@@ -3,12 +3,12 @@
 // photo — the odoo-erp landing page uses a variant with a large left image that
 // isn't in the original ACF block source (hand-authored Gutenberg content on that page).
 import Cta from './Cta.astro';
-import { blockImg } from '../../lib/img';
+import { blockImg, blockAlt } from '../../lib/img';
 export interface Props {
   badges?: string[];
   logo?: string;
   title?: string;
-  cta?: { label?: string; url?: string; newTab?: boolean };
+  cta?: { label?: string; url?: string; newTab?: boolean; calendly?: boolean };
   leftImage?: string;
   variantClass?: string;
 }
@@ -19,7 +19,7 @@ const { badges = [], logo, title, cta, leftImage, variantClass = '' } = Astro.pr
     <div class="row">
       {leftImage && (
         <div class="col-lg-5 col-md-5 col-sm-6 col-12">
-          <div class="left-img black-overlay"><img src={blockImg(leftImage)} alt=""></div>
+          <div class="left-img black-overlay"><img src={blockImg(leftImage)} alt={blockAlt(leftImage)}></div>
         </div>
       )}
       <div class={`${leftImage ? 'col-lg-7 col-md-7' : 'col-lg-8 col-md-8'} col-sm-6 col-12 odoo-intro-content`}>
@@ -27,14 +27,14 @@ const { badges = [], logo, title, cta, leftImage, variantClass = '' } = Astro.pr
           <div class="badge-oodo-img d-flex align-items-center">
             {badges.length > 0 && (
               <div class="badge-img d-flex align-items-center">
-                {badges.map(b => <img src={blockImg(b)} alt="">)}
+                {badges.map(b => <img src={blockImg(b)} alt={blockAlt(b)}>)}
               </div>
             )}
-            {logo && <div class="img-odoo"><img src={blockImg(logo)} alt=""></div>}
+            {logo && <div class="img-odoo"><img src={blockImg(logo)} alt={blockAlt(logo)}></div>}
           </div>
         )}
         {title && <h3>{title}</h3>}
-        {cta && <Cta label={cta.label} url={cta.url} newTab={cta.newTab} />}
+        {cta && <Cta label={cta.label} url={cta.url} newTab={cta.newTab} calendly={cta.calendly} />}
       </div>
     </div>
   </div>

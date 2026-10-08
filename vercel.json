@@ -1,0 +1,264 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/:path(.*)",
+      "destination": "https://agitech.io/:path",
+      "permanent": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.agitech.io"
+        }
+      ]
+    },
+    {
+      "source": "/home-page/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/en/home-page/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/home/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/business-cases/",
+      "destination": "/case-study/",
+      "permanent": true
+    },
+    {
+      "source": "/en/business-cases/",
+      "destination": "/en/case-study/",
+      "permanent": true
+    },
+    {
+      "source": "/nl/business-cases/",
+      "destination": "/nl/case-study/",
+      "permanent": true
+    },
+    {
+      "source": "/newsletter-fr/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/en/newsletter/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/odoo-development-service/",
+      "destination": "/odoo-erp/",
+      "permanent": true
+    },
+    {
+      "source": "/odoo/",
+      "destination": "/odoo-erp/",
+      "permanent": true
+    },
+    {
+      "source": "/solution/odoo/",
+      "destination": "/odoo-accounting-integration-for-smes/",
+      "permanent": true
+    },
+    {
+      "source": "/solutions/",
+      "destination": "/solutions-remplacer-logiciel-legacy/",
+      "permanent": true
+    },
+    {
+      "source": "/contact/",
+      "destination": "/contact-us/",
+      "permanent": true
+    },
+    {
+      "source": "/en/contact/",
+      "destination": "/en/contact-us/",
+      "permanent": true
+    },
+    {
+      "source": "/fr_be/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/fr_be/:path*/",
+      "destination": "/:path*/",
+      "permanent": true
+    },
+    {
+      "source": "/en/category/:path*/",
+      "destination": "/en/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/en/tag/:path*/",
+      "destination": "/en/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/en/author/:path*/",
+      "destination": "/en/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/category/:path*/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/tag/:path*/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/author/:path*/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/feed/",
+      "destination": "/feed.xml",
+      "permanent": true
+    },
+    {
+      "source": "/en/feed/",
+      "destination": "/en/feed.xml",
+      "permanent": true
+    },
+    {
+      "source": "/comments/feed/",
+      "destination": "/feed.xml",
+      "permanent": true
+    },
+    {
+      "source": "/en/:path*/feed/",
+      "destination": "/en/feed.xml",
+      "permanent": true
+    },
+    {
+      "source": "/:path*/feed/",
+      "destination": "/feed.xml",
+      "permanent": true
+    },
+    {
+      "source": "/sitemap_index.xml",
+      "destination": "/sitemap.xml",
+      "permanent": true
+    },
+    {
+      "source": "/wp-sitemap.xml",
+      "destination": "/sitemap.xml",
+      "permanent": true
+    },
+    {
+      "source": "/post-sitemap.xml",
+      "destination": "/sitemap.xml",
+      "permanent": true
+    },
+    {
+      "source": "/page-sitemap.xml",
+      "destination": "/sitemap.xml",
+      "permanent": true
+    },
+    {
+      "source": "/business-cases-sitemap.xml",
+      "destination": "/sitemap.xml",
+      "permanent": true
+    },
+    {
+      "source": "/local-sitemap.xml",
+      "destination": "/sitemap.xml",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        }
+      ]
+    },
+    {
+      "source": "/keystatic",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/keystatic/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/wp-theme/fonts/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/wp-theme/images/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, stale-while-revalidate=86400"
+        }
+      ]
+    },
+    {
+      "source": "/wp-content/uploads/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, stale-while-revalidate=86400"
+        }
+      ]
+    },
+    {
+      "source": "/assets/img/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, stale-while-revalidate=86400"
+        }
+      ]
+    }
+  ]
+}

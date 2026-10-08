@@ -1,42 +1,51 @@
 ---
-// Ported from template-parts/block/featured-cases.php.
-// Simplified: no owl-carousel JS (deferred), cases passed in already resolved
-// from the businessCases collection instead of the WP AJAX tab listing.
+// Ported from template-parts/block/featured-cases.php (same markup, Owl Carousel initialised by
+// agitech-theme.js). Cases are passed in already resolved instead of coming from a WP relationship.
 import Cta from './Cta.astro';
-import { blockImg } from '../../lib/img';
+import { blockImg, blockAlt } from '../../lib/img';
+import { langOf, learnMoreLabel } from '../../lib/lang';
 export interface Props {
   bgClass?: string;
   title?: string;
   subTitle?: string;
-  cta?: { label?: string; url?: string; newTab?: boolean };
-  cases?: { title: string; href: string; image?: string; caseType?: string; needs?: string[] }[];
+  cta?: { label?: string; url?: string; newTab?: boolean; calendly?: boolean };
+  cases?: { title: string; href: string; image?: string; caseType?: string; caseTypes?: string[]; needs?: string[] }[];
 }
 const { bgClass = '', title, subTitle, cta, cases = [] } = Astro.props;
+const learnMore = learnMoreLabel[langOf(Astro.url)];
+const typesOf = (c: { caseType?: string; caseTypes?: string[] }) => (c.caseTypes?.length ? c.caseTypes : c.caseType ? [c.caseType] : []);
 ---
-<section class={`we-implemented-section ${bgClass}`}>
-  <div class="container">
+<section class={`we-implemented-section owl-carousel-wrap ${bgClass}`}>
+<div class="container">
     <div class="text-center">
-      <div class="title">
-        {title && <h6>{title}</h6>}
-        {subTitle && <h3>{subTitle}</h3>}
-      </div>
-      <div class="row items-wrap">
-        {cases.map(c => (
-          <div class="item">
-            <a href={c.href}>
-              <div class="field">
-                <div class="img">{c.image && <img src={blockImg(c.image)} alt={c.title}>}</div>
-                <div class="content">
-                  {c.caseType && <div class="case_types"><span class="green-text">{c.caseType}</span></div>}
-                  <h6>{c.title}</h6>
-                  {c.needs && c.needs.length > 0 && <ul>{c.needs.map(n => <li>{n}</li>)}</ul>}
-                </div>
+        <div class="title">
+            {title && <h6>{title}</h6>}
+            {subTitle && <h3>{subTitle}</h3>}
+        </div>
+        <div class="row items-wrap owl-carousel owl-theme">
+            {cases.map(c => (
+                <div class="item">
+                  <a href={c.href}>
+                    <div class="field">
+                      <div class="img">
+                        {c.image && <img src={blockImg(c.image)} alt={blockAlt(c.image, c.title)}>}
+                      </div>
+                      <div class="content">
+                      <div class="case_types">
+                        {typesOf(c).map(t => <Fragment><span class="green-text">{t}</span>{' '}</Fragment>)}
+                      </div>
+                        <h6>{c.title}</h6>
+                        {c.needs && c.needs.length > 0 && <ul>{c.needs.map(n => <li>{n}</li>)}</ul>}
+                        <div class="dark-link">
+                          <span class="learn-more-link">{learnMore}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
               </div>
-            </a>
-          </div>
-        ))}
-      </div>
-      {cta && <Cta label={cta.label} url={cta.url} newTab={cta.newTab} />}
+            ))}
+        </div>
+        {cta && <Cta label={cta.label} url={cta.url} newTab={cta.newTab} calendly={cta.calendly} />}
     </div>
-  </div>
+</div>
 </section>

@@ -1,0 +1,81 @@
+---
+// Ported from template-parts/block/blog-posts.php + the card markup of load_more_blogposts_ajax().
+// WP filled the grid through AJAX; here every post of the page language is rendered and
+// agitech-theme.js applies the category tabs and the "load more" paging (8 cards at a time).
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../../keystatic.config';
+import { langOf, learnMoreLabel } from '../../lib/lang';
+import { showDrafts } from '../../lib/translations.mjs';
+import { wallClock } from '../../lib/dates.mjs';
+import { BLOG_TABS, LISTING_LABELS, entryUrl, formatPostDate, slugify } from '../../lib/blog';
+export interface Props {
+  loadMoreLabel?: string;
+}
+const { loadMoreLabel } = Astro.props;
+const lang = langOf(Astro.url);
+const labels = LISTING_LABELS[lang];
+
+const reader = createReader(process.cwd(), keystaticConfig);
+const authors = Object.fromEntries((await reader.collections.authors.all()).map(a => [a.slug, a.entry.name]));
+const posts = (await reader.collections.blog.all())
+  .filter(p => p.entry.lang === lang && (showDrafts() || !p.entry.draft))
+  .sort((a, b) => wallClock(b.entry.publishedAt).localeCompare(wallClock(a.entry.publishedAt)) || a.slug.localeCompare(b.slug));
+
+// FR/EN: the WP category list of the language; NL (no WP reference): categories actually used.
+const tabs = BLOG_TABS[lang] ?? [...new Set(posts.flatMap(p => p.entry.categories))].map(name => ({ slug: slugify(name), name }));
+---
+<section class="blog-listing-section lighter-gray-bg" data-listing>
+<div class="container">
+    <div class="text-center">
+        <div class="row">
+            <div class="d-flex justify-content-between align-items-center tabinations">
+                <div class="d-flex tabs-links">
+                    <div class="tab-link active" data-category="all" data-tab="tab-1">{labels.all}</div>
+                    {tabs.map((t, i) => (
+                        <div class="tab-link" data-tab={`tab-${i + 2}`} data-category={t.slug}>
+                            {t.name}
+                        </div>
+                    ))}
+                </div>
+                <div class="next-prev d-flex justify-content-center align-items-center">
+                    <div class="prev-btn"></div>
+                    <div class="next-btn"></div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-content">
+            <div class="row items-wrap blog-wrap">
+                {posts.map(({ slug, entry }) => (
+                    <div class="col-lg-4 col-md-6 col-12 field" data-categories={entry.categories.map(slugify).join(' ')}>
+                        <a href={entryUrl('post', entry.urlSlug || slug, lang)}>
+                            <div class="item">
+                                <div class="img">
+                                    {entry.coverImage && <img src={entry.coverImage} class="attachment-full size-full wp-post-image" alt={entry.title} loading="lazy">}
+                                </div>
+                                <div class="content">
+                                    <div class="d-flex align-items-center name-date">
+                                        <p>{entry.author ? authors[entry.author] : ''}</p>
+                                        <p>{formatPostDate(entry.publishedAt, lang)}</p>
+                                    </div>
+                                    <div class="d-flex align-items-center categories-btn">
+                                        {entry.categories.map(c => <span class="purple-text">{c}</span>)}
+                                    </div>
+                                    <h6>{entry.title}</h6>
+                                    <div class="dark-link">
+                                        <span class="learn-more-link">{learnMoreLabel[lang]}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                ))}
+            </div>
+            <div class="col-12 load-more-wrapper" style="display:none;">
+                <div class="primary-btn load-more-btn">
+                    <a href="javascript:void(0);">{loadMoreLabel || labels.morePosts}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>

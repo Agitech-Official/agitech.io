@@ -1,6 +1,6 @@
 ---
 // Ported from template-parts/block/hero-image-below.php
-import { blockImg } from '../../lib/img';
+import { blockImg, blockAlt } from '../../lib/img';
 export interface Props {
   imageBelow?: string;
   bottomLine?: boolean;
@@ -10,7 +10,7 @@ const { imageBelow, bottomLine = false } = Astro.props;
 <section class={`ful-image-section black-overlay ${bottomLine ? 'bottom-line-img' : ''}`}>
   <div class="Container-fluid">
     <div class="img">
-      {imageBelow && <img src={blockImg(imageBelow)} alt="">}
+      {imageBelow && <img src={blockImg(imageBelow)} alt={blockAlt(imageBelow)}>}
     </div>
   </div>
 </section>

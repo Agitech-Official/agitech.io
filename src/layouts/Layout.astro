@@ -1,14 +1,27 @@
 ---
+import { alternatesFor } from '../lib/translations.mjs';
+import { SITE, SITE_NAME, INDEXABLE, GTM_ID, defaultOgImage, SITE_ICON, SAME_AS, HTML_LANG } from '../lib/site';
+
 export interface Props {
   lang: 'fr' | 'en' | 'nl';
   title: string;
   description: string;
-  canonical?: string;
+  /** Absolute canonical URL. Defaults to this page's own URL; `false` = none (404). */
+  canonical?: string | false;
   ogLocale?: string;
-  jsonLd?: Record<string, unknown>;
+  /** Preview image (absolute URL or site path). Defaults to the shared logo image. */
+  ogImage?: { url: string; width?: number; height?: number; alt?: string; type?: string };
+  /** "article" for posts and business cases, "website" otherwise. */
+  ogType?: 'website' | 'article';
+  /** Posts only: adds article:* meta and a BlogPosting node to the structured data. */
+  article?: { publishedTime?: string; section?: string; author?: string };
+  /** Extra schema.org nodes (FAQPage, ...) merged into the page's @graph. */
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  /** Explicit noindex (thank-you pages, 404). When omitted, pages are noindex until PUBLIC_INDEXABLE is set. */
   robotsNoIndex?: boolean;
-  /** Set on the homepage only — flips the dark-section corner glow to the opposite
-   * corner from every other page (see .is-home rules in style.css). */
+  /** Extra body classes. The WP theme CSS keys a few rules on body classes ("home", "single",
+   * "page-id-N" for the legal pages): "home" and the legal ids are derived from the URL below,
+   * templates for single posts / business cases pass "single ...". */
   bodyClass?: string;
   /** Calendly widget + the postMessage listener that redirects to the "merci-rdv"
    * thank-you page on booking — only needed on pages with the Calendly embed. */
@@ -18,74 +31,142 @@ export interface Props {
 const localeMap = { fr: 'fr_BE', en: 'en_US', nl: 'nl_BE' };
 const {
   lang, title, description,
-  canonical, ogLocale = localeMap[lang],
-  jsonLd,
-  // Site not live yet — agitech.io (WP) is still the indexed site. Defaults to noindex
-  // everywhere so this preview never competes with it in search. Flip to false (or set
-  // per-page) only once this deployment actually replaces the live site.
-  robotsNoIndex = true,
+  ogLocale = localeMap[lang],
+  ogImage, ogType = 'website', article, jsonLd,
+  robotsNoIndex,
   bodyClass,
   includeContactScripts = false,
 } = Astro.props;
 
+const pathname = Astro.url.pathname.endsWith('/') || /\.[a-z0-9]+$/i.test(Astro.url.pathname) ? Astro.url.pathname : `${Astro.url.pathname}/`;
+const canonical = Astro.props.canonical === false ? undefined : Astro.props.canonical ?? `${SITE}${pathname}`;
+const noindex = robotsNoIndex ?? !INDEXABLE;
+const robots = !noindex
+  ? 'follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large'
+  : INDEXABLE ? 'follow, noindex' : 'noindex, nofollow';
+
+// WP body classes the theme CSS depends on (see public/wp-theme/css/style.css: .home, .single, .page-id-*).
+const wpPath = Astro.url.pathname.replace(/^\/(en|nl)(?=\/|$)/, '') || '/';
+const wpBodyClass = [
+  bodyClass,
+  wpPath === '/' && 'home',
+  wpPath === '/privacy-policy/' && 'page-id-1334',
+  wpPath === '/terms-conditions/' && 'page-id-1360',
+].filter(Boolean).join(' ') || undefined;
+
 const rdvThankYouPath = lang === 'en' ? '/en/thank-you-meeting/' : lang === 'nl' ? '/nl/thank-you-meeting/' : '/merci-rdv/';
 
-// FR = default locale (no prefix), EN and NL under /en/ and /nl/ — matches current
-// WP/Polylang URL shape for FR/EN, NL added the same way. hreflang needs every
-// language's URL for the same page, so strip whichever prefix this page has, then
-// rebuild all three.
-const SITE = 'https://agitech.io';
-const barePath = canonical
-  ? canonical.replace(SITE, '').replace(/^\/(en|nl)(\/|$)/, '/')
-  : undefined;
-const altLinks = barePath
-  ? [
-      { hreflang: 'fr', href: `${SITE}${barePath}` },
-      { hreflang: 'en', href: `${SITE}/en${barePath}` },
-      { hreflang: 'nl', href: `${SITE}/nl${barePath}` },
-    ]
-  : [];
+// hreflang: only the languages this page really exists in (translationKey, see src/lib/translations.mjs),
+// self included; x-default = the French version when there is one.
+const alternates = canonical ? alternatesFor(pathname) : [];
+const xDefault = alternates.find(a => a.lang === 'fr') ?? alternates[0];
+
+const DEFAULT_OG_IMAGE = await defaultOgImage();
+const abs = (u: string) => (u.startsWith('http') ? u : `${SITE}${u}`);
+const image = ogImage ? { ...ogImage, url: abs(ogImage.url) } : { url: abs(DEFAULT_OG_IMAGE.path), width: DEFAULT_OG_IMAGE.width, height: DEFAULT_OG_IMAGE.height, type: DEFAULT_OG_IMAGE.type };
+
+// Structured data: same graph Rank Math printed on WordPress (Organization, WebSite, WebPage, BreadcrumbList,
+// BlogPosting for posts), plus whatever the page adds (FAQPage). Dates are only given where the content has them.
+const inLanguage = HTML_LANG[lang];
+const pageUrl = canonical || `${SITE}${pathname}`;
+const pageName = title.replace(/\s+[-–|]\s+Agitech.*$/i, '');
+const isHome = wpPath === '/';
+const extra = (Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : []).map(({ ['@context']: _c, ...node }) => node);
+const graph = canonical ? [
+  {
+    '@type': ['ProfessionalService', 'Organization'], '@id': `${SITE}/#organization`, name: SITE_NAME, url: SITE, sameAs: SAME_AS,
+    logo: { '@type': 'ImageObject', '@id': `${SITE}/#logo`, url: abs(DEFAULT_OG_IMAGE.path), contentUrl: abs(DEFAULT_OG_IMAGE.path), caption: SITE_NAME, width: DEFAULT_OG_IMAGE.width, height: DEFAULT_OG_IMAGE.height },
+    image: { '@id': `${SITE}/#logo` },
+  },
+  { '@type': 'WebSite', '@id': `${SITE}/#website`, url: SITE, name: SITE_NAME, publisher: { '@id': `${SITE}/#organization` }, inLanguage },
+  {
+    '@type': 'WebPage', '@id': `${pageUrl}#webpage`, url: pageUrl, name: title, inLanguage,
+    isPartOf: { '@id': `${SITE}/#website` },
+    ...(article?.publishedTime ? { datePublished: article.publishedTime } : {}),
+    primaryImageOfPage: { '@type': 'ImageObject', url: image.url },
+    ...(isHome ? {} : { breadcrumb: { '@id': `${pageUrl}#breadcrumb` } }),
+  },
+  ...(isHome ? [] : [{
+    '@type': 'BreadcrumbList', '@id': `${pageUrl}#breadcrumb`,
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, item: { '@id': SITE, name: 'Home' } },
+      { '@type': 'ListItem', position: 2, item: { '@id': pageUrl, name: pageName } },
+    ],
+  }]),
+  ...(article ? [{
+    '@type': 'BlogPosting', headline: pageName, name: title, description, inLanguage,
+    mainEntityOfPage: { '@id': `${pageUrl}#webpage` },
+    image: image.url,
+    publisher: { '@id': `${SITE}/#organization` },
+    ...(article.publishedTime ? { datePublished: article.publishedTime } : {}),
+    ...(article.author ? { author: { '@type': 'Person', name: article.author } } : {}),
+  }] : []),
+  ...extra,
+] : extra;
+
+const gtmSnippet = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GTM_ID}');`;
+const feed = lang === 'fr' ? '/feed.xml' : lang === 'en' ? '/en/feed.xml' : undefined;
 ---
 <!DOCTYPE html>
-<html lang={lang}>
+<html lang={inLanguage}>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-{robotsNoIndex && <meta name="robots" content="noindex, nofollow">}
+<meta name="robots" content={robots}>
 <title>{title}</title>
 <meta name="description" content={description}>
+{GTM_ID && <script is:inline set:html={`window.dataLayer=window.dataLayer||[];${gtmSnippet}`} />}
+{canonical && <link rel="canonical" href={canonical}>}
+{alternates.map(a => <link rel="alternate" hreflang={a.lang} href={`${SITE}${a.path}`}>)}
+{xDefault && <link rel="alternate" hreflang="x-default" href={`${SITE}${xDefault.path}`}>}
+{feed && <link rel="alternate" type="application/rss+xml" title={`${SITE_NAME} » Feed`} href={feed}>}
 {canonical && (
   <>
-    <link rel="canonical" href={canonical}>
-    {altLinks.map(a => <link rel="alternate" hreflang={a.hreflang} href={a.href}>)}
-    <link rel="alternate" hreflang="x-default" href="https://agitech.io/">
-    <meta property="og:type" content="website">
+    <meta property="og:type" content={ogType}>
     <meta property="og:locale" content={ogLocale}>
     <meta property="og:url" content={canonical}>
-    <meta property="og:site_name" content="Agitech">
+    <meta property="og:site_name" content={SITE_NAME}>
     <meta property="og:title" content={title}>
     <meta property="og:description" content={description}>
+    <meta property="og:image" content={image.url}>
+    {image.width && <meta property="og:image:width" content={String(image.width)}>}
+    {image.height && <meta property="og:image:height" content={String(image.height)}>}
+    {image.alt && <meta property="og:image:alt" content={image.alt}>}
+    {image.type && <meta property="og:image:type" content={image.type}>}
+    {article?.publishedTime && <meta property="article:published_time" content={article.publishedTime}>}
+    {article?.section && <meta property="article:section" content={article.section}>}
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content={title}>
     <meta name="twitter:description" content={description}>
+    <meta name="twitter:image" content={image.url}>
   </>
 )}
-<link rel="icon" href="/assets/img/agitech-logo-dark.svg">
-{jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
-<!-- Same base design system as agifid.be (fonts, tokens, layout primitives), recolored to
-     Agitech's own mauve (#984895, from the official wordmark) instead of agifid's teal. -->
-<link rel="stylesheet" href="/assets/fonts.css">
-<link rel="stylesheet" href="/assets/style.css">
+<link rel="icon" href={SITE_ICON} sizes="32x32">
+<link rel="icon" href={SITE_ICON} sizes="192x192">
+<link rel="apple-touch-icon" href={SITE_ICON}>
+{graph.length > 0 && <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })} />}
+<!-- Original WP theme CSS (copied verbatim from wp-content/themes/agitech/library), loaded in the
+     same order as on the live WP site. astro-extras.css only styles components that exist in
+     Astro and not in WP; it must stay last and never override the theme for shared blocks. -->
+<link rel="stylesheet" href="/wp-theme/css/wp-block-library.min.css">
+<link rel="stylesheet" href="/wp-theme/css/wp-global-styles.css">
+<link rel="stylesheet" href="/wp-theme/css/newsletter-plugin.css">
+<link rel="stylesheet" href="/wp-theme/css/bootstrap.min.css">
+<link rel="stylesheet" href="/wp-theme/css/owl.carousel.css">
+<link rel="stylesheet" href="/wp-theme/css/style.css">
+<link rel="stylesheet" href="/wp-theme/css/responsive.css">
+<link rel="stylesheet" href="/assets/astro-extras.css">
 </head>
-<body class={bodyClass}>
+<body class={wpBodyClass}>
+{GTM_ID && <noscript><iframe src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`} height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>}
 <slot name="header" />
 <slot />
 <slot name="footer" />
-<script>
-  const burgerBtn = document.getElementById('burgerBtn');
-  const mainMenu = document.getElementById('mainMenu');
-  burgerBtn?.addEventListener('click', () => mainMenu?.classList.toggle('open'));
-</script>
+<script is:inline src="/wp-theme/js/jquery.min.js"></script>
+<script is:inline src="/wp-theme/js/owl.carousel.min.js"></script>
+<script is:inline src="/wp-theme/js/bootstrap.bundle.min.js"></script>
+<script is:inline src="/wp-theme/js/agitech-theme.js"></script>
+<script is:inline src="/assets/tracking.js"></script>
 {includeContactScripts && (
   <script is:inline define:vars={{ rdvThankYouPath }}>
     // Calendly is a heavy third-party script only needed once the visitor reaches the

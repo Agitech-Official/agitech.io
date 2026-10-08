@@ -1,7 +1,7 @@
 ---
 // Ported from template-parts/block/key-features.php — outputs two sections at once
 // (intro text + numbered feature rows), same as the original WP block.
-import { blockImg } from '../../lib/img';
+import { blockImg, blockAlt } from '../../lib/img';
 export interface Props {
   subTitle?: string;
   title?: string;
@@ -40,7 +40,8 @@ const extraClass = (i: number) => i === 0 ? 'one-platform' : i === 1 ? 'unlimite
         <div class="col-lg-9 col-md-10 col-sm-11 col-12 one-platform-content">
           <div class="title">
             {f.title && <h5>{f.title}</h5>}
-            {f.description && <Fragment set:html={f.description} />}
+            {/* WP wraps the (already <p>) description in another <p>: the resulting empty paragraph is part of the spacing. */}
+            {f.description && <Fragment set:html={`<p>${f.description}</p>`} />}
             {(f.pointLabel || f.pointDescription) && (
               <div class="advantages"><p><strong>{f.pointLabel}:</strong> {f.pointDescription}</p></div>
             )}
@@ -49,18 +50,18 @@ const extraClass = (i: number) => i === 0 ? 'one-platform' : i === 1 ? 'unlimite
             <div class="logo-wrp">
               {f.logos.map(l => (
                 <div class="item">
-                  {l.logo && <img src={blockImg(l.logo)} alt="">}
+                  {l.logo && <img src={blockImg(l.logo)} alt={blockAlt(l.logo)}>}
                   <p>{l.logoTitle}</p>
                 </div>
               ))}
             </div>
           )}
           {f.blockToDisplay === 'image' && f.image && (
-            <div class="customization-step-image"><img src={blockImg(f.image)} alt=""></div>
+            <div class="customization-step-image"><img src={blockImg(f.image)} alt={blockAlt(f.image)}></div>
           )}
           {f.blockToDisplay === 'oembed' && f.embedUrl && (
             <div class="affordable-video">
-              <iframe src={f.embedUrl} width="640" height="360" frameborder="0" allowfullscreen title={f.title}></iframe>
+              <iframe title={f.title} width="640" height="360" src={f.embedUrl} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
           )}
         </div>

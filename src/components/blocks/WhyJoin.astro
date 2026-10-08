@@ -1,6 +1,6 @@
 ---
 // Ported from template-parts/block/why-join.php
-import { blockImg } from '../../lib/img';
+import { blockImg, blockAlt } from '../../lib/img';
 export interface Props {
   leftTitle?: string;
   mainTitle?: string;
@@ -27,7 +27,7 @@ const { leftTitle, mainTitle, content, perks = [], image } = Astro.props;
               {perks.map(p => (
                 <div class="col-lg-6 col-md-6 col-12">
                   <div class="perks-list">
-                    {p.icon && <div class="img"><img src={blockImg(p.icon)} alt=""></div>}
+                    {p.icon && <div class="img"><img src={blockImg(p.icon)} alt={blockAlt(p.icon)}></div>}
                     {p.title && <h6>{p.title}</h6>}
                     {p.points && <Fragment set:html={p.points} />}
                   </div>
@@ -39,7 +39,7 @@ const { leftTitle, mainTitle, content, perks = [], image } = Astro.props;
       </div>
     </div>
     {image && (
-      <div class="row image-container"><div class="img"><img src={blockImg(image)} alt=""></div></div>
+      <div class="row image-container"><div class="img"><img src={blockImg(image)} alt={blockAlt(image)}></div></div>
     )}
   </div>
 </section>

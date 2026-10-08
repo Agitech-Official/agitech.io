@@ -1,0 +1,76 @@
+---
+title: "Odoo Manufacturing Implementation That Works"
+lang: "fr"
+publishedAt: "2026-08-17T08:48"
+excerpt: "Plan an Odoo manufacturing implementation around real shop-floor workflows, accurate costs, inventory control, and a rollout your team can trust daily."
+author: "sam-gutman"
+categories:
+- "Digital Transformation"
+coverImage: "/assets/img/blog/odoo-manufacturing-implementation/odoo-manufacturing-implementation-that-works-featured.webp"
+seoTitle: "Odoo Manufacturing Implementation That Works - Agitech - Odoo Partner"
+---
+A late production order rarely has one cause. It may start with an inaccurate bill of materials, stock recorded in the wrong location, a subcontractor lead time nobody updated, or a planner working from an old spreadsheet. An Odoo manufacturing implementation should address those operating realities. It is not a matter of switching on Manufacturing and expecting better control.
+
+For a small or midsize manufacturer, the goal is simple: give production, purchasing, warehouse, finance, and management one reliable view of what is planned, what is available, what it costs, and what must happen next. The work required to get there is more disciplined than a standard software rollout, but it does not need to become an endless transformation program.
+
+## Start with the production decisions that matter
+
+Before discussing modules, document the decisions your team makes every day. What triggers a manufacturing order? Do you produce to stock, to order, or both? Who decides whether a shortage should be purchased, manufactured, or substituted? When does a job become late? How are scrap, rework, and unplanned consumption recorded?
+
+These questions expose the real scope. A company assembling a limited range of standard products may need clear bills of materials, replenishment rules, barcode-enabled stock movements, and basic work orders. A company producing engineered or highly customized items may also need sales-to-production handoffs, product variants, document control, approvals, project tracking, or integration with design software.
+
+Do not map every exception from the past ten years into the future system. Some exceptions are valid commercial requirements. Others exist because the previous system was difficult to use. The distinction matters. Reproducing inefficient workarounds in Odoo creates a more expensive version of the same problem.
+
+A useful design workshop should produce agreed answers on the production flow, ownership at each step, required data, approval points, and reporting measures. If those decisions remain vague, configuration will become guesswork.
+
+## Build the data foundation before opening the shop floor
+
+Manufacturing data determines whether planning and costing can be trusted. It deserves the same attention as the system configuration.
+
+Start with the product master. Each item needs a consistent code, unit of measure, product type, purchase or manufacturing route, replenishment settings, and inventory valuation logic. Units of measure are often underestimated. If materials are bought in kilograms, stored in grams, and consumed in meters or pieces, conversions must be agreed and tested. A small error can distort both available inventory and product cost.
+
+Bills of materials need equally careful review. Confirm component quantities, alternatives, scrap assumptions, by-products, operation sequence, and version ownership. A bill of materials should represent how the product is actually made, not how it was priced three years ago. Where product revisions are frequent, set a clear rule for when a new version becomes active and which open orders may continue on the prior version.
+
+Routing and work center setup should be proportionate to the benefit. Detailed operations can improve capacity planning, labor reporting, and traceability. They also ask more of supervisors and operators. If time is not recorded reliably, highly detailed routing data becomes fiction. Many SMEs are better served by starting with the operations that affect delivery dates, bottlenecks, or cost materially, then adding precision once the process is stable.
+
+Inventory locations require the same practical approach. Define where raw materials, work in progress, finished goods, quality holds, scrap, subcontractor stock, and returns physically sit. Odoo should mirror controlled physical flows. It should not force warehouse staff to invent locations that nobody can recognize on the floor.
+
+## Configure Odoo around flow, not features
+
+Odoo Manufacturing connects naturally to Inventory, Purchase, Sales, Accounting, Quality, Maintenance, and sometimes PLM. The right setup depends on the business model, not on how many applications can be activated.
+
+For make-to-order production, a confirmed sales order can trigger procurement and manufacturing. For make-to-stock products, reorder points and master production scheduling may be more suitable. Mixed environments are common: standard components may be replenished to stock while final assemblies are made only after a customer order. The system can support this, provided routes and lead times are deliberately designed.
+
+Subcontracting deserves special attention. It is not simply a purchase order. You need visibility over components sent to the supplier, expected returns, consumption, quality checks, and financial treatment. The same is true for serial and lot traceability. If you sell regulated, safety-critical, food, chemical, or serviceable products, define the traceability requirement before configuration. Retrofitting it after a recall, audit, or warranty dispute is not a sensible plan.
+
+Costing is another area where business choices cannot be avoided. Standard cost offers stability and simpler reporting, but it must be maintained. Average cost reflects changing purchase prices but may make margin analysis less predictable. Actual cost can offer more detail, yet it requires disciplined inventory and production recording. Finance and operations should make this decision together, because the accounting impact is real.
+
+Customization should be the exception, not a badge of seriousness. Standard Odoo capabilities are easier to upgrade, support, and train. [Custom development](/en/development/) is justified when a process creates genuine competitive value, when regulatory obligations demand it, or when an essential external system must be integrated. It is not justified because a legacy spreadsheet used a particular column order.
+
+## Test the complete order, not isolated screens
+
+A manufacturing system can look correct in a demonstration and still fail under real conditions. Testing must follow an order from demand through delivery and invoicing.
+
+Use realistic scenarios: a customer order for a configured product, a production order with a component shortage, a late supplier delivery, partial completion, scrap, a quality failure, a rush order, and a return. Test what happens to stock, commitments, production schedules, costs, and accounting entries at every stage. Include people who actually perform the work, not only project managers.
+
+This is where hidden assumptions emerge. Perhaps a warehouse employee cannot scan a label at a work center. Perhaps purchasing has no rule for an approved substitute. Perhaps production closes an order before actual component consumption is posted. These are not minor user issues. They affect availability, margins, and the credibility of the new ERP.
+
+A conference room pilot is valuable, but it should be followed by user acceptance testing with clear pass criteria. Each process owner should sign off on the flow they own. Issues should be categorized by business impact, not by who raised them loudest.
+
+## Plan the rollout as an operational event
+
+Go-live planning needs more than a data import date. Decide how open sales orders, purchase orders, manufacturing orders, and inventory balances will be treated. A clean cutover may work for a smaller operation with manageable volume. A phased rollout can reduce risk where sites, product lines, or warehouses differ significantly. Neither is automatically better.
+
+Inventory is usually the most sensitive cutover item. Set a controlled counting plan, freeze movement where necessary, reconcile variances, and agree who has authority to approve final opening balances. If inventory data is unreliable on day one, every team will quickly return to spreadsheets.
+
+Training should be role-based and specific. Planners need to understand exceptions and scheduling. Warehouse teams need simple transaction flows. Production supervisors need to know how work orders, consumption, downtime, and quality events affect the wider business. Executives need reporting that answers practical questions about backlog, delivery risk, inventory value, and margin.
+
+Keep support close during the first weeks. Daily review of blocked orders, unprocessed receipts, negative stock, missing costs, and user questions prevents small problems from becoming permanent bad habits. Agitech approaches this phase as hands-on operational support, because the project is only successful when the team can run the system without a consultant standing beside them.
+
+## Measure value after go-live
+
+An [ERP implementation](/en/odoo-erp/) is not complete when users can log in. Review whether the information is improving decisions. Useful measures may include on-time delivery, schedule adherence, stock accuracy, inventory turns, stockouts, manufacturing lead time, scrap rate, purchase price variance, and gross margin by product family.
+
+Choose a limited baseline before go-live and review it monthly. If delivery performance improves but inventory climbs sharply, the setup may be protecting service levels at too high a working-capital cost. If reported production costs fall but operators are not recording time or consumption, the apparent improvement may be unreliable. Good reporting should prompt questions, not provide false reassurance.
+
+The strongest result from Odoo manufacturing implementation is not more data. It is a production operation that can act on facts before a shortage becomes a missed promise, and before a cost issue becomes a year-end surprise.

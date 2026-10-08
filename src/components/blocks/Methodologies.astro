@@ -1,39 +1,43 @@
 ---
-// Ported from template-parts/block/methodologies.php
+// Ported from template-parts/block/methodologies.php (heading, sub-heading paragraph, HTML description)
 export interface Props {
   bgClass?: string;
   title?: string;
   description?: string;
-  methodologies?: { heading?: string; description?: string }[];
+  methodologies?: { heading?: string; subHeading?: string; description?: string }[];
 }
 const { bgClass = '', title, description, methodologies = [] } = Astro.props;
 ---
 <section class={`methodology-section ${bgClass}`}>
-  <div class="container">
-    <div class="row">
-      {title && (
-        <div class="col-lg-4 col-md-12 col-sm-12 col-12 title">
-          <h3>{title}</h3>
-        </div>
-      )}
-      <div class="col-lg-8 col-md-12 col-sm-12 col-12 content">
-        {description && (
-          <div class="row">
-            <div class="col-12 para-text"><h6>{description}</h6></div>
-          </div>
-        )}
+    <div class="container">
         <div class="row">
-          {methodologies.map((m, i) => (
-            <div class="col-lg-6 col-md-6 col-sm-12 col-12 methodology-content">
-              <div class="item">
-                <h4>{String(i + 1).padStart(2, '0')}</h4>
-                {m.heading && <h5>{m.heading}</h5>}
-                {m.description && <Fragment set:html={m.description} />}
-              </div>
+            {title && (
+                <div class="col-lg-4 col-md-12 col-sm-12 col-12 title">
+                    <h3>{title}</h3>
+                </div>
+            )}
+
+            <div class="col-lg-8 col-md-12 col-sm-12 col-12 content">
+                {description && (
+                <div class="row">
+                        <div class="col-12 para-text">
+                            <h6 set:html={description} />
+                        </div>
+                </div>
+                )}
+                <div class="row">
+                    {methodologies.map((m, i) => (
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-12 methodology-content">
+                            <div class="item">
+                                <h4>{String(i + 1).padStart(2, '0')}</h4>
+                                {m.heading && <h5>{m.heading}</h5>}
+                                {m.subHeading && <p>{m.subHeading}</p>}
+                                {m.description && <Fragment set:html={m.description} />}
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
-          ))}
         </div>
-      </div>
     </div>
-  </div>
 </section>

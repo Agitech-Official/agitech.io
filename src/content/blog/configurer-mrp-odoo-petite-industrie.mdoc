@@ -1,0 +1,88 @@
+---
+title: "Configurer MRP Odoo pour petite industrie"
+lang: "fr"
+publishedAt: "2026-08-28T02:01"
+excerpt: "Configurer MRP Odoo pour petite industrie : méthodes, données et règles de pilotage pour produire mieux, réduire les écarts et tenir vos délais réels."
+author: "sam-gutman"
+categories:
+- "Digital Transformation"
+coverImage: "/assets/img/blog/configurer-mrp-odoo-petite-industrie/configurer-mrp-odoo-pour-petite-industrie-featured.webp"
+seoTitle: "Configurer MRP Odoo pour petite industrie - Agitech - Odoo Partner"
+---
+Une petite usine ne manque généralement pas d’informations. Elle manque d’une version fiable de la réalité. Les quantités en stock ne correspondent pas toujours à l’atelier, les délais fournisseurs vivent dans des fichiers Excel distincts, et le planning dépend de la mémoire de deux personnes clés. Configurer MRP Odoo pour une petite industrie consiste d’abord à rendre ces données exploitables, pas à reproduire toute la complexité d’un grand groupe.
+
+Le bon paramétrage doit répondre à des questions opérationnelles simples : que faut-il acheter, fabriquer ou sous-traiter ? À quelle date ? Avec quelles capacités et quels composants disponibles ? Si l’ERP ne permet pas de répondre clairement, il génère des ordres inutiles et dégrade la confiance des équipes.
+
+## Partir du flux réel avant de paramétrer
+
+Le premier piège est de commencer par les écrans Odoo. Avant d’activer les routes, les nomenclatures ou les postes de charge, il faut suivre un produit depuis la commande jusqu’à l’expédition. Dans une petite industrie, ce flux est souvent moins linéaire qu’il n’y paraît : une pièce peut être achetée selon les volumes, retouchée à l’atelier, puis intégrée dans plusieurs produits finis.
+
+Cartographiez les étapes réellement réalisées, les stocks physiques et les décisions prises par les équipes. Distinguez ce qui est systématique de ce qui relève d’une exception. Cette distinction évite de transformer un cas rare en règle générale dans l’ERP.
+
+Posez notamment quatre questions : quels produits fabriquez-vous à la commande, quels produits tenez-vous en stock, quels composants sont critiques et où se produit l’attente ? Une entreprise qui assemble huit références à partir de composants standards n’a pas besoin du même modèle qu’un atelier de fabrication sur mesure.
+
+L’objectif n’est pas d’imposer un processus théorique. Il est d’obtenir un processus suffisamment structuré pour être piloté, sans ajouter une saisie qui ne crée aucune valeur.
+
+## Configurer MRP Odoo petite industrie : les fondations
+
+Un MRP fiable repose sur quelques données de base. Elles semblent administratives, mais elles déterminent directement la qualité des propositions d’achat et de fabrication. Une erreur de nomenclature ou de délai se propage rapidement dans les besoins calculés.
+
+### Structurer les articles et les unités de mesure
+
+Chaque article doit avoir une fonction claire : matière première, composant acheté, semi-fini, produit fini, consommable ou prestation de sous-traitance. Les doublons et les descriptions approximatives doivent être corrigés avant le démarrage. Un même roulement créé sous trois références produit des stocks trompeurs et des achats mal consolidés.
+
+Les unités de mesure méritent une attention particulière. Si vous achetez en mètres, consommez en centimètres et vendez à la pièce, les conversions doivent être définies et testées. Le MRP ne compensera pas une unité incohérente. Il calculera simplement très vite une erreur très précise.
+
+Pour les matières à forte variabilité, prévoyez aussi les règles de rebut ou de perte normale. Les masquer dans une surconsommation non déclarée rend les coûts et les besoins impossibles à analyser.
+
+### Construire des nomenclatures utilisables par l’atelier
+
+La nomenclature doit refléter ce qui est consommé pour fabriquer, pas seulement ce qui figure dans un devis commercial. Ajoutez les composants réellement prélevés, les quantités, les variantes éventuelles et les sous-ensembles quand ils sont gérés comme tels.
+
+Faut-il créer des nomenclatures à plusieurs niveaux ? Cela dépend. Elles sont pertinentes lorsqu’un sous-ensemble est fabriqué, stocké ou planifié indépendamment. En revanche, décomposer chaque opération en sous-produit artificiel alourdit les flux et augmente le travail de maintenance. Pour une petite structure, la simplicité est souvent plus rentable qu’une modélisation exhaustive.
+
+Les versions de nomenclature doivent être maîtrisées. Lorsqu’une pièce est remplacée, conservez une règle claire sur la date d’effet et le traitement du stock restant. Sinon, l’atelier peut produire avec une configuration différente de celle attendue par le commercial ou le contrôle qualité.
+
+### Définir les itinéraires et les capacités avec réalisme
+
+Les gammes décrivent les opérations : découpe, usinage, montage, contrôle, conditionnement. Dans Odoo, les postes de charge permettent d’associer ces étapes à une capacité et à une durée. Ne cherchez pas une précision à la minute dès le premier jour. Une durée moyenne crédible, revue après quelques semaines, est plus utile qu’un standard parfait mais jamais mis à jour.
+
+Intégrez les contraintes qui comptent réellement : une machine unique, un opérateur qualifié, un temps de séchage ou un contrôle externe. En revanche, ne modélisez pas les déplacements mineurs si personne n’utilisera cette information pour planifier ou améliorer le flux.
+
+Les calendriers doivent représenter les heures de travail disponibles, les fermetures prévues et, si nécessaire, les équipes. Un planning qui promet une livraison le dimanche perd immédiatement sa crédibilité.
+
+## Choisir les bonnes règles d’approvisionnement
+
+Le MRP fonctionne à partir des règles qui indiquent comment réapprovisionner un article. Pour chaque produit, il faut arbitrer entre achat, fabrication, sous-traitance et réapprovisionnement sur commande. Cet arbitrage ne doit pas être laissé implicite.
+
+Pour un produit fini fabriqué à la commande, une règle de fabrication sur commande peut déclencher les besoins à partir de la vente. Pour un composant standard, une règle de stock minimum peut être plus adaptée afin de protéger les délais client. Pour un article long à obtenir et peu coûteux à stocker, un point de commande sécurisé est souvent préférable à une urgence fournisseur répétée.
+
+Le stock de sécurité ne doit pas servir à masquer des données instables. Si le délai fournisseur est inconnu, le bon travail consiste d’abord à le mesurer. Si la consommation varie réellement, un stock de sécurité calculé et revu périodiquement a du sens. Une réserve décidée « au cas où » immobilise de la trésorerie sans traiter la cause des ruptures.
+
+Les délais sont tout aussi déterminants : délai fournisseur, contrôle réception, fabrication, transfert entre emplacements et délai de préparation. Dans une petite industrie, un délai de deux jours ajouté par prudence à chaque étape peut déplacer artificiellement toutes les décisions d’achat. Renseignez des délais réalistes, puis comparez-les aux délais observés.
+
+## Organiser l’exécution dans l’atelier
+
+Un ordre de fabrication n’est utile que s’il devient le point de référence de l’atelier. Les équipes doivent pouvoir voir ce qui est à lancer, ce qui est bloqué, ce qui est terminé et ce qui a consommé plus que prévu. Si les mouvements sont régularisés plusieurs semaines plus tard par l’administration, le MRP travaille sur un stock déjà faux.
+
+Commencez avec un niveau de traçabilité proportionné au risque. Pour certaines entreprises, déclarer le début et la fin de l’ordre suffit. Pour d’autres, il faut enregistrer les numéros de lot, les contrôles et les consommations par opération. Les secteurs réglementés, les produits sensibles ou les fabrications à forte valeur ajoutée exigent un suivi plus fin.
+
+L’essentiel est de définir qui valide quoi. Qui corrige une consommation ? Qui décide de remplacer un composant ? Qui clôture un ordre partiellement produit ? Sans ces règles, Odoo expose les écarts mais ne peut pas les résoudre.
+
+## Tester sur un [périmètre limité](/comment-cadrer-un-projet-odoo/) avant le déploiement
+
+Un test utile ne consiste pas à cliquer sur quelques ordres fictifs. Prenez deux ou trois produits représentatifs : un produit simple, un assemblage avec contraintes d’approvisionnement et un produit présentant une exception fréquente. Faites-les passer de la demande client à l’achat, la réception, la fabrication et l’expédition.
+
+Vérifiez les dates proposées, les quantités générées, les réservations de stock, les coûts et les alertes de rupture. Impliquez le responsable achats, l’atelier et l’administration. Chacun repère des incohérences différentes, et c’est précisément l’intérêt de ce test transversal.
+
+Évitez de [charger tout l’historique](/comment-reussir-migration-vers-odoo/) si sa qualité est douteuse. Un stock de départ contrôlé, des articles actifs nettoyés et des nomenclatures validées valent mieux qu’une migration exhaustive de données non fiables.
+
+## Piloter les écarts plutôt que regarder seulement le planning
+
+Après le démarrage, les écrans de planification ne suffisent pas. Les indicateurs les plus utiles sont souvent les écarts entre le prévu et le réel : retards fournisseurs, ruptures sur composants critiques, temps de fabrication, rebuts, ordres lancés trop tôt et produits terminés non expédiés.
+
+Ces écarts montrent où agir. Si les ordres sont fréquemment bloqués, le problème peut venir d’un stock non déclaré, d’un délai erroné ou d’une nomenclature incomplète. Si les capacités sont constamment dépassées, le sujet n’est pas uniquement Odoo : il peut concerner la charge commerciale, l’organisation des équipes ou l’investissement machine.
+
+Un bon paramétrage MRP n’élimine pas les aléas. Il les rend visibles assez tôt pour permettre une décision. C’est là que se joue le retour sur investissement : moins d’urgences, moins de stock subi, des engagements clients plus crédibles et des responsables qui disposent enfin de la même information pour arbitrer.
+
+Pour une petite industrie, le bon MRP n’est pas celui qui contient le plus de règles. C’est celui que les équipes utilisent chaque jour, que la direction comprend, et que l’entreprise peut ajuster quand son activité change.

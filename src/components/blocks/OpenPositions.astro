@@ -1,36 +1,40 @@
 ---
-// Ported from template-parts/block/open-positions.php.
-// The live job list lives on the Odoo recruitment portal (its own domain).
-// `portalUrl` renders one prominent button straight to that list — fastest
-// path for a candidate. `jobs` is the older per-role link list, kept as a
-// fallback for any page still using it.
+// Ported from template-parts/block/open-positions.php: the list of open roles, each linking to its
+// job post. (Astro had replaced the list by a single button to the Odoo recruitment portal; that
+// variant is parked with the other Astro-only additions, see docs/deferred-additions.md.)
 export interface Props {
   title?: string;
   subTitle?: string;
   jobs?: { jobTitle?: string; link?: string }[];
-  portalUrl?: string;
-  portalLabel?: string;
 }
-const { title, subTitle, jobs = [], portalUrl, portalLabel } = Astro.props;
+const { title, subTitle, jobs = [] } = Astro.props;
 ---
 <section class="open-positions-section dark-bg">
-  <div class="container-sm">
-    <div class="row">
-      <div class="col-lg-12 col-md-12 col-sm-12 col-12">{title && <h6>{title}</h6>}</div>
-      <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-        <div class="left-content">{subTitle && <h3>{subTitle}</h3>}</div>
-      </div>
-      <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-        <div class="right-content">
-          {portalUrl ? (
-            <div class="primary-btn">
-              <a href={portalUrl} target="_blank" rel="noopener">{portalLabel || 'Voir tous nos postes ouverts'}</a>
+    <div class="container-sm">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                {title && <h6>{title}</h6>}
             </div>
-          ) : jobs.length > 0 && (
-            <ul>{jobs.map(j => <li><a href={j.link} target="_blank" rel="noopener">{j.jobTitle}</a></li>)}</ul>
-          )}
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="left-content">
+                    {subTitle && <h3>{subTitle}</h3>}
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="right-content">
+                    {jobs.length > 0 && (
+                        <ul>
+                            {jobs.map(j => (
+                                <li>
+                                    <a href={j.link} target="_blank" rel="noopener">
+                                        {j.jobTitle}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </section>

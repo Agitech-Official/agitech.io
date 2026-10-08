@@ -1,0 +1,96 @@
+---
+title: "How to Reduce Odoo Database Performance Issues"
+lang: "fr"
+publishedAt: "2026-09-25T03:23"
+excerpt: "Learn how to reduce Odoo database performance issues by finding bottlenecks, fixing data and code, and scaling infrastructure without waste at any scale."
+author: "sam-gutman"
+categories:
+- "Digital Transformation"
+coverImage: "/assets/img/blog/reduce-odoo-database-performance-issues/how-to-reduce-odoo-database-performance-issues-featured.webp"
+seoTitle: "How to Reduce Odoo Database Performance Issues - Agitech - Odoo Partner"
+---
+A slow Odoo system is rarely just an IT irritation. When salespeople wait for customer records, warehouse teams cannot validate transfers, or finance reports time out at month-end, the cost appears in delayed work, poor decisions, and frustrated staff. To **reduce Odoo database performance issues**, start by treating the problem as an operational risk, not a request to simply add more server capacity.
+
+Odoo performance depends on several connected layers: business processes, data volume, custom code, PostgreSQL configuration, application workers, and infrastructure. A weak point in any one of them can make the whole system feel slow. The right fix depends on where time is actually being spent.
+
+## Start with evidence, not assumptions
+
+The most expensive response to poor performance is guessing. Increasing CPU, memory, or database capacity may provide temporary relief, but it will not fix an inefficient report, a missing index, or a customization that runs hundreds of unnecessary queries every time a quotation opens.
+
+First, define the user-facing symptom. Is Odoo slow across the business, only at certain times, or only in a specific workflow? A system that slows down at 9:00 a.m. when everyone logs in has a different problem from one that fails only when inventory valuation reports are generated.
+
+Look at response times for common actions: opening a sales order, confirming a purchase order, searching contacts, loading a dashboard, posting invoices, and validating stock moves. Record when delays occur and which users, companies, or modules are affected. This gives your technical team a usable starting point and prevents a broad, costly intervention when one process is responsible.
+
+At the infrastructure level, review CPU utilization, available memory, disk latency, database connection counts, and network behavior. At the PostgreSQL level, identify long-running queries, blocked queries, deadlocks, cache efficiency, and tables with high write activity. Odoo logs can reveal slow requests, recurring errors, and scheduled jobs that overlap with busy business hours.
+
+This baseline matters. Without it, there is no reliable way to tell whether a change improved the system or simply moved the bottleneck somewhere else.
+
+## Reduce Odoo database performance issues at the source
+
+### Control data growth without damaging business history
+
+Odoo is designed to keep operational history. That is valuable for auditability, customer service, traceability, and financial control. But years of emails, attachments, stock movements, message notifications, logs, and obsolete records can affect searches, reporting, backups, and maintenance tasks.
+
+Do not delete data just because a table is large. Financial records, inventory movements, and customer communications may be subject to retention requirements or remain commercially useful. Instead, create a data-retention policy that distinguishes between records that must remain immediately available, records that can be archived, and technical data that can be safely cleaned.
+
+For example, old chatter messages, mail queue entries, temporary imports, inactive products, duplicate contacts, and outdated integration logs may deserve attention. Archiving inactive commercial records can improve day-to-day usability without removing the underlying business history. Large attachments may also be better managed through a deliberate document strategy rather than left to grow indefinitely inside the database.
+
+The goal is not a small database. It is a database where active processes do not repeatedly scan unnecessary data.
+
+### Audit custom modules and integrations
+
+Custom development is often the difference between an Odoo system that fits an SME and one that forces teams into workarounds. It can also become the source of serious performance degradation when it is not reviewed as the business and data set grow.
+
+A common issue is the N+1 query pattern. A customization loads a list of records, then runs an additional database query for every item in that list. This may be unnoticeable with 20 records and painfully slow with 20,000. Repeated computed fields, poorly designed automated actions, inefficient search domains, and code that processes records one at a time can cause similar problems.
+
+Review [custom modules](/en/development/) after major upgrades, new integrations, or rapid growth in transactions. Pay particular attention to code executed during high-frequency actions such as opening forms, confirming orders, calculating availability, synchronizing e-commerce inventory, or importing data.
+
+Integrations deserve the same discipline. An external webshop, payment platform, warehouse system, or CRM should not create a constant stream of small updates that compete with users for database resources. Where appropriate, batch updates, queue non-urgent work, and schedule synchronization outside peak periods. Real-time integration is useful when the business genuinely needs it. It is not automatically the best design for every data point.
+
+### Use indexes carefully
+
+Indexes can substantially improve searches and reporting, but they are not a universal cure. Every index consumes disk space and adds work when data is inserted or updated. Adding indexes without understanding the actual query plan can make writes slower and create more maintenance overhead.
+
+The right approach is targeted. Use query analysis to identify expensive searches that are repeatedly executed and confirm whether PostgreSQL is scanning large tables unnecessarily. Fields commonly used in filters, joins, sorting, or reporting may benefit from an index. Fields used rarely, or queries that already return a large share of a table, may not.
+
+This is one reason database tuning should be handled by people who understand both PostgreSQL and Odoo's data model. A technically valid change can still be commercially wrong if it speeds up one report while slowing down stock validation across the company.
+
+## Keep PostgreSQL healthy
+
+Odoo relies heavily on PostgreSQL, and database health is not a one-time setup task. As records are created, changed, and deleted, PostgreSQL needs routine maintenance to keep tables and indexes efficient.
+
+Autovacuum is central to that work. If it falls behind, table bloat can grow, query planning becomes less accurate, and performance gradually declines. Busy Odoo databases, especially those with frequent stock, accounting, messaging, or integration activity, may need autovacuum settings adjusted for their workload.
+
+Database statistics also need to be current. PostgreSQL uses them to decide how to execute queries. Outdated statistics can lead it to choose inefficient plans, even when the application code and server hardware are sound.
+
+Regular backups are essential, but they should be designed so they do not disrupt business operations. A backup process that saturates disk input/output during the working day can look exactly like an Odoo performance issue. Test restore procedures as well. A backup that has never been restored is not a proven recovery plan.
+
+## Size the application and infrastructure for the workload
+
+An Odoo environment needs more than a large virtual machine. It needs sensible separation of responsibilities and capacity aligned with how people actually use the system.
+
+For a small team with light transaction volumes, a simple deployment may be sufficient. For a company running [e-commerce](/en/industries-e-commerce/), warehouse operations, accounting, field service, and integrations, the application server, PostgreSQL database, file storage, and background processing need more deliberate planning.
+
+Odoo worker configuration is particularly important. Too few workers can leave available processing capacity unused. Too many can exhaust memory, create connection pressure on PostgreSQL, and make the system less stable under load. The right number depends on available RAM, CPU cores, user concurrency, installed modules, and the intensity of scheduled jobs.
+
+Storage matters as much as processor capacity. Database workloads are sensitive to disk latency. Fast, reliable storage and enough memory for useful caching often deliver a better result than adding CPU alone. [Cloud infrastructure](/en/infrastructure-it/) on AWS or Azure can scale effectively, but only when the architecture, monitoring, backup design, and cost controls are planned together.
+
+Do not overlook scheduled actions. Automated invoicing, synchronization, email processing, report generation, and data cleanup jobs can compete with daytime users. Some need to run immediately. Others can run every 15 minutes or overnight with no business downside. Scheduling is a practical performance tool.
+
+## Make reporting fit the business question
+
+Many perceived database problems begin with a report that asks Odoo to calculate too much, too often. A director may need margin by product category and month. That is different from asking the system to calculate every stock movement, invoice line, analytic entry, and currency conversion across five years every time a dashboard refreshes.
+
+Define the management question first. Then decide whether the answer should come from a live Odoo view, a filtered operational report, a scheduled export, a precomputed dataset, or a dedicated reporting model. The best option depends on how current the information must be and how much detail the user needs.
+
+For operational work, live data is often essential. For board reporting or historical analysis, a scheduled process may be more reliable and considerably faster. This trade-off should be explicit. Users should not have to wait three minutes for a report that could have been available as a daily refresh.
+
+## Build performance into change management
+
+Performance issues often appear after a perfectly reasonable business change: a new warehouse, a product catalog expansion, an acquisition, a new e-commerce channel, or a regulatory reporting requirement. The problem is not the change itself. It is implementing it without considering data volume, transaction patterns, and user load.
+
+Include performance checks in every significant Odoo change. Test realistic volumes, not only a few sample records. Review database impact before deploying new automations and integrations. Monitor the system after release, when real users and real data reveal the gaps that test environments may miss.
+
+Agitech approaches Odoo optimization this way: identify the operational friction, trace it to the real technical cause, and recommend only the work that produces a clear business benefit. Sometimes that means a database intervention. Sometimes it means rewriting one customization, rescheduling an integration, or changing a report design.
+
+The useful closing question is simple: which delay is costing your team the most time right now? Start there, measure it properly, and fix the cause before it becomes accepted as the normal cost of doing business.

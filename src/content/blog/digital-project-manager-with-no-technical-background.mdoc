@@ -1,490 +1,263 @@
 ---
 title: "Digital project manager with no technical background?"
 lang: "en"
-publishedAt: "2025-05-20"
-category: "Digital Project Management, Digital Transformation, Software Development"
-excerpt: ""
+publishedAt: "2025-05-20T09:01"
+excerpt: "IntroductionOver the last 6 years I dedicated most of my professional time launching softwares and analyzing how technology could improve company performances. Coming from a law education, far from the"
+author: "diego"
+categories:
+- "Digital Project Management"
+- "Digital Transformation"
+- "Software Development"
+coverImage: "/assets/img/blog/digital-project-manager-with-no-technical-background/Digital-Project-Management.png"
+seoTitle: "Digital project manager with no technical background? - Agitech - Odoo Partner"
+contentHtml: |
+  <p><strong>Introduction</strong><br>Over the last 6 years I dedicated most of my professional time launching softwares and analyzing how technology could improve company performances. Coming from a law education, far from the engineering universe I dragged my way up to the industry of the so called "Digital Transformation" with people from diverse backgrounds.</p>
+
+  <p>Many people in our industry (that has been in high demand in the last 10 years and will probably continue to be so in the 10 coming years) are self-learners with no prior technical degree, this observation leads us to two interesting consequences:</p>
+
+  <ul class="wp-block-list">
+  <li>The Y &amp; Z generation has access to challenging jobs with good prospects requiring no dedicated degree (there are no specific degree for most of the digital jobs) but only with a proven willingness to work in digital, self learning and 1-3 years of work experience. Those can be acquired in many affordable ways; I will elaborate more on this in a separate article.</li>
+
+  <li>Most of the people with no technical background tend to look dagger at each other, not knowing they should know one or the other technical term such as "SQL", "API call", "Instance", etc or some people want to impress their peers with some terminology they just learned knowing they will be the only one to understand it. No convention or knowledge base has never been established about what a person active in the digital transformation should know about software development - this is what this article intends to tackle.</li>
+  </ul>
+
+  <p>DISCLAIMER I: The concepts covered in this article have been selected by me as to be what I believe the basic concepts. You may believe I could have gone deeper, but a selection had to be made. I shall therefore limit the geeky acronyms to the minimum in this article.<br><br>DISCLAIMER II: I am on a continuous learning path, should something be wrong or unclear I hereby apologize in advance. I am open to any constructive feedback should some section be improved.</p>
+
+  <p>DISCLAIMER III: This article is short for the power of knowledge it covers. I encourage all digital project managers to read more about specific subjects or concepts they may find useful or interesting.</p>
+
+  <p><strong>How the internet works: a waiter attending a client</strong></p>
+
+  <p>There is no better analogy to explain how the internet works than by comparing it with someone ordering at a McDonalds' drive-in. Let me further illustrate this:&nbsp;</p>
+
+  <p>A&nbsp;<strong>server</strong>&nbsp;is a centralized program that communicates over a network (such as the Internet) to serve&nbsp;<em>clients</em>. You have several types of servers but let us focus on web applications where two predominate: a web server and a database server. In our McDonalds analogy, the employee taking your order at the drive-in would be the web server and the other employee collecting your BigMac from the oven’s kitchen would be the database server.</p>
+
+  <p>A&nbsp;<strong>client</strong>&nbsp;is a program (like&nbsp;a web browser such as Chrome or Firefox) that can request data from a server - in other words, when you browse the web you are requesting a website (server) for its information. In our McDonalds’ case, this would be you (the client) ordering a menu at the drive-in.</p>
+
+  <p>The client can make several requests the same way you can ask the McDonalds’ employee questions about the menu, order products, modify an order, etc.</p>
+
+  <p>When you go to a web page, your browser (the client) makes a request to the server— this involves the web server making a further call to another server (data server) which will return the data you want to see for that page.</p>
+
+  <p>e.g.:&nbsp;looking up the history of Napoleon on Wikipedia technically means you&nbsp;are searching for all data on the Wikipedia server related to the keyword "Napoleon".</p>
+
+  <p>Another important concept you should understand is that there is&nbsp;<strong>no absolute definition of a client and a server but a relative one.&nbsp;</strong>In the McDonalds example, there is a chain relationship: client – web server – data server, since the web server will make a request to the data server, the web server is the client in the web server-data server relationship. The server can thus become the client of another server depending on who is making the request and who is serving the request.</p>
+
+  <p><strong>DataBases: where your store your product</strong></p>
+
+  <p><strong><em><u>Introduction</u></em></strong></p>
+
+  <p>The main reason why we browse the web is to access information, content and eventually some specific features (that are also "per se" direct or indirect information). The database is for a website what a kitchen is to McDonalds, in other word it is where a website stores its data and where McDonalds store the food they sell (see below in red).</p>
+
+  <p>When we talk about databases we often rely on the term&nbsp;<strong>SQL relational databases, meaning&nbsp;</strong>because<strong>&nbsp;</strong>they:</p>
+
+  <p>1) can use data across tables&nbsp;(<strong>relational<u>)</u></strong>;&nbsp;and<br>2) use the standard&nbsp;<strong>SQL language&nbsp;</strong>that<strong>&nbsp;</strong>clients and developers will use to make requests to databases.</p>
+
+  <p>Join tables</p>
+
+  <p>You first need to understand that SQL relational databases are structured into&nbsp;<strong>tables</strong>&nbsp;(corresponding to a data model). Every table has many objects that have a&nbsp;<strong>unique ID</strong>&nbsp;automatically incremented every time a new object is created into the table.</p>
+
+  <p>Let's forget the physical example of McDonalds for now and see how another restaurant "Acme Restaurant" could structure its database.</p>
+
+  <p>Looking at the tables of this restaurant database (see image on the left) you could infer that the restaurant sells two menus (Monster Menu and Healthy Menu) costing respectively 7$ and 5$ USD and that there are 3 meals available (Fish &amp; Ships, Cesar Salad and Sushi). In this example there is a<strong>&nbsp;relation</strong>&nbsp;between the two tables (Menus and Meals) since a Menu record is made of different entries including a Meal ID coming from another table.</p>
+
+  <p><strong><em><u>SQL queries</u></em></strong></p>
+
+  <p><strong>SQL&nbsp;</strong>is the standard language for servers when they perform a database action and communicate with other servers or clients. In the illustration above you could imagine browsing into Acme Restaurant website and clicking on the "menu button" - this would cause the web server to perform the&nbsp;<strong>following SQL query</strong>&nbsp;to the data server:</p>
+
+  <p>SELECT * MENU in AcmeRestaurant</p>
+
+  <p>The data server will return: “Monster Menu, Healthy Menu” to the web server that will return this same information to the client.</p>
+
+  <p><strong><em><u>The database schema</u></em></strong></p>
+
+  <p>Another key concept a project manager should understand is the concept of&nbsp;<strong>database schema</strong>.</p>
+
+  <p>In the example of Acme Restaurant above, the database schema is poor and restricting. Acme Restaurant could widen the options to their customers by:</p>
+
+  <ol class="wp-block-list">
+  <li>Sell meals apart from the menu’s: this is currently not possible since only menus have a price (as opposed to meals that do not have a price in their model).</li>
+
+  <li>Having several dessert options for one menu (e.g.: order a “Healthy Menu" with a "Chocolate Mousse"), this is currently not possible since every menu is associated with one specific dessert name.</li>
+  </ol>
+
+  <p>Creating a "Dessert" table would have been more flexible allowing to use data from a new table, namely "Dessert" into the "Menu" table. Consequently, this would broaden the dessert’s menu’s choices.</p>
+
+  <p>You may argue that a database schema is simple enough to be foretasted for and in addition that you can change a database schema. Though it is important to keep in mind that complex web applications may have hundreds of tables with millions of information changing your database schema putting your entire project at risk. In conclusion, I recommend making sure you have from the beginning a discussion with your team to allow enough flexibility for your business objectives.</p>
+
+  <p>Having a bad database schema is common as project evolve in their requirements and follow different strategy. A bad database schema is a good example of "t<strong>echnical debt</strong>". As a project manager you will often refer to the term technical debt as something from the past that prevents you from moving forward or that affects your development velocity.</p>
+
+  <p>I will end this section with some market awareness: the major SQL relational databases’ providers used in software development are PostgreSQL and MySQL (now owned by Oracle).</p>
+
+  <p><strong>Cloud servers: pay-as-you-go servers</strong></p>
+
+  <p><strong><em><u>What is a server made of?</u></em></strong></p>
+
+  <p>Servers are basically made of two things: CPU on one hand and storage on the other hand.</p>
+
+  <p>1)&nbsp;CPU or Central Processing Units are used to compute math or execute codes and make up for what a computer program is; I prefer to call it&nbsp;<strong>computer power</strong>. Anything executing any sort of computer program has a CPU consumption (depending on the program complexity). As an example: a modern Texas Instrument® calculator consumes more CPU than Apollo XI which landed on the moon in 1969.</p>
+
+  <p>2)&nbsp;Storage: available space to store data. The byte is the unit we use to measure the available storage on a given place. We nowadays talk often of GB (Gigabyte) or TB (Terabyte). We will use storage to host our&nbsp;<strong>website database and its data.</strong></p>
+
+  <p>Good to know! We execute programs and store data on our computer (desktop and laptop) on a daily basis. Now from a technical perspective the word “computer” refers too much to server components and this is why we now prefer to call our working computer our “machine”.</p>
+
+  <p><strong><em><u>A short history of cloud computing</u></em></strong></p>
+
+  <p>Computers (laptop or desktops) as we know them can be used as servers and were historically used as first servers hosting website on the internet.</p>
+
+  <p>Years later, in the 80-90’s, engineers designed specific hardwares to host websites -&nbsp;those were the first dedicated servers now called "<strong>on premise servers</strong>". Most S&amp;P 500 companies would have warehouses full of these physical servers to host their websites or other programs such as their ERPs, production softwares, etc.</p>
+
+  <p>The word "<strong>cloud server</strong>" was first used in 1996 but only became common in the last decades after Amazon launched its Elastic Cloud Compute product. Cloud servers (or "on demand servers") are in fact&nbsp;<em>on premise servers&nbsp;</em>put at the disposal of companies and individuals by tech giants such as Google Cloud, AWS (Amazon) and Azure Microsoft. Those servers are available on demand in large quantities and in different regions on a pay-as-you-go basis.</p>
+
+  <p><strong><em><u>Why is cloud computing often better for my digital projects?</u></em></strong></p>
+
+  <p>Let’s start by pointing out the challenges and benefits you have with&nbsp;<strong>on premise servers</strong>:</p>
+
+  <p>1.On premise servers require setup and technical configurations that often take time</p>
+
+  <p>2.On premise servers need to be setup and maintained by qualified staff</p>
+
+  <p>3.On premise servers have a fixed amount of storage and CPU.</p>
+
+  <p>This means that if your project scales you will have to buy a new hardware which will include migration, setup, and maintenance. The fixed CPU and storage may also mean that you will find yourselves using 20% of your server capacity.</p>
+
+  <p>4.On premise servers centralize all your project in one place and are therefore centralizing your risk (technical issues, or physical damages incurred by the warehouse in which your hardware is held).</p>
+
+  <p>5.Budgets spent in on premise servers will often be considered as CAPEX or investments in your project (this may be a good/ bad thing depending on the company’s financial strategy).</p>
+
+  <p>6.&nbsp;Hardware servers may be cheaper than on demand servers.</p>
+
+  <p>Let’s now compare this list to&nbsp;<strong>on demand servers:</strong></p>
+
+  <p>1.On demand servers can be set up in minutes. Although for complex and large projects this may require the intervention of one or several development engineers.</p>
+
+  <p>2.On demand servers require little or no maintenance compared to on premise servers, although some large projects may require the intervention of development engineers on cloud servers.</p>
+
+  <p>3.On demand servers allow for&nbsp;<strong>vertical scalability</strong>: you may increase/decrease your CPU or storage at any time without having to purchase a new hardware. CPU and storages are often powerful in an on demand servers.</p>
+
+  <p>4.On demand servers allow for&nbsp;<strong>horizontal scalability</strong>: you may use a large number of servers for one project, decreasing your risk in case one of them does not work. You may also consider using different servers in different geographical regions to serve different type of users.</p>
+
+  <p>5.Budget spent in on demand servers will often be considered as OPEX (the same way you pay a rent or a monthly service for your company). This may or may not suit your company’s financial strategy.&nbsp;</p>
+
+  <p>6.&nbsp;On demand server are expensive and invoiced per second. However, this can be offset by the fact that providers will often give important discounts if you can guarantee that you will use their server on a large period.</p>
+
+  <p>In conclusion, though the price may be higher at first,&nbsp;<strong>on demand servers</strong>&nbsp;will often provide your project with a better quality of service and project agility into the medium and longer term.</p>
+
+  <p><strong>API's: a broker granting access to your server</strong></p>
+
+  <p><strong><em><u>Concept</u></em></strong></p>
+
+  <p>The API is the middleman in-between a client and a server. The sole objective of the API is to allow anyone to become a server's client and to communicate with the given server. I do not see a better way to illustrate the API concept than by the inter-phone in our McDonald’s example (see in red).</p>
+
+  <p>In our daily life we use large platforms that give us&nbsp;access to their API to communicate and receive a service from their server. Some examples are Facebook for logins and profile information, Stripe for payment gateway, Google maps for geolocation purposes, etc. -&nbsp;if tomorrow you need their services, you will be able to make&nbsp;your website call their API to request something from their server.</p>
+
+  <p>Documentation</p>
+
+  <p>An API must be&nbsp;<strong>well documented</strong>&nbsp;(preferably with concrete examples) for the developers to know with relative ease how to make requests to the target server without errors. Examples of errors we often come across browsing the web are 404 errors (URL not found), 503 errors (unavailable), 401 (unavailable) or 403 (forbidden).</p>
+
+  <p>Here is an example of&nbsp;<a href="https://stripe.com/docs">Stripe API documentation</a>. Stripe is a payment provider that allows websites to accept online payment via Visa, MasterCard®, etc. Stripe's service is fully online and your website (<strong>client</strong>) can directly use (<strong>call</strong>) their API, without any human intervention, to&nbsp;<strong>request&nbsp;</strong>Stripe (<strong>server</strong>) to check whether a payment is valid or not.</p>
+
+  <p><strong><em><u>API calls</u></em></strong></p>
+
+  <p>A client (browser, website server, etc.) can&nbsp;<strong>make a call&nbsp;</strong>(synonym for request) to an API. The API will then relay the request to the server.</p>
+
+  <p>There are 4 types of calls you can make to an API and subsequently to a server:</p>
+
+  <p>1.A PUT (and POST) request is made to send new information to the server and&nbsp;<strong>create</strong>&nbsp;a new record into a database.</p>
+
+  <p>E.g.: when you sign-up to a new website, you will fill in a form with information that will allow a new user to be created on the website’s database.</p>
+
+  <p>2.A GET request enables you&nbsp;<strong>to read&nbsp;</strong>something from the server database. GET requests are in fact made every time we browse a website and type and URL in our browser.</p>
+
+  <p>E.g.: you have no logins and go to Google.com and make a search, the results of your search are the response to your GET request.</p>
+
+  <p>3.PATCH request is&nbsp;<strong>to update&nbsp;</strong>a piece of information on the server database.</p>
+
+  <p>E.g.: you just edit your profile on a website and saved your changed information.</p>
+
+  <p>4.DELETE requests are made&nbsp;<strong>to remove</strong>&nbsp;something from the server database.</p>
+
+  <p>E.g.: you wish to delete your profile from a website.</p>
+
+  <p>Those 4 requests are commonly known as CRUD (Create Read Update Delete)&nbsp;operations in computer science and constitute the basics of back-end development.</p>
+
+  <p><strong><em><u>API permissions</u></em></strong></p>
+
+  <p>API's are developed with safety in mind as they open the doors to servers. Creating an API is opening a door to your server and you want to make sure that not everyone can do everything on your server. There may be information you want to conceal from the whole&nbsp;<em>wild&nbsp;</em>web or an operation you want to prevent such as the deletion of key files.</p>
+
+  <p>Therefore, each call may contain a permission attached to it. POST, DELETE, UPDATE requests will often require a permission (e.g.: you need to be logged-in to delete your own profile on Facebook) whilst some GET requests (e.g.: display of a homepage) may not need any permission at all.</p>
+
+  <p>Permissions are packaged into a&nbsp;<strong>token</strong>&nbsp;that will be attached to the request. Tokens are encrypted and they tell the server who you are and consequently the permission you have when you perform a request.</p>
+
+  <p>You often see token in your browser URLs when they contain the "<em>?token</em>" parameter, for example:</p>
+
+  <p>http://www.example.com/foo/bar.html<strong>token=</strong>1441307151_4492f25946a2e8e1414a8bb53dab8a6ba1cf4615</p>
+
+  <p>As you can imagine, tokens and permissions play a significant role in the&nbsp;<strong>authentication process</strong>: when you log in, your credentials are verified by a third party service that confirms who you are - this third-party server will then send a token to the original server containing all actions (permissions) the user is entitled to perform on the database.</p>
+
+  <p><strong><em><u>WebHooks &amp; Callbacks</u></em></strong></p>
+
+  <p>As mentioned above, as a project manager you will often be required to use third-party services (payment gateway, authentication services, etc.) that have a well-documented API to be able to communicate with your web app.</p>
+
+  <p>Those services/servers are external to your web app and you consequently have limited permissions to check how they perform actions, manage their algorithm and verification processes. To solve this problem, we use web-hooks and callbacks.</p>
+
+  <p>Let’s say you are sending one of your web app users to Stripe® to verify a payment on your website. The callback allows your server to know that Stripe® has verified this user’s payment (without elaborating on Stripe’s security, how they verify payments, etc.) by making a request to your server with the details of what Stripe® has processed. In the case of a payment gateway, the callback will typically contain the name of the customer for whom the payment was verified, the product, the price, …&nbsp;so that your web app knows what the user’s next actions should be.</p>
+
+  <p><strong><em><u>API as a reference for data transfer</u></em></strong></p>
+
+  <p>As a project manager you are often asked to enable different systems to communicate with each other. A good example would be to ask a CRM (Sales and invoice management) to transfer an invoice to an Accounting Software (Financial dashboard and payment collection).</p>
+
+  <p>There are two key ways to transfer information from one system to another:</p>
+
+  <p>1.File exchanges: the old-fashioned way, often done by FTP.</p>
+
+  <p>This means that a routine from one of the systems will be executed every X time to import the data sent on/to? a particular storage. The downside to this method is that the transfer will not be in real time but every time the routine is executed.</p>
+
+  <p>2.APIs: API are the best way to transfer data from a server to another in real time. It means every time there is an update in server A, the identical update will be sent to server B.</p>
+
+  <p>When you are required to transfer data from one system to another, you know that API calls will be involved. Beware! API development often means more time consumption (data mapping between the systems) and higher costs (developments).</p>
+
+  <h3 class="wp-block-heading"><strong><em><u>API and servers coding languages</u></em></strong></h3>
+
+  <p>All the programming related to servers and API is often called&nbsp;<strong><u>back-end</u></strong>&nbsp;development. Back-end programming languages are namely Python, PHP, .Net, Node JS.</p>
+
+  <h2 class="wp-block-heading"><strong>Front-End development</strong></h2>
+
+  <p>The front-end of a web app is everything related to what a user can see on his browser and how he interacts with the user interface on his browser.&nbsp;Taking back our McDonalds example; it is the design of the inter-phone's interface and how easily it will be for the user to instantly communicate with the waiter inside the restaurant .</p>
+
+  <p>Front-end programming languages are HTML, CSS, and JavaScript. A project front-end development includes three different areas:</p>
+
+  <p>a.Converting designs into HTML and CSS:</p>
+
+  <p>It is is about how well you can replicate on a browser the work of your design/UX team.</p>
+
+  <p>b.Create behavioral and dynamic effects in JavaScript, such as sticky menus, dropdown menus, autocomplete effects, etc:</p>
+
+  <p>These are all behaviors that go beyond designs requiring a browser to do more than HTML and CSS. JavaScript will also prove useful when it comes to&nbsp;<strong><u>web marketing and tracking</u></strong>&nbsp;(Google Analytics, Facebook Ads, Google Ads, Hotjar, etc.). Marketers add scripts or “tags” to track user’s behaviors on your website and send it back to the script owner. Marketers will be able to segment and target users who performed certain actions on your website.</p>
+
+  <p>c.Render the data given by your server into your web pages:</p>
+
+  <p>Front-end developers create templates that welcome the data from your database. This is how, for example, a web shop does not need the development of a webpage every time it sells a new product.</p>
+
+  <h2 class="wp-block-heading"><strong>Production Pipeline and CI/CD</strong></h2>
+
+  <p>In this section, we will try to understand how developers produce a web app, where they start and how they upload their work to the internet.</p>
+
+  <p>As you could have imagined, a developer will begin the coding process on his own compute: this is known as a&nbsp;<strong>local environment&nbsp;</strong>only accessible by him.</p>
+
+  <p>As soon as the developer has produced something viable, he will push his code to a&nbsp;<strong>staging environment,&nbsp;</strong>also known as pre-prod or test server. The idea is to test the code developed on a server that has the exact same parameters as the production server. The staging environment address is invariably protected so that it is only known internally for testing purposes so that consumers and competitors are unaware of any ongoing changes.</p>
+
+  <p>The last phase of the pipeline is the&nbsp;<strong>production server&nbsp;</strong>(the code will be pulled from the staging to production by an experienced developer).<strong>&nbsp;</strong>The production server the actual server on which your users will access your web app on the internet.</p>
+
+  <p>In addition to the different development environment, the development team uses a&nbsp;<strong>version control</strong>&nbsp;system to make sure they are not confused as to which developers are working on which version of the code. The version control system keeps track of who is coding what and tracks all the changes into a software code. Standard version control systems are GitHub, Gitlab, Bitbucket.</p>
+
+  <p><strong>Continuous Integration and delivery (CI/CD)&nbsp;</strong>to go from a development stage to production.<strong>&nbsp;</strong>These processes focus on small code changes and the automation of sending those code changes through the local, staging and production pipeline efficiently. There are many approaches to continuous integrations and delivery; the idea is to create a logical and efficient pipeline using for instance a project management software, a version control system and Cloud server tools. CI/ CD is a fashionable way for a project manager to build a web app with a development team.</p>
+
+  <h2 class="wp-block-heading"><strong>UX/UI</strong></h2>
+
+  <p>A brainstorming is necessary before you put your frond-end developers to the work. UI/UX designer analyze user behaviors and how users will interact with your product. The UX/ UI team will create designs and mock-ups. This output will be then forwarded to Front-End developers to be converted into a programming language.</p>
+
+  <h2 class="wp-block-heading"><strong>Conclusion</strong></h2>
+
+  <p>I hope you enjoyed reading this article (if you did please share the love!) as much as I enjoy writing it. If an article cannot make for years of experience, I encourage you to deepen those topics even further. At last, now that you understand how things work you have well deserved that burger ;)</p>
+
+  <p></p>
 ---
-**Introduction**  
-Over the last 6 years I dedicated most of my professional time launching softwares and analyzing how technology could improve company performances. Coming from a law education, far from the engineering universe I dragged my way up to the industry of the so called "Digital Transformation" with people from diverse backgrounds.
-
-
-
-Many people in our industry (that has been in high demand in the last 10 years and will probably continue to be so in the 10 coming years) are self-learners with no prior technical degree, this observation leads us to two interesting consequences:
-
-
-
-* The Y & Z generation has access to challenging jobs with good prospects requiring no dedicated degree (there are no specific degree for most of the digital jobs) but only with a proven willingness to work in digital, self learning and 1-3 years of work experience. Those can be acquired in many affordable ways; I will elaborate more on this in a separate article.
-* Most of the people with no technical background tend to look dagger at each other, not knowing they should know one or the other technical term such as "SQL", "API call", "Instance", etc or some people want to impress their peers with some terminology they just learned knowing they will be the only one to understand it. No convention or knowledge base has never been established about what a person active in the digital transformation should know about software development - this is what this article intends to tackle.
-
-
-
-DISCLAIMER I: The concepts covered in this article have been selected by me as to be what I believe the basic concepts. You may believe I could have gone deeper, but a selection had to be made. I shall therefore limit the geeky acronyms to the minimum in this article.  
-  
-DISCLAIMER II: I am on a continuous learning path, should something be wrong or unclear I hereby apologize in advance. I am open to any constructive feedback should some section be improved.
-
-
-
-DISCLAIMER III: This article is short for the power of knowledge it covers. I encourage all digital project managers to read more about specific subjects or concepts they may find useful or interesting.
-
-
-
-**How the internet works: a waiter attending a client**
-
-
-
-There is no better analogy to explain how the internet works than by comparing it with someone ordering at a McDonalds' drive-in. Let me further illustrate this:
-
-
-
-A **server** is a centralized program that communicates over a network (such as the Internet) to serve *clients*. You have several types of servers but let us focus on web applications where two predominate: a web server and a database server. In our McDonalds analogy, the employee taking your order at the drive-in would be the web server and the other employee collecting your BigMac from the oven’s kitchen would be the database server.
-
-
-
-A **client** is a program (like a web browser such as Chrome or Firefox) that can request data from a server - in other words, when you browse the web you are requesting a website (server) for its information. In our McDonalds’ case, this would be you (the client) ordering a menu at the drive-in.
-
-
-
-The client can make several requests the same way you can ask the McDonalds’ employee questions about the menu, order products, modify an order, etc.
-
-
-
-When you go to a web page, your browser (the client) makes a request to the server— this involves the web server making a further call to another server (data server) which will return the data you want to see for that page.
-
-
-
-e.g.: looking up the history of Napoleon on Wikipedia technically means you are searching for all data on the Wikipedia server related to the keyword "Napoleon".
-
-
-
-Another important concept you should understand is that there is **no absolute definition of a client and a server but a relative one.**In the McDonalds example, there is a chain relationship: client – web server – data server, since the web server will make a request to the data server, the web server is the client in the web server-data server relationship. The server can thus become the client of another server depending on who is making the request and who is serving the request.
-
-
-
-**DataBases: where your store your product**
-
-
-
-***Introduction***
-
-
-
-The main reason why we browse the web is to access information, content and eventually some specific features (that are also "per se" direct or indirect information). The database is for a website what a kitchen is to McDonalds, in other word it is where a website stores its data and where McDonalds store the food they sell (see below in red).
-
-
-
-When we talk about databases we often rely on the term **SQL relational databases, meaning**becausethey:
-
-
-
-1) can use data across tables (**relational)**; and  
-2) use the standard **SQL language**thatclients and developers will use to make requests to databases.
-
-
-
-Join tables
-
-
-
-You first need to understand that SQL relational databases are structured into **tables** (corresponding to a data model). Every table has many objects that have a **unique ID** automatically incremented every time a new object is created into the table.
-
-
-
-Let's forget the physical example of McDonalds for now and see how another restaurant "Acme Restaurant" could structure its database.
-
-
-
-Looking at the tables of this restaurant database (see image on the left) you could infer that the restaurant sells two menus (Monster Menu and Healthy Menu) costing respectively 7$ and 5$ USD and that there are 3 meals available (Fish & Ships, Cesar Salad and Sushi). In this example there is a**relation** between the two tables (Menus and Meals) since a Menu record is made of different entries including a Meal ID coming from another table.
-
-
-
-***SQL queries***
-
-
-
-**SQL**is the standard language for servers when they perform a database action and communicate with other servers or clients. In the illustration above you could imagine browsing into Acme Restaurant website and clicking on the "menu button" - this would cause the web server to perform the **following SQL query** to the data server:
-
-
-
-SELECT \* MENU in AcmeRestaurant
-
-
-
-The data server will return: “Monster Menu, Healthy Menu” to the web server that will return this same information to the client.
-
-
-
-***The database schema***
-
-
-
-Another key concept a project manager should understand is the concept of **database schema**.
-
-
-
-In the example of Acme Restaurant above, the database schema is poor and restricting. Acme Restaurant could widen the options to their customers by:
-
-
-
-1. Sell meals apart from the menu’s: this is currently not possible since only menus have a price (as opposed to meals that do not have a price in their model).
-2. Having several dessert options for one menu (e.g.: order a “Healthy Menu" with a "Chocolate Mousse"), this is currently not possible since every menu is associated with one specific dessert name.
-
-
-
-Creating a "Dessert" table would have been more flexible allowing to use data from a new table, namely "Dessert" into the "Menu" table. Consequently, this would broaden the dessert’s menu’s choices.
-
-
-
-You may argue that a database schema is simple enough to be foretasted for and in addition that you can change a database schema. Though it is important to keep in mind that complex web applications may have hundreds of tables with millions of information changing your database schema putting your entire project at risk. In conclusion, I recommend making sure you have from the beginning a discussion with your team to allow enough flexibility for your business objectives.
-
-
-
-Having a bad database schema is common as project evolve in their requirements and follow different strategy. A bad database schema is a good example of "t**echnical debt**". As a project manager you will often refer to the term technical debt as something from the past that prevents you from moving forward or that affects your development velocity.
-
-
-
-I will end this section with some market awareness: the major SQL relational databases’ providers used in software development are PostgreSQL and MySQL (now owned by Oracle).
-
-
-
-**Cloud servers: pay-as-you-go servers**
-
-
-
-***What is a server made of?***
-
-
-
-Servers are basically made of two things: CPU on one hand and storage on the other hand.
-
-
-
-1) CPU or Central Processing Units are used to compute math or execute codes and make up for what a computer program is; I prefer to call it **computer power**. Anything executing any sort of computer program has a CPU consumption (depending on the program complexity). As an example: a modern Texas Instrument® calculator consumes more CPU than Apollo XI which landed on the moon in 1969.
-
-
-
-2) Storage: available space to store data. The byte is the unit we use to measure the available storage on a given place. We nowadays talk often of GB (Gigabyte) or TB (Terabyte). We will use storage to host our **website database and its data.**
-
-
-
-Good to know! We execute programs and store data on our computer (desktop and laptop) on a daily basis. Now from a technical perspective the word “computer” refers too much to server components and this is why we now prefer to call our working computer our “machine”.
-
-
-
-***A short history of cloud computing***
-
-
-
-Computers (laptop or desktops) as we know them can be used as servers and were historically used as first servers hosting website on the internet.
-
-
-
-Years later, in the 80-90’s, engineers designed specific hardwares to host websites - those were the first dedicated servers now called "**on premise servers**". Most S&P 500 companies would have warehouses full of these physical servers to host their websites or other programs such as their ERPs, production softwares, etc.
-
-
-
-The word "**cloud server**" was first used in 1996 but only became common in the last decades after Amazon launched its Elastic Cloud Compute product. Cloud servers (or "on demand servers") are in fact *on premise servers*put at the disposal of companies and individuals by tech giants such as Google Cloud, AWS (Amazon) and Azure Microsoft. Those servers are available on demand in large quantities and in different regions on a pay-as-you-go basis.
-
-
-
-***Why is cloud computing often better for my digital projects?***
-
-
-
-Let’s start by pointing out the challenges and benefits you have with **on premise servers**:
-
-
-
-1.On premise servers require setup and technical configurations that often take time
-
-
-
-2.On premise servers need to be setup and maintained by qualified staff
-
-
-
-3.On premise servers have a fixed amount of storage and CPU.
-
-
-
-This means that if your project scales you will have to buy a new hardware which will include migration, setup, and maintenance. The fixed CPU and storage may also mean that you will find yourselves using 20% of your server capacity.
-
-
-
-4.On premise servers centralize all your project in one place and are therefore centralizing your risk (technical issues, or physical damages incurred by the warehouse in which your hardware is held).
-
-
-
-5.Budgets spent in on premise servers will often be considered as CAPEX or investments in your project (this may be a good/ bad thing depending on the company’s financial strategy).
-
-
-
-6. Hardware servers may be cheaper than on demand servers.
-
-
-
-Let’s now compare this list to **on demand servers:**
-
-
-
-1.On demand servers can be set up in minutes. Although for complex and large projects this may require the intervention of one or several development engineers.
-
-
-
-2.On demand servers require little or no maintenance compared to on premise servers, although some large projects may require the intervention of development engineers on cloud servers.
-
-
-
-3.On demand servers allow for **vertical scalability**: you may increase/decrease your CPU or storage at any time without having to purchase a new hardware. CPU and storages are often powerful in an on demand servers.
-
-
-
-4.On demand servers allow for **horizontal scalability**: you may use a large number of servers for one project, decreasing your risk in case one of them does not work. You may also consider using different servers in different geographical regions to serve different type of users.
-
-
-
-5.Budget spent in on demand servers will often be considered as OPEX (the same way you pay a rent or a monthly service for your company). This may or may not suit your company’s financial strategy.
-
-
-
-6. On demand server are expensive and invoiced per second. However, this can be offset by the fact that providers will often give important discounts if you can guarantee that you will use their server on a large period.
-
-
-
-In conclusion, though the price may be higher at first, **on demand servers** will often provide your project with a better quality of service and project agility into the medium and longer term.
-
-
-
-**API's: a broker granting access to your server**
-
-
-
-***Concept***
-
-
-
-The API is the middleman in-between a client and a server. The sole objective of the API is to allow anyone to become a server's client and to communicate with the given server. I do not see a better way to illustrate the API concept than by the inter-phone in our McDonald’s example (see in red).
-
-
-
-In our daily life we use large platforms that give us access to their API to communicate and receive a service from their server. Some examples are Facebook for logins and profile information, Stripe for payment gateway, Google maps for geolocation purposes, etc. - if tomorrow you need their services, you will be able to make your website call their API to request something from their server.
-
-
-
-Documentation
-
-
-
-An API must be **well documented** (preferably with concrete examples) for the developers to know with relative ease how to make requests to the target server without errors. Examples of errors we often come across browsing the web are 404 errors (URL not found), 503 errors (unavailable), 401 (unavailable) or 403 (forbidden).
-
-
-
-Here is an example of [Stripe API documentation](https://stripe.com/docs). Stripe is a payment provider that allows websites to accept online payment via Visa, MasterCard®, etc. Stripe's service is fully online and your website (**client**) can directly use (**call**) their API, without any human intervention, to **request**Stripe (**server**) to check whether a payment is valid or not.
-
-
-
-***API calls***
-
-
-
-A client (browser, website server, etc.) can **make a call**(synonym for request) to an API. The API will then relay the request to the server.
-
-
-
-There are 4 types of calls you can make to an API and subsequently to a server:
-
-
-
-1.A PUT (and POST) request is made to send new information to the server and **create** a new record into a database.
-
-
-
-E.g.: when you sign-up to a new website, you will fill in a form with information that will allow a new user to be created on the website’s database.
-
-
-
-2.A GET request enables you **to read**something from the server database. GET requests are in fact made every time we browse a website and type and URL in our browser.
-
-
-
-E.g.: you have no logins and go to Google.com and make a search, the results of your search are the response to your GET request.
-
-
-
-3.PATCH request is **to update**a piece of information on the server database.
-
-
-
-E.g.: you just edit your profile on a website and saved your changed information.
-
-
-
-4.DELETE requests are made **to remove** something from the server database.
-
-
-
-E.g.: you wish to delete your profile from a website.
-
-
-
-Those 4 requests are commonly known as CRUD (Create Read Update Delete) operations in computer science and constitute the basics of back-end development.
-
-
-
-***API permissions***
-
-
-
-API's are developed with safety in mind as they open the doors to servers. Creating an API is opening a door to your server and you want to make sure that not everyone can do everything on your server. There may be information you want to conceal from the whole *wild*web or an operation you want to prevent such as the deletion of key files.
-
-
-
-Therefore, each call may contain a permission attached to it. POST, DELETE, UPDATE requests will often require a permission (e.g.: you need to be logged-in to delete your own profile on Facebook) whilst some GET requests (e.g.: display of a homepage) may not need any permission at all.
-
-
-
-Permissions are packaged into a **token** that will be attached to the request. Tokens are encrypted and they tell the server who you are and consequently the permission you have when you perform a request.
-
-
-
-You often see token in your browser URLs when they contain the "*?token*" parameter, for example:
-
-
-
-http://www.example.com/foo/bar.html**token=**1441307151\_4492f25946a2e8e1414a8bb53dab8a6ba1cf4615
-
-
-
-As you can imagine, tokens and permissions play a significant role in the **authentication process**: when you log in, your credentials are verified by a third party service that confirms who you are - this third-party server will then send a token to the original server containing all actions (permissions) the user is entitled to perform on the database.
-
-
-
-***WebHooks & Callbacks***
-
-
-
-As mentioned above, as a project manager you will often be required to use third-party services (payment gateway, authentication services, etc.) that have a well-documented API to be able to communicate with your web app.
-
-
-
-Those services/servers are external to your web app and you consequently have limited permissions to check how they perform actions, manage their algorithm and verification processes. To solve this problem, we use web-hooks and callbacks.
-
-
-
-Let’s say you are sending one of your web app users to Stripe® to verify a payment on your website. The callback allows your server to know that Stripe® has verified this user’s payment (without elaborating on Stripe’s security, how they verify payments, etc.) by making a request to your server with the details of what Stripe® has processed. In the case of a payment gateway, the callback will typically contain the name of the customer for whom the payment was verified, the product, the price, … so that your web app knows what the user’s next actions should be.
-
-
-
-***API as a reference for data transfer***
-
-
-
-As a project manager you are often asked to enable different systems to communicate with each other. A good example would be to ask a CRM (Sales and invoice management) to transfer an invoice to an Accounting Software (Financial dashboard and payment collection).
-
-
-
-There are two key ways to transfer information from one system to another:
-
-
-
-1.File exchanges: the old-fashioned way, often done by FTP.
-
-
-
-This means that a routine from one of the systems will be executed every X time to import the data sent on/to? a particular storage. The downside to this method is that the transfer will not be in real time but every time the routine is executed.
-
-
-
-2.APIs: API are the best way to transfer data from a server to another in real time. It means every time there is an update in server A, the identical update will be sent to server B.
-
-
-
-When you are required to transfer data from one system to another, you know that API calls will be involved. Beware! API development often means more time consumption (data mapping between the systems) and higher costs (developments).
-
-
-
-### ***API and servers coding languages***
-
-
-
-All the programming related to servers and API is often called **back-end** development. Back-end programming languages are namely Python, PHP, .Net, Node JS.
-
-
-
-## **Front-End development**
-
-
-
-The front-end of a web app is everything related to what a user can see on his browser and how he interacts with the user interface on his browser. Taking back our McDonalds example; it is the design of the inter-phone's interface and how easily it will be for the user to instantly communicate with the waiter inside the restaurant .
-
-
-
-Front-end programming languages are HTML, CSS, and JavaScript. A project front-end development includes three different areas:
-
-
-
-a.Converting designs into HTML and CSS:
-
-
-
-It is is about how well you can replicate on a browser the work of your design/UX team.
-
-
-
-b.Create behavioral and dynamic effects in JavaScript, such as sticky menus, dropdown menus, autocomplete effects, etc:
-
-
-
-These are all behaviors that go beyond designs requiring a browser to do more than HTML and CSS. JavaScript will also prove useful when it comes to **web marketing and tracking** (Google Analytics, Facebook Ads, Google Ads, Hotjar, etc.). Marketers add scripts or “tags” to track user’s behaviors on your website and send it back to the script owner. Marketers will be able to segment and target users who performed certain actions on your website.
-
-
-
-c.Render the data given by your server into your web pages:
-
-
-
-Front-end developers create templates that welcome the data from your database. This is how, for example, a web shop does not need the development of a webpage every time it sells a new product.
-
-
-
-## **Production Pipeline and CI/CD**
-
-
-
-In this section, we will try to understand how developers produce a web app, where they start and how they upload their work to the internet.
-
-
-
-As you could have imagined, a developer will begin the coding process on his own compute: this is known as a **local environment**only accessible by him.
-
-
-
-As soon as the developer has produced something viable, he will push his code to a **staging environment,**also known as pre-prod or test server. The idea is to test the code developed on a server that has the exact same parameters as the production server. The staging environment address is invariably protected so that it is only known internally for testing purposes so that consumers and competitors are unaware of any ongoing changes.
-
-
-
-The last phase of the pipeline is the **production server**(the code will be pulled from the staging to production by an experienced developer).The production server the actual server on which your users will access your web app on the internet.
-
-
-
-In addition to the different development environment, the development team uses a **version control** system to make sure they are not confused as to which developers are working on which version of the code. The version control system keeps track of who is coding what and tracks all the changes into a software code. Standard version control systems are GitHub, Gitlab, Bitbucket.
-
-
-
-**Continuous Integration and delivery (CI/CD)**to go from a development stage to production.These processes focus on small code changes and the automation of sending those code changes through the local, staging and production pipeline efficiently. There are many approaches to continuous integrations and delivery; the idea is to create a logical and efficient pipeline using for instance a project management software, a version control system and Cloud server tools. CI/ CD is a fashionable way for a project manager to build a web app with a development team.
-
-
-
-## **UX/UI**
-
-
-
-A brainstorming is necessary before you put your frond-end developers to the work. UI/UX designer analyze user behaviors and how users will interact with your product. The UX/ UI team will create designs and mock-ups. This output will be then forwarded to Front-End developers to be converted into a programming language.
-
-
-
-## **Conclusion**
-
-
-
-I hope you enjoyed reading this article (if you did please share the love!) as much as I enjoy writing it. If an article cannot make for years of experience, I encourage you to deepen those topics even further. At last, now that you understand how things work you have well deserved that burger ;)

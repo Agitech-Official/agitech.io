@@ -1,127 +1,71 @@
 ---
+// Markup identical to the WP header (header.php + wp_nav_menu "main-nav" output), so the
+// original theme CSS (public/wp-theme/css) and JS (agitech-theme.js) apply untouched.
+// FR/EN menus are the live WP menus; NL has no WP counterpart, it mirrors the EN structure.
+import { switcherLinks } from '../lib/translations.mjs';
+import { navigation } from '../lib/settings';
 export interface Props {
   lang: 'fr' | 'en' | 'nl';
 }
 const { lang } = Astro.props;
 
-const strings = {
-  fr: { odoo: 'Odoo ERP', industries: 'Solutions', services: 'Services', cases: 'Réalisations', blog: 'Blog', team: 'Jobs', contact: 'Contact', allIndustries: 'Toutes les solutions' },
-  en: { odoo: 'Odoo ERP', industries: 'Solutions', services: 'Services', cases: 'Case Studies', blog: 'Blog', team: 'Jobs', contact: 'Contact', allIndustries: 'All solutions' },
-  nl: { odoo: 'Odoo ERP', industries: 'Oplossingen', services: 'Diensten', cases: 'Realisaties', blog: 'Blog', team: 'Jobs', contact: 'Contact', allIndustries: 'Alle oplossingen' },
-}[lang];
-
-const base = lang === 'fr' ? '' : `/${lang}`;
-
-const industries = {
-  fr: [
-    { label: 'E-Commerce', href: '/industries-e-commerce/' },
-    { label: 'Grossiste & Vente B2B', href: '/industries-grossiste-vente-b2b/' },
-    { label: 'Construction & Bâtiment', href: '/industries-construction-batiment/' },
-    { label: 'Services aux Entreprises', href: '/industries-services-aux-entreprises/' },
-    { label: 'Transport & Logistique', href: '/solution-transport-logistique/' },
-    { label: 'Associations Internationales', href: '/industries-associations-internationales/' },
-    { label: 'Gestion Immobilière', href: '/solution-gestion-immobiliere/' },
-    { label: 'Auto-École', href: '/solution-auto-ecole/' },
-  ],
-  en: [
-    { label: 'E-Commerce', href: '/en/industries-e-commerce/' },
-    { label: 'Wholesale & B2B Sales', href: '/en/industries-wholesale-b2b-sales/' },
-    { label: 'Business Services', href: '/en/solution-business-services/' },
-    { label: 'Transport & Logistics', href: '/en/solution-transport-logistics/' },
-    { label: 'NGOs & International Associations', href: '/en/industries-ngos-international-associations/' },
-    { label: 'Property Management', href: '/en/solution-gestion-immobiliere/' },
-    { label: 'Driving School', href: '/en/solution-auto-ecole/' },
-  ],
-  nl: [
-    { label: 'E-commerce', href: '/nl/industries-e-commerce/' },
-    { label: 'Groothandel & B2B-verkoop', href: '/nl/industries-grossiste-vente-b2b/' },
-    { label: 'Bouw & Constructie', href: '/nl/industries-construction-batiment/' },
-    { label: 'Zakelijke Dienstverlening', href: '/nl/industries-services-aux-entreprises/' },
-    { label: 'Transport & Logistiek', href: '/nl/solution-transport-logistique/' },
-    { label: 'Internationale Verenigingen', href: '/nl/industries-associations-internationales/' },
-    { label: 'Vastgoedbeheer', href: '/nl/solution-gestion-immobiliere/' },
-    { label: 'Rijschool', href: '/nl/solution-auto-ecole/' },
-  ],
-}[lang];
-
-// "Comptabilité" hands off to AgiFid (sister company, separate site) rather than a page
-// on agitech.io. Formation/Support/Migration are the categories competitors (TSC Expert,
-// Eezee-IT, Nalios...) list alongside implementation — new lightweight pages, not migrated
-// WP content.
-const services = {
-  fr: [
-    { label: 'Comptabilité (AgiFid)', href: 'https://agifid.be', external: true },
-    { label: 'Implémentation Odoo', href: '/odoo-erp/' },
-    { label: 'Formation', href: '/formation/' },
-    { label: 'Support', href: '/support/' },
-    { label: 'Migration de données', href: '/migration/' },
-    { label: 'Mise à niveau de version', href: '/mise-a-niveau-version/' },
-    { label: 'Réseau et IoT', href: '/infrastructure-it/' },
-    { label: 'Développement', href: '/development/' },
-    { label: 'Développement au forfait (IA)', href: '/developpement-odoo-forfait/' },
-  ],
-  en: [
-    { label: 'Accounting (AgiFid)', href: 'https://agifid.be', external: true },
-    { label: 'Odoo Implementation', href: '/en/odoo-erp/' },
-    { label: 'Training', href: '/en/formation/' },
-    { label: 'Support', href: '/en/support/' },
-    { label: 'Data Migration', href: '/en/migration/' },
-    { label: 'Version Upgrade', href: '/en/mise-a-niveau-version/' },
-    { label: 'Network & IoT', href: '/en/infrastructure-it/' },
-    { label: 'Development', href: '/en/development/' },
-    { label: 'Fixed-Price Development (AI)', href: '/en/developpement-odoo-forfait/' },
-  ],
-  nl: [
-    { label: 'Boekhouding (AgiFid)', href: 'https://agifid.be', external: true },
-    { label: 'Odoo Implementatie', href: '/nl/odoo-erp/' },
-    { label: 'Opleiding', href: '/nl/formation/' },
-    { label: 'Support', href: '/nl/support/' },
-    { label: 'Data Migratie', href: '/nl/migration/' },
-    { label: 'Versie-upgrade', href: '/nl/mise-a-niveau-version/' },
-    { label: 'Netwerk & IoT', href: '/nl/infrastructure-it/' },
-    { label: 'Ontwikkeling', href: '/nl/development/' },
-    { label: 'Ontwikkeling met vaste prijs (AI)', href: '/nl/developpement-odoo-forfait/' },
-  ],
-}[lang];
+// Menu texts and links come from the "Navigation" settings (one tree per language, three levels like the WP menu).
+const { items, discuss, discussHref } = navigation[lang];
+// Language flags: WordPress offered the other language; NL has no WP counterpart and offers FR and EN. Each flag points
+// to this page's translation (translationKey), or to the other language's home when it has none.
+const FLAGS = { fr: ['en'], en: ['fr'], nl: ['fr', 'en'] } as const;
+const FLAG_ALT = { fr: 'Français', en: 'English' } as const;
+const links = switcherLinks(Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`);
+const flags = FLAGS[lang].map((img) => ({ img, alt: FLAG_ALT[img], href: links[img] }));
+const home = lang === 'fr' ? '/' : `/${lang}/`;
+const contact = discussHref;
+const current = Astro.url.pathname;
 ---
 <header>
-  <div class="container header-wrap">
-    <a class="logo" href={lang === 'fr' ? '/' : `${base}/`}>
-      <img src="/assets/img/agitech-logo-light.svg" alt="Agitech">
-    </a>
-    <nav class="main_menu" id="mainMenu">
-      <ul>
-        <li><a href={`${base}/odoo-erp/`}>{strings.odoo}</a></li>
-        <li class="has-submenu">
-          <a href={`${base}/industries/`}>{strings.industries}</a>
-          <div class="submenu">
-            <ul class="submenu-inner">
-              {industries.map(i => <li><a href={i.href}>{i.label}</a></li>)}
-              <li class="submenu-all"><a href={`${base}/industries/`}>{strings.allIndustries}</a></li>
-            </ul>
-          </div>
-        </li>
-        <li class="has-submenu">
-          <a href={`${base}/odoo-erp/`}>{strings.services}</a>
-          <div class="submenu">
-            <ul class="submenu-inner">
-              {services.map(s => <li><a href={s.href} target={s.external ? '_blank' : undefined} rel={s.external ? 'noopener' : undefined}>{s.label}</a></li>)}
-            </ul>
-          </div>
-        </li>
-        <li><a href={`${base}/business-cases/`}>{strings.cases}</a></li>
-        <li><a href={`${base}/blog/`}>{strings.blog}</a></li>
-        <li><a href={`${base}/jobs/`}>{strings.team}</a></li>
-      </ul>
-      <div class="lang-flag">
-        {lang === 'fr' ? <span class="active">FR</span> : <a href="/">FR</a>}
-        {' / '}
-        {lang === 'en' ? <span class="active">EN</span> : <a href="/en/">EN</a>}
-        {' / '}
-        {lang === 'nl' ? <span class="active">NL</span> : <a href="/nl/">NL</a>}
-      </div>
-      <div class="discuss-btn"><a href={`${base}/contact-us/`}>{strings.contact}</a></div>
-    </nav>
-    <div class="lines-button" id="burgerBtn"><span class="lines"></span></div>
-  </div>
+<div class="container">
+    <div class="header-wrap">
+        <div class="logo">
+            <a href={home}>
+                <img src="/wp-content/uploads/2025/06/agitech-white-logo.svg" alt="agitech-white-logo">
+            </a>
+        </div>
+        <div class="navigation">
+            <a href={home} class="lines-button"><span class="lines"></span></a>
+            <div class="main_menu">
+                <div class={`menu-top-header-menu-${lang}-container`}><ul id={`menu-top-header-menu-${lang}`} class="menu">
+                    {items.map((item) => (
+                        <li class:list={['menu-item', item.children.length > 0 && 'menu-item-has-children', item.href === current && 'current-menu-item']}>
+                            <a href={item.href}>{item.label}</a>
+                            {item.children.length > 0 && <span class="dropdown-arrow"></span>}
+                            {item.children.length > 0 && (
+                                <ul class="sub-menu">
+                                    {item.children.map((sub) => (
+                                        <li class:list={['menu-item', sub.children.length > 0 && 'menu-item-has-children']}>
+                                            <a href={sub.href}>{sub.label}</a>
+                                            {sub.children.length > 0 && (
+                                                <ul class="sub-menu">
+                                                    {sub.children.map((leaf) => (
+                                                        <li class:list={['menu-item', leaf.href === current && 'current-menu-item']}><a href={leaf.href}>{leaf.label}</a></li>
+                                                    ))}
+                                                </ul>
+                                            )}
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                        </li>
+                    ))}
+                    {flags.map((f) => (
+                        <li class={`lang-item lang-item-${f.img} menu-item`}>
+                            <a href={f.href} hreflang={f.img} lang={f.img}><img src={`/wp-theme/images/flags/${f.img}.png`} alt={f.alt} width="16" height="11" style="width: 16px; height: 11px;"></a>
+                        </li>
+                    ))}
+                </ul></div>
+                <div class="discuss-btn">
+                    <a href={contact}>{discuss}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </header>

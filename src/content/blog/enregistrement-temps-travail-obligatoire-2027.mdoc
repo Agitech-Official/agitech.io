@@ -1,570 +1,374 @@
 ---
 title: "Enregistrement du temps de travail obligatoire en 2027 en Belgique"
 lang: "fr"
-publishedAt: "2026-02-10"
-category: "Odoo, Légal, RH"
+translationKey: enregistrement-temps-travail-obligatoire-2027
+publishedAt: "2026-02-10T10:07"
 excerpt: "Enregistrement du temps de travail obligatoire dès 2027 en Belgique : cadre légal, risques encourus et mise en conformité simple avec Odoo."
+author: "diego"
+categories:
+- "Odoo"
+- "Légal"
+- "RH"
+coverImage: "/assets/img/blog/enregistrement-temps-travail-obligatoire-2027/2027-1.png"
+seoTitle: "Enregistrement du temps de travail obligatoire en 2027 en Belgique -"
+contentHtml: |
+  <h2 class="wp-block-heading" id="h-cadre-legal-risques-et-mise-en-conformite-avec-odoo">Cadre légal, risques et mise en conformité avec Odoo</h2>
+
+  <p><br>L’enregistrement du temps de travail obligatoire en Belgique <strong>entrera en vigueur dès le 1er janvier 2027. À partir de cette date, chaque entreprise belge devra enregistrer le temps de travail de ses collaborateurs dans un système objectif, fiable et accessible. Cette obligation, issue de deux arrêts majeurs de la Cour de justice de l’Union européenne et confirmée par le gouvernement fédéral dans l’accord budgétaire de novembre 2025, concernera l’ensemble des employeurs — privés et publics, PME comme grandes entreprises.</strong></p>
+
+  <p>Dans cet article, nous décryptons les fondements juridiques de cette obligation, ses implications concrètes pour les employeurs belges, les risques en cas de non-conformité, et surtout comment un ERP comme Odoo permet de s'y conformer en intégrant le suivi du temps de travail à l'ensemble de votre gestion RH.</p>
+
+  <p><strong>Découvrez la configuration complète en vidéo :</strong></p>
+
+  <pre class="wp-block-code"><code>
+  <div style="position:relative;padding-bottom:56.25%;height:0"><iframe src="https://www.youtube.com/embed/2g_CB4-ORPE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></code></pre>
+
+  <div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
+
+  <div class="wp-block-yoast-seo-table-of-contents yoast-table-of-contents"><h2>Sommaire</h2><ul><li><a href="#h-1-les-fondements-juridiques-europeens" data-level="2">1. Les fondements juridiques européens</a><ul><li><a href="#h-la-directive-2003-88-ce-le-socle-legislatif" data-level="3">La directive 2003/88/CE : Le socle législatif</a></li><li><a href="#h-l-arret-ccoo-contre-deutsche-bank-cjue-14-mai-2019-c-55-18" data-level="3">L'arrêt CCOO contre Deutsche Bank (CJUE, 14 mai 2019, C-55/18)</a></li><li><a href="#h-l-arret-loredas-cjue-19-decembre-2024-c-531-23" data-level="3">L'arrêt Loredas (CJUE, 19 décembre 2024, C-531/23)</a></li></ul></li><li><a href="#h-2-la-situation-en-belgique-ce-qui-change-en-2027" data-level="2">2. La situation en Belgique : ce qui change en 2027</a><ul><li><a href="#h-avant-2027-pas-d-obligation-generale-mais-des-cas-specifiques" data-level="3">Avant 2027 : pas d'obligation générale, mais des cas spécifiques</a></li><li><a href="#h-a-partir-du-1er-janvier-2027-l-obligation-devient-generale" data-level="3">À partir du 1er janvier 2027 : l'obligation devient générale</a></li></ul></li><li><a href="#h-3-la-jurisprudence-belge-des-decisions-deja-contraignantes" data-level="2">3. La jurisprudence belge : des décisions déjà contraignantes</a><ul><li><a href="#h-les-decisions-favorables-a-l-obligation" data-level="3">Les décisions favorables à l'obligation</a></li><li><a href="#h-les-decisions-plus-reservees" data-level="3">Les décisions plus réservées</a></li><li><a href="#h-ce-que-cela-signifie-pour-vous" data-level="3">Ce que cela signifie pour vous</a></li></ul></li><li><a href="#h-4-faq-toutes-les-reponses-a-vos-questions" data-level="2">4. FAQ : toutes les réponses à vos questions</a></li><li><a href="#h-5-pourquoi-un-erp-comme-odoo-est-la-meilleure-reponse" data-level="2">5. Pourquoi un ERP comme Odoo est la meilleure réponse</a><ul><li><a href="#h-le-module-presences-attendances-votre-pointeuse-numerique" data-level="3">Le module Présences (Attendances) : votre pointeuse numérique</a></li><li><a href="#h-le-module-feuilles-de-temps-timesheets-le-suivi-par-projet" data-level="3">Le module Feuilles de temps (Timesheets) : le suivi par projet</a></li><li><a href="#h-l-avantage-integrateur-ce-qu-aucun-outil-standalone-ne-fait" data-level="3">L'avantage intégrateur : ce qu'aucun outil standalone ne fait</a></li></ul></li><li><a href="#h-6-comment-configurer-le-suivi-du-temps-dans-odoo-guide-pas-a-pas" data-level="2">6. Comment configurer le suivi du temps dans Odoo : guide pas à pas</a><ul><li><a href="#h-etape-1-installer-le-module-presences" data-level="3">Étape 1 : Installer le module Présences</a></li><li><a href="#h-etape-2-configurer-les-parametres-generaux" data-level="3">Étape 2 : Configurer les paramètres généraux</a></li><li><a href="#h-etape-3-definir-les-horaires-de-travail" data-level="3">Étape 3 : Définir les horaires de travail</a></li><li><a href="#undefined" data-level="3">Étape 4 : Déployer le mode Kiosque (optionnel)</a></li><li><a href="#h-etape-5-configurer-les-droits-d-acces" data-level="3">Étape 5 : Configurer les droits d'accès</a></li><li><a href="#h-etape-6-activer-les-feuilles-de-temps-optionnel" data-level="3">Étape 6 : Activer les Feuilles de temps (optionnel)</a></li></ul></li><li><a href="#h-7-checklist-etes-vous-pret-pour-2027" data-level="2">7. Checklist : êtes-vous prêt pour 2027 ?</a></li><li><a href="#h-conclusion-transformez-l-obligation-en-opportunite" data-level="2">Conclusion : transformez l'obligation en opportunité</a></li></ul>
+    <style>
+      a {
+        color: #984895;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.2rem;
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+
+  <div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
+
+  <h2 class="wp-block-heading" id="h-1-les-fondements-juridiques-europeens">1. Les fondements juridiques européens</h2>
+
+  <h3 class="wp-block-heading" id="h-la-directive-2003-88-ce-le-socle-legislatif">La directive 2003/88/CE : Le socle législatif </h3>
+
+  <p><a href="https://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2003:299:0009:0019:FR:PDF" target="_blank" rel="noreferrer noopener">La <strong>directive 2003/88/CE</strong> du 4 novembre 2003</a> relative à l'aménagement du temps de travail constitue la pierre angulaire de la réglementation européenne. Elle fixe des normes minimales en matière de :</p>
+
+  <ul class="wp-block-list">
+  <li>Durée maximale hebdomadaire de travail (48 heures en moyenne)</li>
+
+  <li>Repos journalier minimum (11 heures consécutives)</li>
+
+  <li>Repos hebdomadaire minimum (24 heures consécutives)</li>
+
+  <li>Pauses obligatoires au-delà de 6 heures de travail</li>
+
+  <li>Congés annuels payés (minimum 4 semaines)</li>
+  </ul>
+
+  <p>La directive ne mentionne pas explicitement l'obligation d'enregistrer le temps de travail. Cependant, elle impose aux États membres de prendre <strong>toutes les mesures nécessaires</strong> pour garantir le respect de ces dispositions. C'est précisément ce vide que la Cour de justice a comblé par sa jurisprudence.</p>
+
+  <p></p>
+
+  <h3 class="wp-block-heading" id="h-l-arret-ccoo-contre-deutsche-bank-cjue-14-mai-2019-c-55-18">L'arrêt CCOO contre Deutsche Bank (CJUE, 14 mai 2019, C-55/18)</h3>
+
+  <p>L'arrêt fondateur est celui rendu dans<a href="https://www.stradalex.eu/fr/se_src_publ_jur_eur_c_just/document/cjue2019_C_55_18_57" target="_blank" rel="noreferrer noopener"> l'affaire <strong>CCOO</strong></a>. Le syndicat espagnol <em>Federación de Servicios de Comisiones Obreras</em> avait demandé à la justice d'obliger Deutsche Bank à mettre en place un système d'enregistrement du temps de travail journalier de ses employés.</p>
+
+  <p>La CJUE a statué sans ambiguïté :</p>
+
+  <blockquote class="wp-block-quote">
+  <p>Les États membres doivent imposer aux employeurs l'obligation de mettre en place un <strong>système objectif, fiable et accessible</strong> permettant de mesurer la durée du temps de travail journalier effectué par chaque travailleur.</p>
+  </blockquote>
+
+  <p>La Cour a souligné que sans un tel système, il est <strong>« excessivement difficile, voire impossible en pratique »</strong> pour les travailleurs de faire respecter leurs droits aux périodes de repos et à la limitation du temps de travail. Le travailleur étant la partie faible dans la relation de travail, l'absence d'enregistrement le prive de tout moyen de preuve effectif.</p>
+
+  <p></p>
+
+  <h3 class="wp-block-heading" id="h-l-arret-loredas-cjue-19-decembre-2024-c-531-23">L'arrêt Loredas (<a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A62023CJ0531" target="_blank" rel="noreferrer noopener">CJUE, 19 décembre 2024, C-531/23</a>)</h3>
+
+  <p>Fin 2024, la Cour a <strong>réaffirmé et étendu</strong> cette jurisprudence dans l'affaire Loredas. Les faits : une employée de maison espagnole, après son licenciement, réclamait le paiement d'heures supplémentaires et de jours de congé non pris. Le juge de première instance avait rejeté sa demande, estimant qu'elle n'avait pas fourni de preuves suffisantes des heures réellement prestées.</p>
+
+  <p>La CJUE a jugé que <strong>la législation espagnole exemptant les employeurs domestiques de l'obligation d'enregistrement était contraire au droit de l'Union</strong>. Les points clés de l'arrêt :</p>
+
+  <blockquote class="wp-block-quote">
+  <ul class="wp-block-list">
+  <li>L'obligation d'enregistrement s'applique à <strong>tous les travailleurs, sans exception</strong> — y compris les employés de maison.</li>
+
+  <li>Les États membres <strong>peuvent</strong> prévoir des modalités différentes selon les secteurs, <strong>à condition</strong> que le système reste objectif, fiable et accessible.</li>
+
+  <li>L'absence de système d'enregistrement rend <strong>« excessivement difficile, voire impossible en pratique »</strong> pour les travailleurs de faire valoir leurs droits.</li>
+  </ul>
+  </blockquote>
+
+  <hr class="wp-block-separator has-alpha-channel-opacity">
+
+  <p></p>
+
+  <h2 class="wp-block-heading" id="h-2-la-situation-en-belgique-ce-qui-change-en-2027">2. La situation en Belgique : ce qui change en 2027</h2>
+
+  <h3 class="wp-block-heading" id="h-avant-2027-pas-d-obligation-generale-mais-des-cas-specifiques">Avant 2027 : pas d'obligation générale, mais des cas spécifiques</h3>
+
+  <p>En l'état actuel du droit belge, il <strong>n'existe pas d'obligation générale</strong> d'enregistrement du temps de travail. Toutefois, des obligations spécifiques sont déjà en vigueur dans plusieurs situations :</p>
+
+  <ul class="wp-block-list">
+  <li><strong>Horaires flottants/variables</strong> : l'utilisation d'un système d'enregistrement est obligatoire. Depuis le <strong>1er juillet 2024</strong>, des sanctions sont expressément prévues dans le Code pénal social en cas de non-respect.</li>
+
+  <li><strong>Travailleurs à temps partiel</strong> : tout écart par rapport à l'horaire normal doit être consigné dans un registre des écarts, remplaçable par un système d'enregistrement du temps.</li>
+
+  <li><strong>Secteurs réglementés</strong> : le transport, la construction, l'Horeca, le nettoyage et le secteur de la viande imposent déjà des formes d'enregistrement.</li>
+  </ul>
+
+  <p></p>
+
+  <h3 class="wp-block-heading" id="h-a-partir-du-1er-janvier-2027-l-obligation-devient-generale">À partir du 1er janvier 2027 : l'obligation devient générale</h3>
+
+  <p>En marge de l'accord budgétaire de <strong>novembre 2025</strong>, le gouvernement fédéral a décidé de rendre l'enregistrement du temps de travail <strong>obligatoire pour tous les employeurs</strong> — secteur privé et public confondus. Voici ce que l'on sait :</p>
+
+  <figure class="wp-block-table"><table class="has-fixed-layout"><thead><tr><th>Élément</th><th>Détail</th></tr></thead><tbody><tr><td><strong>Date d'entrée en vigueur</strong></td><td>1er janvier 2027</td></tr><tr><td><strong>Employeurs concernés</strong></td><td>Tous (privé et public), toutes tailles, tous secteurs</td></tr><tr><td><strong>Travailleurs concernés</strong></td><td>Tous les travailleurs sous contrat de travail</td></tr><tr><td><strong>Exclusion</strong></td><td>Les indépendants (pas de contrat de travail)</td></tr><tr><td><strong>Type de système requis</strong></td><td>Objectif, fiable, flexible et accessible</td></tr><tr><td><strong>Liberté de choix</strong></td><td>Pointeuse, badge, logiciel, app mobile, enregistrement a posteriori</td></tr><tr><td><strong>Données minimales</strong></td><td>Heure de début, heure de fin, temps de pause</td></tr></tbody></table></figure>
+
+  <p>Les modalités précises (sanctions, exceptions éventuelles, format des données) doivent encore être définies par voie législative au cours de l'année 2026.</p>
+
+  <hr class="wp-block-separator has-alpha-channel-opacity">
+
+  <p></p>
+
+  <h2 class="wp-block-heading" id="h-3-la-jurisprudence-belge-des-decisions-deja-contraignantes">3. La jurisprudence belge : des décisions déjà contraignantes</h2>
+
+  <p>Sans attendre la loi de 2027, plusieurs juridictions belges ont déjà tiré les conséquences de la jurisprudence européenne. Les positions sont toutefois <strong>divergentes</strong>, ce qui crée une insécurité juridique réelle pour les employeurs.</p>
+
+  <p></p>
+
+  <h3 class="wp-block-heading" id="h-les-decisions-favorables-a-l-obligation">Les décisions favorables à l'obligation</h3>
+
+  <p><strong>Cour du travail de Bruxelles, 22 mai 2020</strong> : dans un arrêt remarquable, la Cour a estimé que tout employeur est tenu de mettre en place un système objectif, fiable et accessible d'enregistrement du temps de travail. Une travailleuse licenciée réclamait des heures supplémentaires sans pouvoir les prouver. La Cour a opéré un <strong>renversement de la charge de la preuve</strong> : c'est à l'employeur, qui n'avait pas mis en place de système d'enregistrement, de démontrer que les heures n'avaient pas été prestées.</p>
+
+  <p><strong>Cour du travail de Liège (div. Liège), 4 juin 2021</strong> : la Cour conclut à l'obligation pour l'employeur de disposer d'un système d'enregistrement, faute de quoi il lui appartient de démontrer quelles heures de travail ont effectivement été prestées.</p>
+
+  <p><strong>Cour du travail de Bruxelles, 27 mars 2023</strong> : la Cour précise que le « badgeage » à l'entrée d'un parking ne constitue pas un système d'enregistrement du temps de travail au sens de la jurisprudence européenne, car il ne mesure que les entrées/sorties du parking et non le début et la fin des prestations.</p>
+
+  <p></p>
+
+  <h3 class="wp-block-heading" id="h-les-decisions-plus-reservees">Les décisions plus réservées</h3>
+
+  <p><strong>Cour du travail de Bruxelles, 17 novembre 2021</strong> : la Cour estime que l'arrêt CCOO n'a pas pour portée, en l'état actuel du droit belge, de rendre l'employeur automatiquement redevable de toute heure supplémentaire réclamée par un travailleur, même en l'absence de système d'enregistrement.</p>
+
+  <p><strong>Cour du travail de Bruxelles, 4 avril 2025</strong> : l'obligation d'enregistrement n'emporte pas de renversement automatique de la charge de la preuve des heures supplémentaires.</p>
+
+  <p></p>
+
+  <h3 class="wp-block-heading" id="h-ce-que-cela-signifie-pour-vous">Ce que cela signifie pour vous</h3>
+
+  <p>Même sans obligation légale formelle avant 2027, <strong>l'absence de système d'enregistrement peut déjà vous être préjudiciable</strong> en cas de litige. Si un travailleur réclame des heures supplémentaires et que vous n'avez aucun moyen de prouver le contraire, certains juges donneront raison au travailleur. Ne pas agir maintenant, c'est s'exposer à un risque juridique croissant.</p>
+
+  <hr class="wp-block-separator has-alpha-channel-opacity">
+
+  <p></p>
+
+  <h2 class="wp-block-heading" id="h-4-faq-toutes-les-reponses-a-vos-questions">4. FAQ : toutes les réponses à vos questions</h2>
+
+  <div class="wp-block-rank-math-faq-block"><div class="rank-math-faq-item"><h3 class="rank-math-question">Qui est concerné par l'obligation d'enregistrement du temps de travail en 2027 ?<br></h3><div class="rank-math-answer">Tous les employeurs du secteur privé et public sont concernés, quelle que soit la taille de l'entreprise, le secteur d'activité ou la forme juridique. Les indépendants, qui ne travaillent pas sous contrat de travail, sont exclus. L'arrêt Loredas de 2024 a confirmé que même les employeurs domestiques doivent s'y conformer.</div></div><div class="rank-math-faq-item"><h3 class="rank-math-question">Quelles données doivent être enregistrées ?<br></h3><div class="rank-math-answer">Le système doit consigner au minimum l'heure de début et de fin de chaque prestation ainsi que les temps de pause. L'objectif est de pouvoir déterminer le nombre d'heures effectivement prestées, les éventuelles heures supplémentaires et le respect des périodes de repos journalier et hebdomadaire</div></div><div class="rank-math-faq-item"><h3 class="rank-math-question">Une pointeuse physique est-elle obligatoire ?<br></h3><div class="rank-math-answer">Non. Conformément à la jurisprudence européenne et à la volonté du gouvernement, tout système objectif, fiable et accessible suffit. Les options incluent : pointeuse physique, badge, logiciel cloud, application mobile, ou même un enregistrement numérique a posteriori. L'essentiel est la fiabilité et l'accessibilité des données, pas la forme du système.</div></div><div class="rank-math-faq-item"><h3 class="rank-math-question">Quels sont les risques si je ne suis pas en conformité ?<br></h3><div class="rank-math-answer">Trois risques majeurs se profilent. Premièrement, l'inversion de la charge de la preuve : en cas de litige sur les heures supplémentaires, c'est à vous, employeur, de prouver que le travailleur n'a pas effectué les heures réclamées — quasi impossible sans système d'enregistrement. Deuxièmement, des sanctions administratives et pénales qui seront définies dans la future législation (le Code pénal social prévoit déjà des sanctions depuis juillet 2024 pour les horaires variables). Troisièmement, une insécurité juridique permanente face à des juridictions qui s'alignent de plus en plus sur la jurisprudence européenne.</div></div><div class="rank-math-faq-item"><h3 class="rank-math-question">Quels avantages concrets pour mon entreprise ?<br></h3><div class="rank-math-answer">Au-delà de la conformité, un système d'enregistrement offre : une transparence qui élimine les discussions sur les heures prestées, un calcul salarial fiable qui réduit les erreurs de paie, une détection précoce des risques de surcharge de travail (prévention du burn-out), et un meilleur équilibre vie privée/professionnelle pour vos équipes. Selon une étude Protime/ivox de 2025, 57 % des employés belges estiment que l'enregistrement du temps les aide à maintenir un bon équilibre.</div></div><div class="rank-math-faq-item"><h3 class="rank-math-question">Pourquoi choisir un ERP plutôt qu'un outil de pointage standalone ?<br></h3><div class="rank-math-answer">Un outil de pointage isolé enregistre les heures, point final. Un ERP comme Odoo intègre le suivi du temps dans un écosystème complet : les données de présence alimentent automatiquement le calcul de paie, les feuilles de temps se lient aux projets et à la facturation, les absences se synchronisent avec le planning. C'est la différence entre cocher une case réglementaire et créer de la valeur opérationnelle.</div></div><div class="rank-math-faq-item"><h3 class="rank-math-question">Comment mettre en place l'enregistrement du temps de travail dans Odoo ?<br></h3><div class="rank-math-answer">Odoo propose deux modules complémentaires — Présences et Feuilles de temps — qui répondent aux exigences de la future législation. La section suivante détaille les fonctionnalités et la configuration pas à pas.</div></div></div>
+
+  <hr class="wp-block-separator has-alpha-channel-opacity">
+
+  <h2 class="wp-block-heading" id="h-5-pourquoi-un-erp-comme-odoo-est-la-meilleure-reponse">5. Pourquoi un ERP comme Odoo est la meilleure réponse</h2>
+
+  <p>Là où la plupart des solutions du marché se limitent au pointage, <a href="https://www.odoo.com/fr_FR" target="_blank" rel="noreferrer noopener">Odoo offre un <strong>écosystème intégré</strong></a> qui transforme l'obligation légale en levier de performance.</p>
+
+  <p></p>
+
+  <h3 class="wp-block-heading" id="h-le-module-presences-attendances-votre-pointeuse-numerique">Le module Présences (Attendances) : votre pointeuse numérique</h3>
+
+  <p>Le module <a href="https://www.youtube.com/watch?v=b9CWKYAJrr4" target="_blank" rel="noreferrer noopener">Présences</a> fonctionne comme une pointeuse digitale complète, conforme aux critères d'objectivité, de fiabilité et d'accessibilité exigés par la CJUE.</p>
+
+  <p><strong>Modes de pointage disponibles :</strong></p>
+
+  <ul class="wp-block-list">
+  <li><strong>Mode Kiosque</strong> : tablette ou écran dédié sur site, avec identification par badge, code PIN ou saisie manuelle. Idéal pour les ateliers, entrepôts et bureaux.</li>
+
+  <li><strong>Pointage depuis le backend Odoo</strong> : chaque utilisateur peut pointer directement depuis l'interface web, via l'icône de présence visible dans toutes les applications.</li>
+
+  <li><strong>Application mobile</strong> : les collaborateurs en télétravail ou en déplacement pointent depuis leur smartphone.</li>
+  </ul>
+
+  <p><strong>Fonctionnalités clés :</strong></p>
+
+  <ul class="wp-block-list">
+  <li><strong>Horodatage précis</strong> des check-in et check-out.</li>
+
+  <li><strong>Check-out automatique</strong> : si un employé oublie de pointer sa sortie, le système le fait automatiquement après un délai configurable (paramètre "Tolérance").</li>
+
+  <li><strong>Calcul automatique des heures supplémentaires</strong> avec tolérances configurables — en faveur de l'employé (ex. : 15 min de retard non pénalisées) et en faveur de l'entreprise (ex. : 15 min d'extra non comptées en heures sup).</li>
+
+  <li><strong>Gestion des absences</strong> : suivi des absences non liées à une demande de congé.</li>
+
+  <li><strong>Tableaux de bord</strong> : vue Gantt et vue liste pour les managers. Les anomalies apparaissent en rouge pour un traitement rapide.</li>
+  </ul>
+
+  <figure class="wp-block-image size-full"><img src="/wp-content/uploads/2026/02/odoo-dashboard-presences.jpg" alt="Dashboard Présences Odoo avec vue Gantt des présences par employé">
+  <figcaption class="wp-element-caption"><em>Le dashboard Présences : visualisez d'un coup d'œil qui est présent, qui est absent, et repérez les anomalies en rouge.</em></figcaption></figure>
+
+  <p></p>
+
+  <ul class="wp-block-list">
+  <li><strong>Rapports et analyses</strong> : rapports détaillés par département, période, employé.</li>
+  </ul>
+
+  <figure class="wp-block-image size-full"><img src="/wp-content/uploads/2026/02/odoo-rapports-presences.jpg" alt="Rapport de présence sur Odoo-heures prestées par employés">
+  <figcaption class="wp-element-caption"><em>Comparez les heures travaillées aux heures prévues, identifiez les écarts et les soldes par employé.</em></figcaption></figure>
+
+  <p></p>
+
+  <ul class="wp-block-list">
+  <li><strong>Trois niveaux de droits d'accès</strong> : utilisateur (ses propres données), officier (toute l'équipe), administrateur (configuration complète).</li>
+  </ul>
+
+  <figure class="wp-block-image size-full"><img src="/wp-content/uploads/2026/02/odoo-menu-principal.jpg" alt="Interface Odoo avec les modules Présences, Employés, Planning installés">
+  <figcaption class="wp-element-caption"><em>Le module Présences est accessible directement depuis le menu principal d'Odoo.</em></figcaption></figure>
+
+  <p></p>
+
+  <h3 class="wp-block-heading" id="h-le-module-feuilles-de-temps-timesheets-le-suivi-par-projet">Le module Feuilles de temps (Timesheets) : le suivi par projet</h3>
+
+  <p>Le <a href="https://www.odoo.com/fr_FR/app/timesheet-features" target="_blank" rel="noreferrer noopener">module Feuilles de temps</a> complète le dispositif en permettant de ventiler le temps par projet, client ou tâche :</p>
+
+  <ul class="wp-block-list">
+  <li><strong>Timer intégré</strong> : démarrage/arrêt depuis le tableau de bord ou directement depuis une tâche.</li>
+
+  <li><strong>Encodage flexible</strong> : en heures, minutes, jours ou demi-journées.</li>
+
+  <li><strong>Comparaison Présences vs Feuilles de temps</strong> : cohérence automatique entre les deux sources de données.</li>
+
+  <li><strong>Validation managériale</strong> avec rappels automatiques par email.</li>
+
+  <li><strong>Facturation sur base des feuilles de temps</strong> : facturez vos prestations directement depuis les données enregistrées.</li>
+
+  <li></li>
+  </ul>
+
+  <h3 class="wp-block-heading" id="h-l-avantage-integrateur-ce-qu-aucun-outil-standalone-ne-fait">L'avantage intégrateur : ce qu'aucun outil standalone ne fait</h3>
+
+  <figure class="wp-block-table"><table class="has-fixed-layout"><thead><tr><th>Fonctionnalité</th><th>Outil de pointage standalone</th><th>Odoo (ERP intégré)</th></tr></thead><tbody><tr><td>Enregistrement check-in/check-out</td><td>✅</td><td>✅</td></tr><tr><td>Calcul heures supplémentaires</td><td>✅</td><td>✅</td></tr><tr><td>Lien automatique avec la paie</td><td>❌</td><td>✅</td></tr><tr><td>Suivi du temps par projet/client</td><td>❌</td><td>✅</td></tr><tr><td>Facturation basée sur les heures</td><td>❌</td><td>✅</td></tr><tr><td>Synchronisation avec les congés</td><td>❌</td><td>✅</td></tr><tr><td>Rapports RH consolidés</td><td>Limité</td><td>✅</td></tr><tr><td>Intégration badge/biométrique</td><td>Variable</td><td>✅ (modules tiers)</td></tr><tr><td>Coût additionnel par module</td><td>Oui (licence séparée)</td><td>Inclus dans l'ERP</td></tr></tbody></table></figure>
+
+  <hr class="wp-block-separator has-alpha-channel-opacity">
+
+  <p></p>
+
+  <h2 class="wp-block-heading" id="h-6-comment-configurer-le-suivi-du-temps-dans-odoo-guide-pas-a-pas">6. Comment configurer le suivi du temps dans Odoo : guide pas à pas</h2>
+
+  <blockquote class="wp-block-quote">
+  <p>🎥 <strong>Vous préférez suivre en vidéo ?</strong> Regardez notre screencast complet ci-dessus — la configuration pas à pas commence à 02:56.</p>
+
+  <p></p>
+  </blockquote>
+
+  <h3 class="wp-block-heading" id="h-etape-1-installer-le-module-presences">Étape 1 : Installer le module Présences</h3>
+
+  <p>Depuis le menu Applications d'Odoo, recherchez « Présences » (ou « Attendances ») et installez le module. L'installation est immédiate et ne nécessite aucune configuration serveur.</p>
+
+  <figure class="wp-block-image size-full"><img src="/wp-content/uploads/2026/02/odoo-menu-principal.jpg" alt="Interface Odoo avec les modules Présences, Employés, Planning installés">
+  <figcaption class="wp-element-caption"><em>Le module Présences est accessible directement depuis le menu principal d'Odoo.</em></figcaption></figure>
+
+  <p></p>
+
+  <h3 class="wp-block-heading" id="h-etape-2-configurer-les-parametres-generaux">Étape 2 : Configurer les paramètres généraux</h3>
+
+  <p>Accédez à <strong>Présences &gt; Configuration &gt; Paramètres</strong> et activez :</p>
+
+  <ul class="wp-block-list">
+  <li>✅ <strong>Présences depuis le backend</strong> : permet le pointage directement depuis l'interface Odoo.</li>
+
+  <li>✅ <strong>Check-out automatique</strong> : définissez une tolérance (ex. : 2 heures après la fin théorique de la journée).</li>
+
+  <li>✅ <strong>Comptage des heures supplémentaires</strong> : activez le calcul automatique et définissez les tolérances.</li>
+
+  <li>✅ <strong>Gestion des absences</strong> : pour suivre les absences non planifiées.</li>
+  </ul>
+
+  <p>🎬 <strong>Voir la configuration en détail dans notre vidéo :</strong></p>
+
+  <div style="position:relative;padding-bottom:56.25%;height:0"><iframe src="https://www.loom.com/embed/27f230d720104dedac52bc464e979bf3?t=176" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div>
+
+  <p></p>
+
+  <h3 class="wp-block-heading" id="h-etape-3-definir-les-horaires-de-travail">Étape 3 : Définir les horaires de travail</h3>
+
+  <p>Sur chaque fiche employé (<strong>Employés &gt; fiche employé &gt; onglet Informations professionnelles</strong>), renseignez l'horaire de travail applicable. C'est cette donnée qui permettra au système de calculer automatiquement les écarts, les heures supplémentaires et les absences.</p>
+
+  <p>🎬 <strong>Voir la configuration des horaires dans notre vidéo :</strong></p>
+
+  <div style="position:relative;padding-bottom:56.25%;height:0"><iframe src="https://www.loom.com/embed/d6238fed62d54a28a19ef61b797c1f4a?t=158" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div>
+
+  <h3 class="wp-block-heading">Étape 4 : Déployer le mode Kiosque (optionnel)</h3>
+
+  <p>Si vous souhaitez <a href="https://www.odoo.com/documentation/19.0/applications/hr/attendances/kiosks.html" target="_blank" rel="noreferrer noopener">un point de pointage physique</a>, ouvrez <strong>Présences &gt; Mode Kiosque</strong> depuis une tablette ou un écran dédié. Les employés peuvent s'identifier par :</p>
+
+  <ul class="wp-block-list">
+  <li>Scan de badge</li>
+
+  <li>Code PIN personnel</li>
+
+  <li>Saisie manuelle de leur nom</li>
+  </ul>
+
+  <figure class="wp-block-image size-full"><img src="/wp-content/uploads/2026/02/odoo-mode-kiosque.jpg" alt="Mode Kiosque Odoo avec scan de badge pour le pointage">
+  <figcaption class="wp-element-caption"><em>Le mode Kiosque d'Odoo : une interface épurée pour le pointage par badge ou identification manuelle.</em></figcaption></figure>
+
+  <p></p>
+
+  <h3 class="wp-block-heading" id="h-etape-5-configurer-les-droits-d-acces">Étape 5 : Configurer les droits d'accès</h3>
+
+  <p>Attribuez les rôles appropriés dans <strong>Paramètres &gt; Utilisateurs</strong> :</p>
+
+  <ul class="wp-block-list">
+  <li><strong>Utilisateur</strong> : voit uniquement ses propres données de présence.</li>
+
+  <li><strong>Officier</strong> : accède aux données de tous les employés, peut modifier et corriger.</li>
+
+  <li><strong>Administrateur</strong> : accès complet, y compris la configuration et les rapports.</li>
+  </ul>
+
+  <p></p>
+
+  <h3 class="wp-block-heading" id="h-etape-6-activer-les-feuilles-de-temps-optionnel">Étape 6 : Activer les Feuilles de temps (optionnel)</h3>
+
+  <p>Pour un suivi par projet, installez le module « <a href="https://www.odoo.com/fr_FR/app/timesheet-features">Feuill</a><a href="https://www.odoo.com/fr_FR/app/timesheet-features" target="_blank" rel="noreferrer noopener">e</a><a href="https://www.odoo.com/fr_FR/app/timesheet-features">s de temps</a> ». Les deux modules fonctionnent de manière complémentaire : Présences pour le pointage global, Feuilles de temps pour la ventilation par activité.</p>
+
+  <hr class="wp-block-separator has-alpha-channel-opacity">
+
+  <p></p>
+
+  <h2 class="wp-block-heading" id="h-7-checklist-etes-vous-pret-pour-2027">7. Checklist : êtes-vous prêt pour 2027 ?</h2>
+
+  <figure class="wp-block-table"><table class="has-fixed-layout"><thead><tr><th>✅</th><th>Action</th><th>Échéance recommandée</th></tr></thead><tbody><tr><td>☐</td><td>Réaliser un audit de votre situation actuelle (quels systèmes existent, quelles lacunes ?)</td><td>Dès maintenant</td></tr><tr><td>☐</td><td>Vérifier vos obligations spécifiques (horaires variables, temps partiel, secteurs réglementés)</td><td>Dès maintenant</td></tr><tr><td>☐</td><td>Choisir votre solution d'enregistrement (ERP, logiciel GTA, pointeuse)</td><td>T1 2026</td></tr><tr><td>☐</td><td>Adapter votre règlement de travail pour intégrer les modalités d'enregistrement</td><td>T2 2026</td></tr><tr><td>☐</td><td>Informer et former vos collaborateurs sur le nouveau système</td><td>T3 2026</td></tr><tr><td>☐</td><td>Lancer un projet pilote pour détecter les problèmes avant l'obligation</td><td>T3 2026</td></tr><tr><td>☐</td><td>Consulter la délégation syndicale (si applicable) sur le système choisi</td><td>T3 2026</td></tr><tr><td>☐</td><td>Être opérationnel et conforme</td><td>1er janvier 2027</td></tr></tbody></table></figure>
+
+  <hr class="wp-block-separator has-alpha-channel-opacity">
+
+  <p></p>
+
+  <h2 class="wp-block-heading" id="h-conclusion-transformez-l-obligation-en-opportunite">Conclusion : transformez l'obligation en opportunité</h2>
+
+  <p>L’enregistrement du temps de travail obligatoire en Belgique n’est plus une question de « si », mais bien de « comment ». Plutôt que de le subir comme une contrainte administrative, il convient de le considérer comme une opportunité de professionnaliser votre gestion RH, de sécuriser vos relations de travail et d’optimiser votre administration salariale.</p>
+
+  <p><strong>Odoo offre une solution complète, modulaire et conforme</strong> aux exigences d'objectivité, de fiabilité et d'accessibilité posées par la jurisprudence européenne. En tant qu'intégrateur Odoo, <strong>Agitech vous accompagne</strong> dans le choix, la configuration et le déploiement de la solution adaptée à votre organisation.</p>
+
+  <p><strong>👉 <a href="/contact-us/">Contactez-nous pour une démo gratuite</a></strong> | <strong>👉 <a href="/contact-us/">Demandez un audit de conformité 2027</a></strong></p>
+
+  <hr class="wp-block-separator has-alpha-channel-opacity">
+
+  <p></p>
+
+  <p><em>Sources juridiques : Directive 2003/88/CE · CJUE, 14 mai 2019, C-55/18 (CCOO c. Deutsche Bank) · CJUE, 19 décembre 2024, C-531/23 (Loredas) · C. trav. Bruxelles, 22 mai 2020 · C. trav. Liège, 4 juin 2021 · C. trav. Bruxelles, 27 mars 2023 · C. trav. Bruxelles, 4 avril 2025 · Avis CNT n° 2.324 (2022) et n° 2.462 (2025) · Accord budgétaire fédéral, novembre 2025</em></p>
+
+  <p><em>Sources documentaires : Securex · Acerta · Partena Professional · Protime · Shyfter · Kelio · Terralaboris · LITISS</em></p>
+
+  <p></p>
+
+  <h4 class="wp-block-heading" id="h-telechargez-notre-checklist-gratuite-conformite-2027-les-8-etapes-pour-preparer-votre-entreprise">Téléchargez notre checklist gratuite : « Conformité 2027 — Les 8 étapes pour préparer votre entreprise ».</h4>
+
+  <div class="wp-block-file"><a id="wp-block-file--media-4985dd88-f894-4a21-af91-43d6dabaa9d4" href="/wp-content/uploads/2026/02/AgiTech-CHECKLIST-Attendance.pdf" download=""> Conformité 2027 — Les 8 étapes pour préparer votre entreprise
+    </a>
+  </div>
+
+  <div class="wp-block-columns">
+  <div class="wp-block-column"></div>
+
+  <div class="wp-block-column"></div>
+  </div>
+
+  <p></p>
+                  </div>
 ---
-## Cadre légal, risques et mise en conformité avec Odoo
-
-
-
-L’enregistrement du temps de travail obligatoire en Belgique **entrera en vigueur dès le 1er janvier 2027. À partir de cette date, chaque entreprise belge devra enregistrer le temps de travail de ses collaborateurs dans un système objectif, fiable et accessible. Cette obligation, issue de deux arrêts majeurs de la Cour de justice de l’Union européenne et confirmée par le gouvernement fédéral dans l’accord budgétaire de novembre 2025, concernera l’ensemble des employeurs — privés et publics, petites comme grandes entreprises.**
-
-
-
-Dans cet article, nous décryptons les fondements juridiques de cette obligation, ses implications concrètes pour les employeurs belges, les risques en cas de non-conformité, et surtout comment un ERP comme Odoo permet de s'y conformer en intégrant le suivi du temps de travail à l'ensemble de votre gestion RH.
-
-
-
-**Découvrez la configuration complète en vidéo :**
-
-
-
-
-
-## Sommaire
-
-* [1. Les fondements juridiques européens](#h-1-les-fondements-juridiques-europeens)
-  + [La directive 2003/88/CE : Le socle législatif](#h-la-directive-2003-88-ce-le-socle-legislatif)
-  + [L'arrêt CCOO contre Deutsche Bank (CJUE, 14 mai 2019, C-55/18)](#h-l-arret-ccoo-contre-deutsche-bank-cjue-14-mai-2019-c-55-18)
-  + [L'arrêt Loredas (CJUE, 19 décembre 2024, C-531/23)](#h-l-arret-loredas-cjue-19-decembre-2024-c-531-23)
-* [2. La situation en Belgique : ce qui change en 2027](#h-2-la-situation-en-belgique-ce-qui-change-en-2027)
-  + [Avant 2027 : pas d'obligation générale, mais des cas spécifiques](#h-avant-2027-pas-d-obligation-generale-mais-des-cas-specifiques)
-  + [À partir du 1er janvier 2027 : l'obligation devient générale](#h-a-partir-du-1er-janvier-2027-l-obligation-devient-generale)
-* [3. La jurisprudence belge : des décisions déjà contraignantes](#h-3-la-jurisprudence-belge-des-decisions-deja-contraignantes)
-  + [Les décisions favorables à l'obligation](#h-les-decisions-favorables-a-l-obligation)
-  + [Les décisions plus réservées](#h-les-decisions-plus-reservees)
-  + [Ce que cela signifie pour vous](#h-ce-que-cela-signifie-pour-vous)
-* [4. FAQ : toutes les réponses à vos questions](#h-4-faq-toutes-les-reponses-a-vos-questions)
-* [5. Pourquoi un ERP comme Odoo est la meilleure réponse](#h-5-pourquoi-un-erp-comme-odoo-est-la-meilleure-reponse)
-  + [Le module Présences (Attendances) : votre pointeuse numérique](#h-le-module-presences-attendances-votre-pointeuse-numerique)
-  + [Le module Feuilles de temps (Timesheets) : le suivi par projet](#h-le-module-feuilles-de-temps-timesheets-le-suivi-par-projet)
-  + [L'avantage intégrateur : ce qu'aucun outil standalone ne fait](#h-l-avantage-integrateur-ce-qu-aucun-outil-standalone-ne-fait)
-* [6. Comment configurer le suivi du temps dans Odoo : guide pas à pas](#h-6-comment-configurer-le-suivi-du-temps-dans-odoo-guide-pas-a-pas)
-  + [Étape 1 : Installer le module Présences](#h-etape-1-installer-le-module-presences)
-  + [Étape 2 : Configurer les paramètres généraux](#h-etape-2-configurer-les-parametres-generaux)
-  + [Étape 3 : Définir les horaires de travail](#h-etape-3-definir-les-horaires-de-travail)
-  + [Étape 4 : Déployer le mode Kiosque (optionnel)](#undefined)
-  + [Étape 5 : Configurer les droits d'accès](#h-etape-5-configurer-les-droits-d-acces)
-  + [Étape 6 : Activer les Feuilles de temps (optionnel)](#h-etape-6-activer-les-feuilles-de-temps-optionnel)
-* [7. Checklist : êtes-vous prêt pour 2027 ?](#h-7-checklist-etes-vous-pret-pour-2027)
-* [Conclusion : transformez l'obligation en opportunité](#h-conclusion-transformez-l-obligation-en-opportunite)
-
-
-
-
-
-## 1. Les fondements juridiques européens
-
-
-
-### La directive 2003/88/CE : Le socle législatif
-
-
-
-[La **directive 2003/88/CE** du 4 novembre 2003](https://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2003:299:0009:0019:FR:PDF) relative à l'aménagement du temps de travail constitue la pierre angulaire de la réglementation européenne. Elle fixe des normes minimales en matière de :
-
-
-
-* Durée maximale hebdomadaire de travail (48 heures en moyenne)
-* Repos journalier minimum (11 heures consécutives)
-* Repos hebdomadaire minimum (24 heures consécutives)
-* Pauses obligatoires au-delà de 6 heures de travail
-* Congés annuels payés (minimum 4 semaines)
-
-
-
-La directive ne mentionne pas explicitement l'obligation d'enregistrer le temps de travail. Cependant, elle impose aux États membres de prendre **toutes les mesures nécessaires** pour garantir le respect de ces dispositions. C'est précisément ce vide que la Cour de justice a comblé par sa jurisprudence.
-
-
-
-
-### L'arrêt CCOO contre Deutsche Bank (CJUE, 14 mai 2019, C-55/18)
-
-
-
-L'arrêt fondateur est celui rendu dans [l'affaire **CCOO**](https://www.stradalex.eu/fr/se_src_publ_jur_eur_c_just/document/cjue2019_C_55_18_57). Le syndicat espagnol *Federación de Servicios de Comisiones Obreras* avait demandé à la justice d'obliger Deutsche Bank à mettre en place un système d'enregistrement du temps de travail journalier de ses employés.
-
-
-
-La CJUE a statué sans ambiguïté :
-
-
-> Les États membres doivent imposer aux employeurs l'obligation de mettre en place un **système objectif, fiable et accessible** permettant de mesurer la durée du temps de travail journalier effectué par chaque travailleur.
-
-
-
-La Cour a souligné que sans un tel système, il est **« excessivement difficile, voire impossible en pratique »** pour les travailleurs de faire respecter leurs droits aux périodes de repos et à la limitation du temps de travail. Le travailleur étant la partie faible dans la relation de travail, l'absence d'enregistrement le prive de tout moyen de preuve effectif.
-
-
-
-
-### L'arrêt Loredas ([CJUE, 19 décembre 2024, C-531/23](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A62023CJ0531))
-
-
-
-Fin 2024, la Cour a **réaffirmé et étendu** cette jurisprudence dans l'affaire Loredas. Les faits : une employée de maison espagnole, après son licenciement, réclamait le paiement d'heures supplémentaires et de jours de congé non pris. Le juge de première instance avait rejeté sa demande, estimant qu'elle n'avait pas fourni de preuves suffisantes des heures réellement prestées.
-
-
-
-La CJUE a jugé que **la législation espagnole exemptant les employeurs domestiques de l'obligation d'enregistrement était contraire au droit de l'Union**. Les points clés de l'arrêt :
-
-
-> * L'obligation d'enregistrement s'applique à **tous les travailleurs, sans exception** — y compris les employés de maison.
-> * Les États membres **peuvent** prévoir des modalités différentes selon les secteurs, **à condition** que le système reste objectif, fiable et accessible.
-> * L'absence de système d'enregistrement rend **« excessivement difficile, voire impossible en pratique »** pour les travailleurs de faire valoir leurs droits.
-
-
-
-
----
-
-
-
-
-
-## 2. La situation en Belgique : ce qui change en 2027
-
-
-
-### Avant 2027 : pas d'obligation générale, mais des cas spécifiques
-
-
-
-En l'état actuel du droit belge, il **n'existe pas d'obligation générale** d'enregistrement du temps de travail. Toutefois, des obligations spécifiques sont déjà en vigueur dans plusieurs situations :
-
-
-
-* **Horaires flottants/variables** : l'utilisation d'un système d'enregistrement est obligatoire. Depuis le **1er juillet 2024**, des sanctions sont expressément prévues dans le Code pénal social en cas de non-respect.
-* **Travailleurs à temps partiel** : tout écart par rapport à l'horaire normal doit être consigné dans un registre des écarts, remplaçable par un système d'enregistrement du temps.
-* **Secteurs réglementés** : le transport, la construction, l'Horeca, le nettoyage et le secteur de la viande imposent déjà des formes d'enregistrement.
-
-
-
-
-### À partir du 1er janvier 2027 : l'obligation devient générale
-
-
-
-En marge de l'accord budgétaire de **novembre 2025**, le gouvernement fédéral a décidé de rendre l'enregistrement du temps de travail **obligatoire pour tous les employeurs** — secteur privé et public confondus. Voici ce que l'on sait :
-
-
-
-
-| Élément | Détail |
-| --- | --- |
-| **Date d'entrée en vigueur** | 1er janvier 2027 |
-| **Employeurs concernés** | Tous (privé et public), toutes tailles, tous secteurs |
-| **Travailleurs concernés** | Tous les travailleurs sous contrat de travail |
-| **Exclusion** | Les indépendants (pas de contrat de travail) |
-| **Type de système requis** | Objectif, fiable, flexible et accessible |
-| **Liberté de choix** | Pointeuse, badge, logiciel, app mobile, enregistrement a posteriori |
-| **Données minimales** | Heure de début, heure de fin, temps de pause |
-
-
-
-
-Les modalités précises (sanctions, exceptions éventuelles, format des données) doivent encore être définies par voie législative au cours de l'année 2026.
-
-
-
-
----
-
-
-
-
-
-## 3. La jurisprudence belge : des décisions déjà contraignantes
-
-
-
-Sans attendre la loi de 2027, plusieurs juridictions belges ont déjà tiré les conséquences de la jurisprudence européenne. Les positions sont toutefois **divergentes**, ce qui crée une insécurité juridique réelle pour les employeurs.
-
-
-
-
-### Les décisions favorables à l'obligation
-
-
-
-**Cour du travail de Bruxelles, 22 mai 2020** : dans un arrêt remarquable, la Cour a estimé que tout employeur est tenu de mettre en place un système objectif, fiable et accessible d'enregistrement du temps de travail. Une travailleuse licenciée réclamait des heures supplémentaires sans pouvoir les prouver. La Cour a opéré un **renversement de la charge de la preuve** : c'est à l'employeur, qui n'avait pas mis en place de système d'enregistrement, de démontrer que les heures n'avaient pas été prestées.
-
-
-
-**Cour du travail de Liège (div. Liège), 4 juin 2021** : la Cour conclut à l'obligation pour l'employeur de disposer d'un système d'enregistrement, faute de quoi il lui appartient de démontrer quelles heures de travail ont effectivement été prestées.
-
-
-
-**Cour du travail de Bruxelles, 27 mars 2023** : la Cour précise que le « badgeage » à l'entrée d'un parking ne constitue pas un système d'enregistrement du temps de travail au sens de la jurisprudence européenne, car il ne mesure que les entrées/sorties du parking et non le début et la fin des prestations.
-
-
-
-
-### Les décisions plus réservées
-
-
-
-**Cour du travail de Bruxelles, 17 novembre 2021** : la Cour estime que l'arrêt CCOO n'a pas pour portée, en l'état actuel du droit belge, de rendre l'employeur automatiquement redevable de toute heure supplémentaire réclamée par un travailleur, même en l'absence de système d'enregistrement.
-
-
-
-**Cour du travail de Bruxelles, 4 avril 2025** : l'obligation d'enregistrement n'emporte pas de renversement automatique de la charge de la preuve des heures supplémentaires.
-
-
-
-
-### Ce que cela signifie pour vous
-
-
-
-Même sans obligation légale formelle avant 2027, **l'absence de système d'enregistrement peut déjà vous être préjudiciable** en cas de litige. Si un travailleur réclame des heures supplémentaires et que vous n'avez aucun moyen de prouver le contraire, certains juges donneront raison au travailleur. Ne pas agir maintenant, c'est s'exposer à un risque juridique croissant.
-
-
-
-
----
-
-
-
-
-
-## 4. FAQ : toutes les réponses à vos questions
-
-
-
-### Qui est concerné par l'obligation d'enregistrement du temps de travail en 2027 ?
-
-Tous les employeurs du secteur privé et public sont concernés, quelle que soit la taille de l'entreprise, le secteur d'activité ou la forme juridique. Les indépendants, qui ne travaillent pas sous contrat de travail, sont exclus. L'arrêt Loredas de 2024 a confirmé que même les employeurs domestiques doivent s'y conformer.
-
-### Quelles données doivent être enregistrées ?
-
-Le système doit consigner au minimum l'heure de début et de fin de chaque prestation ainsi que les temps de pause. L'objectif est de pouvoir déterminer le nombre d'heures effectivement prestées, les éventuelles heures supplémentaires et le respect des périodes de repos journalier et hebdomadaire
-
-### Une pointeuse physique est-elle obligatoire ?
-
-Non. Conformément à la jurisprudence européenne et à la volonté du gouvernement, tout système objectif, fiable et accessible suffit. Les options incluent : pointeuse physique, badge, logiciel cloud, application mobile, ou même un enregistrement numérique a posteriori. L'essentiel est la fiabilité et l'accessibilité des données, pas la forme du système.
-
-### Quels sont les risques si je ne suis pas en conformité ?
-
-Trois risques majeurs se profilent. Premièrement, l'inversion de la charge de la preuve : en cas de litige sur les heures supplémentaires, c'est à vous, employeur, de prouver que le travailleur n'a pas effectué les heures réclamées — quasi impossible sans système d'enregistrement. Deuxièmement, des sanctions administratives et pénales qui seront définies dans la future législation (le Code pénal social prévoit déjà des sanctions depuis juillet 2024 pour les horaires variables). Troisièmement, une insécurité juridique permanente face à des juridictions qui s'alignent de plus en plus sur la jurisprudence européenne.
-
-### Quels avantages concrets pour mon entreprise ?
-
-Au-delà de la conformité, un système d'enregistrement offre : une transparence qui élimine les discussions sur les heures prestées, un calcul salarial fiable qui réduit les erreurs de paie, une détection précoce des risques de surcharge de travail (prévention du burn-out), et un meilleur équilibre vie privée/professionnelle pour vos équipes. Selon une étude Protime/ivox de 2025, 57 % des employés belges estiment que l'enregistrement du temps les aide à maintenir un bon équilibre.
-
-### Pourquoi choisir un ERP plutôt qu'un outil de pointage standalone ?
-
-Un outil de pointage isolé enregistre les heures, point final. Un ERP comme Odoo intègre le suivi du temps dans un écosystème complet : les données de présence alimentent automatiquement le calcul de paie, les feuilles de temps se lient aux projets et à la facturation, les absences se synchronisent avec le planning. C'est la différence entre cocher une case réglementaire et créer de la valeur opérationnelle.
-
-### Comment mettre en place l'enregistrement du temps de travail dans Odoo ?
-
-Odoo propose deux modules complémentaires — Présences et Feuilles de temps — qui répondent aux exigences de la future législation. La section suivante détaille les fonctionnalités et la configuration pas à pas.
-
-
-
-
----
-
-
-
-
-## 5. Pourquoi un ERP comme Odoo est la meilleure réponse
-
-
-
-Là où la plupart des solutions du marché se limitent au pointage, [Odoo offre un **écosystème intégré**](https://www.odoo.com/fr_FR) qui transforme l'obligation légale en levier de performance.
-
-
-
-
-### Le module Présences (Attendances) : votre pointeuse numérique
-
-
-
-Le module [Présences](https://www.youtube.com/watch?v=b9CWKYAJrr4) fonctionne comme une pointeuse digitale complète, conforme aux critères d'objectivité, de fiabilité et d'accessibilité exigés par la CJUE.
-
-
-
-**Modes de pointage disponibles :**
-
-
-
-* **Mode Kiosque** : tablette ou écran dédié sur site, avec identification par badge, code PIN ou saisie manuelle. Idéal pour les ateliers, entrepôts et bureaux.
-* **Pointage depuis le backend Odoo** : chaque utilisateur peut pointer directement depuis l'interface web, via l'icône de présence visible dans toutes les applications.
-* **Application mobile** : les collaborateurs en télétravail ou en déplacement pointent depuis leur smartphone.
-
-
-
-**Fonctionnalités clés :**
-
-
-
-* **Horodatage précis** des check-in et check-out.
-* **Check-out automatique** : si un employé oublie de pointer sa sortie, le système le fait automatiquement après un délai configurable (paramètre "Tolérance").
-* **Calcul automatique des heures supplémentaires** avec tolérances configurables — en faveur de l'employé (ex. : 15 min de retard non pénalisées) et en faveur de l'entreprise (ex. : 15 min d'extra non comptées en heures sup).
-* **Gestion des absences** : suivi des absences non liées à une demande de congé.
-* **Tableaux de bord** : vue Gantt et vue liste pour les managers. Les anomalies apparaissent en rouge pour un traitement rapide.
-
-
-
-
-![Dashboard Présences Odoo avec vue Gantt des présences par employé](/wp-content/uploads/2026/02/odoo-dashboard-presences.jpg)
-
-
-*Le dashboard Présences : visualisez d'un coup d'œil qui est présent, qui est absent, et repérez les anomalies en rouge.*
-
-
-
-
-
-* **Rapports et analyses** : rapports détaillés par département, période, employé.
-
-
-
-
-![Rapport de présence sur Odoo-heures prestées par employés](/wp-content/uploads/2026/02/odoo-rapports-presences.jpg)
-
-
-*Comparez les heures travaillées aux heures prévues, identifiez les écarts et les soldes par employé.*
-
-
-
-
-
-* **Trois niveaux de droits d'accès** : utilisateur (ses propres données), officier (toute l'équipe), administrateur (configuration complète).
-
-
-
-
-![Interface Odoo avec les modules Présences, Employés, Planning installés](/wp-content/uploads/2026/02/odoo-menu-principal.jpg)
-
-
-*Le module Présences est accessible directement depuis le menu principal d'Odoo.*
-
-
-
-
-
-### Le module Feuilles de temps (Timesheets) : le suivi par projet
-
-
-
-Le [module Feuilles de temps](https://www.odoo.com/fr_FR/app/timesheet-features) complète le dispositif en permettant de ventiler le temps par projet, client ou tâche :
-
-
-
-* **Timer intégré** : démarrage/arrêt depuis le tableau de bord ou directement depuis une tâche.
-* **Encodage flexible** : en heures, minutes, jours ou demi-journées.
-* **Comparaison Présences vs Feuilles de temps** : cohérence automatique entre les deux sources de données.
-* **Validation managériale** avec rappels automatiques par email.
-* **Facturation sur base des feuilles de temps** : facturez vos prestations directement depuis les données enregistrées.
-
-
-
-### L'avantage intégrateur : ce qu'aucun outil standalone ne fait
-
-
-
-
-| Fonctionnalité | Outil de pointage standalone | Odoo (ERP intégré) |
-| --- | --- | --- |
-| Enregistrement check-in/check-out | ✅ | ✅ |
-| Calcul heures supplémentaires | ✅ | ✅ |
-| Lien automatique avec la paie | ❌ | ✅ |
-| Suivi du temps par projet/client | ❌ | ✅ |
-| Facturation basée sur les heures | ❌ | ✅ |
-| Synchronisation avec les congés | ❌ | ✅ |
-| Rapports RH consolidés | Limité | ✅ |
-| Intégration badge/biométrique | Variable | ✅ (modules tiers) |
-| Coût additionnel par module | Oui (licence séparée) | Inclus dans l'ERP |
-
-
-
-
-
----
-
-
-
-
-
-## 6. Comment configurer le suivi du temps dans Odoo : guide pas à pas
-
-
-> 🎥 **Vous préférez suivre en vidéo ?** Regardez notre screencast complet ci-dessus — la configuration pas à pas commence à 02:56.
-
-
-
-### Étape 1 : Installer le module Présences
-
-
-
-Depuis le menu Applications d'Odoo, recherchez « Présences » (ou « Attendances ») et installez le module. L'installation est immédiate et ne nécessite aucune configuration serveur.
-
-
-
-
-![Interface Odoo avec les modules Présences, Employés, Planning installés](/wp-content/uploads/2026/02/odoo-menu-principal.jpg)
-
-
-*Le module Présences est accessible directement depuis le menu principal d'Odoo.*
-
-
-
-
-
-### Étape 2 : Configurer les paramètres généraux
-
-
-
-Accédez à **Présences > Configuration > Paramètres** et activez :
-
-
-
-* ✅ **Présences depuis le backend** : permet le pointage directement depuis l'interface Odoo.
-* ✅ **Check-out automatique** : définissez une tolérance (ex. : 2 heures après la fin théorique de la journée).
-* ✅ **Comptage des heures supplémentaires** : activez le calcul automatique et définissez les tolérances.
-* ✅ **Gestion des absences** : pour suivre les absences non planifiées.
-
-
-
-🎬 **Voir la configuration en détail dans notre vidéo :**
-
-
-
-
-
-
-### Étape 3 : Définir les horaires de travail
-
-
-
-Sur chaque fiche employé (**Employés > fiche employé > onglet Informations professionnelles**), renseignez l'horaire de travail applicable. C'est cette donnée qui permettra au système de calculer automatiquement les écarts, les heures supplémentaires et les absences.
-
-
-
-🎬 **Voir la configuration des horaires dans notre vidéo :**
-
-
-
-
-
-### Étape 4 : Déployer le mode Kiosque (optionnel)
-
-
-
-Si vous souhaitez [un point de pointage physique](https://www.odoo.com/documentation/19.0/applications/hr/attendances/kiosks.html), ouvrez **Présences > Mode Kiosque** depuis une tablette ou un écran dédié. Les employés peuvent s'identifier par :
-
-
-
-* Scan de badge
-* Code PIN personnel
-* Saisie manuelle de leur nom
-
-
-
-
-![Mode Kiosque Odoo avec scan de badge pour le pointage](/wp-content/uploads/2026/02/odoo-mode-kiosque.jpg)
-
-
-*Le mode Kiosque d'Odoo : une interface épurée pour le pointage par badge ou identification manuelle.*
-
-
-
-
-
-### Étape 5 : Configurer les droits d'accès
-
-
-
-Attribuez les rôles appropriés dans **Paramètres > Utilisateurs** :
-
-
-
-* **Utilisateur** : voit uniquement ses propres données de présence.
-* **Officier** : accède aux données de tous les employés, peut modifier et corriger.
-* **Administrateur** : accès complet, y compris la configuration et les rapports.
-
-
-
-
-### Étape 6 : Activer les Feuilles de temps (optionnel)
-
-
-
-Pour un suivi par projet, installez le module « [Feuill](https://www.odoo.com/fr_FR/app/timesheet-features)[e](https://www.odoo.com/fr_FR/app/timesheet-features)[s de temps](https://www.odoo.com/fr_FR/app/timesheet-features) ». Les deux modules fonctionnent de manière complémentaire : Présences pour le pointage global, Feuilles de temps pour la ventilation par activité.
-
-
-
-
----
-
-
-
-
-
-## 7. Checklist : êtes-vous prêt pour 2027 ?
-
-
-
-
-| ✅ | Action | Échéance recommandée |
-| --- | --- | --- |
-| ☐ | Réaliser un audit de votre situation actuelle (quels systèmes existent, quelles lacunes ?) | Dès maintenant |
-| ☐ | Vérifier vos obligations spécifiques (horaires variables, temps partiel, secteurs réglementés) | Dès maintenant |
-| ☐ | Choisir votre solution d'enregistrement (ERP, logiciel GTA, pointeuse) | T1 2026 |
-| ☐ | Adapter votre règlement de travail pour intégrer les modalités d'enregistrement | T2 2026 |
-| ☐ | Informer et former vos collaborateurs sur le nouveau système | T3 2026 |
-| ☐ | Lancer un projet pilote pour détecter les problèmes avant l'obligation | T3 2026 |
-| ☐ | Consulter la délégation syndicale (si applicable) sur le système choisi | T3 2026 |
-| ☐ | Être opérationnel et conforme | 1er janvier 2027 |
-
-
-
-
-
----
-
-
-
-
-
-## Conclusion : transformez l'obligation en opportunité
-
-
-
-L’enregistrement du temps de travail obligatoire en Belgique n’est plus une question de « si », mais bien de « comment ». Plutôt que de le subir comme une contrainte administrative, il convient de le considérer comme une opportunité de professionnaliser votre gestion RH, de sécuriser vos relations de travail et d’optimiser votre administration salariale.
-
-
-
-**Odoo offre une solution complète, modulaire et conforme** aux exigences d'objectivité, de fiabilité et d'accessibilité posées par la jurisprudence européenne. En tant qu'intégrateur Odoo, **Agitech vous accompagne** dans le choix, la configuration et le déploiement de la solution adaptée à votre organisation.
-
-
-
-**👉 [Contactez-nous pour une démo gratuite](/contact-us/)** | **👉 [Demandez un audit de conformité 2027](/contact-us/)**
-
-
-
-
----
-
-
-
-
-
-*Sources juridiques : Directive 2003/88/CE · CJUE, 14 mai 2019, C-55/18 (CCOO c. Deutsche Bank) · CJUE, 19 décembre 2024, C-531/23 (Loredas) · C. trav. Bruxelles, 22 mai 2020 · C. trav. Liège, 4 juin 2021 · C. trav. Bruxelles, 27 mars 2023 · C. trav. Bruxelles, 4 avril 2025 · Avis CNT n° 2.324 (2022) et n° 2.462 (2025) · Accord budgétaire fédéral, novembre 2025*
-
-
-
-*Sources documentaires : Securex · Acerta · Partena Professional · Protime · Shyfter · Kelio · Terralaboris · LITISS*
-
-
-
-
-#### Téléchargez notre checklist gratuite : « Conformité 2027 — Les 8 étapes pour préparer votre entreprise ».
-
-
-
-[Conformité 2027 — Les 8 étapes pour préparer votre entreprise](/wp-content/uploads/2026/02/AgiTech-CHECKLIST-Attendance.pdf)

@@ -4,10 +4,17 @@
 import type { APIRoute } from 'astro';
 import { connectDb, UserResponse } from '../../lib/estimator/db';
 import { sendEstimateEmail } from '../../lib/estimator/emailService';
+import { clientIp, isForeignOrigin, isRateLimited } from '../../lib/rateLimit';
 
 export const prerender = false;
 
+const json = (status: number, body: unknown, headers: Record<string, string> = {}) =>
+  new Response(JSON.stringify(body), { status, headers: { 'Content-Type': 'application/json', ...headers } });
+
 export const POST: APIRoute = async ({ request }) => {
+  if (isForeignOrigin(request)) return json(403, { success: false, message: 'Forbidden' });
+  if (Number(request.headers.get('content-length') ?? 0) > 200_000) return json(413, { success: false, message: 'Request too large' });
+  if (isRateLimited(clientIp(request))) return json(429, { success: false, message: 'Too many requests, please try again later' }, { 'Retry-After': '600' });
   try {
     const body = await request.json();
     const { contactInfo, selectedApps, environmentSetup, accounting, integrations, customDev, dataMigration, iot, hosting, maintenance, budget } = body;

@@ -7,46 +7,27 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import BlockRenderer from '../components/BlockRenderer.astro';
-import { createReader } from '@keystatic/core/reader';
-import keystaticConfig from '../../keystatic.config';
 import Markdoc from '@markdoc/markdoc';
-import { addTocIds } from '../lib/toc';
+import { pageAndPostPaths } from '../lib/content';
+import PostArticle from '../components/PostArticle.astro';
+import { headingOf, pageSeo, postSeo } from '../lib/seo';
 
 export async function getStaticPaths() {
-  const reader = createReader(process.cwd(), keystaticConfig);
-
-  const pageSlugs = await reader.collections.pages.list();
-  const pageEntries = await Promise.all(
-    pageSlugs
-      .filter((slug) => slug !== 'accueil')
-      .map(async (slug) => ({ slug, entry: await reader.collections.pages.read(slug) }))
-  );
-  const pagePaths = pageEntries
-    .filter(({ entry }) => entry && entry.lang === 'fr')
-    .map(({ slug, entry }) => ({ params: { slug }, props: { kind: 'page', entry } }));
-
-  const blogSlugs = await reader.collections.blog.list();
-  const blogEntries = await Promise.all(
-    blogSlugs.map(async (slug) => ({ slug, entry: await reader.collections.blog.read(slug) }))
-  );
-  const blogPaths = blogEntries
-    .filter(({ entry }) => entry && entry.lang === 'fr')
-    .map(({ slug, entry }) => ({ params: { slug }, props: { kind: 'blog', entry } }));
-
-  return [...pagePaths, ...blogPaths];
+  return pageAndPostPaths('fr');
 }
 
 const { kind, entry } = Astro.props;
 
 let bodyHtml = '';
-let toc: { id: string; text: string }[] = [];
 if (kind === 'blog') {
-  const { node } = await entry.body();
-  const rendered = Markdoc.renderers.html(Markdoc.transform(node));
-  const withToc = addTocIds(rendered);
-  bodyHtml = withToc.html;
-  toc = withToc.toc;
+  if (entry.contentHtml) {
+    bodyHtml = entry.contentHtml;
+  } else {
+    const { node } = await entry.body();
+    bodyHtml = Markdoc.renderers.html(Markdoc.transform(node));
+  }
 }
+const seo = kind === 'blog' ? await postSeo(entry) : pageSeo(entry);
 const hasContactHero = kind === 'page' && entry.blocks?.some((b: { discriminant: string }) => b.discriminant === 'contactHero');
 
 const pageFaqBlock = kind === 'page' ? entry.blocks?.find((b: any) => b.discriminant === 'faq') : undefined;
@@ -67,13 +48,13 @@ const pageJsonLd = pageFaqBlock
     lang="fr"
     title={entry.seoTitle || entry.title}
     description={entry.seoDescription ?? ''}
-    canonical={`https://agitech.io/${Astro.params.slug}/`}
     includeContactScripts={hasContactHero}
+    {...seo}
     jsonLd={pageJsonLd}
   >
     <Header slot="header" lang="fr" />
     <main>
-      {Astro.params.slug === 'developpement-odoo-forfait' && <h1 class="visually-hidden-h1">{entry.title}</h1>}
+      {!entry.blocks?.some((b: { discriminant: string }) => b.discriminant === 'cmsPage') && <h1 class="visually-hidden-h1">{headingOf(entry)}</h1>}
       <BlockRenderer blocks={entry.blocks} />
     </main>
     <Footer slot="footer" lang="fr" />
@@ -81,45 +62,16 @@ const pageJsonLd = pageFaqBlock
 ) : (
   <Layout
     lang="fr"
-    title={entry.title}
-    description={entry.excerpt ?? ''}
-    canonical={`https://agitech.io/${Astro.params.slug}/`}
+    bodyClass="post-template-default single single-post"
+    {...seo}
+    title={entry.seoTitle || entry.title}
+    description={entry.seoDescription || entry.excerpt || ''}
   >
     <Header slot="header" lang="fr" />
     <main>
-      <section class="blog-details-section">
-        <div class="container-sm">
-          <div class="row header-area">
-            <div class="col-12">
-              {entry.category && <div class="categories-btn"><span class="purple-text">{entry.category}</span></div>}
-              <h1>{entry.title}</h1>
-              {entry.publishedAt && <div class="name-date"><p>{entry.publishedAt}</p></div>}
-            </div>
-          </div>
-          <div class="row content-area">
-            {toc.length > 1 && (
-              <aside class="col-lg-3 toc-sidebar">
-                <nav>
-                  <h6>Sommaire</h6>
-                  <ol>{toc.map(t => <li><a href={`#${t.id}`}>{t.text}</a></li>)}</ol>
-                </nav>
-              </aside>
-            )}
-            <div class={toc.length > 1 ? 'col-lg-9' : 'col-lg-12'} set:html={bodyHtml} />
-          </div>
-        </div>
-      </section>
+      <h1 class="visually-hidden-h1">{entry.title}</h1>
+      <PostArticle lang="fr" slug={Astro.params.slug} entry={entry} bodyHtml={bodyHtml} />
     </main>
     <Footer slot="footer" lang="fr" />
   </Layout>
 )}
-
-<style>
-  /* InnerHero renders its headline as h6/h2 (shared across every inner page), so this
-     page's real h1 is added here instead — visually hidden, present for a11y/SEO,
-     scoped to this file only. */
-  .visually-hidden-h1 {
-    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
-    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
-  }
-</style>

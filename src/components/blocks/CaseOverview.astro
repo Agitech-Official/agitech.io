@@ -1,21 +1,25 @@
 ---
-// Ported from template-parts/block/case-overview.php
+// Ported from template-parts/block/case-overview.php (the space between the counter and its unit is
+// kept: JSX would otherwise drop it and render "2Mois").
 export interface Props {
   metrics?: { label?: string; counter?: string; value?: string }[];
 }
 const { metrics = [] } = Astro.props;
 ---
 <section class="overview-section">
-  <div class="container">
-    <div class="row">
-      <div class="items-wrap d-flex align-items-center justify-content-between">
-        {metrics.map(m => (
-          <div class="item">
-            <h6>{m.label}</h6>
-            <h5>{m.counter && <span class="counter">{m.counter}</span>}{m.value}</h5>
-          </div>
-        ))}
-      </div>
+    <div class="container">
+        <div class="row">
+            <div class="items-wrap d-flex align-items-center justify-content-between">
+                {metrics.map(m => (
+                    <div class="item">
+                        <h6>{m.label}</h6>
+                        <h5>
+                            {m.counter && <Fragment><span class="counter">{m.counter}</span>{' '}</Fragment>}
+                            {m.value}
+                        </h5>
+                    </div>
+                ))}
+            </div>
+        </div>
     </div>
-  </div>
 </section>

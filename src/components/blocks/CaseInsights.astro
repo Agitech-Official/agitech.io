@@ -1,6 +1,6 @@
 ---
 // Ported from template-parts/block/case-insights.php
-import { blockImg } from '../../lib/img';
+import { blockImg, blockAlt } from '../../lib/img';
 export interface Props {
   insights?: {
     heading?: string;
@@ -24,12 +24,12 @@ const { insights = [] } = Astro.props;
           <div class="right-content">
             {row.content && <div class="text" set:html={row.content} />}
             {row.imageToDisplay === '1' && row.image && (
-              <div class="img d-inline-flex"><img src={blockImg(row.image)} alt="" class="devlopment-1"></div>
+              <div class="img d-inline-flex"><img src={blockImg(row.image)} alt={blockAlt(row.image)} class="devlopment-1"></div>
             )}
             {row.imageToDisplay === '2' && (row.image1 || row.image2) && (
               <div class="img d-inline-flex">
-                {row.image1 && <img src={blockImg(row.image1)} alt="" class="devlopment-2">}
-                {row.image2 && <img src={blockImg(row.image2)} alt="" class="devlopment-3">}
+                {row.image1 && <img src={blockImg(row.image1)} alt={blockAlt(row.image1)} class="devlopment-2">}
+                {row.image2 && <img src={blockImg(row.image2)} alt={blockAlt(row.image2)} class="devlopment-3">}
               </div>
             )}
           </div>

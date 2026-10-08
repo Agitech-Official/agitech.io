@@ -1,11 +1,11 @@
 ---
 // Ported from template-parts/block/applications-used.php
 import Cta from './Cta.astro';
-import { blockImg } from '../../lib/img';
+import { blockImg, blockAlt } from '../../lib/img';
 export interface Props {
   logo?: string;
   title?: string;
-  discoverCta?: { label?: string; url?: string; newTab?: boolean };
+  discoverCta?: { label?: string; url?: string; newTab?: boolean; calendly?: boolean };
   logos?: { logo?: string; title?: string }[];
 }
 const { logo, title, discoverCta, logos = [] } = Astro.props;
@@ -14,15 +14,15 @@ const { logo, title, discoverCta, logos = [] } = Astro.props;
   <div class="container-sm">
     <div class="row">
       <div class="col-lg-3 col-md-3 col-sm-12 col-12 left-content">
-        {logo && <div class="at-odoo-logo"><img src={blockImg(logo)} alt=""></div>}
+        {logo && <div class="at-odoo-logo"><img src={blockImg(logo)} alt={blockAlt(logo)}></div>}
         {title && <h3>{title}</h3>}
-        {discoverCta && <Cta label={discoverCta.label} url={discoverCta.url} newTab={discoverCta.newTab} wrapClass="dark-link" />}
+        {discoverCta && <Cta label={discoverCta.label} url={discoverCta.url} newTab={discoverCta.newTab} calendly={discoverCta.calendly} wrapClass="dark-link" />}
       </div>
       <div class="col-lg-9 col-md-9 col-sm-12 col-12 right-content">
         <div class="logo-wrp">
           {logos.map(item => (
             <div class="item">
-              {item.logo && <img src={blockImg(item.logo)} alt="">}
+              {item.logo && <img src={blockImg(item.logo)} alt={blockAlt(item.logo)}>}
               {item.title && <p>{item.title}</p>}
             </div>
           ))}

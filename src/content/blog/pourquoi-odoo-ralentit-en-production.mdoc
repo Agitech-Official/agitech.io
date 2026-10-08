@@ -1,0 +1,80 @@
+---
+title: "Pourquoi Odoo ralentit en production dans votre PME"
+lang: "fr"
+publishedAt: "2026-10-03T01:31"
+excerpt: "Pourquoi Odoo ralentit en production ? Causes, diagnostic et actions concrètes pour retrouver un ERP rapide, fiable et adapté à votre activité réelle."
+author: "sam-gutman"
+categories:
+- "Digital Transformation"
+coverImage: "/assets/img/blog/pourquoi-odoo-ralentit-en-production/pourquoi-odoo-ralentit-en-production-dans-votre-pm-featured.webp"
+seoTitle: "Pourquoi Odoo ralentit en production dans votre PME - Agitech - Odoo Partner"
+---
+Un écran de vente qui met huit secondes à s’ouvrir, une validation de facture qui bloque en fin de mois, un inventaire devenu pénible à traiter : **pourquoi Odoo ralentit en production** est rarement une question qui se résout en ajoutant simplement de la mémoire au serveur. Dans une PME, le ralentissement apparaît souvent lorsque les volumes, les usages ou les personnalisations ont dépassé les hypothèses de départ.
+
+Le bon réflexe consiste à mesurer avant de corriger. Un ERP lent coûte du temps, pousse les équipes à recréer des [fichiers Excel parallèles](/comment-remplacer-excel-par-odoo/) et finit par entamer la confiance dans les données. À l’inverse, un diagnostic précis permet généralement de cibler quelques causes concrètes, avec un retour rapide pour les opérations.
+
+## Pourquoi Odoo ralentit en production : les causes réelles
+
+Odoo associe une application web, une base de données PostgreSQL, des modules métier, des tâches planifiées et souvent plusieurs connecteurs externes. Une lenteur peut donc venir d’un seul maillon ou de leur combinaison. Le symptôme observé par l’utilisateur ne désigne pas automatiquement le coupable.
+
+### Des volumes de données sous-estimés
+
+Odoo peut gérer des volumes significatifs, mais certaines opérations deviennent coûteuses lorsque les tables grossissent sans stratégie adaptée. C’est fréquent pour les lignes de commandes, les mouvements de stock, les écritures comptables, les messages de suivi et les pièces jointes.
+
+Le problème n’est pas seulement le nombre total d’enregistrements. Une recherche large, un filtre mal conçu, un calcul sur tout l’historique ou une liste affichant trop de colonnes peuvent déclencher des requêtes lourdes. Une base de données qui répondait correctement avec 20 000 mouvements de stock peut souffrir à 2 millions si les index et les méthodes d’accès n’ont pas évolué.
+
+Archiver les données utiles mais rarement consultées peut aider, sans les supprimer. Il faut toutefois le faire avec prudence : une archive comptable, logistique ou qualité doit rester cohérente avec les obligations de traçabilité de l’entreprise.
+
+### Des [développements sur mesure](/development/) qui calculent trop
+
+La personnalisation est souvent indispensable. Un workflow propre à l’entreprise, un champ calculé, une règle de prix ou un échange avec un outil métier peuvent créer une vraie valeur. Mais un code qui s’exécute à chaque ouverture de fiche, à chaque écriture ou pour chaque ligne d’une commande peut multiplier la charge très vite.
+
+Les erreurs classiques sont connues : boucles qui déclenchent une requête par enregistrement, champs calculés recalculés inutilement, automatisations lancées sur un périmètre trop large, ou appels à une API externe pendant l’action d’un utilisateur. Une validation de commande ne devrait pas attendre la réponse d’un transporteur ou d’une plateforme eCommerce si cette vérification peut être traitée de manière asynchrone.
+
+La solution n’est pas de supprimer tout développement spécifique. Elle consiste à revoir son coût opérationnel, à regrouper les accès aux données, à limiter les recalculs et à choisir les bons déclencheurs. Une personnalisation utile doit rester soutenable lorsque l’activité double.
+
+### Des tâches planifiées qui concurrencent les utilisateurs
+
+Les tâches automatisées, souvent appelées cron, sont essentielles pour synchroniser les stocks, envoyer des documents, importer des paiements ou mettre à jour des catalogues. Elles deviennent un problème lorsqu’elles s’exécutent toutes au même moment, trop fréquemment ou sur des volumes croissants.
+
+Par exemple, une synchronisation de milliers de références toutes les cinq minutes peut consommer les mêmes ressources que les équipes commerciales ou comptables. Si plusieurs tâches lourdes démarrent à 9 h, l’ERP semblera lent alors que le serveur n’est pas nécessairement sous-dimensionné en permanence.
+
+Il faut examiner leur durée, leur fréquence, leurs chevauchements et leur impact sur la base. Décaler certaines tâches la nuit est parfois pertinent. Mais ce choix dépend de l’activité : un commerce omnicanal ou un entrepôt à flux tendu peut nécessiter une synchronisation quasi temps réel. Dans ce cas, l’enjeu est d’optimiser les échanges et de les traiter par lots, pas simplement de les reporter.
+
+### Une infrastructure mal dimensionnée ou mal configurée
+
+Un serveur peut disposer de beaucoup de mémoire et rester lent si le processeur sature, si le stockage disque est insuffisant ou si PostgreSQL est mal paramétré. La configuration des workers Odoo compte également. Trop peu de workers limitent les requêtes simultanées ; trop de workers sur une machine modeste provoquent de la concurrence mémoire et dégradent l’ensemble.
+
+L’environnement de production doit aussi être séparé des usages non essentiels. Lancer des tests, des imports massifs ou des mises à jour de modules directement pendant les heures de pointe est un risque évitable. Les sauvegardes, la supervision et les mises à jour doivent être prévues sans mettre l’exploitation sous pression.
+
+Le cloud n’est pas une garantie automatique de performance, pas plus qu’un serveur dédié. La bonne infrastructure dépend du nombre d’utilisateurs simultanés, des modules utilisés, du volume transactionnel, des pièces jointes, des intégrations et des pics d’activité.
+
+### Des intégrations qui ralentissent le parcours utilisateur
+
+Odoo est souvent au centre du système d’information : site eCommerce, PIM, transporteurs, paiement, outil de production, BI ou comptabilité externe. Chaque connexion ajoute une dépendance. Si une API tierce répond lentement ou applique une limite, une action Odoo peut se bloquer si l’intégration a été conçue de façon synchrone.
+
+Les intégrations fiables utilisent des files d’attente, des reprises sur erreur, des journaux lisibles et des mécanismes pour éviter les doublons. Elles acceptent qu’un service externe soit temporairement indisponible sans empêcher un opérateur de confirmer une commande ou de préparer un colis.
+
+## Diagnostiquer avant d’investir
+
+Augmenter les ressources sans diagnostic peut soulager temporairement la situation, mais cela masque souvent une requête lente, une automatisation défaillante ou un module spécifique à corriger. Le diagnostic doit partir d’exemples précis : quelle action est lente, pour quel utilisateur, à quelle heure et depuis quand ?
+
+Une analyse sérieuse croise les retours des équipes avec les journaux Odoo, les métriques système et les requêtes PostgreSQL. Il faut distinguer une lenteur générale d’un écran particulier. Si seuls les bons de livraison posent problème, une hausse globale des ressources ne sera probablement pas la première action rentable.
+
+Les indicateurs les plus utiles sont le temps de réponse des pages critiques, l’utilisation CPU et mémoire, les entrées-sorties disque, les requêtes les plus coûteuses, la saturation des workers, la durée des tâches planifiées et les erreurs de connecteurs. Les données doivent être observées pendant une période représentative, notamment lors des pics de préparation, de facturation ou de clôture.
+
+## Les corrections à prioriser
+
+La priorité n’est pas de tout optimiser. Elle est de supprimer les blocages qui pénalisent directement la capacité opérationnelle. Une démarche pragmatique suit généralement cet ordre : corriger les requêtes ou développements les plus coûteux, régler les conflits entre tâches automatiques et utilisateurs, ajuster la configuration applicative et base de données, puis dimensionner l’infrastructure sur la base de mesures réelles.
+
+Les gains rapides peuvent inclure la correction d’un domaine de recherche, l’ajout d’un index adapté, la réduction des données chargées dans une vue, le découpage d’un import ou le déplacement d’un appel API vers une file d’attente. Ces interventions ont souvent plus d’impact qu’un changement d’hébergement réalisé sans analyse.
+
+Pour les problèmes structurels, il faut définir un plan plus large : nettoyage ou archivage contrôlé, refonte d’un module sur mesure, séparation d’un traitement intensif, amélioration des interfaces d’intégration, ou revue de l’architecture. Le coût se justifie lorsque l’entreprise retrouve de la capacité de traitement, réduit les erreurs et évite de recruter pour compenser une lenteur logicielle.
+
+## Prévenir le prochain ralentissement
+
+Une instance Odoo performante n’est pas figée. Les volumes changent, les équipes ajoutent des usages et les processus se transforment. Chaque nouveau module, automatisation ou connecteur devrait être évalué non seulement sur sa fonctionnalité, mais aussi sur son impact en production.
+
+Cela implique un environnement de test réaliste, des revues de code pour les développements spécifiques, un suivi des tâches planifiées et une supervision continue des indicateurs essentiels. Les mises à jour doivent également être préparées : elles peuvent corriger des problèmes de performance, mais elles peuvent aussi révéler des incompatibilités dans un code ancien.
+
+Chez Agitech, l’objectif d’une analyse de performance n’est pas de vendre une refonte inutile. C’est d’identifier ce qui ralentit réellement vos équipes, de chiffrer les priorités et de corriger ce qui protège durablement votre exploitation. Si vos collaborateurs commencent à contourner Odoo pour aller plus vite, c’est le bon moment de regarder les faits techniques avant que le contournement ne devienne votre nouveau processus.

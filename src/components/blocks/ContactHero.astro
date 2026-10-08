@@ -2,6 +2,7 @@
 // Homepage-bottom contact section, ported from agifid's index.astro contact-hero pattern:
 // trust list + direct Calendly booking + a Formspree contact form side by side.
 import Cta from './Cta.astro';
+import { absoluteUrl } from '../../lib/forms';
 export interface Props {
   titleBefore?: string;
   titleHighlight?: string;
@@ -67,7 +68,8 @@ const {
           <textarea id="ch-message" name="message" rows="4"></textarea>
         </div>
         <input type="hidden" name="_subject" value={formSubject}>
-        <input type="hidden" name="_next" value={thankYouPath}>
+        <input type="hidden" name="_next" value={absoluteUrl(thankYouPath)}>
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
         <button type="submit" class="btn btn-violet">Envoyer →</button>
       </form>
     </div>

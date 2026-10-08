@@ -1,0 +1,139 @@
+{
+  "fr": {
+    "learnMore": "En savoir plus",
+    "listing": {
+      "all": "Voir tout",
+      "morePosts": "Voir plus d'articles",
+      "moreCases": "Voir plus de cas"
+    },
+    "article": {
+      "back": "Retour",
+      "share": "Partagez",
+      "send": "Envoyez",
+      "visit": "Visiter le site"
+    },
+    "contactForm": {
+      "title": "Échangez par Email",
+      "name": "Nom",
+      "company": "Société",
+      "email": "Email",
+      "phone": "Téléphone",
+      "message": "Comment pouvons-nous vous aider ?",
+      "send": "Envoyer",
+      "formLabel": "Formulaire de contact"
+    },
+    "blogCategories": [
+      "Conseils",
+      "Développement de logiciels",
+      "Gestion de projet numérique",
+      "Gouvernance",
+      "IA",
+      "Légal",
+      "Odoo",
+      "RH",
+      "Transformation numérique",
+      "Uncategorized"
+    ],
+    "caseTypes": [
+      {
+        "name": "Développement sur mesure",
+        "slug": "custom-development"
+      },
+      {
+        "name": "Infrastructure IT",
+        "slug": "infrastructure-it"
+      },
+      {
+        "name": "odoo",
+        "slug": "odoo"
+      }
+    ]
+  },
+  "en": {
+    "learnMore": "Learn more",
+    "listing": {
+      "all": "All",
+      "morePosts": "See more posts",
+      "moreCases": "See more cases"
+    },
+    "article": {
+      "back": "Back",
+      "share": "Share",
+      "send": "Send",
+      "visit": "Visit the website"
+    },
+    "contactForm": {
+      "title": "Exchange by Email",
+      "name": "Name",
+      "company": "Company",
+      "email": "Email",
+      "phone": "Phone",
+      "message": "How can we help you?",
+      "send": "Send",
+      "formLabel": "Contact form"
+    },
+    "blogCategories": [
+      "Digital Project Management",
+      "Digital Transformation",
+      "Governance",
+      "Légal",
+      "Odoo",
+      "RH",
+      "Software Development",
+      "Tips"
+    ],
+    "caseTypes": [
+      {
+        "name": "Custom development",
+        "slug": "custom-development"
+      },
+      {
+        "name": "Infrastructure IT",
+        "slug": "infrastructure-it"
+      },
+      {
+        "name": "odoo",
+        "slug": "odoo"
+      }
+    ]
+  },
+  "nl": {
+    "learnMore": "Meer informatie",
+    "listing": {
+      "all": "Alles",
+      "morePosts": "Meer artikelen",
+      "moreCases": "Meer cases"
+    },
+    "article": {
+      "back": "Terug",
+      "share": "Delen",
+      "send": "Verzenden",
+      "visit": "Bezoek de website"
+    },
+    "contactForm": {
+      "title": "Contact per e-mail",
+      "name": "Naam",
+      "company": "Bedrijf",
+      "email": "E-mail",
+      "phone": "Telefoon",
+      "message": "Hoe kunnen wij u helpen?",
+      "send": "Verzenden",
+      "formLabel": "Contactformulier"
+    },
+    "blogCategories": [],
+    "caseTypes": [
+      {
+        "name": "Maatwerkontwikkeling",
+        "slug": "custom-development"
+      },
+      {
+        "name": "IT-infrastructuur",
+        "slug": "infrastructure-it"
+      },
+      {
+        "name": "odoo",
+        "slug": "odoo"
+      }
+    ]
+  }
+}

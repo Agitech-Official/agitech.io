@@ -1,92 +1,110 @@
 ---
-// Ported from the live WP footer (footer.php via get_footer()) — newsletter signup,
-// tagline, real company address, ShiftingPact partner badge, social icons, nav, legal.
+// Markup identical to the WP footer (footer.php), so the original theme CSS applies untouched.
+// Copy follows the live WP footer; the few WP slips (English placeholder and address on the FR
+// page, "Agitech Belgique" on the EN page, "Termes et Conditionss") are fixed on purpose.
 export interface Props {
   lang: 'fr' | 'en' | 'nl';
 }
+import { FORM_ENDPOINT, NEWSLETTER_SUBJECT } from '../lib/forms';
+import { footer, site } from '../lib/settings';
+import { blockImg, blockAlt } from '../lib/img';
+import { switcherLinks } from '../lib/translations.mjs';
 const { lang } = Astro.props;
-const base = lang === 'fr' ? '' : `/${lang}`;
-const strings = {
-  fr: {
-    newsletter: 'Abonnez-vous à notre newsletter', emailPlaceholder: 'Entrez votre email',
-    tagline: 'Solutions informatiques fiables, pour entreprises performantes.',
-    nav: 'Navigation',
-    odoo: 'Odoo ERP', dev: 'Développement', infra: 'Infrastructure IT', cases: 'Réalisations', recruitment: 'Recrutement',
-    rights: `© ${new Date().getFullYear()} Agitech. Tous droits réservés.`,
-    privacy: 'Politique de Confidentialité', terms: 'Termes et Conditions',
-    otherOffices: 'Voir nos 3 bureaux',
-  },
-  en: {
-    newsletter: 'Subscribe to our newsletter', emailPlaceholder: 'Enter your email',
-    tagline: 'Reliable IT solutions, for high-performing SMEs.',
-    nav: 'Navigation',
-    odoo: 'Odoo ERP', dev: 'Development', infra: 'IT Infrastructure', cases: 'Case Studies', recruitment: 'Recruitment',
-    rights: `© ${new Date().getFullYear()} Agitech. All rights reserved.`,
-    privacy: 'Privacy Policy', terms: 'Terms & Conditions',
-    otherOffices: 'See our 3 offices',
-  },
-  nl: {
-    newsletter: 'Schrijf u in op onze nieuwsbrief', emailPlaceholder: 'Vul uw e-mail in',
-    tagline: 'Betrouwbare IT-oplossingen, voor performante KMO\'s.',
-    nav: 'Navigatie',
-    odoo: 'Odoo ERP', dev: 'Ontwikkeling', infra: 'IT-infrastructuur', cases: 'Realisaties', recruitment: 'Vacatures',
-    rights: `© ${new Date().getFullYear()} Agitech. Alle rechten voorbehouden.`,
-    privacy: 'Privacybeleid', terms: 'Algemene Voorwaarden',
-    otherOffices: 'Bekijk onze 3 kantoren',
-  },
-}[lang];
+const year = new Date().getFullYear();
+
+// Texts and links come from the "Pied de page" settings (per language) and "Réglages du site" (social networks).
+const f = footer[lang];
+const esc = (t: string) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const address = f.addressLines.map(esc).join(' <br>');
+const links = switcherLinks(Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`);
+const flags = {
+  fr: [{ img: 'en', label: 'English' }],
+  en: [{ img: 'fr', label: 'Français' }],
+  nl: [{ img: 'fr', label: 'Français' }, { img: 'en', label: 'English' }],
+}[lang].map((fl) => ({ ...fl, href: links[fl.img as 'fr' | 'en'] }));
 ---
-<div class="brand-bar"></div>
-<footer>
-  <div class="container">
-    <div class="row main-row">
-      <div class="item logo-sub">
-        <a class="ft-logo" href={lang === 'fr' ? '/' : `${base}/`}>
-          <img src="/assets/img/blocks/Agitech_LogoWhite_footer.svg" alt="Agitech">
-        </a>
-        <div class="content">
-          <h6>{strings.newsletter}</h6>
-          <!-- Real submit endpoint (Formspree, like agifid) to be wired later. -->
-          <form class="tnp-subscription" action="https://formspree.io/f/xeajdqgr" method="POST">
-            <input class="tnp-email" type="email" name="email" placeholder={strings.emailPlaceholder} required>
-            <button class="tnp-submit" type="submit">→</button>
-          </form>
+<footer class="footer-section dark-bg top-line-img">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-12 item">
+                <div class="item-wrap logo-sub">
+                    <div class="ft-logo top-text">
+                        <a href={lang === 'fr' ? '/' : `/${lang}/`}><img
+                            src="/assets/img/site/Agitech_LogoWhite_footer.svg"
+                            alt="Agitech_LogoWhite_footer">
+                        </a>
+                    </div>
+                    <div class="content">
+                        <h6>{f.newsletterTitle}</h6>
+                        <div class="tnp tnp-subscription ">
+                            <!-- Same Formspree endpoint as before (src/lib/forms.ts); forms are reworked in a later phase. -->
+                            <form method="post" action={FORM_ENDPOINT}>
+                                <input type="hidden" name="_subject" value={NEWSLETTER_SUBJECT}>
+                                <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
+                                <div class="tnp-field tnp-field-email">
+                                    <input class="tnp-email" type="email" name="email" id="tnp-1" value="" placeholder={f.emailPlaceholder} required>
+                                </div>
+                                <div class="tnp-field tnp-field-button" style="text-align: left"><button class="tnp-submit" type="submit">&gt;</button></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-5 col-sm-12 col-12 item">
+                <div class="item-wrap company-location">
+                    <div class="top-text">
+                        <h5>{f.tagline}</h5>
+                    </div>
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-lg-6 col-6 col-sm-12 col-12 address">
+                                <h6>{f.companyName}</h6>
+                                <p set:html={address} />
+                            </div>
+                            <div class="col-lg-6 col-6 col-sm-12 col-12 ms-auto ml-auto address shiftingpact-logo">
+                                <a href="https://shiftingpact.be/agitech/" target="_blank" rel="noopener"><img
+                                    src="/assets/img/site/shiftingpackt-logo.png"
+                                    alt="shiftingpackt-logo">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12 col-12 item row">
+                <div class="item-wrap ft-links">
+                    <div class="top-text social-icons">
+                        {site.socialLinks.map((n) => (
+                        <a href={n.url} target="_blank" rel="noopener">
+                            <img src={blockImg(n.icon)} alt={blockAlt(n.icon, n.label)}>
+                        </a>
+                        ))}
+                    </div>
+                    <div class="content">
+                        <h6>{f.navTitle}</h6>
+                        <div class={`menu-footer-links-menu-${lang}-container`}><ul id={`menu-footer-links-menu-${lang}`} class="menu">
+                            {f.links.map((l) => <li class="menu-item"><a href={l.href}>{l.label}</a></li>)}
+                        </ul></div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="item company-location">
-        <div class="top-text"><h5>{strings.tagline}</h5></div>
-        <div class="content">
-          <div class="address">
-            <h6>Agitech Belgium</h6>
-            <p>Clos Lucien Outers 11, 1160<br>Bruxelles, Belgique</p>
-            <a class="other-offices-link" href={`${base}/#bureaux`}>{strings.otherOffices}</a>
-          </div>
+        <div class="row copy-right">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-12 item">
+                <div class="flag-icon">
+                    <div class={`menu-languages-${lang}-container`}><ul id={`menu-languages-${lang}`} class="menu">
+                        {flags.map((f) => (
+                            <li class={`lang-item lang-item-${f.img} menu-item`}><a href={f.href} hreflang={f.img} lang={f.img}><img src={`/wp-theme/images/flags/${f.img}.png`} alt="" width="16" height="11" style="width: 16px; height: 11px;"><span style="margin-left:0.3em;">{f.label}</span></a></li>
+                        ))}
+                    </ul></div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-12 item">
+                <p>&copy; {year} {site.companyName}. {f.rights}</p>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-12 item text-end privacy-links">
+                <p><a href={f.privacyHref}>{f.privacyLabel}</a>&nbsp;|&nbsp;<a href={f.termsHref}>{f.termsLabel}</a></p>
+            </div>
         </div>
-      </div>
-      <div class="item ft-links">
-        <div class="social-icons">
-          <a href="https://www.linkedin.com/company/agitechbelgium/" target="_blank" rel="noopener"><img src="/assets/img/blocks/linkedin.svg" alt="LinkedIn"></a>
-          <a href="https://www.youtube.com/@Agitech-OdooPartner" target="_blank" rel="noopener"><img src="/assets/img/blocks/youtube.svg" alt="YouTube"></a>
-          <a href="https://wa.me/32460241589" target="_blank" rel="noopener"><img src="/assets/img/blocks/whatsap.svg" alt="WhatsApp"></a>
-        </div>
-        <div class="content">
-          <h6>{strings.nav}</h6>
-          <ul>
-            <li><a href={`${base}/odoo-erp/`}>{strings.odoo}</a></li>
-            <li><a href={`${base}/development/`}>{strings.dev}</a></li>
-            <li><a href={`${base}/infrastructure-it/`}>{strings.infra}</a></li>
-            <li><a href={`${base}/business-cases/`}>{strings.cases}</a></li>
-            <li><a href={`${base}/recruitment/`}>{strings.recruitment}</a></li>
-          </ul>
-        </div>
-      </div>
     </div>
-    <div class="copy-right">
-      <p>{strings.rights}</p>
-      <a class="shiftingpact-logo" href="https://shiftingpact.be/agitech/" target="_blank" rel="noopener">
-        <img src="/assets/img/blocks/shiftingpackt-logo.png" alt="ShiftingPact">
-      </a>
-      <p class="privacy-links"><a href={`${base}/privacy-policy/`}>{strings.privacy}</a>&nbsp;|&nbsp;<a href={`${base}/terms-conditions/`}>{strings.terms}</a></p>
-    </div>
-  </div>
 </footer>

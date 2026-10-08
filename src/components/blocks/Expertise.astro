@@ -1,6 +1,6 @@
 ---
 // Ported from template-parts/block/expertise.php
-import { blockImg } from '../../lib/img';
+import { blockImg, blockAlt } from '../../lib/img';
 export interface Props {
   bgClass?: string;
   customList?: boolean;
@@ -20,14 +20,14 @@ const { bgClass = '', customList = false, title, description, expertise = [] } =
       )}
       <div class="col-lg-8 col-md-12 col-sm-6 col-12 content">
         {description && (
-          <div class="row"><div class="col-12 para-text"><h6>{description}</h6></div></div>
+          <div class="row"><div class="col-12 para-text"><h6 set:html={description} /></div></div>
         )}
         {expertise.length > 0 && (
           <div class="row">
             {expertise.map(e => (
               <div class="col-lg-6 col-md-6 col-sm-12 col-12 expertises-content">
                 <div class="item">
-                  {e.icon && <div class="icon"><img src={blockImg(e.icon)} alt=""></div>}
+                  {e.icon && <div class="icon"><img src={blockImg(e.icon)} alt={blockAlt(e.icon)}></div>}
                   {e.heading && <h5>{e.heading}</h5>}
                   {e.subHeading && <p>{e.subHeading}</p>}
                   {e.description && <Fragment set:html={e.description} />}

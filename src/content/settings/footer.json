@@ -1,0 +1,116 @@
+{
+  "fr": {
+    "newsletterTitle": "Abonnez-vous à notre newsletter",
+    "emailPlaceholder": "Entrez votre email",
+    "tagline": "Solutions informatiques fiables, pour PME performantes.",
+    "companyName": "Agitech Belgium",
+    "addressLines": [
+      "11 Clos Lucien Outers, 1160",
+      "Bruxelles, Belgique"
+    ],
+    "navTitle": "Navigation",
+    "links": [
+      {
+        "label": "Odoo ERP",
+        "href": "/odoo-erp/"
+      },
+      {
+        "label": "Développement",
+        "href": "/development/"
+      },
+      {
+        "label": "Infrastructure IT",
+        "href": "/infrastructure-it/"
+      },
+      {
+        "label": "Réalisations",
+        "href": "/case-study/"
+      },
+      {
+        "label": "Recrutement",
+        "href": "/recruitment/"
+      }
+    ],
+    "rights": "Tous droits réservés.",
+    "privacyLabel": "Politique de Confidentialité",
+    "privacyHref": "/privacy-policy/",
+    "termsLabel": "Termes et Conditions",
+    "termsHref": "/terms-conditions/"
+  },
+  "en": {
+    "newsletterTitle": "Subscribe to our newsletter",
+    "emailPlaceholder": "Enter your email",
+    "tagline": "Reliable IT solutions for high-performing SMEs.",
+    "companyName": "Agitech Belgium",
+    "addressLines": [
+      "11 Clos Lucien Outers, 1160",
+      "Brussels, Belgium"
+    ],
+    "navTitle": "Navigation",
+    "links": [
+      {
+        "label": "Odoo ERP",
+        "href": "/en/odoo-erp/"
+      },
+      {
+        "label": "Development",
+        "href": "/en/development/"
+      },
+      {
+        "label": "Infrastructure IT",
+        "href": "/en/infrastructure-it/"
+      },
+      {
+        "label": "Business Cases",
+        "href": "/en/case-study/"
+      },
+      {
+        "label": "Recruitment",
+        "href": "/en/recruitment/"
+      }
+    ],
+    "rights": "All Rights Reserved.",
+    "privacyLabel": "Privacy Policy",
+    "privacyHref": "/en/privacy-policy/",
+    "termsLabel": "Terms and Conditions",
+    "termsHref": "/en/terms-conditions/"
+  },
+  "nl": {
+    "newsletterTitle": "Schrijf u in op onze nieuwsbrief",
+    "emailPlaceholder": "Vul uw e-mail in",
+    "tagline": "Betrouwbare IT-oplossingen, voor performante KMO's.",
+    "companyName": "Agitech Belgium",
+    "addressLines": [
+      "11 Clos Lucien Outers, 1160",
+      "Brussel, België"
+    ],
+    "navTitle": "Navigatie",
+    "links": [
+      {
+        "label": "Odoo ERP",
+        "href": "/nl/odoo-erp/"
+      },
+      {
+        "label": "Ontwikkeling",
+        "href": "/nl/development/"
+      },
+      {
+        "label": "IT-infrastructuur",
+        "href": "/nl/infrastructure-it/"
+      },
+      {
+        "label": "Realisaties",
+        "href": "/nl/case-study/"
+      },
+      {
+        "label": "Vacatures",
+        "href": "/nl/recruitment/"
+      }
+    ],
+    "rights": "Alle rechten voorbehouden.",
+    "privacyLabel": "Privacybeleid",
+    "privacyHref": "/nl/privacy-policy/",
+    "termsLabel": "Algemene Voorwaarden",
+    "termsHref": "/nl/terms-conditions/"
+  }
+}

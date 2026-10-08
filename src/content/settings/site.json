@@ -1,0 +1,25 @@
+{
+  "siteName": "Agitech - Odoo Partner",
+  "companyName": "Agitech",
+  "defaultImage": "/assets/img/og/Signature-Logo.png",
+  "socialLinks": [
+    {
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/company/agitechbelgium/",
+      "icon": "linkedin",
+      "inStructuredData": true
+    },
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/@Agitech-OdooPartner",
+      "icon": "youtube",
+      "inStructuredData": true
+    },
+    {
+      "label": "WhatsApp",
+      "url": "https://wa.me/32460241589",
+      "icon": "whatsap",
+      "inStructuredData": false
+    }
+  ]
+}

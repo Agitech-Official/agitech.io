@@ -1,36 +1,33 @@
 ---
-// Ported from template-parts/block/inner-hero.php
+// Ported from template-parts/block/inner-hero.php (same markup: CTA directly in .light-btn, .right-img
+// always rendered). The secondary CTA Astro had added is not part of the WP block and is gone.
 import Cta from './Cta.astro';
-import { blockImg } from '../../lib/img';
+import { blockImg, blockAlt } from '../../lib/img';
 export interface Props {
   logo?: string;
   title?: string;
   subTitle?: string;
-  cta?: { label?: string; url?: string; newTab?: boolean };
-  cta2?: { label?: string; url?: string; newTab?: boolean };
+  cta?: { label?: string; url?: string; newTab?: boolean; calendly?: boolean };
   image?: string;
   bottomLine?: boolean;
   logoAtBottom?: boolean;
 }
-const { logo, title, subTitle, cta, cta2, image, bottomLine = false, logoAtBottom = false } = Astro.props;
+const { logo, title, subTitle, cta, image, bottomLine = false, logoAtBottom = false } = Astro.props;
 ---
 <section class={`banner-sec inner-pages-banner dark-bg ${bottomLine ? 'bottom-line-img' : ''}`}>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-        <div class={`text ${logoAtBottom ? 'logo-bottom' : ''}`}>
-          {logo && <div class="at-odoo-logo"><img src={blockImg(logo)} alt=""></div>}
-          {title && <h6>{title}</h6>}
-          {subTitle && <h2 set:html={subTitle} />}
-          {(cta || cta2) && (
-            <div class="hero-cta-group">
-              {cta && <Cta label={cta.label} url={cta.url} newTab={cta.newTab} wrapClass="light-btn" />}
-              {cta2 && <Cta label={cta2.label} url={cta2.url} newTab={cta2.newTab} wrapClass="hero-cta-secondary" />}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class={`text ${logoAtBottom ? 'logo-bottom' : ''}`}>
+                    {logo && <div class="at-odoo-logo"><img src={blockImg(logo)} alt={blockAlt(logo)}></div>}
+                    {title && <h6>{title}</h6>}
+                    {subTitle && <h2 set:html={subTitle} />}
+                    {cta && <Cta label={cta.label} url={cta.url} newTab={cta.newTab} calendly={cta.calendly} wrapClass="light-btn" />}
+                </div>
             </div>
-          )}
         </div>
-      </div>
     </div>
-  </div>
-  {image && <div class="right-img"><img src={blockImg(image)} alt=""></div>}
+    <div class="right-img">
+        {image && <img src={blockImg(image)} alt={blockAlt(image)}>}
+    </div>
 </section>

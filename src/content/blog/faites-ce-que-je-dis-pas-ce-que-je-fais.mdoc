@@ -1,332 +1,461 @@
 ---
 title: "Anthropic, OpenAI, Mistral : ce que leurs 1 200 offres d’emploi révèlent vraiment sur l’avenir du travail"
 lang: "fr"
-publishedAt: "2026-05-06"
-category: "Transformation numérique, Développement de logiciels, IA"
+translationKey: faites-ce-que-je-dis-pas-ce-que-je-fais
+publishedAt: "2026-05-06T15:11"
 excerpt: "Les leaders de l'IA recrutent encore des comptables SAP et des admins Salesforce. Ce que font Anthropic, OpenAI et Mistral dit plus que leurs prédictions."
+author: "sam-gutman"
+categories:
+- "Transformation numérique"
+- "Développement de logiciels"
+- "IA"
+coverImage: "/assets/img/blog/faites-ce-que-je-dis-pas-ce-que-je-fais/image-11.png"
+seoTitle: "Anthropic, OpenAI, Mistral : ce que leurs 1 200 offres d'emploi révèlent vraiment sur l'avenir du travail - Agitech - Odoo Partner"
+contentHtml: |
+  <div class="wp-block-group">
+  <div class="wp-block-group">
+  <div class="wp-block-group">
+  <div class="wp-block-group">
+  <div class="wp-block-group has-x-large-font-size">
+  <p class="has-medium-font-size">Deux prophéties agitent le monde business en ce moment.</p>
+
+  <p class="has-black-color has-text-color has-link-color has-medium-font-size">La première : une <strong>"Grande Récession pour les cols blancs"</strong> arrive. Anthropic a publié des études montrant que l'IA peut déjà réaliser plus de 90% des tâches d'un employé en finance, legal, IT ou admin. Les comptables, marketeurs, développeurs, juristes sont tous menacés de remplacement par des agents IA.</p>
+
+  <p class="has-medium-font-size">La deuxième : le <strong>"SaaS Doomsday"</strong>. Salesforce, SAP, Workday, HubSpot seraient également condamnés, remplacés par les mêmes agents. Les cours des éditeurs de logiciels cotés en bourse s'effondrent depuis le début de l'année.</p>
+
+  <p class="has-medium-font-size">Selon les etudes de la Silicon Valley, l'AGI va remplacer le comptable et son logiciel comptable. Et les pronostics sont agressifs : 2026 selon Sam Altman, 2027 selon Dario Amodei. Les CEO des big tech sont alignés : l'IA est prête. Le seul frein au déploiement mondial ? L'adoption dans les entreprises et le compute power disponible.</p>
+
+  <p class="has-text-align-left has-black-color has-text-color has-link-color has-medium-font-size">Le graphique ci-dessous, produit par Anthropic, montre la part des tâches professionnelles que les LLM pourraient théoriquement réaliser (zone bleue) et la mesure de couverture réelle dérivée des données d'utilisation (zone rouge). </p>
+
+  <p></p>
+  </div>
+
+  <figure class="wp-block-image size-full is-resized"><img src="/wp-content/uploads/2026/05/Screenshot-2026-05-07-133740.png" alt="">
+  </figure>
+  </div>
+  </div>
+  </div>
+  </div>
+
+  <div class="wp-block-group">
+  <p class="has-medium-font-size">Mais avant de croire sur parole les oracles de la Silicon Valley, relisons celui d'Omaha, Warren Buffet : <em>"Forecasts may tell you a great deal about the forecaster; they tell you nothing about the future."</em></p>
+
+  <div class="wp-block-group">
+  <p></p>
+
+  <hr class="wp-block-separator has-alpha-channel-opacity">
+  </div>
+
+  <hr class="wp-block-separator has-alpha-channel-opacity">
+
+  <p style="font-size:30px"><strong>Les 1000 offres d'emploie d'Anthropic, OpenAI et Mistral.</strong></p>
+
+  <p class="has-medium-font-size">Alors, j'ai eu une idée simple : éplucher (avec mon ami Claude) les offres d'emploi d'Anthropic, OpenAI et Mistral. Si on croit les pronostics de la tech, ces offres devraient se limiter à quelques PhD en mathématiques et à des directeurs commerciaux très bien connectés.  Le reste ? Déjà remplacé par leurs propres modèles.</p>
+
+  <p class="has-medium-font-size">Pourtant, le résultat est sans appel et franchement surprenant.</p>
+
+  <p class="has-medium-font-size">Les trois entreprises utilisent de nombreux logiciels de "l'ancien monde" : Workday, NetSuite, SAP, Salesforce, HubSpot, etc. </p>
+  </div>
+
+  <style>
+  h2.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--font-sans)}
+  .wrap{padding:1rem 0;overflow:hidden}
+  .scroll-hint{display:none;font-size:10px;color:#bbb;text-align:right;padding:0 0 4px}
+  .scroll-container{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .table-inner{min-width:580px;width:100%}
+  .top-row{display:grid;grid-template-columns:110px repeat(3,1fr)}
+  .corner{background:transparent}
+  .co-header{padding:.65rem .75rem;display:flex;flex-direction:column;align-items:center;gap:3px;border-radius:10px 10px 0 0;border:0.5px solid #e5e5e5;border-bottom:none;margin:0 2px;background:#fafafa}
+  .co-name{font-size:12px;font-weight:500;color:#1a1a1a;text-align:center}
+  .co-dot{width:6px;height:6px;border-radius:50%}
+  .table{display:grid;grid-template-columns:110px repeat(3,1fr);border:0.5px solid #e5e5e5;border-radius:0 0 10px 10px;overflow:hidden}
+  .cat-cell{background:#fafafa;padding:.75rem;border-right:0.5px solid #e5e5e5;border-bottom:0.5px solid #e5e5e5;display:flex;align-items:center}
+  .cat-label{font-size:10px;font-weight:500;color:#1a1a1a;line-height:1.3}
+  .tool-cell{padding:.75rem;border-right:0.5px solid #e5e5e5;border-bottom:0.5px solid #e5e5e5;background:white;display:flex;flex-wrap:wrap;gap:4px;align-content:flex-start}
+  .tool-cell:nth-child(4n){border-right:none}
+  .cat-cell:nth-last-child(-n+4),.tool-cell:nth-last-child(-n+4){border-bottom:none}
+  .p{font-size:10px;padding:2px 7px;border-radius:20px;white-space:nowrap;line-height:1.7}
+  .note{font-size:10px;color:#bbb;margin-top:.75rem;text-align:right;padding:0 .5rem}
+  @media(max-width:640px){
+    .scroll-hint{display:block}
+    .top-row,.table{grid-template-columns:90px repeat(3,140px)}
+  }
+  </style>
+
+  <h2 class="sr-only">Tableau comparatif des SaaS utilisés par Anthropic, OpenAI et Mistral AI</h2>
+
+  <div class="wrap">
+    <div class="scroll-hint">← Faites défiler →</div>
+    <div class="scroll-container">
+      <div class="table-inner">
+
+        <div class="top-row">
+          <div class="corner"></div>
+          <div class="co-header"><div class="co-dot" style="background:#CC785C"></div><span class="co-name">Anthropic</span></div>
+          <div class="co-header"><div class="co-dot" style="background:#1a1a1a"></div><span class="co-name">OpenAI</span></div>
+          <div class="co-header"><div class="co-dot" style="background:#F7602A"></div><span class="co-name">Mistral AI</span></div>
+        </div>
+
+        <div class="table">
+
+          <div class="cat-cell"><span class="cat-label">ERP / Finance</span></div>
+          <div class="tool-cell">
+            <span class="p" style="background:#FEF3EB;color:#C45A0A;border:0.5px solid #F5C090">Workday</span>
+            <span class="p" style="background:#E3F4FD;color:#0070A8;border:0.5px solid #8CCCE8">NetSuite</span>
+            <span class="p" style="background:#F0EAFE;color:#6320D4;border:0.5px solid #C4AAEF">Pigment</span>
+            <span class="p" style="background:#E8F8F3;color:#00724E;border:0.5px solid #7DCBB0">Navan</span>
+          </div>
+          <div class="tool-cell">
+            <span class="p" style="background:#FEF3EB;color:#C45A0A;border:0.5px solid #F5C090">Workday</span>
+            <span class="p" style="background:#E3F4FD;color:#0070A8;border:0.5px solid #8CCCE8">NetSuite</span>
+            <span class="p" style="background:#FEF0E6;color:#C05200;border:0.5px solid #F4A870">Anaplan</span>
+            <span class="p" style="background:#EBF0FE;color:#1E40C8;border:0.5px solid #90ABEE">ServiceNow</span>
+          </div>
+          <div class="tool-cell">
+            <span class="p" style="background:#E8F4FD;color:#0069A0;border:0.5px solid #7CC2E8">SAP S/4HANA</span>
+            <span class="p" style="background:#F0EAFE;color:#6320D4;border:0.5px solid #C4AAEF">Pigment</span>
+            <span class="p" style="background:#E6EFF9;color:#00348A;border:0.5px solid #80AEDE">Kyriba</span>
+            <span class="p" style="background:#E8F8F3;color:#00724E;border:0.5px solid #7DCBB0">Navan</span>
+          </div>
+
+          <div class="cat-cell"><span class="cat-label">Billing / QTC</span></div>
+          <div class="tool-cell">
+            <span class="p" style="background:#EEEDFE;color:#4E45C8;border:0.5px solid #B5B0F5">Stripe</span>
+            <span class="p" style="background:#FDECEC;color:#B80018;border:0.5px solid #EE9090">Zuora</span>
+            <span class="p" style="background:#F5F5F5;color:#444;border:0.5px solid #CCC">Metronome</span>
+            <span class="p" style="background:#EEEDFE;color:#3040EE;border:0.5px solid #AAAFFE">Ironclad</span>
+          </div>
+          <div class="tool-cell">
+            <span class="p" style="background:#E3F4FB;color:#0079C1;border:0.5px solid #87CEEB">SF CPQ</span>
+            <span class="p" style="background:#EEEDFE;color:#4E45C8;border:0.5px solid #B5B0F5">Stripe</span>
+            <span class="p" style="background:#EEEDFE;color:#3040EE;border:0.5px solid #AAAFFE">Ironclad</span>
+          </div>
+          <div class="tool-cell">
+            <span class="p" style="background:#F0EAFE;color:#5A1AE0;border:0.5px solid #C0AAEF">Lago</span>
+            <span class="p" style="background:#F5F5F5;color:#444;border:0.5px solid #CCC">Anrok</span>
+            <span class="p" style="background:#EBF3FE;color:#1A58C0;border:0.5px solid #90BAF4">Payflows</span>
+          </div>
+
+          <div class="cat-cell"><span class="cat-label">CRM / Marketing</span></div>
+          <div class="tool-cell">
+            <span class="p" style="background:#E3F4FB;color:#0079C1;border:0.5px solid #87CEEB">Salesforce</span>
+            <span class="p" style="background:#FFF0EB;color:#D0501A;border:0.5px solid #F5A880">HubSpot</span>
+            <span class="p" style="background:#FEF2E8;color:#C05010;border:0.5px solid #F4A870">Apollo</span>
+            <span class="p" style="background:#F5F5F5;color:#555;border:0.5px solid #CCC">Clay</span>
+          </div>
+          <div class="tool-cell">
+            <span class="p" style="background:#E3F4FB;color:#0079C1;border:0.5px solid #87CEEB">Salesforce</span>
+            <span class="p" style="background:#FFF0EB;color:#D0501A;border:0.5px solid #F5A880">HubSpot</span>
+          </div>
+          <div class="tool-cell">
+            <span class="p" style="background:#E3F4FB;color:#0079C1;border:0.5px solid #87CEEB">Salesforce</span>
+            <span class="p" style="background:#FFF0EB;color:#D0501A;border:0.5px solid #F5A880">HubSpot</span>
+            <span class="p" style="background:#FEF2E8;color:#B85808;border:0.5px solid #F4B070">ZoomInfo</span>
+          </div>
+
+          <div class="cat-cell"><span class="cat-label">RH / Recrutement</span></div>
+          <div class="tool-cell">
+            <span class="p" style="background:#E8F8F2;color:#1A9460;border:0.5px solid #80C8A0">Greenhouse</span>
+            <span class="p" style="background:#EEEDFE;color:#4848D0;border:0.5px solid #B0B0F0">ModernLoop</span>
+            <span class="p" style="background:#FEEEEA;color:#B03000;border:0.5px solid #EEA080">PwC Payroll</span>
+          </div>
+          <div class="tool-cell">
+            <span class="p" style="background:#EBF3FE;color:#1A52C0;border:0.5px solid #90B8F4">Ashby</span>
+            <span class="p" style="background:#FDECEC;color:#B01818;border:0.5px solid #EE8888">Jamf</span>
+          </div>
+          <div class="tool-cell">
+            <span class="p" style="background:#EAF6EF;color:#267848;border:0.5px solid #84C498">Lever</span>
+            <span class="p" style="background:#FEF0EB;color:#C04010;border:0.5px solid #F4A080">Lucca</span>
+            <span class="p" style="background:#EEEDFE;color:#4848D0;border:0.5px solid #B0B0F0">ModernLoop</span>
+          </div>
+
+          <div class="cat-cell"><span class="cat-label">Collaboration</span></div>
+          <div class="tool-cell">
+            <span class="p" style="background:#F5EAF5;color:#4A154B;border:0.5px solid #D4A8D4">Slack</span>
+            <span class="p" style="background:#F0F0F0;color:#24292E;border:0.5px solid #BBBBBB">GitHub</span>
+            <span class="p" style="background:#EBF3FE;color:#1A6AE0;border:0.5px solid #90C0F4">Google WS</span>
+            <span class="p" style="background:#E3F1FD;color:#006AAE;border:0.5px solid #80C0E8">Okta</span>
+          </div>
+          <div class="tool-cell">
+            <span class="p" style="background:#F5EAF5;color:#4A154B;border:0.5px solid #D4A8D4">Slack</span>
+            <span class="p" style="background:#F0F0F0;color:#24292E;border:0.5px solid #BBBBBB">GitHub</span>
+            <span class="p" style="background:#EBF3FE;color:#1A6AE0;border:0.5px solid #90C0F4">Google WS</span>
+            <span class="p" style="background:#E8EFFE;color:#0048C0;border:0.5px solid #90B0F0">Atlassian</span>
+          </div>
+          <div class="tool-cell">
+            <span class="p" style="background:#F5EAF5;color:#4A154B;border:0.5px solid #D4A8D4">Slack</span>
+            <span class="p" style="background:#F0F0F0;color:#24292E;border:0.5px solid #BBBBBB">GitHub</span>
+            <span class="p" style="background:#E8EFFE;color:#0048C0;border:0.5px solid #90B0F0">Jira</span>
+            <span class="p" style="background:#EDEAFC;color:#362D59;border:0.5px solid #B8B0E0">Sentry</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="note">Sources : anthropic.com/careers · openai.com/careers · jobs.lever.co/mistral — mai 2026</div>
+  </div>
+
+  <div class="wp-block-group">
+  <p class="has-medium-font-size">Et elles recrutent : des comptables, des responsables paie, des spécialistes réseaux sociaux, des juristes et des experts Salesforce.</p>
+  </div>
+
+  <p class="has-medium-font-size">Chez Anthropic, les postes en finance, sales, juridique, marketing et RH représentent <strong>182 offres ouvertes — soit 42 % de leurs recrutements totaux</strong>. Presque un poste sur deux est un métier que l'IA était censée avoir déjà remplacé.</p>
+
+  <div class="wp-block-group">
+  <p class="has-medium-font-size">Autre exemple, chez les 3 acteurs, lorsqu'on calcule les ratios, les postes en finance représentent approximativement 5% du total des recrutements — ce qui est un ratio très classique pour une entreprise de logiciels.</p>
+
+  <p></p>
+  </div>
+
+  <style>
+  h2.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--font-sans)}
+  .wrap{padding:1rem 0;overflow:hidden}
+  .scroll-container{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .table-inner{min-width:600px;width:100%}
+  .top-row{display:grid;grid-template-columns:110px repeat(3,1fr);gap:0}
+  .corner{background:transparent}
+  .co-header{padding:.65rem .75rem;display:flex;flex-direction:column;align-items:center;gap:3px;border-radius:10px 10px 0 0;border:0.5px solid #e5e5e5;border-bottom:none;margin:0 2px;background:#fafafa}
+  .co-name{font-size:12px;font-weight:500;color:#1a1a1a;text-align:center}
+  .co-dot{width:6px;height:6px;border-radius:50%}
+  .table{display:grid;grid-template-columns:110px repeat(3,1fr);border:0.5px solid #e5e5e5;border-radius:0 0 10px 10px;overflow:hidden}
+  .cat-cell{background:#fafafa;padding:.75rem;border-right:0.5px solid #e5e5e5;border-bottom:0.5px solid #e5e5e5;display:flex;align-items:center}
+  .cat-label{font-size:10px;font-weight:500;color:#1a1a1a;line-height:1.3}
+  .tool-cell{padding:.75rem;border-right:0.5px solid #e5e5e5;border-bottom:0.5px solid #e5e5e5;background:white;display:flex;gap:8px;align-items:flex-start}
+  .tool-cell.hl{background:#FAFBFF}
+  .tool-cell:nth-child(4n){border-right:none}
+  .cat-cell:nth-last-child(-n+4),.tool-cell:nth-last-child(-n+4){border-bottom:none}
+  .cat-cell.hl{background:#F0F4FF}
+  .num{font-size:22px;font-weight:500;color:#1a1a1a;line-height:1;flex-shrink:0;padding-top:2px;min-width:30px}
+  .num.blue{color:#1848A0}
+  .titles{display:flex;flex-direction:column;gap:2px}
+  .jt{font-size:10px;color:#666;line-height:1.35}
+  .jt::before{content:"· "}
+  .jt.b{color:#1a1a1a;font-weight:500}
+  .jt.b::before{content:"· "}
+  .total-row{display:grid;grid-template-columns:110px repeat(3,1fr);background:#fafafa;border:0.5px solid #e5e5e5;border-top:none;border-radius:0 0 10px 10px;overflow:hidden;margin-top:-1px}
+  .total-cat{padding:.65rem .75rem;border-right:0.5px solid #e5e5e5;display:flex;align-items:center}
+  .total-label{font-size:9px;font-weight:500;color:#999;text-transform:uppercase;letter-spacing:.05em}
+  .total-cell{padding:.65rem .75rem;border-right:0.5px solid #e5e5e5;display:flex;align-items:center;gap:4px}
+  .total-cell:last-child{border-right:none}
+  .total-n{font-size:13px;font-weight:500;color:#1a1a1a}
+  .total-sub{font-size:10px;color:#aaa}
+  .note{font-size:10px;color:#bbb;margin-top:.75rem;text-align:right;padding:0 .5rem}
+  .scroll-hint{display:none;font-size:10px;color:#bbb;text-align:right;padding:0 0 4px;margin-bottom:4px}
+  @media(max-width:640px){
+    .scroll-hint{display:block}
+    .top-row,.table,.total-row{grid-template-columns:90px repeat(3,130px)}
+    .co-name{font-size:11px}
+  }
+  </style>
+
+  <h2 class="sr-only">Jobs cols blancs recrutés chez Anthropic, OpenAI et Mistral AI</h2>
+
+  <div class="wrap">
+    <div class="scroll-hint">← Faites défiler →</div>
+    <div class="scroll-container">
+      <div class="table-inner">
+
+        <div class="top-row">
+          <div class="corner"></div>
+          <div class="co-header"><div class="co-dot" style="background:#CC785C"></div><span class="co-name">Anthropic</span></div>
+          <div class="co-header"><div class="co-dot" style="background:#1a1a1a"></div><span class="co-name">OpenAI</span></div>
+          <div class="co-header"><div class="co-dot" style="background:#F7602A"></div><span class="co-name">Mistral AI</span></div>
+        </div>
+
+        <div class="table">
+
+          <div class="cat-cell"><span class="cat-label">Finance &amp; Compta</span></div>
+          <div class="tool-cell">
+            <span class="num">39</span>
+            <div class="titles">
+              <span class="jt">Comptable général</span>
+              <span class="jt">Spécialiste comptes clients</span>
+              <span class="jt">Spécialiste paie internationale</span>
+              <span class="jt">Analyste trésorerie</span>
+            </div>
+          </div>
+          <div class="tool-cell">
+            <span class="num">28</span>
+            <div class="titles">
+              <span class="jt">Responsable comptes fournisseurs</span>
+              <span class="jt">Analyste finance stratégique</span>
+              <span class="jt">Responsable gestion commandes</span>
+              <span class="jt">Spécialiste fiscalité US</span>
+            </div>
+          </div>
+          <div class="tool-cell">
+            <span class="num">7</span>
+            <div class="titles">
+              <span class="jt">Comptable général</span>
+              <span class="jt">Responsable comptes fournisseurs</span>
+              <span class="jt">Spécialiste IFRS</span>
+              <span class="jt">Responsable contrôle interne</span>
+            </div>
+          </div>
+
+          <div class="cat-cell"><span class="cat-label">Sales &amp; Commercial</span></div>
+          <div class="tool-cell">
+            <span class="num">90</span>
+            <div class="titles">
+              <span class="jt">Commercial entreprise</span>
+              <span class="jt">Business development rep.</span>
+              <span class="jt">Account manager</span>
+              <span class="jt">Chargé relation client</span>
+            </div>
+          </div>
+          <div class="tool-cell">
+            <span class="num">120</span>
+            <div class="titles">
+              <span class="jt">Commercial grands comptes</span>
+              <span class="jt">Business development rep.</span>
+              <span class="jt">Account manager</span>
+              <span class="jt">Customer success manager</span>
+            </div>
+          </div>
+          <div class="tool-cell">
+            <span class="num">18</span>
+            <div class="titles">
+              <span class="jt">Commercial entreprise</span>
+              <span class="jt">Account manager</span>
+              <span class="jt">Chargé de partenariats</span>
+              <span class="jt">Business development manager</span>
+            </div>
+          </div>
+
+          <div class="cat-cell"><span class="cat-label">Juridique &amp; Legal</span></div>
+          <div class="tool-cell">
+            <span class="num">26</span>
+            <div class="titles">
+              <span class="jt">Juriste contrats</span>
+              <span class="jt">Juriste propriété intellectuelle</span>
+              <span class="jt">Juriste conformité &amp; privacy</span>
+            </div>
+          </div>
+          <div class="tool-cell">
+            <span class="num">14</span>
+            <div class="titles">
+              <span class="jt">Juriste droit des affaires</span>
+              <span class="jt">Juriste M&amp;A</span>
+              <span class="jt">Juriste droit du travail</span>
+              <span class="jt">Paralégal contentieux</span>
+            </div>
+          </div>
+          <div class="tool-cell">
+            <span class="num">10</span>
+            <div class="titles">
+              <span class="jt">Juriste contrats commerciaux</span>
+              <span class="jt">Juriste propriété intellectuelle</span>
+              <span class="jt">Juriste bancaire</span>
+              <span class="jt">Juriste réglementaire (UE)</span>
+            </div>
+          </div>
+
+          <div class="cat-cell"><span class="cat-label">Marketing &amp; Comms</span></div>
+          <div class="tool-cell">
+            <span class="num">22</span>
+            <div class="titles">
+              <span class="jt">Chef de produit marketing</span>
+              <span class="jt">Chargé de contenu &amp; rédaction</span>
+              <span class="jt">Responsable événements</span>
+            </div>
+          </div>
+          <div class="tool-cell">
+            <span class="num">22</span>
+            <div class="titles">
+              <span class="jt">Chargé de marketing digital</span>
+              <span class="jt">Gestionnaire réseaux sociaux</span>
+              <span class="jt">Responsable génération de leads</span>
+              <span class="jt">Chargé de marketing terrain</span>
+            </div>
+          </div>
+          <div class="tool-cell">
+            <span class="num">9</span>
+            <div class="titles">
+              <span class="jt">Responsable programmes marketing</span>
+              <span class="jt">Spécialiste contenu &amp; réseaux sociaux</span>
+              <span class="jt">Chargé marketing partenaires</span>
+            </div>
+          </div>
+
+          <div class="cat-cell"><span class="cat-label">RH &amp; Recrutement</span></div>
+          <div class="tool-cell">
+            <span class="num">5</span>
+            <div class="titles">
+              <span class="jt">Chargé de recrutement</span>
+              <span class="jt">HR business partner</span>
+              <span class="jt">Gestionnaire paie</span>
+            </div>
+          </div>
+          <div class="tool-cell">
+            <span class="num">18</span>
+            <div class="titles">
+              <span class="jt">Chargé de recrutement</span>
+              <span class="jt">HR business partner</span>
+              <span class="jt">Gestionnaire avantages sociaux</span>
+              <span class="jt">Coordinateur mobilité internationale</span>
+            </div>
+          </div>
+          <div class="tool-cell">
+            <span class="num">12</span>
+            <div class="titles">
+              <span class="jt">Chargé de recrutement (x6)</span>
+              <span class="jt">HR business partner</span>
+              <span class="jt">Responsable workplace</span>
+            </div>
+          </div>
+
+          <div class="cat-cell hl"><span class="cat-label" style="color:#1848A0">Experts logiciels</span></div>
+          <div class="tool-cell hl">
+            <span class="num blue">12</span>
+            <div class="titles">
+              <span class="jt b">Administrateur Salesforce</span>
+              <span class="jt b">Spécialiste Workday</span>
+              <span class="jt b">Ingénieur intégration Workday</span>
+              <span class="jt b">Analyste systèmes Finance</span>
+            </div>
+          </div>
+          <div class="tool-cell hl">
+            <span class="num blue">8</span>
+            <div class="titles">
+              <span class="jt b">Ingénieur Workday</span>
+              <span class="jt b">Administrateur Salesforce</span>
+              <span class="jt b">Spécialiste NetSuite</span>
+            </div>
+          </div>
+          <div class="tool-cell hl">
+            <span class="num blue">4</span>
+            <div class="titles">
+              <span class="jt b">SAP Platform Lead</span>
+              <span class="jt b">Administrateur Salesforce</span>
+              <span class="jt b">Spécialiste systèmes Finance</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="total-row">
+          <div class="total-cat"><span class="total-label">Total jobs ouverts</span></div>
+          <div class="total-cell"><span class="total-n">~428</span><span class="total-sub">postes</span></div>
+          <div class="total-cell"><span class="total-n">658</span><span class="total-sub">postes</span></div>
+          <div class="total-cell"><span class="total-n">~160</span><span class="total-sub">postes</span></div>
+        </div>
+
+      </div>
+    </div>
+    <div class="note">Sources : anthropic.com/careers · openai.com/careers · jobs.lever.co/mistral — mai 2026</div>
+  </div>
+
+  <p class="has-medium-font-size">Cela ne prouve pas que rien ne changera. L'IA a déjà un impact majeur sur notre manière de travailler et va transformer nos sociétés. Cet article, dont la recherche des données et la production des tableaux ont été réalisées avec l'aide de l'IA, en est un bon exemple.</p>
+
+  <p class="has-medium-font-size">Mais lorsque vous verrez la prochaine étude sur la fin de votre profession, ou le prochain Youtubeur qui vous explique comment il a remplacé tous ses employés par de l'IA, rappelez-vous que les créateurs des LLM recrutent encore en mai 2026 des comptables avec des compétences SAP, des administrateurs Salesforce et des gestionnaires de réseaux sociaux.</p>
+
+  <p class="has-medium-font-size">Ces entreprises ont au moins 3 à 5 ans d'avance sur la PME moyenne dans l'adoption de l'IA. La disruption viendra. Mais elle sera plus lente, plus partielle et plus nuancée que les prophètes du SaaS Doomsday ne le prédisent.</p>
+
+  <p class="has-medium-font-size">Expert-comptable SAP, consultant Salesforce, développeur Workday : vous aurez très probablement encore un travail en 2030. Pas le même qu'en 2020 — mais un travail.</p>
+
+  <p></p>
 ---
-Deux prophéties agitent le monde business en ce moment.
-
-
-
-La première : une **"Grande Récession pour les cols blancs"** arrive. Anthropic a publié des études montrant que l'IA peut déjà réaliser plus de 90% des tâches d'un employé en finance, legal, IT ou admin. Les comptables, marketeurs, développeurs, juristes sont tous menacés de remplacement par des agents IA.
-
-
-
-La deuxième : le **"SaaS Doomsday"**. Salesforce, SAP, Workday, HubSpot seraient également condamnés, remplacés par les mêmes agents. Les cours des éditeurs de logiciels cotés en bourse s'effondrent depuis le début de l'année.
-
-
-
-Selon les etudes de la Silicon Valley, l'AGI va remplacer le comptable et son logiciel comptable. Et les pronostics sont agressifs : 2026 selon Sam Altman, 2027 selon Dario Amodei. Les CEO des big tech sont alignés : l'IA est prête. Le seul frein au déploiement mondial ? L'adoption dans les entreprises et le compute power disponible.
-
-
-
-Le graphique ci-dessous, produit par Anthropic, montre la part des tâches professionnelles que les LLM pourraient théoriquement réaliser (zone bleue) et la mesure de couverture réelle dérivée des données d'utilisation (zone rouge).
-
-
-
-
-![](/wp-content/uploads/2026/05/Screenshot-2026-05-07-133740.png)
-
-
-
-Mais avant de croire sur parole les oracles de la Silicon Valley, relisons celui d'Omaha, Warren Buffet : *"Forecasts may tell you a great deal about the forecaster; they tell you nothing about the future."*
-
-
-
----
-
-
-
-
----
-
-
-
-
-**Les 1000 offres d'emploie d'Anthropic, OpenAI et Mistral.**
-
-
-
-Alors, j'ai eu une idée simple : éplucher (avec mon ami Claude) les offres d'emploi d'Anthropic, OpenAI et Mistral. Si on croit les pronostics de la tech, ces offres devraient se limiter à quelques PhD en mathématiques et à des directeurs commerciaux très bien connectés. Le reste ? Déjà remplacé par leurs propres modèles.
-
-
-
-Pourtant, le résultat est sans appel et franchement surprenant.
-
-
-
-Les trois entreprises utilisent de nombreux logiciels de "l'ancien monde" : Workday, NetSuite, SAP, Salesforce, HubSpot, etc.
-
-
-
-
-## Tableau comparatif des SaaS utilisés par Anthropic, OpenAI et Mistral AI
-
-← Faites défiler →
-
-Anthropic
-
-OpenAI
-
-Mistral AI
-
-ERP / Finance
-
-Workday
-NetSuite
-Pigment
-Navan
-
-Workday
-NetSuite
-Anaplan
-ServiceNow
-
-SAP S/4HANA
-Pigment
-Kyriba
-Navan
-
-Billing / QTC
-
-Stripe
-Zuora
-Metronome
-Ironclad
-
-SF CPQ
-Stripe
-Ironclad
-
-Lago
-Anrok
-Payflows
-
-CRM / Marketing
-
-Salesforce
-HubSpot
-Apollo
-Clay
-
-Salesforce
-HubSpot
-
-Salesforce
-HubSpot
-ZoomInfo
-
-RH / Recrutement
-
-Greenhouse
-ModernLoop
-PwC Payroll
-
-Ashby
-Jamf
-
-Lever
-Lucca
-ModernLoop
-
-Collaboration
-
-Slack
-GitHub
-Google WS
-Okta
-
-Slack
-GitHub
-Google WS
-Atlassian
-
-Slack
-GitHub
-Jira
-Sentry
-
-Sources : anthropic.com/careers · openai.com/careers · jobs.lever.co/mistral — mai 2026
-
-
-
-Et elles recrutent : des comptables, des responsables paie, des spécialistes réseaux sociaux, des juristes et des experts Salesforce.
-
-
-
-Chez Anthropic, les postes en finance, sales, juridique, marketing et RH représentent **182 offres ouvertes — soit 42 % de leurs recrutements totaux**. Presque un poste sur deux est un métier que l'IA était censée avoir déjà remplacé.
-
-
-
-Autre exemple, chez les 3 acteurs, lorsqu'on calcule les ratios, les postes en finance représentent approximativement 5% du total des recrutements — ce qui est un ratio très classique pour une entreprise de logiciels.
-
-
-
-
-## Jobs cols blancs recrutés chez Anthropic, OpenAI et Mistral AI
-
-← Faites défiler →
-
-Anthropic
-
-OpenAI
-
-Mistral AI
-
-Finance & Compta
-
-39
-
-Comptable général
-Spécialiste comptes clients
-Spécialiste paie internationale
-Analyste trésorerie
-
-28
-
-Responsable comptes fournisseurs
-Analyste finance stratégique
-Responsable gestion commandes
-Spécialiste fiscalité US
-
-7
-
-Comptable général
-Responsable comptes fournisseurs
-Spécialiste IFRS
-Responsable contrôle interne
-
-Sales & Commercial
-
-90
-
-Commercial entreprise
-Business development rep.
-Account manager
-Chargé relation client
-
-120
-
-Commercial grands comptes
-Business development rep.
-Account manager
-Customer success manager
-
-18
-
-Commercial entreprise
-Account manager
-Chargé de partenariats
-Business development manager
-
-Juridique & Legal
-
-26
-
-Juriste contrats
-Juriste propriété intellectuelle
-Juriste conformité & privacy
-
-14
-
-Juriste droit des affaires
-Juriste M&A
-Juriste droit du travail
-Paralégal contentieux
-
-10
-
-Juriste contrats commerciaux
-Juriste propriété intellectuelle
-Juriste bancaire
-Juriste réglementaire (UE)
-
-Marketing & Comms
-
-22
-
-Chef de produit marketing
-Chargé de contenu & rédaction
-Responsable événements
-
-22
-
-Chargé de marketing digital
-Gestionnaire réseaux sociaux
-Responsable génération de leads
-Chargé de marketing terrain
-
-9
-
-Responsable programmes marketing
-Spécialiste contenu & réseaux sociaux
-Chargé marketing partenaires
-
-RH & Recrutement
-
-5
-
-Chargé de recrutement
-HR business partner
-Gestionnaire paie
-
-18
-
-Chargé de recrutement
-HR business partner
-Gestionnaire avantages sociaux
-Coordinateur mobilité internationale
-
-12
-
-Chargé de recrutement (x6)
-HR business partner
-Responsable workplace
-
-Experts logiciels
-
-12
-
-Administrateur Salesforce
-Spécialiste Workday
-Ingénieur intégration Workday
-Analyste systèmes Finance
-
-8
-
-Ingénieur Workday
-Administrateur Salesforce
-Spécialiste NetSuite
-
-4
-
-SAP Platform Lead
-Administrateur Salesforce
-Spécialiste systèmes Finance
-
-Total jobs ouverts
-
-~428postes
-
-658postes
-
-~160postes
-
-Sources : anthropic.com/careers · openai.com/careers · jobs.lever.co/mistral — mai 2026
-
-
-
-Cela ne prouve pas que rien ne changera. L'IA a déjà un impact majeur sur notre manière de travailler et va transformer nos sociétés. Cet article, dont la recherche des données et la production des tableaux ont été réalisées avec l'aide de l'IA, en est un bon exemple.
-
-
-
-Mais lorsque vous verrez la prochaine étude sur la fin de votre profession, ou le prochain Youtubeur qui vous explique comment il a remplacé tous ses employés par de l'IA, rappelez-vous que les créateurs des LLM recrutent encore en mai 2026 des comptables avec des compétences SAP, des administrateurs Salesforce et des gestionnaires de réseaux sociaux.
-
-
-
-Ces entreprises ont au moins 3 à 5 ans d'avance sur l'entreprise moyenne dans l'adoption de l'IA. La disruption viendra. Mais elle sera plus lente, plus partielle et plus nuancée que les prophètes du SaaS Doomsday ne le prédisent.
-
-
-
-Expert-comptable SAP, consultant Salesforce, développeur Workday : vous aurez très probablement encore un travail en 2030. Pas le même qu'en 2020 — mais un travail.

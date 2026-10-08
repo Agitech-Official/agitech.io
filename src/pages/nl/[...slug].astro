@@ -5,81 +5,27 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import BlockRenderer from '../../components/BlockRenderer.astro';
-import { createReader } from '@keystatic/core/reader';
-import keystaticConfig from '../../../keystatic.config';
 import Markdoc from '@markdoc/markdoc';
-import { addTocIds } from '../../lib/toc';
+import PostArticle from '../../components/PostArticle.astro';
+import { headingOf, pageSeo, postSeo } from '../../lib/seo';
+import { pageAndPostPaths } from '../../lib/content';
 
 export async function getStaticPaths() {
-  const reader = createReader(process.cwd(), keystaticConfig);
-
-  // The `pages` collection is one flat folder shared by every language — when an NL
-  // page's natural URL slug collides with an existing FR file (e.g. both want
-  // "industries"), the NL entry is stored under a disambiguated filename and mapped
-  // back to its real URL here. Every NL page mirrors an FR slug, so every one needs
-  // an entry (unlike EN, which only overrides the subset that actually collide).
-  const NL_SLUG_URL_OVERRIDES: Record<string, string> = {
-    'contact-us-nl': 'contact-us',
-    'development-nl': 'development',
-    'erp-sea-nl': 'erp-sea',
-    'formation-nl': 'formation',
-    'industries-associations-internationales-nl': 'industries-associations-internationales',
-    'industries-construction-batiment-nl': 'industries-construction-batiment',
-    'industries-e-commerce-nl': 'industries-e-commerce',
-    'industries-grossiste-vente-b2b-nl': 'industries-grossiste-vente-b2b',
-    'industries-services-aux-entreprises-nl': 'industries-services-aux-entreprises',
-    'industries-nl': 'industries',
-    'infrastructure-it-nl': 'infrastructure-it',
-    'jobs-nl': 'jobs',
-    'landing-page-sea-pb-nl': 'landing-page-sea-pb',
-    'migration-nl': 'migration',
-    'mise-a-niveau-version-nl': 'mise-a-niveau-version',
-    'odoo-erp-nl': 'odoo-erp',
-    'privacy-policy-nl': 'privacy-policy',
-    'recruitment-nl': 'recruitment',
-    'solution-auto-ecole-nl': 'solution-auto-ecole',
-    'solution-gestion-immobiliere-nl': 'solution-gestion-immobiliere',
-    'solution-transport-logistique-nl': 'solution-transport-logistique',
-    'support-nl': 'support',
-    'terms-conditions-nl': 'terms-conditions',
-    'why-odoo-nl': 'why-odoo',
-    'developpement-odoo-forfait-nl': 'developpement-odoo-forfait',
-  };
-
-  const pageSlugs = await reader.collections.pages.list();
-  const pageEntries = await Promise.all(
-    pageSlugs
-      .filter((slug) => slug !== 'accueil-nl')
-      .map(async (slug) => ({ slug, entry: await reader.collections.pages.read(slug) }))
-  );
-  const pagePaths = pageEntries
-    .filter(({ entry }) => entry && entry.lang === 'nl')
-    .map(({ slug, entry }) => ({ params: { slug: NL_SLUG_URL_OVERRIDES[slug] ?? slug }, props: { kind: 'page', entry } }));
-
-  const blogSlugs = await reader.collections.blog.list();
-  const blogEntries = await Promise.all(
-    blogSlugs.map(async (slug) => ({ slug, entry: await reader.collections.blog.read(slug) }))
-  );
-  const blogPaths = blogEntries
-    .filter(({ entry }) => entry && entry.lang === 'nl')
-    // Blog files are named "<slug>-nl.mdoc" (unlike EN posts, which each have their
-    // own distinct translated filename) — strip the suffix back off for the URL.
-    .map(({ slug, entry }) => ({ params: { slug: slug.replace(/-nl$/, '') }, props: { kind: 'blog', entry } }));
-
-  return [...pagePaths, ...blogPaths];
+  return pageAndPostPaths('nl');
 }
 
 const { kind, entry } = Astro.props;
 
 let bodyHtml = '';
-let toc: { id: string; text: string }[] = [];
 if (kind === 'blog') {
-  const { node } = await entry.body();
-  const rendered = Markdoc.renderers.html(Markdoc.transform(node));
-  const withToc = addTocIds(rendered);
-  bodyHtml = withToc.html;
-  toc = withToc.toc;
+  if (entry.contentHtml) {
+    bodyHtml = entry.contentHtml;
+  } else {
+    const { node } = await entry.body();
+    bodyHtml = Markdoc.renderers.html(Markdoc.transform(node));
+  }
 }
+const seo = kind === 'blog' ? await postSeo(entry) : pageSeo(entry);
 const hasContactHero = kind === 'page' && entry.blocks?.some((b: { discriminant: string }) => b.discriminant === 'contactHero');
 
 const pageFaqBlock = kind === 'page' ? entry.blocks?.find((b: any) => b.discriminant === 'faq') : undefined;
@@ -100,13 +46,13 @@ const pageJsonLd = pageFaqBlock
     lang="nl"
     title={entry.seoTitle || entry.title}
     description={entry.seoDescription ?? ''}
-    canonical={`https://agitech.io/nl/${Astro.params.slug}/`}
     includeContactScripts={hasContactHero}
+    {...seo}
     jsonLd={pageJsonLd}
   >
     <Header slot="header" lang="nl" />
     <main>
-      {Astro.params.slug === 'developpement-odoo-forfait' && <h1 class="visually-hidden-h1">{entry.title}</h1>}
+      {!entry.blocks?.some((b: { discriminant: string }) => b.discriminant === 'cmsPage') && <h1 class="visually-hidden-h1">{headingOf(entry)}</h1>}
       <BlockRenderer blocks={entry.blocks} />
     </main>
     <Footer slot="footer" lang="nl" />
@@ -114,42 +60,16 @@ const pageJsonLd = pageFaqBlock
 ) : (
   <Layout
     lang="nl"
-    title={entry.title}
-    description={entry.excerpt ?? ''}
-    canonical={`https://agitech.io/nl/${Astro.params.slug}/`}
+    bodyClass="post-template-default single single-post"
+    {...seo}
+    title={entry.seoTitle || entry.title}
+    description={entry.seoDescription || entry.excerpt || ''}
   >
     <Header slot="header" lang="nl" />
     <main>
-      <section class="blog-details-section">
-        <div class="container-sm">
-          <div class="row header-area">
-            <div class="col-12">
-              {entry.category && <div class="categories-btn"><span class="purple-text">{entry.category}</span></div>}
-              <h1>{entry.title}</h1>
-              {entry.publishedAt && <div class="name-date"><p>{entry.publishedAt}</p></div>}
-            </div>
-          </div>
-          <div class="row content-area">
-            {toc.length > 1 && (
-              <aside class="col-lg-3 toc-sidebar">
-                <nav>
-                  <h6>Inhoud</h6>
-                  <ol>{toc.map(t => <li><a href={`#${t.id}`}>{t.text}</a></li>)}</ol>
-                </nav>
-              </aside>
-            )}
-            <div class={toc.length > 1 ? 'col-lg-9' : 'col-lg-12'} set:html={bodyHtml} />
-          </div>
-        </div>
-      </section>
+      <h1 class="visually-hidden-h1">{entry.title}</h1>
+      <PostArticle lang="nl" slug={Astro.params.slug} entry={entry} bodyHtml={bodyHtml} />
     </main>
     <Footer slot="footer" lang="nl" />
   </Layout>
 )}
-
-<style>
-  .visually-hidden-h1 {
-    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
-    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
-  }
-</style>

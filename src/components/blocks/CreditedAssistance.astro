@@ -1,11 +1,11 @@
 ---
 // Ported from template-parts/block/credited-assistance.php
 import Cta from './Cta.astro';
-import { blockImg } from '../../lib/img';
+import { blockImg, blockAlt } from '../../lib/img';
 export interface Props {
   title?: string;
   subTitle?: string;
-  cta?: { label?: string; url?: string; newTab?: boolean };
+  cta?: { label?: string; url?: string; newTab?: boolean; calendly?: boolean };
   details?: { image?: string; title?: string }[];
 }
 const { title, subTitle, cta, details = [] } = Astro.props;
@@ -17,7 +17,7 @@ const { title, subTitle, cta, details = [] } = Astro.props;
         <div class="credite-content">
           {title && <h6>{title}</h6>}
           {subTitle && <h3>{subTitle}</h3>}
-          {cta && <Cta label={cta.label} url={cta.url} newTab={cta.newTab} />}
+          {cta && <Cta label={cta.label} url={cta.url} newTab={cta.newTab} calendly={cta.calendly} />}
         </div>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-12 col-12">
@@ -25,7 +25,7 @@ const { title, subTitle, cta, details = [] } = Astro.props;
           <div class="range-area">
             {details.map(d => (
               <div class="item">
-                <div class="img">{d.image && <img src={blockImg(d.image)} alt="" fetchpriority="high">}</div>
+                <div class="img">{d.image && <img src={blockImg(d.image)} alt={blockAlt(d.image)} fetchpriority="high">}</div>
                 <div class="text">{d.title && <p>{d.title}</p>}</div>
               </div>
             ))}

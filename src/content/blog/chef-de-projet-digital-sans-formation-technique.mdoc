@@ -1,508 +1,324 @@
 ---
 title: "Chef de projet digital sans formation technique ?"
 lang: "fr"
-publishedAt: "2025-05-20"
-category: "Conseils, Gestion de projet numérique"
-excerpt: ""
+translationKey: chef-de-projet-digital-sans-formation-technique
+publishedAt: "2025-05-20T09:57"
+excerpt: "Sommaire Introduction Comment fonctionne Internet : le serveur comme un employé de drive McDonald’s Les bases de données : l’endroit où vos données sont stockées Tables et relations Requêtes SQL"
+author: "diego"
+categories:
+- "Conseils"
+- "Gestion de projet numérique"
+coverImage: "/assets/img/blog/chef-de-projet-digital-sans-formation-technique/Digital-Project-Management.png"
+seoTitle: "Chef de projet digital sans formation technique ? - Agitech - Odoo Partner"
+contentHtml: |
+  <div class="wp-block-yoast-seo-table-of-contents yoast-table-of-contents"><h2>Sommaire</h2><ul><li><a href="#h-introduction" data-level="2">Introduction</a></li><li><a href="#h-comment-fonctionne-internet-le-serveur-comme-un-employe-de-drive-mcdonald-s" data-level="2">Comment fonctionne Internet : le serveur comme un employé de drive McDonald’s</a></li><li><a href="#h-les-bases-de-donnees-l-endroit-ou-vos-donnees-sont-stockees" data-level="2">Les bases de données : l’endroit où vos données sont stockées</a><ul><li><a href="#h-tables-et-relations" data-level="3">Tables et relations</a></li><li><a href="#h-requetes-sql" data-level="3">Requêtes SQL</a></li></ul></li><li><a href="#h-le-schema-de-base-de-donnees" data-level="2">Le schéma de base de données</a></li><li><a href="#h-les-serveurs-cloud-des-serveurs-a-la-demande" data-level="2">Les serveurs cloud : des serveurs à la demande</a><ul><li><a href="#h-serveurs-physiques-vs-cloud" data-level="3">Serveurs physiques vs cloud</a></li><li><a href="#h-avantages-du-cloud" data-level="3">Avantages du cloud</a></li></ul></li><li><a href="#h-les-api-l-intermediaire-entre-client-et-serveur" data-level="2">Les API : l’intermédiaire entre client et serveur</a><ul><li><a href="#h-types-de-requetes-api" data-level="3">Types de requêtes API</a></li><li><a href="#h-permissions-et-securite" data-level="3">Permissions et sécurité</a></li></ul></li><li><a href="#h-front-end-vs-back-end" data-level="2">Front-end vs Back-end</a><ul><li><a href="#h-back-end" data-level="3">Back-end</a></li><li><a href="#h-front-end" data-level="3">Front-end</a></li></ul></li><li><a href="#h-pipeline-de-production-et-ci-cd" data-level="2">Pipeline de production et CI/CD</a></li><li><a href="#h-ux-ui" data-level="2">UX / UI</a></li><li><a href="#h-conclusion" data-level="2">Conclusion</a></li></ul></div>  <style>
+      a {
+        color: #984895;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.2rem;
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+
+  <h2 class="wp-block-heading" id="h-introduction">Introduction</h2>
+
+  <p>Au cours des six dernières années, j’ai consacré la majeure partie de mon temps professionnel au lancement de logiciels et à l’analyse de la manière dont la technologie peut améliorer les performances des entreprises. Issu d’une formation en droit, loin de l’univers de l’ingénierie, je me suis progressivement fait une place dans le secteur de la « transformation digitale », aux côtés de personnes venant d’horizons très variés.</p>
+
+  <p>De nombreuses personnes dans notre industrie (qui est en forte demande depuis 10 ans et le restera probablement encore pendant les 10 prochaines années) sont autodidactes et ne possèdent pas de diplôme technique. Cette réalité entraîne deux conséquences intéressantes :</p>
+
+  <ul class="wp-block-list">
+  <li>Les générations Y et Z ont accès à des métiers stimulants et prometteurs sans diplôme spécifique (la plupart des métiers du digital n’ont pas de parcours académique dédié), mais nécessitent une réelle motivation, de l’auto-apprentissage et 1 à 3 ans d’expérience professionnelle. Ces compétences peuvent être acquises de nombreuses façons accessibles, que je détaillerai dans un autre article.</li>
+
+  <li>Beaucoup de personnes sans formation technique hésitent ou se sentent mal à l’aise face à des termes comme « SQL », « API call » ou « instance ». À l’inverse, certains utilisent volontairement du jargon pour impressionner leurs pairs. Il n’existe pas de référentiel clair définissant ce qu’un professionnel de la transformation digitale devrait connaître en développement logiciel — c’est précisément l’objectif de cet article.</li>
+  </ul>
+
+  <p><strong>AVERTISSEMENT I :</strong> Les concepts présentés ici sont, selon moi, les notions fondamentales. Une sélection a été nécessaire, et je limiterai volontairement le jargon technique.</p>
+
+  <p><strong>AVERTISSEMENT II :</strong> Je suis moi-même en apprentissage continu. Si certaines informations sont inexactes ou peu claires, je m’en excuse par avance et reste ouvert à tout retour constructif.</p>
+
+  <p><strong>AVERTISSEMENT III :</strong> Cet article est court au regard de la richesse des sujets abordés. J’encourage tous les chefs de projet digital à approfondir les notions qui leur semblent utiles.</p>
+
+  <hr class="wp-block-separator has-alpha-channel-opacity">
+
+  <h2 class="wp-block-heading" id="h-comment-fonctionne-internet-le-serveur-comme-un-employe-de-drive-mcdonald-s">Comment fonctionne Internet : le serveur comme un employé de drive McDonald’s</h2>
+
+  <p>Une bonne analogie pour comprendre Internet est celle d’un client qui commande dans un drive McDonald’s.</p>
+
+  <p>Un <strong>serveur</strong> est un programme centralisé qui communique via un réseau (comme Internet) pour répondre aux demandes des clients. Il existe différents types de serveurs, mais concentrons-nous sur les applications web, où deux serveurs principaux interviennent :</p>
+
+  <ul class="wp-block-list">
+  <li>le <strong>serveur web</strong>, qui reçoit la demande ;</li>
+
+  <li>le <strong>serveur de base de données</strong>, qui fournit les données.</li>
+  </ul>
+
+  <p>Dans notre analogie, l’employé qui prend votre commande est le serveur web, et celui qui récupère votre Big Mac en cuisine est le serveur de base de données.</p>
+
+  <p>Un <strong>client</strong> est un programme (comme Chrome ou Firefox) qui demande des informations à un serveur. Dans ce cas, vous êtes le client qui passe commande.</p>
+
+  <p>Le client peut effectuer plusieurs requêtes : poser des questions, commander, modifier une commande, etc.</p>
+
+  <p>Lorsque vous ouvrez une page web, votre navigateur (client) envoie une requête au serveur web, qui peut lui-même interroger le serveur de base de données pour récupérer les informations.</p>
+
+  <p>Par exemple, rechercher « Napoléon » sur Wikipédia consiste techniquement à demander toutes les données associées à ce mot-clé sur les serveurs de Wikipédia.</p>
+
+  <p>Il est important de noter qu’un serveur peut aussi devenir client d’un autre serveur. Dans la chaîne : client → serveur web → serveur de base de données, le serveur web agit comme client du serveur de base de données.</p>
+
+  <hr class="wp-block-separator has-alpha-channel-opacity">
+
+  <h2 class="wp-block-heading" id="h-les-bases-de-donnees-l-endroit-ou-vos-donnees-sont-stockees">Les bases de données : l’endroit où vos données sont stockées</h2>
+
+  <p>La principale raison pour laquelle nous utilisons Internet est d’accéder à des informations. La base de données est, pour un site web, ce que la cuisine est pour un restaurant : l’endroit où les données sont stockées.</p>
+
+  <p>La plupart des bases de données modernes sont des <strong>bases de données relationnelles SQL</strong>, ce qui signifie :</p>
+
+  <ul class="wp-block-list">
+  <li>qu’elles utilisent des tables liées entre elles ;</li>
+
+  <li>qu’elles utilisent le langage SQL pour interroger les données.</li>
+  </ul>
+
+  <h3 class="wp-block-heading" id="h-tables-et-relations">Tables et relations</h3>
+
+  <p>Une base de données SQL est organisée en tables. Chaque table contient des objets identifiés par un ID unique.</p>
+
+  <p>Par exemple, un restaurant pourrait avoir :</p>
+
+  <ul class="wp-block-list">
+  <li>une table « Menus »</li>
+
+  <li>une table « Plats »</li>
+  </ul>
+
+  <p>Chaque menu peut être lié à plusieurs plats via leurs ID respectifs.</p>
+
+  <h3 class="wp-block-heading" id="h-requetes-sql">Requêtes SQL</h3>
+
+  <p>SQL est le langage utilisé pour communiquer avec une base de données.</p>
+
+  <p>Par exemple :</p>
+
+  <pre class="wp-block-code"><code>SELECT * FROM Menu
+  </code></pre>
+
+  <p>Cette requête demande à la base de données de retourner tous les menus.</p>
+
+  <hr class="wp-block-separator has-alpha-channel-opacity">
+
+  <h2 class="wp-block-heading" id="h-le-schema-de-base-de-donnees">Le schéma de base de données</h2>
+
+  <p>Le schéma définit la structure de la base de données.</p>
+
+  <p>Un mauvais schéma peut limiter les fonctionnalités futures ou rendre les évolutions complexes et risquées.</p>
+
+  <p>C’est ce qu’on appelle la <strong>dette technique</strong> : des décisions passées qui ralentissent les évolutions futures.</p>
+
+  <p>Les bases de données SQL les plus utilisées sont :</p>
+
+  <ul class="wp-block-list">
+  <li>PostgreSQL</li>
+
+  <li>MySQL</li>
+  </ul>
+
+  <hr class="wp-block-separator has-alpha-channel-opacity">
+
+  <h2 class="wp-block-heading" id="h-les-serveurs-cloud-des-serveurs-a-la-demande">Les serveurs cloud : des serveurs à la demande</h2>
+
+  <p>Un serveur est composé de deux éléments principaux :</p>
+
+  <p><strong>CPU (processeur)</strong><br>Il exécute les programmes et effectue les calculs.</p>
+
+  <p><strong>Stockage</strong><br>Il permet de conserver les données.</p>
+
+  <hr class="wp-block-separator has-alpha-channel-opacity">
+
+  <h3 class="wp-block-heading" id="h-serveurs-physiques-vs-cloud">Serveurs physiques vs cloud</h3>
+
+  <p>Historiquement, les entreprises utilisaient des serveurs physiques (« on-premise »).</p>
+
+  <p>Aujourd’hui, des fournisseurs comme :</p>
+
+  <ul class="wp-block-list">
+  <li>AWS</li>
+
+  <li>Google Cloud</li>
+
+  <li>Microsoft Azure</li>
+  </ul>
+
+  <p>proposent des serveurs cloud accessibles à la demande.</p>
+
+  <hr class="wp-block-separator has-alpha-channel-opacity">
+
+  <h3 class="wp-block-heading" id="h-avantages-du-cloud">Avantages du cloud</h3>
+
+  <ul class="wp-block-list">
+  <li>Mise en place rapide</li>
+
+  <li>Maintenance réduite</li>
+
+  <li>Scalabilité (augmentation ou réduction des ressources)</li>
+
+  <li>Paiement à l’usage (OPEX)</li>
+  </ul>
+
+  <p>Malgré un coût initial parfois plus élevé, le cloud offre une meilleure flexibilité et fiabilité.</p>
+
+  <hr class="wp-block-separator has-alpha-channel-opacity">
+
+  <h2 class="wp-block-heading" id="h-les-api-l-intermediaire-entre-client-et-serveur">Les API : l’intermédiaire entre client et serveur</h2>
+
+  <p>Une <strong>API</strong> permet à un logiciel de communiquer avec un autre.</p>
+
+  <p>Par exemple :</p>
+
+  <ul class="wp-block-list">
+  <li>connexion avec Google</li>
+
+  <li>paiement avec Stripe</li>
+
+  <li>cartes avec Google Maps</li>
+  </ul>
+
+  <p>Une API agit comme un intermédiaire.</p>
+
+  <hr class="wp-block-separator has-alpha-channel-opacity">
+
+  <h3 class="wp-block-heading" id="h-types-de-requetes-api">Types de requêtes API</h3>
+
+  <p>Il existe quatre types principaux :</p>
+
+  <ul class="wp-block-list">
+  <li><strong>POST / PUT</strong> → créer une donnée</li>
+
+  <li><strong>GET</strong> → lire une donnée</li>
+
+  <li><strong>PATCH</strong> → modifier une donnée</li>
+
+  <li><strong>DELETE</strong> → supprimer une donnée</li>
+  </ul>
+
+  <p>Ces actions sont appelées <strong>CRUD</strong> :</p>
+
+  <ul class="wp-block-list">
+  <li>Create</li>
+
+  <li>Read</li>
+
+  <li>Update</li>
+
+  <li>Delete</li>
+  </ul>
+
+  <hr class="wp-block-separator has-alpha-channel-opacity">
+
+  <h3 class="wp-block-heading" id="h-permissions-et-securite">Permissions et sécurité</h3>
+
+  <p>Les API utilisent des <strong>tokens</strong> pour vérifier l’identité et les permissions des utilisateurs.</p>
+
+  <p>Cela garantit que seuls les utilisateurs autorisés peuvent effectuer certaines actions.</p>
+
+  <hr class="wp-block-separator has-alpha-channel-opacity">
+
+  <h2 class="wp-block-heading" id="h-front-end-vs-back-end">Front-end vs Back-end</h2>
+
+  <h3 class="wp-block-heading" id="h-back-end">Back-end</h3>
+
+  <p>Le back-end correspond à la logique serveur et aux bases de données.</p>
+
+  <p>Langages courants :</p>
+
+  <ul class="wp-block-list">
+  <li>Python</li>
+
+  <li>PHP</li>
+
+  <li>Node.js</li>
+
+  <li>.NET</li>
+  </ul>
+
+  <hr class="wp-block-separator has-alpha-channel-opacity">
+
+  <h3 class="wp-block-heading" id="h-front-end">Front-end</h3>
+
+  <p>Le front-end correspond à ce que l’utilisateur voit dans son navigateur.</p>
+
+  <p>Langages principaux :</p>
+
+  <ul class="wp-block-list">
+  <li>HTML</li>
+
+  <li>CSS</li>
+
+  <li>JavaScript</li>
+  </ul>
+
+  <p>Le front-end permet :</p>
+
+  <ul class="wp-block-list">
+  <li>d’afficher les pages</li>
+
+  <li>de créer des interactions</li>
+
+  <li>d’afficher les données du serveur</li>
+  </ul>
+
+  <hr class="wp-block-separator has-alpha-channel-opacity">
+
+  <h2 class="wp-block-heading" id="h-pipeline-de-production-et-ci-cd">Pipeline de production et CI/CD</h2>
+
+  <p>Le développement logiciel passe par plusieurs étapes :</p>
+
+  <p><strong>1. Environnement local</strong><br>Le développeur travaille sur sa machine.</p>
+
+  <p><strong>2. Staging (pré-production)</strong><br>Environnement de test.</p>
+
+  <p><strong>3. Production</strong><br>Version utilisée par les utilisateurs.</p>
+
+  <p>Des outils comme :</p>
+
+  <ul class="wp-block-list">
+  <li>GitHub</li>
+
+  <li>GitLab</li>
+
+  <li>Bitbucket</li>
+  </ul>
+
+  <p>permettent de gérer les versions du code.</p>
+
+  <p>Le <strong>CI/CD</strong> automatise le déploiement du code.</p>
+
+  <hr class="wp-block-separator has-alpha-channel-opacity">
+
+  <h2 class="wp-block-heading" id="h-ux-ui">UX / UI</h2>
+
+  <p>Avant le développement, les designers UX/UI conçoivent :</p>
+
+  <ul class="wp-block-list">
+  <li>l’interface utilisateur</li>
+
+  <li>les maquettes</li>
+
+  <li>l’expérience utilisateur</li>
+  </ul>
+
+  <p>Ces designs sont ensuite transformés en code par les développeurs front-end.</p>
+
+  <hr class="wp-block-separator has-alpha-channel-opacity">
+
+  <h2 class="wp-block-heading" id="h-conclusion">Conclusion</h2>
+
+  <p>J’espère que cet article vous a aidé à mieux comprendre les bases du fonctionnement des logiciels et d’Internet.</p>
+
+  <p>Même si rien ne remplace l’expérience, comprendre ces concepts fondamentaux vous permettra de mieux collaborer avec les équipes techniques et de piloter vos projets digitaux efficacement.</p>
+
+  <p>Et maintenant que vous avez compris tout cela, vous avez bien mérité ce burger 😉</p>
 ---
-## Sommaire
-
-* [Introduction](#h-introduction)
-* [Comment fonctionne Internet : le serveur comme un employé de drive McDonald’s](#h-comment-fonctionne-internet-le-serveur-comme-un-employe-de-drive-mcdonald-s)
-* [Les bases de données : l’endroit où vos données sont stockées](#h-les-bases-de-donnees-l-endroit-ou-vos-donnees-sont-stockees)
-  + [Tables et relations](#h-tables-et-relations)
-  + [Requêtes SQL](#h-requetes-sql)
-* [Le schéma de base de données](#h-le-schema-de-base-de-donnees)
-* [Les serveurs cloud : des serveurs à la demande](#h-les-serveurs-cloud-des-serveurs-a-la-demande)
-  + [Serveurs physiques vs cloud](#h-serveurs-physiques-vs-cloud)
-  + [Avantages du cloud](#h-avantages-du-cloud)
-* [Les API : l’intermédiaire entre client et serveur](#h-les-api-l-intermediaire-entre-client-et-serveur)
-  + [Types de requêtes API](#h-types-de-requetes-api)
-  + [Permissions et sécurité](#h-permissions-et-securite)
-* [Front-end vs Back-end](#h-front-end-vs-back-end)
-  + [Back-end](#h-back-end)
-  + [Front-end](#h-front-end)
-* [Pipeline de production et CI/CD](#h-pipeline-de-production-et-ci-cd)
-* [UX / UI](#h-ux-ui)
-* [Conclusion](#h-conclusion)
-
-
-
-
-## Introduction
-
-
-
-Au cours des six dernières années, j’ai consacré la majeure partie de mon temps professionnel au lancement de logiciels et à l’analyse de la manière dont la technologie peut améliorer les performances des entreprises. Issu d’une formation en droit, loin de l’univers de l’ingénierie, je me suis progressivement fait une place dans le secteur de la « transformation digitale », aux côtés de personnes venant d’horizons très variés.
-
-
-
-De nombreuses personnes dans notre industrie (qui est en forte demande depuis 10 ans et le restera probablement encore pendant les 10 prochaines années) sont autodidactes et ne possèdent pas de diplôme technique. Cette réalité entraîne deux conséquences intéressantes :
-
-
-
-* Les générations Y et Z ont accès à des métiers stimulants et prometteurs sans diplôme spécifique (la plupart des métiers du digital n’ont pas de parcours académique dédié), mais nécessitent une réelle motivation, de l’auto-apprentissage et 1 à 3 ans d’expérience professionnelle. Ces compétences peuvent être acquises de nombreuses façons accessibles, que je détaillerai dans un autre article.
-* Beaucoup de personnes sans formation technique hésitent ou se sentent mal à l’aise face à des termes comme « SQL », « API call » ou « instance ». À l’inverse, certains utilisent volontairement du jargon pour impressionner leurs pairs. Il n’existe pas de référentiel clair définissant ce qu’un professionnel de la transformation digitale devrait connaître en développement logiciel — c’est précisément l’objectif de cet article.
-
-
-
-**AVERTISSEMENT I :** Les concepts présentés ici sont, selon moi, les notions fondamentales. Une sélection a été nécessaire, et je limiterai volontairement le jargon technique.
-
-
-
-**AVERTISSEMENT II :** Je suis moi-même en apprentissage continu. Si certaines informations sont inexactes ou peu claires, je m’en excuse par avance et reste ouvert à tout retour constructif.
-
-
-
-**AVERTISSEMENT III :** Cet article est court au regard de la richesse des sujets abordés. J’encourage tous les chefs de projet digital à approfondir les notions qui leur semblent utiles.
-
-
-
-
----
-
-
-
-
-## Comment fonctionne Internet : le serveur comme un employé de drive McDonald’s
-
-
-
-Une bonne analogie pour comprendre Internet est celle d’un client qui commande dans un drive McDonald’s.
-
-
-
-Un **serveur** est un programme centralisé qui communique via un réseau (comme Internet) pour répondre aux demandes des clients. Il existe différents types de serveurs, mais concentrons-nous sur les applications web, où deux serveurs principaux interviennent :
-
-
-
-* le **serveur web**, qui reçoit la demande ;
-* le **serveur de base de données**, qui fournit les données.
-
-
-
-Dans notre analogie, l’employé qui prend votre commande est le serveur web, et celui qui récupère votre Big Mac en cuisine est le serveur de base de données.
-
-
-
-Un **client** est un programme (comme Chrome ou Firefox) qui demande des informations à un serveur. Dans ce cas, vous êtes le client qui passe commande.
-
-
-
-Le client peut effectuer plusieurs requêtes : poser des questions, commander, modifier une commande, etc.
-
-
-
-Lorsque vous ouvrez une page web, votre navigateur (client) envoie une requête au serveur web, qui peut lui-même interroger le serveur de base de données pour récupérer les informations.
-
-
-
-Par exemple, rechercher « Napoléon » sur Wikipédia consiste techniquement à demander toutes les données associées à ce mot-clé sur les serveurs de Wikipédia.
-
-
-
-Il est important de noter qu’un serveur peut aussi devenir client d’un autre serveur. Dans la chaîne : client → serveur web → serveur de base de données, le serveur web agit comme client du serveur de base de données.
-
-
-
-
----
-
-
-
-
-## Les bases de données : l’endroit où vos données sont stockées
-
-
-
-La principale raison pour laquelle nous utilisons Internet est d’accéder à des informations. La base de données est, pour un site web, ce que la cuisine est pour un restaurant : l’endroit où les données sont stockées.
-
-
-
-La plupart des bases de données modernes sont des **bases de données relationnelles SQL**, ce qui signifie :
-
-
-
-* qu’elles utilisent des tables liées entre elles ;
-* qu’elles utilisent le langage SQL pour interroger les données.
-
-
-
-### Tables et relations
-
-
-
-Une base de données SQL est organisée en tables. Chaque table contient des objets identifiés par un ID unique.
-
-
-
-Par exemple, un restaurant pourrait avoir :
-
-
-
-* une table « Menus »
-* une table « Plats »
-
-
-
-Chaque menu peut être lié à plusieurs plats via leurs ID respectifs.
-
-
-
-### Requêtes SQL
-
-
-
-SQL est le langage utilisé pour communiquer avec une base de données.
-
-
-
-Par exemple :
-
-
-
-```
-SELECT * FROM Menu
-```
-
-
-
-Cette requête demande à la base de données de retourner tous les menus.
-
-
-
-
----
-
-
-
-
-## Le schéma de base de données
-
-
-
-Le schéma définit la structure de la base de données.
-
-
-
-Un mauvais schéma peut limiter les fonctionnalités futures ou rendre les évolutions complexes et risquées.
-
-
-
-C’est ce qu’on appelle la **dette technique** : des décisions passées qui ralentissent les évolutions futures.
-
-
-
-Les bases de données SQL les plus utilisées sont :
-
-
-
-* PostgreSQL
-* MySQL
-
-
-
-
----
-
-
-
-
-## Les serveurs cloud : des serveurs à la demande
-
-
-
-Un serveur est composé de deux éléments principaux :
-
-
-
-**CPU (processeur)**  
-Il exécute les programmes et effectue les calculs.
-
-
-
-**Stockage**  
-Il permet de conserver les données.
-
-
-
-
----
-
-
-
-
-### Serveurs physiques vs cloud
-
-
-
-Historiquement, les entreprises utilisaient des serveurs physiques (« on-premise »).
-
-
-
-Aujourd’hui, des fournisseurs comme :
-
-
-
-* AWS
-* Google Cloud
-* Microsoft Azure
-
-
-
-proposent des serveurs cloud accessibles à la demande.
-
-
-
-
----
-
-
-
-
-### Avantages du cloud
-
-
-
-* Mise en place rapide
-* Maintenance réduite
-* Scalabilité (augmentation ou réduction des ressources)
-* Paiement à l’usage (OPEX)
-
-
-
-Malgré un coût initial parfois plus élevé, le cloud offre une meilleure flexibilité et fiabilité.
-
-
-
-
----
-
-
-
-
-## Les API : l’intermédiaire entre client et serveur
-
-
-
-Une **API** permet à un logiciel de communiquer avec un autre.
-
-
-
-Par exemple :
-
-
-
-* connexion avec Google
-* paiement avec Stripe
-* cartes avec Google Maps
-
-
-
-Une API agit comme un intermédiaire.
-
-
-
-
----
-
-
-
-
-### Types de requêtes API
-
-
-
-Il existe quatre types principaux :
-
-
-
-* **POST / PUT** → créer une donnée
-* **GET** → lire une donnée
-* **PATCH** → modifier une donnée
-* **DELETE** → supprimer une donnée
-
-
-
-Ces actions sont appelées **CRUD** :
-
-
-
-* Create
-* Read
-* Update
-* Delete
-
-
-
-
----
-
-
-
-
-### Permissions et sécurité
-
-
-
-Les API utilisent des **tokens** pour vérifier l’identité et les permissions des utilisateurs.
-
-
-
-Cela garantit que seuls les utilisateurs autorisés peuvent effectuer certaines actions.
-
-
-
-
----
-
-
-
-
-## Front-end vs Back-end
-
-
-
-### Back-end
-
-
-
-Le back-end correspond à la logique serveur et aux bases de données.
-
-
-
-Langages courants :
-
-
-
-* Python
-* PHP
-* Node.js
-* .NET
-
-
-
-
----
-
-
-
-
-### Front-end
-
-
-
-Le front-end correspond à ce que l’utilisateur voit dans son navigateur.
-
-
-
-Langages principaux :
-
-
-
-* HTML
-* CSS
-* JavaScript
-
-
-
-Le front-end permet :
-
-
-
-* d’afficher les pages
-* de créer des interactions
-* d’afficher les données du serveur
-
-
-
-
----
-
-
-
-
-## Pipeline de production et CI/CD
-
-
-
-Le développement logiciel passe par plusieurs étapes :
-
-
-
-**1. Environnement local**  
-Le développeur travaille sur sa machine.
-
-
-
-**2. Staging (pré-production)**  
-Environnement de test.
-
-
-
-**3. Production**  
-Version utilisée par les utilisateurs.
-
-
-
-Des outils comme :
-
-
-
-* GitHub
-* GitLab
-* Bitbucket
-
-
-
-permettent de gérer les versions du code.
-
-
-
-Le **CI/CD** automatise le déploiement du code.
-
-
-
-
----
-
-
-
-
-## UX / UI
-
-
-
-Avant le développement, les designers UX/UI conçoivent :
-
-
-
-* l’interface utilisateur
-* les maquettes
-* l’expérience utilisateur
-
-
-
-Ces designs sont ensuite transformés en code par les développeurs front-end.
-
-
-
-
----
-
-
-
-
-## Conclusion
-
-
-
-J’espère que cet article vous a aidé à mieux comprendre les bases du fonctionnement des logiciels et d’Internet.
-
-
-
-Même si rien ne remplace l’expérience, comprendre ces concepts fondamentaux vous permettra de mieux collaborer avec les équipes techniques et de piloter vos projets digitaux efficacement.
-
-
-
-Et maintenant que vous avez compris tout cela, vous avez bien mérité ce burger 😉

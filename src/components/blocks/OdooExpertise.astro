@@ -1,6 +1,6 @@
 ---
 // Ported from template-parts/block/odoo-expertise.php
-import { blockImg } from '../../lib/img';
+import { blockImg, blockAlt } from '../../lib/img';
 export interface Props {
   bgClass?: string;
   title?: string;
@@ -15,7 +15,7 @@ const { bgClass = '', title, items = [] } = Astro.props;
       <div class="row odoo-expertise-content">
         {items.map(item => (
           <div class="col-lg-4 col-md-6 col-sm-6 col-12 item">
-            <div class="icon">{item.logo && <img src={blockImg(item.logo)} alt="">}</div>
+            <div class="icon">{item.logo && <img src={blockImg(item.logo)} alt={blockAlt(item.logo)}>}</div>
             {item.heading && <h6>{item.heading}</h6>}
             {item.descriptionPoints && <Fragment set:html={item.descriptionPoints} />}
           </div>

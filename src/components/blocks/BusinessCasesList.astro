@@ -1,0 +1,80 @@
+---
+// Ported from template-parts/block/business-cases.php + the card markup of load_business_cases_ajax().
+// Every business case of the page language is rendered; agitech-theme.js applies the type tabs and
+// the "load more" paging (8 cards at a time).
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../../keystatic.config';
+import { blockImg, blockAlt } from '../../lib/img';
+import { langOf, learnMoreLabel } from '../../lib/lang';
+import { showDrafts } from '../../lib/translations.mjs';
+import { wallClock } from '../../lib/dates.mjs';
+import { CASE_TABS, LISTING_LABELS, entryUrl } from '../../lib/blog';
+export interface Props {
+  loadMoreLabel?: string;
+}
+const { loadMoreLabel } = Astro.props;
+const lang = langOf(Astro.url);
+const labels = LISTING_LABELS[lang];
+const tabs = CASE_TABS[lang];
+const slugOfType = Object.fromEntries(tabs.map(t => [t.name, t.slug]));
+
+const reader = createReader(process.cwd(), keystaticConfig);
+const cases = (await reader.collections.businessCases.all())
+  .filter(c => c.entry.lang === lang && (showDrafts() || !c.entry.draft))
+  .sort((a, b) => wallClock(b.entry.publishedAt).localeCompare(wallClock(a.entry.publishedAt)));
+const needsOf = (blocks: readonly { discriminant: string; value: any }[]) =>
+  (blocks.find(b => b.discriminant === 'caseIntro')?.value?.needs ?? []).filter(Boolean).slice(0, 4) as string[];
+---
+<section class="we-implemented-section lighter-gray-bg" data-listing>
+        <div class="container">
+            <div class="text-center">
+                <div class="row">
+                    <div class="d-flex justify-content-between align-items-center tabinations">
+                        <div class="d-flex tabs-links">
+                            <div class="tab-link active" data-category="all" data-tab="tab-1">{labels.all}</div>
+                            {tabs.map((t, i) => (
+                                <div class="tab-link" data-tab={`tab-${i + 2}`} data-category={t.slug}>
+                                    {t.name}
+                                </div>
+                            ))}
+                        </div>
+                        <div class="next-prev d-flex justify-content-center align-items-center">
+                            <div class="prev-btn"></div>
+                            <div class="next-btn"></div>
+                        </div>
+                    </div>
+                </div>
+               <div class="tab-content">
+                    <div class="row items-wrap">
+                        {cases.map(({ slug, entry }) => {
+                            const needs = needsOf(entry.blocks);
+                            return (
+                            <div class="col-lg-3 col-md-6 col-12 field" data-categories={entry.types.map(t => slugOfType[t] ?? '').join(' ')}>
+                                <a href={entryUrl('case', entry.urlSlug || slug, lang)}>
+                                    <div class="item">
+                                        <div class="img">
+                                            {entry.coverImage && <img src={blockImg(entry.coverImage)} class="attachment-full size-full wp-post-image" alt={blockAlt(entry.coverImage, entry.client || entry.title)} loading="lazy">}
+                                        </div>
+                                        <div class="content">
+                                            {entry.types.map(t => <Fragment><span class="green-text">{t}</span>{' '}</Fragment>)}
+                                            <h6>{entry.client || entry.title}</h6>
+                                            {needs.length > 0 && <ul>{needs.map(n => <li>{n}</li>)}</ul>}
+                                            <div class="dark-link">
+                                                <span class="learn-more-link">{learnMoreLabel[lang]}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            );
+                        })}
+                    </div>
+                    <div class="col-12 load-more-wrapper" style="display:none;">
+                        <div class="primary-btn load-more-btn">
+                            <a href="javascript:void(0);">{loadMoreLabel || labels.moreCases}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>

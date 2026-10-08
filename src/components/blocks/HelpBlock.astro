@@ -1,17 +1,15 @@
 ---
-// Ported from template-parts/block/help-block.php
-import Cta from './Cta.astro';
+// Ported from template-parts/block/help-block.php (the CTA wrapper is always rendered, like in WP)
 export interface Props {
   bgClass?: string;
   title?: string;
   headingTitle?: string;
-  cards?: { title?: string; subTitle?: string; link?: string; linkLabel?: string; newTab?: boolean }[];
-  cta?: { label?: string; url?: string; newTab?: boolean };
-  dark?: boolean;
+  cards?: { title?: string; subTitle?: string; link?: string; linkLabel?: string; newTab?: boolean; calendly?: boolean }[];
+  cta?: { label?: string; url?: string; newTab?: boolean; calendly?: boolean };
 }
-const { bgClass = '', title, headingTitle, cards = [], cta, dark = false } = Astro.props;
+const { bgClass = '', title, headingTitle, cards = [], cta } = Astro.props;
 ---
-<section class={`help-section ${dark ? 'dark-cards' : ''} ${bgClass}`} id="help-section">
+<section class={`help-section ${bgClass}`} id="help-section">
   <div class="container">
     {title && <h6>{title}</h6>}
     {headingTitle && <h3>{headingTitle}</h3>}
@@ -20,13 +18,17 @@ const { bgClass = '', title, headingTitle, cards = [], cta, dark = false } = Ast
         {cards.map(card => (
           <div class="col-lg-3 col-md-6 field">
             <a href={card.link ?? '#'} class="service-card" target={card.newTab ? '_blank' : undefined} rel={card.newTab ? 'noopener' : undefined}>
-              {card.title && <h5>{card.title}</h5>}
+              {card.title && <h5 set:html={card.title} />}
               {card.subTitle && <p>{card.subTitle}</p>}
               <span class="page-link">{card.linkLabel}</span>
             </a>
           </div>
         ))}
-        {cta && <Cta label={cta.label} url={cta.url} newTab={cta.newTab} />}
+        <div class="primary-btn">
+          {cta?.label && cta?.url && (cta.calendly
+            ? <a href="#" data-calendly-url={cta.url}>{cta.label}</a>
+            : <a href={cta.url} target={cta.newTab ? '_blank' : undefined} rel={cta.newTab ? 'noopener' : undefined}>{cta.label}</a>)}
+        </div>
       </div>
     )}
   </div>

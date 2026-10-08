@@ -1,33 +1,30 @@
 ---
-// Ported from template-parts/block/team-members-scroll-slider.php.
-// Simplified: static scroll row (owl-carousel JS deferred).
-import { blockImg } from '../../lib/img';
-import Cta from './Cta.astro';
+// Ported from template-parts/block/team-members-scroll-slider.php (Owl Carousel initialised by
+// agitech-theme.js). The WP block has no CTA: the one Astro added is no longer rendered.
+import { blockImg, blockAlt } from '../../lib/img';
 export interface Props {
   subHeading?: string;
   mainHeading?: string;
   teamMembers?: { image?: string; name?: string; role?: string }[];
-  cta?: { label?: string; url?: string; newTab?: boolean };
 }
-const { subHeading, mainHeading, teamMembers = [], cta } = Astro.props;
+const { subHeading, mainHeading, teamMembers = [] } = Astro.props;
 ---
 <section class="certified-experts-section">
-  <div class="container">
-    {subHeading && <h6>{subHeading}</h6>}
-    {mainHeading && <h3>{mainHeading}</h3>}
-    {teamMembers.length > 0 && (
-      <div class="experts-slider">
-        {teamMembers.map(member => (
-          <div class="expert-member">
-            {member.image && <img src={blockImg(member.image)} alt={member.name ?? ''}>}
-            <div class="expert-info">
-              {member.name && <h5>{member.name}</h5>}
-              {member.role && <h6>{member.role}</h6>}
+    <div class="container">
+        {subHeading && <h6>{subHeading}</h6>}
+        {mainHeading && <h3>{mainHeading}</h3>}
+        {teamMembers.length > 0 && (
+            <div class="experts-slider owl-carousel">
+                {teamMembers.map(member => (
+                    <div class="expert-member">
+                        {member.image && <img src={blockImg(member.image)} alt={blockAlt(member.image, member.name ?? '')}>}
+                        <div class="expert-info">
+                            {member.name && <h5>{member.name}</h5>}
+                            {member.role && <h6>{member.role}</h6>}
+                        </div>
+                    </div>
+                ))}
             </div>
-          </div>
-        ))}
-      </div>
-    )}
-    {cta && <Cta label={cta.label} url={cta.url} newTab={cta.newTab} />}
-  </div>
+        )}
+    </div>
 </section>

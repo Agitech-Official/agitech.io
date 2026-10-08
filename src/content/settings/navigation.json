@@ -1,0 +1,188 @@
+{
+  "fr": {
+    "items": [
+      {
+        "label": "Odoo ERP",
+        "href": "/odoo-erp/",
+        "children": []
+      },
+      {
+        "label": "Solutions",
+        "href": "#",
+        "children": [
+          {
+            "label": "Nos Solutions",
+            "href": "#",
+            "children": [
+              {
+                "label": "Solution – E-Commerce",
+                "href": "/industries-e-commerce/"
+              },
+              {
+                "label": "Solution – Construction & Bâtiment",
+                "href": "/industries-construction-batiment/"
+              },
+              {
+                "label": "Solution – Grossiste & vente B2B",
+                "href": "/industries-grossiste-vente-b2b/"
+              },
+              {
+                "label": "Solution – Services aux entreprises",
+                "href": "/industries-services-aux-entreprises/"
+              },
+              {
+                "label": "Solution – Transport – Logistique",
+                "href": "/solution-transport-logistique/"
+              },
+              {
+                "label": "Solution – ONG & ASBL",
+                "href": "/industries-associations-internationales/"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Réalisations",
+        "href": "/case-study/",
+        "children": []
+      },
+      {
+        "label": "équipe",
+        "href": "/jobs/",
+        "children": []
+      },
+      {
+        "label": "Blog",
+        "href": "/blog/",
+        "children": []
+      }
+    ],
+    "discuss": "Discutons",
+    "discussHref": "/contact-us/"
+  },
+  "en": {
+    "items": [
+      {
+        "label": "Odoo ERP",
+        "href": "/en/odoo-erp/",
+        "children": []
+      },
+      {
+        "label": "Solutions",
+        "href": "#",
+        "children": [
+          {
+            "label": "Our Solutions",
+            "href": "#",
+            "children": [
+              {
+                "label": "Solution – E-Commerce",
+                "href": "/en/industries-e-commerce/"
+              },
+              {
+                "label": "Solution – Construction & Building",
+                "href": "/en/industries-international-associations/"
+              },
+              {
+                "label": "Solution – Wholesale & B2B Sales",
+                "href": "/en/industries-wholesale-b2b-sales/"
+              },
+              {
+                "label": "Solution – Business Services",
+                "href": "/en/solution-business-services/"
+              },
+              {
+                "label": "Solution – Transport & Logistics",
+                "href": "/en/solution-transport-logistics/"
+              },
+              {
+                "label": "Solution – NGOs & International Associations",
+                "href": "/en/industries-ngos-international-associations/"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Business Cases",
+        "href": "/en/case-study/",
+        "children": []
+      },
+      {
+        "label": "Team",
+        "href": "/en/jobs/",
+        "children": []
+      },
+      {
+        "label": "Blog",
+        "href": "/en/blog/",
+        "children": []
+      }
+    ],
+    "discuss": "Discuss",
+    "discussHref": "/en/contact-us/"
+  },
+  "nl": {
+    "items": [
+      {
+        "label": "Odoo ERP",
+        "href": "/nl/odoo-erp/",
+        "children": []
+      },
+      {
+        "label": "Oplossingen",
+        "href": "#",
+        "children": [
+          {
+            "label": "Onze oplossingen",
+            "href": "#",
+            "children": [
+              {
+                "label": "Oplossing – E-commerce",
+                "href": "/nl/industries-e-commerce/"
+              },
+              {
+                "label": "Oplossing – Bouw & Constructie",
+                "href": "/nl/industries-construction-batiment/"
+              },
+              {
+                "label": "Oplossing – Groothandel & B2B-verkoop",
+                "href": "/nl/industries-grossiste-vente-b2b/"
+              },
+              {
+                "label": "Oplossing – Zakelijke Dienstverlening",
+                "href": "/nl/industries-services-aux-entreprises/"
+              },
+              {
+                "label": "Oplossing – Transport & Logistiek",
+                "href": "/nl/solution-transport-logistique/"
+              },
+              {
+                "label": "Oplossing – Internationale Verenigingen",
+                "href": "/nl/industries-associations-internationales/"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Realisaties",
+        "href": "/nl/case-study/",
+        "children": []
+      },
+      {
+        "label": "Team",
+        "href": "/nl/jobs/",
+        "children": []
+      },
+      {
+        "label": "Blog",
+        "href": "/nl/blog/",
+        "children": []
+      }
+    ],
+    "discuss": "Contact",
+    "discussHref": "/nl/contact-us/"
+  }
+}

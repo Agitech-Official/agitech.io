@@ -1,0 +1,26 @@
+{
+  "/industries/": {
+    "reason": "WordPress sert à cette adresse une fiche réalisation (« Cro'vettes & POS ») ; le nouveau site garde la page « Une expertise Odoo par industrie » (docs/phase2-notes.md, décision 1)."
+  },
+  "/en/industries/": {
+    "reason": "Idem en anglais : WordPress sert une fiche réalisation à la place de l'index des secteurs ; le nouveau site garde « One Odoo expertise per industry » (décision 1)."
+  },
+  "/en/industries-e-commerce/": {
+    "reason": "Le titre « X SMEs already trust us in this sector » (chiffre jamais remplacé sur WordPress) est remplacé par le vrai chiffre de la page française (chiffre jamais remplacé sur WordPress) : le titre corrigé n'occupe pas le même nombre de lignes."
+  },
+  "/en/industries-international-associations/": {
+    "reason": "Le titre « X SMEs already trust us in this sector » (chiffre jamais remplacé sur WordPress) est remplacé par le vrai chiffre de la page française (chiffre jamais remplacé sur WordPress) : le titre corrigé n'occupe pas le même nombre de lignes."
+  },
+  "/en/industries-ngos-international-associations/": {
+    "reason": "Le titre « X SMEs already trust us in this sector » (chiffre jamais remplacé sur WordPress) est remplacé par le vrai chiffre de la page française (chiffre jamais remplacé sur WordPress) : le titre corrigé n'occupe pas le même nombre de lignes."
+  },
+  "/en/industries-wholesale-b2b-sales/": {
+    "reason": "Le titre « X SMEs already trust us in this sector » (chiffre jamais remplacé sur WordPress) est remplacé par le vrai chiffre de la page française (chiffre jamais remplacé sur WordPress) : le titre corrigé n'occupe pas le même nombre de lignes."
+  },
+  "/en/solution-business-services/": {
+    "reason": "Le titre « X SMEs already trust us in this sector » (chiffre jamais remplacé sur WordPress) est remplacé par le vrai chiffre de la page française (chiffre jamais remplacé sur WordPress) : le titre corrigé n'occupe pas le même nombre de lignes."
+  },
+  "/en/solution-transport-logistics/": {
+    "reason": "Le titre « X SMEs already trust us in this sector » (chiffre jamais remplacé sur WordPress) est remplacé par le vrai chiffre de la page française (chiffre jamais remplacé sur WordPress) : le titre corrigé n'occupe pas le même nombre de lignes."
+  }
+}

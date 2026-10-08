@@ -5,6 +5,7 @@ import Footer from '../../components/Footer.astro';
 import BlockRenderer from '../../components/BlockRenderer.astro';
 import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../../keystatic.config';
+import { headingOf } from '../../lib/seo';
 
 const reader = createReader(process.cwd(), keystaticConfig);
 const page = await reader.collections.pages.read('accueil-en');
@@ -29,12 +30,12 @@ const jsonLd = faqBlock
   title={page.seoTitle || page.title}
   description={page.seoDescription ?? ''}
   canonical="https://agitech.io/en/"
-  bodyClass="is-home"
   jsonLd={jsonLd}
   includeContactScripts
 >
   <Header slot="header" lang="en" />
   <main>
+    <h1 class="visually-hidden-h1">{headingOf(page)}</h1>
     <BlockRenderer blocks={blocks.slice(0, 1)} />
     <div class="brand-bar"></div>
     <BlockRenderer blocks={blocks.slice(1)} />

@@ -1,0 +1,20 @@
+# Runs on every pull request (and on main): the site must build and pass the content, build and redirect checks.
+# Make "site" a required check on main (docs/decision-github-vercel.md) so an editor's change cannot ship broken.
+name: Vérifications du site
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  site:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build           # also runs check:content
+      - run: npm run check:build     # canonical, hreflang, sitemap, JSON-LD, internal links and images
+      - run: npm run check:redirects # vercel.json replayed on the old WordPress URLs

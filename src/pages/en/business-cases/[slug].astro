@@ -3,31 +3,26 @@ import Layout from '../../../layouts/Layout.astro';
 import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
 import BlockRenderer from '../../../components/BlockRenderer.astro';
-import { createReader } from '@keystatic/core/reader';
-import keystaticConfig from '../../../../keystatic.config';
+import { casePaths } from '../../../lib/content';
+import { caseSeo, headingOf } from '../../../lib/seo';
 
 export async function getStaticPaths() {
-  const reader = createReader(process.cwd(), keystaticConfig);
-  const slugs = await reader.collections.businessCases.list();
-  const entries = await Promise.all(
-    slugs.map(async (slug) => ({ slug, entry: await reader.collections.businessCases.read(slug) }))
-  );
-  return entries
-    .filter(({ entry }) => entry && entry.lang === 'en')
-    // Stored as "<slug>-en" to avoid colliding with the FR entry of the same case
-    // (one flat collection shared by both languages) — stripped back for the URL.
-    .map(({ slug, entry }) => ({ params: { slug: slug.replace(/-en$/, '') }, props: { entry } }));
+  return casePaths('en');
 }
 
 const { entry } = Astro.props;
+const seo = caseSeo(entry);
 ---
 <Layout
   lang="en"
+  bodyClass="single single-business-cases"
+  {...seo}
   title={entry.seoTitle || entry.title}
   description={entry.seoDescription ?? ''}
-  canonical={`https://agitech.io/en/business-cases/${Astro.params.slug}/`}
 >
   <Header slot="header" lang="en" />
-  <main><BlockRenderer blocks={entry.blocks} /></main>
+  <main>
+    <h1 class="visually-hidden-h1">{headingOf(entry)}</h1>
+    <BlockRenderer blocks={entry.blocks} /></main>
   <Footer slot="footer" lang="en" />
 </Layout>

@@ -5,8 +5,17 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
+    "prebuild": "node scripts/check-content.mjs",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "wp:import": "node scripts/wp-import/import-posts.mjs",
+    "check:build": "node scripts/check-build.mjs",
+    "check:redirects": "node scripts/check-redirects.mjs",
+    "check:content": "node scripts/check-content.mjs",
+    "parity:capture": "node scripts/parity/capture.mjs",
+    "parity:compare": "node scripts/parity/compare.mjs",
+    "check:deploy": "node scripts/check-deploy.mjs",
+    "serve:build": "node scripts/serve-build.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",
@@ -17,6 +26,16 @@
     "mongoose": "^9.9.5",
     "nodemailer": "^10.0.1",
     "react": "^19.2.8",
-    "react-dom": "^19.2.8"
+    "react-dom": "^19.2.8",
+    "sharp": "^0.34.5",
+    "yaml": "^2.9.1"
+  },
+  "devDependencies": {
+    "@vercel/routing-utils": "^5.3.3",
+    "cheerio": "^1.2.0",
+    "pixelmatch": "^8.0.0",
+    "playwright-core": "^1.63.0",
+    "turndown": "^7.2.4",
+    "turndown-plugin-gfm": "^1.0.2"
   }
 }

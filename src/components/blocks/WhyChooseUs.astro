@@ -1,7 +1,7 @@
 ---
-// Ported from template-parts/block/why-choose-us.php
-import Cta from './Cta.astro';
-import { blockImg } from '../../lib/img';
+// Ported from template-parts/block/why-choose-us.php (the title is rendered twice, like in WP: once
+// full-width, once inside .why-image for the mobile layout; the CTA wrapper is always rendered).
+import { blockImg, blockAlt } from '../../lib/img';
 export interface Props {
   bgClass?: string;
   title?: string;
@@ -9,39 +9,46 @@ export interface Props {
   logo?: string;
   image?: string;
   items?: { title?: string; content?: string }[];
-  cta?: { label?: string; url?: string; newTab?: boolean };
+  cta?: { label?: string; url?: string; newTab?: boolean; calendly?: boolean };
 }
 const { bgClass = '', title, badges = [], logo, image, items = [], cta } = Astro.props;
 ---
 <section class={`why-section ${bgClass}`}>
-  <div class="container-sm">
+<div class="container-sm">
     <div class="row">
-      <div class="col-lg-12 col-md-12 col-sm-12 col-12 why-title">{title && <h3>{title}</h3>}</div>
-      <div class="col-lg-6 col-md-6 col-sm-12 col-12 why-image">
-        {(badges.length > 0 || logo) && (
-          <div class="badge-oodo-img d-flex align-items-center">
-            {badges.length > 0 && (
-              <div class="badge-img d-flex align-items-center">
-                {badges.map(b => <img src={blockImg(b)} alt="">)}
-              </div>
-            )}
-            {logo && <div class="img-odoo"><img src={blockImg(logo)} alt=""></div>}
-          </div>
-        )}
-        <div class="why-img">{image && <img src={blockImg(image)} alt="">}</div>
-      </div>
-      {items.length > 0 && (
-        <div class="col-lg-6 col-md-6 col-sm-12 col-12 why-content">
-          {items.map((item, i) => (
-            <div class="item">
-              <h4>{String(i + 1).padStart(2, '0')}</h4>
-              {item.title && <h5>{item.title}</h5>}
-              {item.content && <Fragment set:html={item.content} />}
-            </div>
-          ))}
-          {cta && <Cta label={cta.label} url={cta.url} newTab={cta.newTab} />}
-        </div>
-      )}
+    <div class="col-lg-12 col-md-12 col-sm-12 col-12 why-title">
+    {title && <h3>{title}</h3>}
     </div>
-  </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12 why-image">
+        {title && <h3>{title}</h3>}
+            {(badges.length > 0 || logo) && (
+            <div class="badge-oodo-img d-flex align-items-center">
+                {badges.length > 0 && (
+                    <div class="badge-img d-flex align-items-center">
+                        {badges.map(b => <img src={blockImg(b)} alt={blockAlt(b)}>)}
+                    </div>
+                )}
+                {logo && <div class="img-odoo"><img src={blockImg(logo)} alt={blockAlt(logo)}></div>}
+            </div>
+            )}
+            <div class="why-img">
+                {image && <img src={blockImg(image)} alt={blockAlt(image)}>}
+            </div>
+        </div>
+        {items.length > 0 && (
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12 why-content">
+                {items.map((item, i) => (
+                <div class="item">
+                    <h4>{String(i + 1).padStart(2, '0')}</h4>
+                    {item.title && <h5>{item.title}</h5>}
+                    {item.content && <Fragment set:html={item.content} />}
+                </div>
+                ))}
+                <div class="primary-btn">
+                    {cta?.label && cta?.url && <a href={cta.url} target={cta.newTab ? '_blank' : undefined} rel={cta.newTab ? 'noopener' : undefined}>{cta.label}</a>}
+                </div>
+            </div>
+        )}
+    </div>
+</div>
 </section>

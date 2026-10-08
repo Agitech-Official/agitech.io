@@ -1,0 +1,99 @@
+---
+// Article page body, ported from single-post.php: link bar (back / share / send), details
+// (categories, title, author, date, content) and the author "talk to" section.
+// The table of contents Astro had added is not part of the WP article (see docs/deferred-additions.md).
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../keystatic.config';
+import type { Lang } from '../lib/lang';
+import { ARTICLE_LABELS, blogIndexUrl, entryUrl, formatPostDate, nl2br } from '../lib/blog';
+import { blockImg, blockAlt } from '../lib/img';
+export interface Props {
+  lang: Lang;
+  slug: string;
+  entry: { title: string; publishedAt: string | null; author: string | null; categories: readonly string[] };
+  bodyHtml: string;
+}
+const { lang, slug, entry, bodyHtml } = Astro.props;
+const t = ARTICLE_LABELS[lang];
+const reader = createReader(process.cwd(), keystaticConfig);
+const author = entry.author ? await reader.collections.authors.read(entry.author) : null;
+
+const postUrl = new URL(entryUrl('post', slug, lang), 'https://agitech.io').href;
+const title = encodeURIComponent(entry.title);
+const whatsappText = encodeURIComponent(`${title}\n${postUrl}`);
+---
+<section class="link-bar-section top-line-img">
+    <div class="container-fluid p-0">
+        <div class="row">
+            <div class="col-12 link-bar d-flex align-items-center">
+                <div class="back-link">
+                    <a href={blogIndexUrl(lang)}>
+                        {t.back}
+                    </a>
+                </div>
+                <div class="share-links">
+                    <a id="show-social-share" href="#" target="_blank">
+                        {t.share}
+                    </a>
+                    <div id="social-share-links" style="display:none;">
+                        <a href={`https://www.facebook.com/sharer/sharer.php?u=${postUrl}`} target="_blank" rel="noopener" class="facebook_icon">Facebook</a>
+                        <a href={`https://twitter.com/intent/tweet?url=${postUrl}&text=${title}`} target="_blank" rel="noopener" class="twitter_icon">Twitter</a>
+                        <a href={`https://wa.me/?text=${whatsappText}`} target="_blank" rel="noopener" class="whatsapp_icon">WhatsApp</a>
+                    </div>
+                    <a id="mail-send-link" href={`mailto:?subject=${encodeURIComponent(entry.title)}&body=${encodeURIComponent(postUrl)}`}>
+                        {t.send}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="blog-details-section">
+    <div class="container-sm">
+        <div class="row header-area">
+            <div class="col-12">
+                <div class="categories-btn d-flex align-items-center">
+                    {entry.categories.map(c => <span class="purple-text">{c}</span>)}
+                </div>
+            </div>
+
+            <div class="col-12">
+                <h3>{entry.title}</h3>
+                <div class="d-flex align-items-center name-date">
+                    <p>{author?.name}</p>
+                    <p>{formatPostDate(entry.publishedAt, lang)}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row content-area">
+            <div class="col-12" set:html={bodyHtml} />
+        </div>
+    </div>
+</section>
+
+{author && (
+<section class="talk-section lighter-gray-bg">
+    <div class="container-sm">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="person-img">
+                    {author.image && <img src={blockImg(author.image)} alt={blockAlt(author.image, author.role || author.name)}>}
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="content">
+                    <h6>{author.role || author.name}</h6>
+                    <h4>{author.heading}</h4>
+                    <p set:html={nl2br(author.introduction)} />
+                    {author.website && (
+                        <div class="primary-btn">
+                            <a href={author.website} target="_blank" rel="noopener noreferrer">{t.visit}</a>
+                        </div>
+                    )}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+)}

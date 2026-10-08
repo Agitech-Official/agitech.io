@@ -5,71 +5,27 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import BlockRenderer from '../../components/BlockRenderer.astro';
-import { createReader } from '@keystatic/core/reader';
-import keystaticConfig from '../../../keystatic.config';
 import Markdoc from '@markdoc/markdoc';
-import { addTocIds } from '../../lib/toc';
+import PostArticle from '../../components/PostArticle.astro';
+import { headingOf, pageSeo, postSeo } from '../../lib/seo';
+import { pageAndPostPaths } from '../../lib/content';
 
 export async function getStaticPaths() {
-  const reader = createReader(process.cwd(), keystaticConfig);
-
-  // The `pages` collection is one flat folder shared by FR and EN — when an EN page's
-  // natural URL slug collides with an existing FR file (e.g. both want "industries"),
-  // the EN entry is stored under a disambiguated filename and mapped back to its real
-  // URL here.
-  const EN_SLUG_URL_OVERRIDES: Record<string, string> = {
-    'industries-en': 'industries',
-    'industries-e-commerce-en': 'industries-e-commerce',
-    'contact-us-en': 'contact-us',
-    'development-en': 'development',
-    'infrastructure-it-en': 'infrastructure-it',
-    'why-odoo-en': 'why-odoo',
-    'jobs-en': 'jobs',
-    'recruitment-en': 'recruitment',
-    'odoo-erp-en': 'odoo-erp',
-    'terms-conditions-en': 'terms-conditions',
-    'privacy-policy-en': 'privacy-policy',
-    'formation-en': 'formation',
-    'support-en': 'support',
-    'migration-en': 'migration',
-    'mise-a-niveau-version-en': 'mise-a-niveau-version',
-    'solution-gestion-immobiliere-en': 'solution-gestion-immobiliere',
-    'solution-auto-ecole-en': 'solution-auto-ecole',
-    'developpement-odoo-forfait-en': 'developpement-odoo-forfait',
-  };
-
-  const pageSlugs = await reader.collections.pages.list();
-  const pageEntries = await Promise.all(
-    pageSlugs
-      .filter((slug) => slug !== 'accueil-en')
-      .map(async (slug) => ({ slug, entry: await reader.collections.pages.read(slug) }))
-  );
-  const pagePaths = pageEntries
-    .filter(({ entry }) => entry && entry.lang === 'en')
-    .map(({ slug, entry }) => ({ params: { slug: EN_SLUG_URL_OVERRIDES[slug] ?? slug }, props: { kind: 'page', entry } }));
-
-  const blogSlugs = await reader.collections.blog.list();
-  const blogEntries = await Promise.all(
-    blogSlugs.map(async (slug) => ({ slug, entry: await reader.collections.blog.read(slug) }))
-  );
-  const blogPaths = blogEntries
-    .filter(({ entry }) => entry && entry.lang === 'en')
-    .map(({ slug, entry }) => ({ params: { slug }, props: { kind: 'blog', entry } }));
-
-  return [...pagePaths, ...blogPaths];
+  return pageAndPostPaths('en');
 }
 
 const { kind, entry } = Astro.props;
 
 let bodyHtml = '';
-let toc: { id: string; text: string }[] = [];
 if (kind === 'blog') {
-  const { node } = await entry.body();
-  const rendered = Markdoc.renderers.html(Markdoc.transform(node));
-  const withToc = addTocIds(rendered);
-  bodyHtml = withToc.html;
-  toc = withToc.toc;
+  if (entry.contentHtml) {
+    bodyHtml = entry.contentHtml;
+  } else {
+    const { node } = await entry.body();
+    bodyHtml = Markdoc.renderers.html(Markdoc.transform(node));
+  }
 }
+const seo = kind === 'blog' ? await postSeo(entry) : pageSeo(entry);
 const hasContactHero = kind === 'page' && entry.blocks?.some((b: { discriminant: string }) => b.discriminant === 'contactHero');
 
 const pageFaqBlock = kind === 'page' ? entry.blocks?.find((b: any) => b.discriminant === 'faq') : undefined;
@@ -90,13 +46,13 @@ const pageJsonLd = pageFaqBlock
     lang="en"
     title={entry.seoTitle || entry.title}
     description={entry.seoDescription ?? ''}
-    canonical={`https://agitech.io/en/${Astro.params.slug}/`}
     includeContactScripts={hasContactHero}
+    {...seo}
     jsonLd={pageJsonLd}
   >
     <Header slot="header" lang="en" />
     <main>
-      {Astro.params.slug === 'developpement-odoo-forfait' && <h1 class="visually-hidden-h1">{entry.title}</h1>}
+      {!entry.blocks?.some((b: { discriminant: string }) => b.discriminant === 'cmsPage') && <h1 class="visually-hidden-h1">{headingOf(entry)}</h1>}
       <BlockRenderer blocks={entry.blocks} />
     </main>
     <Footer slot="footer" lang="en" />
@@ -104,42 +60,16 @@ const pageJsonLd = pageFaqBlock
 ) : (
   <Layout
     lang="en"
-    title={entry.title}
-    description={entry.excerpt ?? ''}
-    canonical={`https://agitech.io/en/${Astro.params.slug}/`}
+    bodyClass="post-template-default single single-post"
+    {...seo}
+    title={entry.seoTitle || entry.title}
+    description={entry.seoDescription || entry.excerpt || ''}
   >
     <Header slot="header" lang="en" />
     <main>
-      <section class="blog-details-section">
-        <div class="container-sm">
-          <div class="row header-area">
-            <div class="col-12">
-              {entry.category && <div class="categories-btn"><span class="purple-text">{entry.category}</span></div>}
-              <h1>{entry.title}</h1>
-              {entry.publishedAt && <div class="name-date"><p>{entry.publishedAt}</p></div>}
-            </div>
-          </div>
-          <div class="row content-area">
-            {toc.length > 1 && (
-              <aside class="col-lg-3 toc-sidebar">
-                <nav>
-                  <h6>Contents</h6>
-                  <ol>{toc.map(t => <li><a href={`#${t.id}`}>{t.text}</a></li>)}</ol>
-                </nav>
-              </aside>
-            )}
-            <div class={toc.length > 1 ? 'col-lg-9' : 'col-lg-12'} set:html={bodyHtml} />
-          </div>
-        </div>
-      </section>
+      <h1 class="visually-hidden-h1">{entry.title}</h1>
+      <PostArticle lang="en" slug={Astro.params.slug} entry={entry} bodyHtml={bodyHtml} />
     </main>
     <Footer slot="footer" lang="en" />
   </Layout>
 )}
-
-<style>
-  .visually-hidden-h1 {
-    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
-    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
-  }
-</style>

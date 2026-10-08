@@ -1,15 +1,20 @@
 ---
 // Shared CTA button — mirrors the WP "button_group()" link field (label + internal/external url + target).
+// `calendly` = WP link type "calendly_popup": the anchor opens the Calendly popup for `url`
+// (handled by agitech-theme.js, same UTM forwarding as the WP inline onclick).
 export interface Props {
   label?: string;
   url?: string;
   newTab?: boolean;
+  calendly?: boolean;
   wrapClass?: string;
 }
-const { label, url, newTab = false, wrapClass = 'primary-btn' } = Astro.props;
+const { label, url, newTab = false, calendly = false, wrapClass = 'primary-btn' } = Astro.props;
 ---
 {label && url && (
   <div class={wrapClass}>
-    <a href={url} target={newTab ? '_blank' : undefined} rel={newTab ? 'noopener' : undefined}>{label}</a>
+    {calendly
+      ? <a href="#" data-calendly-url={url}>{label}</a>
+      : <a href={url} target={newTab ? '_blank' : undefined} rel={newTab ? 'noopener' : undefined}>{label}</a>}
   </div>
 )}

@@ -1,42 +1,80 @@
 ---
-// Ported from template-parts/block/team-members.php.
-// Simplified: single flat grid instead of the JS tab/chunk-of-3 pagination.
-import { blockImg } from '../../lib/img';
+// Ported from template-parts/block/team-members.php: members are paged by 3 with numbered tabs and
+// prev/next arrows (behaviour in agitech-theme.js, same as WP).
+import { blockImg, blockAlt } from '../../lib/img';
 export interface Props {
   title?: string;
   subTitle?: string;
   teamMembers?: { image?: string; name?: string; role?: string; introduction?: string; linkedinUrl?: string; linkedinLabel?: string }[];
 }
 const { title, subTitle, teamMembers = [] } = Astro.props;
+const chunks: NonNullable<Props['teamMembers']>[] = [];
+for (let i = 0; i < teamMembers.length; i += 3) chunks.push(teamMembers.slice(i, i + 3));
+const pad = (n: number) => String(n).padStart(2, '0');
 ---
 <section class="our-team-section">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-3 col-md-3 col-sm-12 col-12">
-        <div class="left-content">{title && <h6>{title}</h6>}</div>
-      </div>
-      <div class="col-lg-9 col-md-9 col-sm-12 col-12">
-        <div class="right-content">
-          {subTitle && <div class="title"><h3>{subTitle}</h3></div>}
-          <div class="row items-wrap">
-            {teamMembers.map(m => (
-              <div class="col-lg-4 col-md-6 col-12 item">
-                <div class="item-wrap">
-                  <div class="img">{m.image && <img src={blockImg(m.image)} alt={m.name ?? ''}>}</div>
-                  <div class="content">
-                    {m.name && <h6>{m.name}</h6>}
-                    {m.role && <p class="role">{m.role}</p>}
-                    {m.introduction && <p>{m.introduction}</p>}
-                    {m.linkedinUrl && (
-                      <div class="dark-link"><a href={m.linkedinUrl} target="_blank" rel="noopener">{m.linkedinLabel || 'LinkedIn'}</a></div>
-                    )}
-                  </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12 col-12">
+                <div class="left-content">
+                    {title && <h6>{title}</h6>}
                 </div>
-              </div>
-            ))}
-          </div>
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-12 col-12">
+                <div class="right-content">
+                    {subTitle && (
+                        <div class="title">
+                            <h3>{subTitle}</h3>
+                        </div>
+                    )}
+
+                    {chunks.length > 0 && (
+                        <Fragment>
+                        <div class="d-flex justify-content-between align-items-center tabinations">
+                            <div class="d-flex tabs-links">
+                                {chunks.map((_, index) => (
+                                    <div class={`tab-link ${index === 0 ? 'active' : ''}`} data-tab={`tab-${index + 1}`}>
+                                        {pad(index + 1)}
+                                    </div>
+                                ))}
+                            </div>
+                            <div class="next-prev d-flex justify-content-center align-items-center">
+                                <div class="prev-btn"></div>
+                                <div class="next-btn"></div>
+                            </div>
+                        </div>
+
+                        <div class="tab-content">
+                            {chunks.map((chunk, index) => (
+                                <div class="row items-wrap" id={`tab-${index + 1}`} style="display: none;">
+                                    {chunk.map(m => (
+                                        <div class="col-lg-4 col-md-6 col-12 item">
+                                            <div class="item-wrap">
+                                                <div class="img">
+                                                    {m.image && <img src={blockImg(m.image)} alt={blockAlt(m.image, m.name ?? '')}>}
+                                                </div>
+                                                <div class="content">
+                                                    <h6>{m.name}</h6>
+                                                    <p class="role">{m.role}</p>
+                                                    <p>{m.introduction}</p>
+                                                    {m.linkedinUrl && (
+                                                        <div class="dark-link">
+                                                            <a href={m.linkedinUrl} target="_blank" rel="noopener">
+                                                                {m.linkedinLabel || 'LinkedIn'}
+                                                            </a>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            ))}
+                        </div>
+                        </Fragment>
+                    )}
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </section>

@@ -1,12 +1,12 @@
 ---
 // Ported from template-parts/block/recruitment-cta.php
 import Cta from './Cta.astro';
-import { blockImg } from '../../lib/img';
+import { blockImg, blockAlt } from '../../lib/img';
 export interface Props {
   title?: string;
   subTitle?: string;
   contentDetails?: string;
-  cta?: { label?: string; url?: string; newTab?: boolean };
+  cta?: { label?: string; url?: string; newTab?: boolean; calendly?: boolean };
   image?: string;
 }
 const { title, subTitle, contentDetails, cta, image } = Astro.props;
@@ -19,11 +19,11 @@ const { title, subTitle, contentDetails, cta, image } = Astro.props;
           {title && <h6>{title}</h6>}
           {subTitle && <h4>{subTitle}</h4>}
           {contentDetails && <Fragment set:html={contentDetails} />}
-          {cta && <Cta label={cta.label} url={cta.url} newTab={cta.newTab} />}
+          {cta && <Cta label={cta.label} url={cta.url} newTab={cta.newTab} calendly={cta.calendly} />}
         </div>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-        {image && <img src={blockImg(image)} alt="">}
+        {image && <img src={blockImg(image)} alt={blockAlt(image)}>}
       </div>
     </div>
   </div>

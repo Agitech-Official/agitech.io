@@ -1,31 +1,31 @@
 ---
 // Ported from template-parts/block/hero-home.php
 import Cta from './Cta.astro';
-import { blockImg } from '../../lib/img';
+import { blockImg, blockAlt } from '../../lib/img';
 export interface Props {
   title?: string;
   subTitle?: string;
-  cta?: { label?: string; url?: string; newTab?: boolean };
+  cta?: { label?: string; url?: string; newTab?: boolean; calendly?: boolean };
   bottomLine?: boolean;
   image?: string;
 }
 const { title, subTitle, cta, bottomLine = false, image } = Astro.props;
 ---
 <section class={`banner-sec home-banner dark-bg ${bottomLine ? 'bottom-line-img' : ''}`}>
-  <div class="container">
-    <div class="row">
-      {(title || subTitle) && (
-        <div class="col-lg-7 col-md-7 col-sm-12 col-12">
-          <div class="text">
-            {title && <h6>{title}</h6>}
-            {subTitle && <h2 set:html={subTitle} />}
-            {cta && <Cta label={cta.label} url={cta.url} newTab={cta.newTab} wrapClass="light-btn" />}
-          </div>
+    <div class="container">
+        <div class="row">
+            {(title || subTitle) && (
+            <div class="col-lg-7 col-md-7 col-sm-12 col-12">
+                <div class="text">
+                    {title && <h6>{title}</h6>}
+                    {subTitle && <h2 set:html={subTitle} />}
+                    {cta && <Cta label={cta.label} url={cta.url} newTab={cta.newTab} calendly={cta.calendly} wrapClass="light-btn" />}
+                </div>
+            </div>
+            )}
         </div>
-      )}
     </div>
-  </div>
-  <div class="right-img">
-    {image && <img src={blockImg(image)} alt="">}
-  </div>
+    <div class="right-img">
+        {image && <img src={blockImg(image)} alt={blockAlt(image)}>}
+    </div>
 </section>

@@ -1,52 +1,100 @@
 ---
-// Ported from template-parts/block/contact-us-section.php.
-// The WP form was a Contact Form 7 shortcode (server-rendered PHP) — replaced with a
-// plain static form; wiring a real submit endpoint (Formspree, like agifid) is a follow-up.
+// Ported from template-parts/block/contact-us-section.php. The WP form was a Contact Form 7
+// shortcode: its rendered markup (classes included) is reproduced as a static form posting to the
+// shared form endpoint (src/lib/forms.ts). reCAPTCHA is not reproduced (anti-spam is a later step).
 import Cta from './Cta.astro';
-import { blockImg } from '../../lib/img';
+import { blockImg, blockAlt } from '../../lib/img';
+import { langOf } from '../../lib/lang';
+import { labels } from '../../lib/settings';
+import { FORM_ENDPOINT, CONTACT_SUBJECT, THANK_YOU_PATH, absoluteUrl } from '../../lib/forms';
 export interface Props {
   mainHeading?: string;
   highlights?: string[];
   ctaHeading?: string;
   ctaSubHeading?: string;
   profileImage?: string;
-  cta?: { label?: string; url?: string; newTab?: boolean };
+  cta?: { label?: string; url?: string; newTab?: boolean; calendly?: boolean };
 }
 const { mainHeading, highlights = [], ctaHeading, ctaSubHeading, profileImage, cta } = Astro.props;
+const t = labels[langOf(Astro.url)].contactForm;
 ---
 <section class="contact-us-section" id="contact-us-section">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-6 col-md-6">
-        <div class="left-content">
-          {mainHeading && <h2>{mainHeading}</h2>}
-          {highlights.length > 0 && <ul>{highlights.map(h => <li>{h}</li>)}</ul>}
-          <div class="chat-with">
-            {ctaHeading && <h6>{ctaHeading}</h6>}
-            {ctaSubHeading && <p>{ctaSubHeading}</p>}
-            <div class="chat-link">
-              {profileImage && <img src={blockImg(profileImage)} alt="" class="btn-avatar">}
-              {cta && <Cta label={cta.label} url={cta.url} newTab={cta.newTab} />}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="left-content">
+                    {mainHeading && <h2 set:html={mainHeading} />}
+                    {highlights.length > 0 && (
+                    <ul>
+                        {highlights.map(h => <li set:html={h} />)}
+                    </ul>
+                    )}
+                    <div class="chat-with">
+                        {ctaHeading && <h6>{ctaHeading}</h6>}
+                        {ctaHeading && ctaSubHeading && <p>{ctaSubHeading}</p>}
+                        <div class="chat-link">
+                            {profileImage && <img src={blockImg(profileImage)} alt={blockAlt(profileImage)} class="btn-avatar">}
+                            {cta?.label && cta?.url && (cta.calendly
+                                ? <a href="#" data-calendly-url={cta.url}>{cta.label}</a>
+                                : <a href={cta.url} target={cta.newTab ? '_blank' : undefined} rel={cta.newTab ? 'noopener' : undefined}>{cta.label}</a>)}
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
+
+            <div class="col-lg-6 col-md-6">
+                <div class="right-content">
+<div class="wpcf7">
+<form action={FORM_ENDPOINT} method="post" class="wpcf7-form init" aria-label={t.formLabel}>
+<input type="hidden" name="_subject" value={CONTACT_SUBJECT}>
+<input type="hidden" name="_next" value={absoluteUrl(THANK_YOU_PATH[langOf(Astro.url)])}>
+<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
+<div class="form-wrp">
+	<h6>{t.title}
+	</h6>
+	<div class="contact-fields-wrp">
+		<div class="field">
+			<p><label>{t.name}<em>*</em></label><span class="wpcf7-form-control-wrap" data-name="your-name"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" value="" type="text" name="name" required /></span>
+			</p>
+		</div>
+		<div class="field">
+			<p><label>{t.company}</label><span class="wpcf7-form-control-wrap" data-name="your-company"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-text" aria-invalid="false" value="" type="text" name="company" /></span>
+			</p>
+		</div>
+		<div class="field">
+			<p><label>{t.email}<em>*</em></label><span class="wpcf7-form-control-wrap" data-name="your-email"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-email wpcf7-validates-as-required wpcf7-text wpcf7-validates-as-email" aria-required="true" aria-invalid="false" value="" type="email" name="email" required /></span>
+			</p>
+		</div>
+		<div class="field">
+			<p><label>{t.phone}</label><span class="wpcf7-form-control-wrap" data-name="your-number"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-text" aria-invalid="false" value="" type="text" name="phone" /></span>
+			</p>
+		</div>
+		<div class="field">
+			<p><label>{t.message}<em>*</em></label><span class="wpcf7-form-control-wrap" data-name="your-message"><textarea cols="40" rows="4" maxlength="2000" class="wpcf7-form-control wpcf7-textarea wpcf7-validates-as-required" aria-required="true" aria-invalid="false" name="message" required></textarea></span>
+			</p>
+		</div>
+	</div>
+	<div class="recaptcha-v2">
+	</div>
+	<div class="submit-btn-wrp">
+		<p><button type="submit" class="wpcf7-form-control wpcf7-submit submit-btn"><span>{t.send}</span></button>
+		</p>
+		<div class="cf7-all-errors">
+		</div>
+	<div class="wpcf7-response-output" aria-hidden="true"></div>
+	</div>
+</div>
+<div class="success-mess">
+</div>
+<input class="wpcf7-form-control wpcf7-hidden" value="" type="hidden" name="utm_source" />
+<input class="wpcf7-form-control wpcf7-hidden" value="" type="hidden" name="utm_medium" />
+<input class="wpcf7-form-control wpcf7-hidden" value="" type="hidden" name="utm_campaign" />
+<input class="wpcf7-form-control wpcf7-hidden" value="" type="hidden" name="gclid" />
+</form>
+</div>
+                    <div class="cf7-all-errors"></div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="col-lg-6 col-md-6">
-        <div class="right-content">
-          <form class="contact-card contact-form" action="https://formspree.io/f/xeajdqgr" method="POST">
-            <div class="form-row">
-              <div class="form-field"><label>Prénom</label><input type="text" name="first_name" required></div>
-              <div class="form-field"><label>Nom</label><input type="text" name="last_name" required></div>
-            </div>
-            <div class="form-row">
-              <div class="form-field"><label>Email</label><input type="email" name="email" required></div>
-              <div class="form-field"><label>Téléphone</label><input type="tel" name="phone"></div>
-            </div>
-            <div class="form-field"><label>Message</label><textarea name="message" rows="4"></textarea></div>
-            <button type="submit" class="btn btn-violet">Envoyer</button>
-          </form>
-        </div>
-      </div>
     </div>
-  </div>
 </section>
