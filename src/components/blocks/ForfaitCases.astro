@@ -1,0 +1,57 @@
+---
+// Three worked examples for the fixed-price page: client context, need, estimated
+// time-and-materials cost vs fixed price, result. Content comes from the CMS.
+export interface Props {
+  title?: string;
+  intro?: string;
+  note?: string;
+  labels?: { context?: string; need?: string; regie?: string; forfait?: string; result?: string };
+  cases?: { sector?: string; context?: string; need?: string; regie?: string; forfait?: string; delay?: string; result?: string }[];
+}
+const { title, intro, note, labels = {}, cases = [] } = Astro.props;
+const L = { context: 'Contexte', need: 'Besoin', regie: 'En régie (estimé)', forfait: 'Au forfait', result: 'Résultat', ...labels };
+---
+<section class="forfait-cases">
+  <div class="container">
+    {title && <h2>{title}</h2>}
+    {intro && <p class="forfait-cases-intro">{intro}</p>}
+    <div class="forfait-cases-grid">
+      {cases.map(c => (
+        <article class="forfait-case">
+          {c.sector && <span class="forfait-case-tag">{c.sector}</span>}
+          <dl>
+            <dt>{L.context}</dt><dd>{c.context}</dd>
+            <dt>{L.need}</dt><dd>{c.need}</dd>
+          </dl>
+          <div class="forfait-case-prices">
+            <div><span>{L.regie}</span><strong class="is-old">{c.regie}</strong></div>
+            <div><span>{L.forfait}</span><strong>{c.forfait}</strong>{c.delay && <em>{c.delay}</em>}</div>
+          </div>
+          <p class="forfait-case-result"><b>{L.result}</b> {c.result}</p>
+        </article>
+      ))}
+    </div>
+    {note && <p class="forfait-cases-note">{note}</p>}
+  </div>
+</section>
+
+<style>
+  .forfait-cases { padding: 4rem 0; }
+  .forfait-cases h2 { font-size: clamp(1.5rem, 3vw, 1.9rem); margin-bottom: 0.75rem; }
+  .forfait-cases-intro { color: var(--muted, #6b6b6b); max-width: 640px; margin-bottom: 2rem; }
+  .forfait-cases-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; align-items: stretch; }
+  .forfait-case { display: flex; flex-direction: column; background: var(--white, #fff); border: 1px solid var(--border, #e5e5e5); border-radius: 16px; padding: 1.5rem; transition: border-color 0.25s; }
+  .forfait-case:hover { border-color: var(--violet, #984895); }
+  .forfait-case-tag { align-self: flex-start; font-size: 0.75rem; font-weight: 600; color: var(--violet, #984895); background: rgba(152,72,149,0.1); border-radius: 100px; padding: 0.25rem 0.75rem; margin-bottom: 1rem; }
+  .forfait-case dl { margin: 0 0 1rem; }
+  .forfait-case dt { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted, #6b6b6b); margin-top: 0.75rem; }
+  .forfait-case dd { margin: 0.15rem 0 0; font-size: 0.9rem; line-height: 1.5; }
+  .forfait-case-prices { margin-top: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; padding: 1rem 0; border-top: 1px solid var(--border, #e5e5e5); }
+  .forfait-case-prices span { display: block; font-size: 0.72rem; color: var(--muted, #6b6b6b); }
+  .forfait-case-prices strong { font-size: 1.05rem; color: var(--violet, #984895); }
+  .forfait-case-prices strong.is-old { color: var(--muted, #6b6b6b); text-decoration: line-through; font-weight: 500; }
+  .forfait-case-prices em { display: block; font-size: 0.75rem; font-style: normal; color: var(--muted, #6b6b6b); }
+  .forfait-case-result { font-size: 0.88rem; line-height: 1.5; margin: 0; padding-top: 0.75rem; border-top: 1px solid var(--border, #e5e5e5); }
+  .forfait-cases-note { margin-top: 1.25rem; font-size: 0.78rem; color: var(--muted, #6b6b6b); }
+  @media (max-width: 900px) { .forfait-cases-grid { grid-template-columns: 1fr; } }
+</style>

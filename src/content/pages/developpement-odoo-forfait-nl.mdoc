@@ -34,12 +34,39 @@ blocks:
     title: Wat de vaste prijs niet dekt
     content: <p>De vaste prijs geldt voor ontwikkelingen waarvan de scope schriftelijk is vastgelegd. Ze dekt geen dagelijkse support, doorlopende begeleiding, of scopewijzigingen die tijdens het project worden beslist — die verlopen via een geprijsd amendement volgens dezelfde methode.</p><p>Wij starten geen project zonder voorafgaande afbakening, en nemen geen bestaande ontwikkeling over zonder audit.</p>
     emphasis: true
-- discriminant: contentPlaceholder
+- discriminant: forfaitCases
   value:
-    variant: cases
     title: Drie voorbeelden
-    intro: Klantcontext, behoefte, geschatte kost in regie, vaste prijs, resultaat.
-    count: 3
+    intro: Typische projecten, vergeleken met wat ze in regie gekost zouden hebben.
+    note: Geanonimiseerde voorbeelden en indicatieve bedragen (excl. btw) — elk project wordt geprijsd na afbakening.
+    labels:
+      context: Context
+      need: Behoefte
+      regie: In regie (geschat)
+      forfait: Vaste prijs
+      result: Resultaat
+    cases:
+    - sector: Keukenverkoper
+      context: Keukenverkoper die projecten ontwerpt in Carat en het bedrijf beheert in Odoo.
+      need: Connector tussen de offertesoftware Carat en Odoo.
+      regie: € 12.000
+      forfait: € 5.000
+      delay: ''
+      result: Carat-offertes komen rechtstreeks in Odoo terecht, zonder opnieuw in te voeren.
+    - sector: Vastgoedbeheer
+      context: Kantoor dat ongeveer 200 panden beheert, lasten en afrekeningen met de hand verwerkt.
+      need: Portaal voor eigenaars en huurders met afrekeningen van lasten gegenereerd vanuit Odoo.
+      regie: € 22.000 – 30.000
+      forfait: € 14.800
+      delay: 8 weken
+      result: Afrekeningen automatisch verstuurd, minder vragen aan het secretariaat.
+    - sector: Detailhandel
+      context: Winkel met kassasysteem en voorraad die in meerdere tools wordt bijgehouden.
+      need: Mobiele app voor bestellingen en voorraadcontrole, gekoppeld aan Odoo.
+      regie: € 15.000 – 20.000
+      forfait: € 9.800
+      delay: 5 weken
+      result: Voorraad in real time, bestellingen maar één keer ingevoerd.
 - discriminant: textSection
   value:
     title: Schermen die uw teams graag gebruiken
@@ -66,6 +93,8 @@ blocks:
       answer: Die is van u. Wij leveren de broncode en de documentatie.
     - question: Werkt u ook buiten Odoo?
       answer: Ja — klantenportalen, mobiele applicaties, bedrijfsinterfaces gekoppeld aan Odoo via API.
+    - question: Is projectbeheer ook tegen vaste prijs?
+      answer: Nee, projectbeheer (afbakening van de implementatie, configuratie, opleiding, begeleiding) wordt verder in regie gefactureerd. Het hangt te veel af van de klant, het aantal gebruikers en bijzondere gevallen die niet vooraf te omschrijven zijn. De vaste prijs geldt voor ontwikkelingen waarvan de scope schriftelijk is vastgelegd.
 - discriminant: ctaBanner
   value:
     title: Laten we over uw project praten

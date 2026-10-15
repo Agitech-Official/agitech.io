@@ -5,6 +5,8 @@ export interface Props {
   lang: 'fr' | 'en' | 'nl';
 }
 const { lang } = Astro.props;
+import { getNav } from '../lib/nav';
+const nav = getNav(lang);
 const base = lang === 'fr' ? '' : `/${lang}`;
 const strings = {
   fr: {
@@ -69,15 +71,29 @@ const strings = {
           <a href="https://www.youtube.com/@Agitech-OdooPartner" target="_blank" rel="noopener"><img src="/assets/img/blocks/youtube.svg" alt="YouTube"></a>
           <a href="https://wa.me/32460241589" target="_blank" rel="noopener"><img src="/assets/img/blocks/whatsap.svg" alt="WhatsApp"></a>
         </div>
-        <div class="content">
-          <h6>{strings.nav}</h6>
-          <ul>
-            <li><a href={`${base}/odoo-erp/`}>{strings.odoo}</a></li>
-            <li><a href={`${base}/development/`}>{strings.dev}</a></li>
-            <li><a href={`${base}/infrastructure-it/`}>{strings.infra}</a></li>
-            <li><a href={`${base}/business-cases/`}>{strings.cases}</a></li>
-            <li><a href={`${base}/recruitment/`}>{strings.recruitment}</a></li>
-          </ul>
+        <div class="content ft-nav-cols">
+          <div>
+            <h6>{strings.nav}</h6>
+            <ul>
+              <li><a href={`${base}/odoo-erp/`}>{nav.strings.odoo}</a></li>
+              <li><a href={`${base}/business-cases/`}>{nav.strings.cases}</a></li>
+              <li><a href={`${base}/blog/`}>{nav.strings.blog}</a></li>
+              <li><a href={`${base}/jobs/`}>{nav.strings.team}</a></li>
+              <li><a href={`${base}/contact-us/`}>{nav.strings.contact}</a></li>
+            </ul>
+          </div>
+          <div>
+            <h6><a href={`${base}/industries/`}>{nav.strings.industries}</a></h6>
+            <ul>
+              {nav.industries.map(i => <li><a href={i.href}>{i.label}</a></li>)}
+            </ul>
+          </div>
+          <div>
+            <h6>{nav.strings.services}</h6>
+            <ul>
+              {nav.services.map(s => <li><a href={s.href} target={s.external ? '_blank' : undefined} rel={s.external ? 'noopener' : undefined}>{s.label}</a></li>)}
+            </ul>
+          </div>
         </div>
       </div>
     </div>

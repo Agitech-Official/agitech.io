@@ -2,25 +2,28 @@
 // Homepage section: "Ce qu'on développe, et comment on le facture" — new for the
 // développement-au-forfait brief. Not ported from WP, built fresh. Locally scoped
 // styles only (no changes to public/assets/style.css), reuses existing CSS tokens.
+//
+// UI/UX pass: the first version stacked 6 separate blocks (title, cards, tech
+// badges, explainer paragraph, tags line, CTAs, plus a boxed "DIY" callout) —
+// too many competing pieces for a homepage teaser. Collapsed to 3: header,
+// cards (the actual value props), and one footer row (compact tech mention +
+// CTAs + a plain-text DIY link instead of its own bordered box). Depth lives
+// on the dedicated page, not here.
 import Cta from './Cta.astro';
 export interface Props {
   title?: string;
   intro?: string;
   cards?: { title?: string; text?: string; featured?: boolean }[];
-  tagsTitle?: string;
-  tags?: string[];
-  explainerText?: string;
   ctaPrimary?: { label?: string; url?: string };
   ctaSecondary?: { label?: string; url?: string };
   diyTitle?: string;
-  diyText?: string;
   diyCta?: { label?: string; url?: string };
 }
-const { title, intro, cards = [], tagsTitle, tags = [], explainerText, ctaPrimary, ctaSecondary, diyTitle, diyText, diyCta } = Astro.props;
+const { title, intro, cards = [], ctaPrimary, ctaSecondary, diyTitle, diyCta } = Astro.props;
 const ICONS = 'https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg@1/icons';
 const STACK = [
-  { label: 'GPT Astra', logo: `${ICONS}/openai.svg` },
-  { label: 'Claude Fable', logo: `${ICONS}/claude-color.svg` },
+  { label: 'GPT', logo: `${ICONS}/openai.svg` },
+  { label: 'Claude', logo: `${ICONS}/claude-color.svg` },
   { label: 'Odoo', logo: '/assets/img/blocks/LogoOdoo.svg', wide: true },
 ];
 ---
@@ -40,37 +43,22 @@ const STACK = [
         ))}
       </div>
     )}
-    <div class="forfait-stack">
-      <span class="forfait-stack-title">{tagsTitle || 'Notre combo technique'}</span>
-      {STACK.map(s => (
-        <span class="forfait-stack-item">
-          <img src={s.logo} alt="" class={s.wide ? 'is-wide' : ''} loading="lazy" />
-          {!s.wide && s.label}
-          {s.wide && <span class="sr-only">{s.label}</span>}
-        </span>
-      ))}
-    </div>
-    {(explainerText || tags.length > 0) && (
-      <p class="forfait-explainer">
-        {explainerText}
-        {tags.length > 0 && <span class="forfait-stack-note">{tags.join(' · ')}</span>}
-      </p>
-    )}
-    {(ctaPrimary?.label || ctaSecondary?.label) && (
-      <div class="forfait-ctas">
-        <Cta label={ctaPrimary?.label} url={ctaPrimary?.url} wrapClass="primary-btn" />
-        <Cta label={ctaSecondary?.label} url={ctaSecondary?.url} wrapClass="forfait-outline-btn" />
+    <div class="forfait-footer">
+      <div class="forfait-stack" aria-label="GPT, Claude, Odoo">
+        {STACK.map(s => (
+          <img src={s.logo} alt={s.label} class={s.wide ? 'is-wide' : ''} loading="lazy" />
+        ))}
       </div>
-    )}
-    {diyTitle && (
-      <div class="forfait-diy">
-        <div>
-          <strong>{diyTitle}</strong>
-          {diyText && <span>{diyText}</span>}
+      {(ctaPrimary?.label || ctaSecondary?.label) && (
+        <div class="forfait-ctas">
+          <Cta label={ctaPrimary?.label} url={ctaPrimary?.url} wrapClass="primary-btn" />
+          <Cta label={ctaSecondary?.label} url={ctaSecondary?.url} wrapClass="forfait-outline-btn" />
         </div>
-        <Cta label={diyCta?.label} url={diyCta?.url} wrapClass="forfait-outline-btn" />
-      </div>
-    )}
+      )}
+      {diyTitle && diyCta?.url && (
+        <a href={diyCta.url} class="forfait-diy-link">{diyTitle} {diyCta.label} →</a>
+      )}
+    </div>
   </div>
 </section>
 
@@ -104,7 +92,10 @@ const STACK = [
     border-radius: 12px;
     padding: 0.9rem 1rem;
   }
-  .forfait-card.is-featured {
+  .forfait-card {
+    transition: border-color 0.25s, box-shadow 0.25s;
+  }
+  .forfait-card:hover {
     border-color: var(--violet, #984895);
     box-shadow: 0 0 0 1px var(--violet, #984895);
   }
@@ -118,47 +109,20 @@ const STACK = [
     line-height: 1.4;
     margin: 0;
   }
+  .forfait-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
   .forfait-stack {
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem 0.75rem;
-    margin-bottom: 0.6rem;
+    gap: 1.1rem;
+    opacity: 0.85;
   }
-  .forfait-stack-title {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--violet, #984895);
-  }
-  .forfait-stack-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    height: 2.1rem;
-    font-size: 0.85rem;
-    font-weight: 600;
-    padding: 0 0.9rem;
-    border-radius: 100px;
-    border: 1px solid var(--border, #e5e5e5);
-    background: var(--white, #fff);
-    color: var(--ink, #1d1d1d);
-  }
-  .forfait-stack-item img { width: 1.15rem; height: 1.15rem; }
-  .forfait-stack-item img.is-wide { width: auto; height: 1rem; }
-  .forfait-explainer {
-    max-width: 720px;
-    margin: 0 auto 1.1rem;
-    text-align: center;
-    color: var(--muted, #6b6b6b);
-    font-size: 0.85rem;
-    line-height: 1.5;
-  }
-  .forfait-stack-note {
-    display: block;
-    margin-top: 0.2rem;
-    font-size: 0.78rem;
-  }
+  .forfait-stack img { height: 1.3rem; width: auto; }
   .forfait-ctas {
     display: flex;
     justify-content: center;
@@ -180,25 +144,11 @@ const STACK = [
     background: var(--violet, #984895);
     color: var(--white, #fff);
   }
-  .forfait-diy {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    max-width: 860px;
-    margin: 1.5rem auto 0;
-    padding: 0.9rem 1.25rem;
-    border: 1px dashed var(--violet, #984895);
-    border-radius: 12px;
-    background: var(--white, #fff);
+  .forfait-diy-link {
+    font-size: 0.85rem;
+    color: var(--muted, #6b6b6b);
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
-  .forfait-diy strong { display: block; font-size: 1rem; color: var(--ink, #1d1d1d); }
-  .forfait-diy span { font-size: 0.85rem; color: var(--muted, #6b6b6b); }
-  .forfait-diy :global(.forfait-outline-btn a) { padding: 0.55rem 1.2rem; font-size: 0.85rem; white-space: nowrap; }
-  .sr-only {
-    position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
-  }
-  @media (max-width: 560px) {
-    .forfait-diy { flex-direction: column; text-align: center; }
-  }
+  .forfait-diy-link:hover { color: var(--violet, #984895); }
 </style>

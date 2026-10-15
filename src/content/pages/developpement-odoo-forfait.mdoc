@@ -34,12 +34,39 @@ blocks:
     title: Ce que le forfait ne couvre pas
     content: <p>Le forfait s'applique aux développements dont le périmètre est écrit. Il ne couvre pas le support courant, l'accompagnement au fil de l'eau, ni les évolutions décidées en cours de route — celles-ci font l'objet d'un avenant chiffré selon la même méthode.</p><p>Nous ne prenons pas de projet sans cadrage préalable, et nous ne reprenons pas de développement existant sans audit.</p>
     emphasis: true
-- discriminant: contentPlaceholder
+- discriminant: forfaitCases
   value:
-    variant: cases
     title: Trois exemples
-    intro: Contexte client, besoin, coût en régie estimé, prix forfaitaire, résultat.
-    count: 3
+    intro: Des projets typiques, comparés à ce qu'ils auraient coûté en régie.
+    note: Exemples anonymisés et montants indicatifs (HTVA) — chaque projet est chiffré après cadrage.
+    labels:
+      context: Contexte
+      need: Besoin
+      regie: En régie (estimé)
+      forfait: Au forfait
+      result: Résultat
+    cases:
+    - sector: Revendeur de cuisines
+      context: Revendeur de cuisines qui dessine ses projets dans Carat et gère l'activité dans Odoo.
+      need: Connecteur entre le logiciel de devis Carat et Odoo.
+      regie: 12 000 €
+      forfait: 5 000 €
+      delay: ''
+      result: Les devis Carat arrivent directement dans Odoo, sans ressaisie.
+    - sector: Gestion immobilière
+      context: Agence gérant environ 200 biens, charges et relevés traités à la main.
+      need: Portail propriétaires et locataires avec relevés de charges générés depuis Odoo.
+      regie: 22 000 – 30 000 €
+      forfait: 14 800 €
+      delay: 8 semaines
+      result: Relevés envoyés automatiquement, moins de sollicitations au secrétariat.
+    - sector: Commerce de détail
+      context: Boutique avec point de vente et stock suivi sur plusieurs outils.
+      need: Application mobile de prise de commande et de contrôle de stock connectée à Odoo.
+      regie: 15 000 – 20 000 €
+      forfait: 9 800 €
+      delay: 5 semaines
+      result: Stock à jour en temps réel, commandes saisies une seule fois.
 - discriminant: textSection
   value:
     title: Des écrans que vos équipes utilisent volontiers
@@ -66,6 +93,8 @@ blocks:
       answer: Il est à vous. Nous livrons les sources et la documentation.
     - question: Travaillez-vous en dehors d'Odoo ?
       answer: Oui — portails clients, applications mobiles, interfaces métier connectées à Odoo par API.
+    - question: La gestion de projet est-elle aussi au forfait ?
+      answer: Non, la gestion de projet (cadrage de l'implémentation, paramétrage, formation, accompagnement) reste facturée en régie. Elle dépend trop du client, du nombre d'utilisateurs et de cas particuliers impossibles à écrire à l'avance. Le forfait s'applique aux développements dont le périmètre est défini par écrit.
 - discriminant: ctaBanner
   value:
     title: Parlons de votre projet

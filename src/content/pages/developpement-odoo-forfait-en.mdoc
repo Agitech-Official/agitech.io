@@ -34,12 +34,39 @@ blocks:
     title: What the fixed price doesn't cover
     content: <p>The fixed price applies to development whose scope is written down. It doesn't cover day-to-day support, ongoing hand-holding, or scope changes decided mid-project — those go through a priced amendment using the same method.</p><p>We don't take on a project without prior scoping, and we don't take over existing development without an audit.</p>
     emphasis: true
-- discriminant: contentPlaceholder
+- discriminant: forfaitCases
   value:
-    variant: cases
     title: Three examples
-    intro: Client context, need, estimated time-and-materials cost, fixed price, result.
-    count: 3
+    intro: Typical projects, compared with what they would have cost on a time-and-materials basis.
+    note: Anonymised examples and indicative amounts (excl. VAT) — every project is priced after scoping.
+    labels:
+      context: Context
+      need: Need
+      regie: Time & materials (est.)
+      forfait: Fixed price
+      result: Result
+    cases:
+    - sector: Kitchen retailer
+      context: Kitchen retailer that designs projects in Carat and runs the business in Odoo.
+      need: Connector between the Carat quoting software and Odoo.
+      regie: €12,000
+      forfait: €5,000
+      delay: ''
+      result: Carat quotes land directly in Odoo, with no re-keying.
+    - sector: Property management
+      context: Agency managing around 200 properties, charges and statements handled by hand.
+      need: Owner and tenant portal with charge statements generated from Odoo.
+      regie: €22,000 – 30,000
+      forfait: €14,800
+      delay: 8 weeks
+      result: Statements sent automatically, fewer requests to the front desk.
+    - sector: Retail
+      context: Shop with a point of sale and stock tracked across several tools.
+      need: Mobile app for order taking and stock control, connected to Odoo.
+      regie: €15,000 – 20,000
+      forfait: €9,800
+      delay: 5 weeks
+      result: Real-time stock, orders entered only once.
 - discriminant: textSection
   value:
     title: Screens your teams actually want to use
@@ -66,6 +93,8 @@ blocks:
       answer: It's yours. We deliver the source code and the documentation.
     - question: Do you work outside of Odoo?
       answer: Yes — customer portals, mobile apps, business interfaces connected to Odoo via API.
+    - question: Is project management also fixed-price?
+      answer: No, project management (implementation scoping, configuration, training, guidance) stays billed on a time-and-materials basis. It depends too much on the client, the number of users and edge cases that can't be written down in advance. The fixed price applies to development whose scope is defined in writing.
 - discriminant: ctaBanner
   value:
     title: Let's talk about your project
