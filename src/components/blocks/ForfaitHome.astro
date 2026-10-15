@@ -1,7 +1,8 @@
----
+﻿---
 // Homepage AI / fixed-price teaser. Layout borrowed from the original agitech.io
-// "why" sections: dark band, violet eyebrow + large light title on the left, numbered
-// rows separated by thin rules on the right. One idea per row, nothing boxed.
+// "why" sections: violet eyebrow + large light title on the left, numbered rows
+// separated by thin rules on the right. Light background so it never sits dark-on-dark
+// against the hero. One idea per row, nothing boxed.
 import Cta from './Cta.astro';
 export interface Props {
   title?: string;
@@ -15,12 +16,12 @@ export interface Props {
 const { title, eyebrow, cards = [], ctaPrimary, ctaSecondary, diyTitle, diyCta } = Astro.props;
 const ICONS = 'https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg@1/icons';
 const STACK = [
-  { label: 'GPT', logo: `${ICONS}/openai.svg`, invert: true },
+  { label: 'GPT', logo: `${ICONS}/openai.svg` },
   { label: 'Claude', logo: `${ICONS}/claude-color.svg` },
-  { label: 'Odoo', logo: '/assets/img/blocks/LogoOdoo.svg', wide: true, invert: true },
+  { label: 'Odoo', logo: '/assets/img/blocks/LogoOdoo.svg', wide: true },
 ];
 ---
-<section class="forfait-home dark-bg">
+<section class="forfait-home">
   <div class="container">
     <div class="forfait-grid">
       <div class="forfait-left">
@@ -34,7 +35,7 @@ const STACK = [
         {(ctaPrimary?.label || ctaSecondary?.label) && (
           <div class="forfait-ctas">
             <Cta label={ctaPrimary?.label} url={ctaPrimary?.url} wrapClass="primary-btn" />
-            <Cta label={ctaSecondary?.label} url={ctaSecondary?.url} wrapClass="light-btn" />
+            <Cta label={ctaSecondary?.label} url={ctaSecondary?.url} wrapClass="forfait-outline-btn" />
           </div>
         )}
       </div>
@@ -57,20 +58,21 @@ const STACK = [
 </section>
 
 <style>
-  .forfait-home { padding: 4rem 0; background: var(--black, #1d1d1d); color: var(--white, #fff); }
+  .forfait-home { padding: 4rem 0; background: var(--offwhite, #f7f7f7); color: var(--ink, #16151a); }
   .forfait-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-  .forfait-left h6 { color: var(--violet-light, #b671b3); font-family: var(--font-body); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.02em; margin-bottom: 0.75rem; }
-  .forfait-left h2 { color: var(--white, #fff); font-size: clamp(1.7rem, 1.1rem + 2vw, 2.6rem); line-height: 1.2; margin-bottom: 1.75rem; }
+  .forfait-left h6 { color: var(--violet, #984895); font-family: var(--font-body); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.02em; margin-bottom: 0.75rem; }
+  .forfait-left h2 { color: var(--ink, #16151a); font-size: clamp(1.7rem, 1.1rem + 2vw, 2.6rem); line-height: 1.2; margin-bottom: 1.75rem; }
   .forfait-stack { display: flex; align-items: center; gap: 1.25rem; margin-bottom: 2rem; opacity: 0.9; }
   .forfait-stack img { height: 1.5rem; width: auto; }
-  .forfait-stack img.is-invert { filter: brightness(0) invert(1); }
+    .forfait-home :global(.forfait-outline-btn a) { display: inline-block; border: 1px solid var(--violet, #984895); color: var(--violet, #984895); padding: 0.85rem 1.8rem; border-radius: 100px; font-size: 0.95rem; font-weight: 500; transition: background 0.2s, color 0.2s; }
+  .forfait-home :global(.forfait-outline-btn a:hover) { background: var(--violet, #984895); color: var(--white, #fff); }
   .forfait-ctas { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-  .forfait-right { border-top: 1px solid var(--border-onDark, rgba(255,255,255,0.1)); }
-  .forfait-row { display: flex; gap: 1.5rem; align-items: baseline; padding: 1.4rem 0; border-bottom: 1px solid var(--border-onDark, rgba(255,255,255,0.1)); }
-  .forfait-num { flex: 0 0 auto; color: var(--violet-light, #b671b3); font-size: 0.9rem; font-weight: 600; }
-  .forfait-row h4 { color: var(--white, #fff); font-size: 1.3rem; margin: 0 0 0.3rem; }
-  .forfait-row p { color: var(--muted-onDark, #b7b0c2); font-size: 0.95rem; margin: 0; }
-  .forfait-diy-link { display: inline-block; margin-top: 1.25rem; font-size: 0.88rem; color: var(--muted-onDark, #b7b0c2); text-decoration: underline; text-underline-offset: 3px; }
-  .forfait-diy-link:hover { color: var(--white, #fff); }
+  .forfait-right { border-top: 1px solid var(--border, rgba(20,20,20,0.09)); }
+  .forfait-row { display: flex; gap: 1.5rem; align-items: baseline; padding: 1.4rem 0; border-bottom: 1px solid var(--border, rgba(20,20,20,0.09)); }
+  .forfait-num { flex: 0 0 auto; color: var(--violet, #984895); font-size: 0.9rem; font-weight: 600; }
+  .forfait-row h4 { color: var(--ink, #16151a); font-size: 1.3rem; margin: 0 0 0.3rem; }
+  .forfait-row p { color: var(--muted, #6b6b76); font-size: 0.95rem; margin: 0; }
+  .forfait-diy-link { display: inline-block; margin-top: 1.25rem; font-size: 0.88rem; color: var(--muted, #6b6b76); text-decoration: underline; text-underline-offset: 3px; }
+  .forfait-diy-link:hover { color: var(--violet, #984895); }
   @media (max-width: 900px) { .forfait-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
 </style>
