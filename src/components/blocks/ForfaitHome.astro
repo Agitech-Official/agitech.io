@@ -1,154 +1,76 @@
 ---
-// Homepage section: "Ce qu'on développe, et comment on le facture" — new for the
-// développement-au-forfait brief. Not ported from WP, built fresh. Locally scoped
-// styles only (no changes to public/assets/style.css), reuses existing CSS tokens.
-//
-// UI/UX pass: the first version stacked 6 separate blocks (title, cards, tech
-// badges, explainer paragraph, tags line, CTAs, plus a boxed "DIY" callout) —
-// too many competing pieces for a homepage teaser. Collapsed to 3: header,
-// cards (the actual value props), and one footer row (compact tech mention +
-// CTAs + a plain-text DIY link instead of its own bordered box). Depth lives
-// on the dedicated page, not here.
+// Homepage AI / fixed-price teaser. Layout borrowed from the original agitech.io
+// "why" sections: dark band, violet eyebrow + large light title on the left, numbered
+// rows separated by thin rules on the right. One idea per row, nothing boxed.
 import Cta from './Cta.astro';
 export interface Props {
   title?: string;
-  intro?: string;
+  eyebrow?: string;
   cards?: { title?: string; text?: string; featured?: boolean }[];
   ctaPrimary?: { label?: string; url?: string };
   ctaSecondary?: { label?: string; url?: string };
   diyTitle?: string;
   diyCta?: { label?: string; url?: string };
 }
-const { title, intro, cards = [], ctaPrimary, ctaSecondary, diyTitle, diyCta } = Astro.props;
+const { title, eyebrow, cards = [], ctaPrimary, ctaSecondary, diyTitle, diyCta } = Astro.props;
 const ICONS = 'https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg@1/icons';
 const STACK = [
-  { label: 'GPT', logo: `${ICONS}/openai.svg` },
+  { label: 'GPT', logo: `${ICONS}/openai.svg`, invert: true },
   { label: 'Claude', logo: `${ICONS}/claude-color.svg` },
-  { label: 'Odoo', logo: '/assets/img/blocks/LogoOdoo.svg', wide: true },
+  { label: 'Odoo', logo: '/assets/img/blocks/LogoOdoo.svg', wide: true, invert: true },
 ];
 ---
-<section class="forfait-home">
+<section class="forfait-home dark-bg">
   <div class="container">
-    <div class="forfait-home-title">
-      {title && <h2>{title}</h2>}
-      {intro && <p>{intro}</p>}
-    </div>
-    {cards.length > 0 && (
-      <div class="forfait-cards">
-        {cards.map(c => (
-          <div class={`forfait-card ${c.featured ? 'is-featured' : ''}`}>
-            {c.title && <h3>{c.title}</h3>}
-            {c.text && <p>{c.text}</p>}
+    <div class="forfait-grid">
+      <div class="forfait-left">
+        {eyebrow && <h6>{eyebrow}</h6>}
+        {title && <h2>{title}</h2>}
+        <div class="forfait-stack" aria-label="GPT, Claude, Odoo">
+          {STACK.map(s => (
+            <img src={s.logo} alt={s.label} class={`${s.wide ? 'is-wide' : ''} ${s.invert ? 'is-invert' : ''}`} loading="lazy" />
+          ))}
+        </div>
+        {(ctaPrimary?.label || ctaSecondary?.label) && (
+          <div class="forfait-ctas">
+            <Cta label={ctaPrimary?.label} url={ctaPrimary?.url} wrapClass="primary-btn" />
+            <Cta label={ctaSecondary?.label} url={ctaSecondary?.url} wrapClass="light-btn" />
+          </div>
+        )}
+      </div>
+      <div class="forfait-right">
+        {cards.map((c, i) => (
+          <div class="forfait-row">
+            <span class="forfait-num">{String(i + 1).padStart(2, '0')}</span>
+            <div>
+              {c.title && <h4>{c.title}</h4>}
+              {c.text && <p>{c.text}</p>}
+            </div>
           </div>
         ))}
+        {diyTitle && diyCta?.url && (
+          <a href={diyCta.url} class="forfait-diy-link">{diyTitle} {diyCta.label} →</a>
+        )}
       </div>
-    )}
-    <div class="forfait-footer">
-      <div class="forfait-stack" aria-label="GPT, Claude, Odoo">
-        {STACK.map(s => (
-          <img src={s.logo} alt={s.label} class={s.wide ? 'is-wide' : ''} loading="lazy" />
-        ))}
-      </div>
-      {(ctaPrimary?.label || ctaSecondary?.label) && (
-        <div class="forfait-ctas">
-          <Cta label={ctaPrimary?.label} url={ctaPrimary?.url} wrapClass="primary-btn" />
-          <Cta label={ctaSecondary?.label} url={ctaSecondary?.url} wrapClass="forfait-outline-btn" />
-        </div>
-      )}
-      {diyTitle && diyCta?.url && (
-        <a href={diyCta.url} class="forfait-diy-link">{diyTitle} {diyCta.label} →</a>
-      )}
     </div>
   </div>
 </section>
 
 <style>
-  .forfait-home {
-    padding: 2.5rem 0;
-    background: var(--offwhite, #f7f7f7);
-  }
-  .forfait-home-title {
-    max-width: 640px;
-    margin: 0 auto 1.25rem;
-    text-align: center;
-  }
-  .forfait-home-title h2 {
-    font-size: clamp(1.4rem, 2.6vw, 1.75rem);
-    margin-bottom: 0.35rem;
-  }
-  .forfait-home-title p {
-    color: var(--muted, #6b6b6b);
-    font-size: 0.95rem;
-  }
-  .forfait-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 0.75rem;
-    margin-bottom: 1.25rem;
-  }
-  .forfait-card {
-    background: var(--white, #fff);
-    border: 1px solid var(--border, #e5e5e5);
-    border-radius: 12px;
-    padding: 0.9rem 1rem;
-  }
-  .forfait-card {
-    transition: border-color 0.25s, box-shadow 0.25s;
-  }
-  .forfait-card:hover {
-    border-color: var(--violet, #984895);
-    box-shadow: 0 0 0 1px var(--violet, #984895);
-  }
-  .forfait-card h3 {
-    font-size: 0.95rem;
-    margin-bottom: 0.25rem;
-  }
-  .forfait-card p {
-    font-size: 0.82rem;
-    color: var(--muted, #6b6b6b);
-    line-height: 1.4;
-    margin: 0;
-  }
-  .forfait-footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-  }
-  .forfait-stack {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.1rem;
-    opacity: 0.85;
-  }
-  .forfait-stack img { height: 1.3rem; width: auto; }
-  .forfait-ctas {
-    display: flex;
-    justify-content: center;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-  }
-  .forfait-home :global(.forfait-outline-btn a) {
-    display: inline-block;
-    border: 1px solid var(--violet, #984895);
-    color: var(--violet, #984895);
-    background: transparent;
-    padding: 0.85rem 1.8rem;
-    border-radius: 100px;
-    font-size: 0.95rem;
-    font-weight: 500;
-    transition: background 0.2s, color 0.2s;
-  }
-  .forfait-home :global(.forfait-outline-btn a:hover) {
-    background: var(--violet, #984895);
-    color: var(--white, #fff);
-  }
-  .forfait-diy-link {
-    font-size: 0.85rem;
-    color: var(--muted, #6b6b6b);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-  .forfait-diy-link:hover { color: var(--violet, #984895); }
+  .forfait-home { padding: 4rem 0; background: var(--black, #1d1d1d); color: var(--white, #fff); }
+  .forfait-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .forfait-left h6 { color: var(--violet-light, #b671b3); font-family: var(--font-body); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.02em; margin-bottom: 0.75rem; }
+  .forfait-left h2 { color: var(--white, #fff); font-size: clamp(1.7rem, 1.1rem + 2vw, 2.6rem); line-height: 1.2; margin-bottom: 1.75rem; }
+  .forfait-stack { display: flex; align-items: center; gap: 1.25rem; margin-bottom: 2rem; opacity: 0.9; }
+  .forfait-stack img { height: 1.5rem; width: auto; }
+  .forfait-stack img.is-invert { filter: brightness(0) invert(1); }
+  .forfait-ctas { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .forfait-right { border-top: 1px solid var(--border-onDark, rgba(255,255,255,0.1)); }
+  .forfait-row { display: flex; gap: 1.5rem; align-items: baseline; padding: 1.4rem 0; border-bottom: 1px solid var(--border-onDark, rgba(255,255,255,0.1)); }
+  .forfait-num { flex: 0 0 auto; color: var(--violet-light, #b671b3); font-size: 0.9rem; font-weight: 600; }
+  .forfait-row h4 { color: var(--white, #fff); font-size: 1.3rem; margin: 0 0 0.3rem; }
+  .forfait-row p { color: var(--muted-onDark, #b7b0c2); font-size: 0.95rem; margin: 0; }
+  .forfait-diy-link { display: inline-block; margin-top: 1.25rem; font-size: 0.88rem; color: var(--muted-onDark, #b7b0c2); text-decoration: underline; text-underline-offset: 3px; }
+  .forfait-diy-link:hover { color: var(--white, #fff); }
+  @media (max-width: 900px) { .forfait-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
 </style>

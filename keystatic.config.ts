@@ -436,7 +436,7 @@ const blocksField = fields.array(
       }, { label: 'FAQ' }),
       forfaitHome: fields.object({
         title: fields.text({ label: 'Titre' }),
-        intro: fields.text({ label: 'Intro (1 phrase)', multiline: true }),
+        eyebrow: fields.text({ label: 'Sur-titre violet' }),
         cards: fields.array(
           fields.object({
             title: fields.text({ label: 'Titre' }),

@@ -342,6 +342,7 @@
   }
   .form-field input:focus, .form-field textarea:focus, .form-field select:focus { outline: none; border-color: var(--violet); }
   .form-field textarea { resize: vertical; }
+  .form-field select { appearance: none; -webkit-appearance: none; cursor: pointer; padding-right: 1.75rem; background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23984895' stroke-width='1.8'/%3E%3C/svg%3E") no-repeat right 0.25rem center; }
   .contact-form button[type="submit"] { width: 100%; justify-content: center; border: none; cursor: pointer; margin-top: 0.5rem; }
   @media (max-width: 560px) { .form-row { grid-template-columns: 1fr; } .contact-card { padding: 1.75rem; } }
   .chat-with h6 { font-size: 1.1rem; margin-bottom: 0.4rem; }
