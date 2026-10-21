@@ -1,4 +1,5 @@
 ﻿---
+import { faqPlain } from '../lib/faqText';
 // Generic renderer for FR content living at the site root: Keystatic `pages` entries
 // (page-builder blocks) and `blog` entries (markdoc article body) share this one route
 // since both use flat root URLs on the live site (no /blog/ prefix on post URLs).
@@ -57,7 +58,7 @@ const pageJsonLd = pageFaqBlock
       mainEntity: (pageFaqBlock.value.items ?? []).map((item: any) => ({
         '@type': 'Question',
         name: item.question,
-        acceptedAnswer: { '@type': 'Answer', text: item.answer },
+        acceptedAnswer: { '@type': 'Answer', text: faqPlain(item.answer) },
       })),
     }
   : undefined;

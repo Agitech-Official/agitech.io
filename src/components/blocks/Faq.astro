@@ -7,6 +7,7 @@ export interface Props {
   items?: { question?: string; answer?: string }[];
 }
 const { title, subtitle, items = [] } = Astro.props;
+const parts = (a = '') => a.split(/(\[[^\]]+\]\([^)]+\))/).map(p => { const m = p.match(/^\[([^\]]+)\]\(([^)]+)\)$/); return m ? { label: m[1], href: m[2] } : p; });
 ---
 <section class="faq-section" id="faq">
   <div class="container-sm">
@@ -18,7 +19,7 @@ const { title, subtitle, items = [] } = Astro.props;
       {items.map(item => (
         <details class="faq-item">
           <summary>{item.question}</summary>
-          <p>{item.answer}</p>
+          <p>{parts(item.answer).map(p => typeof p === 'string' ? p : <a href={p.href}>{p.label}</a>)}</p>
         </details>
       ))}
     </div>

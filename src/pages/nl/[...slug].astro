@@ -1,4 +1,5 @@
 ﻿---
+import { faqPlain } from '../../lib/faqText';
 // NL mirror of src/pages/[...slug].astro and src/pages/en/[...slug].astro — same merge
 // of `pages` + `blog` collections, filtered to lang 'nl', served under the /nl/ prefix.
 import Layout from '../../layouts/Layout.astro';
@@ -90,7 +91,7 @@ const pageJsonLd = pageFaqBlock
       mainEntity: (pageFaqBlock.value.items ?? []).map((item: any) => ({
         '@type': 'Question',
         name: item.question,
-        acceptedAnswer: { '@type': 'Answer', text: item.answer },
+        acceptedAnswer: { '@type': 'Answer', text: faqPlain(item.answer) },
       })),
     }
   : undefined;
