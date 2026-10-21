@@ -25,6 +25,7 @@ const LANG_OPTIONS = [
         <li><a href={`${base}/odoo-erp/`}>{strings.odoo}</a></li>
         <li class="has-submenu">
           <a href={`${base}/industries/`}>{strings.industries}</a>
+          <button type="button" class="submenu-toggle" aria-expanded="false" aria-label={strings.industries}></button>
           <div class="submenu">
             <ul class="submenu-inner">
               {industries.map(i => <li><a href={i.href}>{i.label}</a></li>)}
@@ -34,6 +35,7 @@ const LANG_OPTIONS = [
         </li>
         <li class="has-submenu">
           <a href={`${base}/odoo-erp/`}>{strings.services}</a>
+          <button type="button" class="submenu-toggle" aria-expanded="false" aria-label={strings.services}></button>
           <div class="submenu">
             <ul class="submenu-inner">
               {services.map(s => <li><a href={s.href} target={s.external ? '_blank' : undefined} rel={s.external ? 'noopener' : undefined}>{s.label}</a></li>)}

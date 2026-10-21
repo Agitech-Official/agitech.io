@@ -185,6 +185,12 @@ const altLinks = barePath
   const burgerBtn = document.getElementById('burgerBtn');
   const mainMenu = document.getElementById('mainMenu');
   burgerBtn?.addEventListener('click', () => mainMenu?.classList.toggle('open'));
+  // Mobile drawer: sub-menus are collapsed accordions, opened with the chevron button.
+  document.querySelectorAll('.submenu-toggle').forEach((btn) => btn.addEventListener('click', () => {
+    const li = btn.closest('.has-submenu');
+    const open = li?.classList.toggle('open');
+    btn.setAttribute('aria-expanded', String(!!open));
+  }));
 </script>
 {includeContactScripts && (
   <script is:inline define:vars={{ rdvThankYouPath }}>

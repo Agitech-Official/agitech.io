@@ -108,6 +108,7 @@
   .main_menu ul a { color: var(--muted-onDark); font-size: 0.92rem; transition: color 0.2s; }
   .main_menu ul a:hover { color: var(--white); }
   .has-submenu { position: relative; }
+  .submenu-toggle { display: none; }
   .has-submenu .submenu {
     display: none; position: absolute; top: 100%; left: -1rem; margin-top: 0;
     padding-top: 0.75rem; background: none; border: none;
@@ -617,14 +618,27 @@
   .privacy-links a:hover { color: var(--white); }
 
   @media (max-width: 900px) {
-    .main_menu { position: fixed; inset: 0 0 0 auto; width: 78%; max-width: 320px; background: var(--dark); flex-direction: column; align-items: flex-start; padding: 5.5rem 2rem 2rem; transform: translateX(100%); transition: transform 0.3s ease; }
+    /* Drawer scrolls (100dvh) so long menus are never cut off; language switch sits on top. */
+    .main_menu { position: fixed; inset: 0 0 0 auto; width: 84%; max-width: 360px; height: 100dvh; overflow-y: auto; overscroll-behavior: contain; background: var(--dark); flex-direction: column; align-items: stretch; gap: 1.25rem; padding: 4.75rem 1.5rem 2rem; transform: translateX(100%); transition: transform 0.3s ease; }
     .main_menu.open { transform: translateX(0); }
-    .main_menu ul { flex-direction: column; gap: 1.25rem; }
-    /* Hover doesn't exist on touch — submenus stay inline/expanded instead of popover. */
-    .has-submenu .submenu { display: flex; position: static; background: none; border: none; padding: 0.75rem 0 0 1rem; margin-top: 0.5rem; min-width: 0; }
+    .main_menu > ul { flex-direction: column; gap: 0; width: 100%; }
+    .main_menu > ul > li > a { display: block; padding: 0.85rem 0; font-size: 14px; }
+    .main_menu > ul > li:hover > a { letter-spacing: 0.6px; }
+    .main_menu .lang-flag { order: -1; display: flex; width: 100%; padding: 4px; font-size: 15px; }
+    .main_menu .lang-flag .lang-opt { flex: 1; text-align: center; padding: 0.7rem 0; min-height: 44px; display: flex; align-items: center; justify-content: center; }
+    /* Hover doesn't exist on touch: sub-menus are accordions opened by the chevron. */
+    .has-submenu { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; width: 100%; }
+    .has-submenu > a { flex: 1; }
+    .submenu-toggle { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: none; border: 0; color: #fff; cursor: pointer; }
+    .submenu-toggle::before { content: ''; width: 8px; height: 8px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); transition: transform 0.2s; }
+    .has-submenu.open .submenu-toggle::before { transform: rotate(-135deg); }
+    .has-submenu .submenu { display: none; flex-basis: 100%; position: static; background: none; border: none; padding: 0 0 0.5rem 0.75rem; margin-top: 0; min-width: 0; }
+    .has-submenu.open .submenu { display: flex; }
+    .has-submenu .submenu a { padding: 0.7rem 0.5rem; font-size: 0.95rem; }
     .has-submenu .submenu-inner { background: none; border: none; padding: 0; }
     .lines-button { display: flex; }
-    .discuss-btn { margin-top: 1.5rem; }
+    .discuss-btn { margin-top: 0.5rem; }
+    .discuss-btn a { display: block; text-align: center; }
     .why-section .row, .talk-section .row, .credite-section .row { grid-template-columns: 1fr; }
     .odoo-expertise-content, .our-services-content, .help-fields, .we-implemented-section .items-wrap { grid-template-columns: 1fr 1fr; }
     footer .row.main-row { grid-template-columns: 1fr; gap: 2.5rem; }
