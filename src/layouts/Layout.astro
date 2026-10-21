@@ -121,6 +121,9 @@ const altLinks = barePath
 {isHome && <script type="application/ld+json" set:html={JSON.stringify(organizationLd)} />}
 <!-- Same base design system as agifid.be (fonts, tokens, layout primitives), recolored to
      Agitech's own mauve (#984895, from the official wordmark) instead of agifid's teal. -->
+<link rel="preload" href="/assets/fonts/SpaceGrotesk-300.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/SpaceGrotesk-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/DMSans-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/fonts.css">
 <link rel="stylesheet" href="/assets/style.css">
 </head>
