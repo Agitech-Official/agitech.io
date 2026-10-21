@@ -10,6 +10,6 @@ const { label, url, newTab = false, wrapClass = 'primary-btn' } = Astro.props;
 ---
 {label && url && (
   <div class={wrapClass}>
-    <a href={url} target={newTab ? '_blank' : undefined} rel={newTab ? 'noopener' : undefined}>{label}</a>
+    <a href={url} target={newTab ? '_blank' : undefined} rel={newTab ? 'noopener' : undefined}>{label.charAt(0).toUpperCase() + label.slice(1)}</a>
   </div>
 )}
