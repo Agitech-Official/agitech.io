@@ -604,8 +604,10 @@
   .address-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
   .shiftingpact-logo img { height: 32px; width: auto; opacity: 0.85; filter: grayscale(1) brightness(1.6); transition: 0.2s; }
   .shiftingpact-logo:hover img { opacity: 1; filter: none; }
-  .social-icons { display: flex; gap: 1.1rem; margin-bottom: 1.5rem; }
-  .social-icons img { width: 22px; height: 22px; opacity: 0.85; transition: 0.2s; }
+  .social-icons { display: flex; gap: 1.1rem; }
+  .copy-left { display: flex; flex-direction: column; gap: 0.9rem; }
+  .copy-left p { margin: 0; }
+  .social-icons img { width: 34px; height: 34px; opacity: 0.85; transition: 0.2s; }
   .social-icons a:hover img { opacity: 1; }
   .ft-links .content ul li { margin-bottom: 0.55rem; }
   .ft-links .content ul a { color: var(--muted-onDark); font-size: 0.88rem; transition: color 0.2s; }
