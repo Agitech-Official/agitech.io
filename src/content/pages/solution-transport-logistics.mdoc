@@ -2,7 +2,7 @@
 title: Transport & Logistics
 lang: en
 seoTitle: Transport & Logistics — Agitech
-seoDescription: Solutions pour ce secteur
+seoDescription: 'Odoo for transport and logistics: integrated TMS, drag-and-drop transport order planning, driver app and eCMR, waste collection, invoicing on actual weight.'
 blocks:
 - discriminant: innerHero
   value:
@@ -13,126 +13,66 @@ blocks:
 - discriminant: caseIntro
   value:
     bgClass: lighter-gray-bg
-    needsLabel: NEEDS
+    needsLabel: 'NEEDS'
     needs:
-    - TMS — Transport orders
-    - Route planning
-    - Fleet tracking
-    - Transport invoicing
-    - CMR & compliance
-    challengesLabel: THE CHALLENGES
-    challenge: <p data-end="471" data-start="196"><strong data-end="232" data-start="196">Transport order management — TMS</strong><br data-end="235" data-start="232"/>Without a centralized TMS, transport orders come in by email, phone, and WhatsApp. Assignments are managed in spreadsheets, confirmations are sent as PDFs, and disputes are impossible to trace. Every shipment becomes a manual operation.</p><p data-end="709" data-start="473"><strong data-end="501" data-start="473">Route planning &amp; loading</strong><br data-end="504" data-start="501"/>Optimizing loads, assigning the right vehicles and drivers, and respecting customer delivery windows — without a dedicated tool, this work takes hours every morning and generates avoidable transport costs.</p><p data-end="938" data-start="711"><strong data-end="743" data-start="711">Fleet tracking &amp; maintenance</strong><br data-end="746" data-start="743"/>Mileage is recorded in notebooks, maintenance checks are forgotten, and breakdowns
-      immobilize vehicles without warning. Without centralized tracking, fleet costs quickly become uncontrollable.</p><p data-end="1163" data-start="940"><strong data-end="973" data-start="940">Transport invoicing &amp; pricing</strong><br data-end="976" data-start="973"/>Invoicing based on weight, volume, distance, pricing zones, or each customer’s specific conditions — without a dedicated tool — is a constant source of errors and silently erodes margins.</p><p data-end="1379" data-start="1165"><strong data-end="1205" data-start="1165">Transport documents &amp; CMR compliance</strong><br data-end="1208" data-start="1205"/>Managing CMRs, delivery notes, and customs certificates on paper exposes the company to costly disputes. Digitalization has become both an operational and legal necessity.</p>
+    - 'Transport orders (TMS)'
+    - 'Drag-and-drop planning'
+    - 'Driver app & eCMR'
+    - 'Waste collection (DAP/BSD)'
+    - 'Invoicing on actual weight'
+    - 'Real-time KPIs'
+    challengesLabel: 'THE CHALLENGES'
+    challenge: '<p><strong>Transport managed outside the ERP:</strong> planning lives in Excel or on paper, disconnected from the sales order. The carrier has no real-time visibility and disputes are settled by phone.</p><p><strong>Double entry and data errors:</strong> transport orders are re-keyed by hand, creating gaps between orders, deliveries and invoices. Every error is a potential financial loss.</p><p><strong>Delayed invoicing:</strong> 5 to 7 days between delivery and invoice, quantity errors and no automatic reminders: cash flow suffers.</p><p><strong>Insufficient waste traceability:</strong> waste slips (BSD) and acceptance requests (DAP) handled manually, with no link between the collection order and the disposal site. A regulatory compliance risk.</p><p><strong>Several companies, no consolidated view:</strong> different entities and countries on disconnected tools make real-time steering impossible.</p>'
 - discriminant: odooExpertise
   value:
     bgClass: white-bg
-    title: Solutions pour ce secteur
+    title: 'Our solution for transport and logistics'
     items:
     - logo: box-add-outline-rounded.svg
-      heading: TMS — Transport Order Management
-      descriptionPoints: '<p data-end="1492" data-start="1438">Centralize and automate all your transport operations.</p><ul data-end="1698" data-start="1494">
-
-        <li data-end="1549" data-start="1494">Real-time creation and tracking of transport orders</li>
-
-        <li data-end="1610" data-start="1550">Automatic assignment of driver / vehicle / subcontractor</li>
-
-        <li data-end="1652" data-start="1611">Customer portal for shipment tracking</li>
-
-        <li data-end="1698" data-start="1653">Complete history by order and by customer</li>
-
-        </ul>'
+      heading: 'TMS integrated with Odoo'
+      descriptionPoints: '<p>Odoo remains the commercial source of truth, the TMS the transport one.</p><ul><li>Customer order automatically split into Delivery Orders</li><li>Real-time Odoo ↔ TMS API sync</li><li>Each DO broken down into transport orders (1 TO = 1 trip)</li><li>Rules per country and vehicle type (semi, rigid, convoy)</li></ul>'
     - logo: automation-outline.svg
-      heading: Route Planning & Loading
-      descriptionPoints: '<p data-end="1791" data-start="1735">Optimize every route to reduce costs and meet deadlines.</p><ul data-end="1989" data-start="1793">
-
-        <li data-end="1838" data-start="1793">Visual route planning by zone and vehicle</li>
-
-        <li data-end="1889" data-start="1839">Load optimization based on capacity and weight</li>
-
-        <li data-end="1933" data-start="1890">Management of customer delivery windows</li>
-
-        <li data-end="1989" data-start="1934">Real-time reassignment in case of unexpected events</li>
-
-        </ul>'
-    - logo: analytique.png
-      heading: Fleet Tracking & Preventive Maintenance
-      descriptionPoints: '<p data-end="2091" data-start="2040">Anticipate breakdowns and control your fleet costs.</p><ul data-end="2232" data-start="2093">
-
-        <li data-end="2140" data-start="2093">Mileage and engine-hour tracking by vehicle</li>
-
-        <li data-end="2184" data-start="2141">Automatic preventive maintenance alerts</li>
-
-        <li data-end="2232" data-start="2185">Complete history of interventions and costs</li>
-
-        </ul>'
-    - logo: conseiller-financier.png
-      heading: Transport Invoicing & Pricing
-      descriptionPoints: '<p data-end="2350" data-start="2273">Invoice accurately according to your pricing grids, without re-entering data.</p><ul data-end="2492" data-start="2352">
-
-        <li data-end="2409" data-start="2352">Pricing by weight, volume, distance, zone, or pallets</li>
-
-        <li data-end="2450" data-start="2410">Customer-specific pricing conditions</li>
-
-        <li data-end="2492" data-start="2451">Mass invoicing and PEPPOL e-invoicing</li>
-
-        </ul>'
+      heading: 'Drag-and-drop planning'
+      descriptionPoints: '<p>The dispatcher sees everything in one place.</p><ul><li>Unplanned orders on the left, trucks and drivers on the right</li><li>Each vehicle''s load visible at a glance</li><li>Own trucks first, subcontracting as a complement</li><li>Site delivery date protected</li></ul>'
     - logo: codage.png
-      heading: Transport Documents & CMR
-      descriptionPoints: '<div class="qMYqUG_convSearchResultHighlightRoot">
-
-        <div class="" data-is-intersecting="true" data-turn-id-container="request-WEB:1a29722b-f3b5-4aad-85ab-00faf1a7297b-7">
-
-        <section class="text-token-text-primary w-full focus:outline-none has-data-writing-block:pointer-events-none [&amp;:has([data-writing-block])&gt;*]:pointer-events-auto R6Vx5W_threadScrollVars scroll-mb-[calc(var(--scroll-root-safe-area-inset-bottom,0px)+var(--thread-response-height))] scroll-mt-[calc(var(--header-height)+min(200px,max(70px,20svh)))]" data-scroll-anchor="false" data-testid="conversation-turn-16" data-turn="assistant" data-turn-id="request-WEB:1a29722b-f3b5-4aad-85ab-00faf1a7297b-7" data-turn-id-container="request-WEB:1a29722b-f3b5-4aad-85ab-00faf1a7297b-7" dir="auto">
-
-        <div class="text-base my-auto mx-auto pb-10 [--thread-content-margin:var(--thread-content-margin-xs,calc(var(--spacing)*4))] @w-sm/main:[--thread-content-margin:var(--thread-content-margin-sm,calc(var(--spacing)*6))] @w-lg/main:[--thread-content-margin:var(--thread-content-margin-lg,calc(var(--spacing)*16))] px-(--thread-content-margin)">
-
-        <div class="[--thread-content-max-width:40rem] @w-lg/main:[--thread-content-max-width:48rem] mx-auto max-w-(--thread-content-max-width) flex-1 group/turn-messages focus-visible:outline-hidden relative flex w-full min-w-0 flex-col agent-turn">
-
-        <div class="flex max-w-full flex-col gap-4 grow">
-
-        <div class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal outline-none keyboard-focused:focus-ring [.text-message+&amp;]:mt-1" data-message-author-role="assistant" data-message-id="a6147039-a8b1-48c8-905f-a2fccfb53e69" data-message-model-slug="gpt-5-5-thinking" data-turn-start-message="true" dir="auto" tabindex="0">
-
-        <div class="flex w-full flex-col gap-1 empty:hidden">
-
-        <div class="markdown prose dark:prose-invert wrap-break-word w-full light markdown-new-styling">
-
-        <p data-end="2580" data-start="2529">Digitize your documents and secure your compliance.</p>
-
-        <ul data-end="2734" data-is-last-node="" data-is-only-node="" data-start="2582">
-
-        <li data-end="2633" data-start="2582">Automatic generation of CMRs and delivery notes</li>
-
-        <li data-end="2672" data-start="2634">Electronic signature upon delivery</li>
-
-        <li data-end="2734" data-is-last-node="" data-start="2673">Centralized archiving and instant access in case of dispute</li>
-
-        </ul>
-
-        </div>
-
-        </div>
-
-        </div>
-
-        </div>
-
-        <div class="z-0 flex min-h-[46px] justify-start"></div>
-
-        <div class="mt-3 w-full empty:hidden">
-
-        <div class="text-center"></div>
-
-        </div>
-
-        </div>
-
-        </div>
-
-        </section>
-
-        </div>
-
-        </div><div aria-hidden="true" class="pointer-events-none -mt-px h-px translate-y-[calc(var(--scroll-root-safe-area-inset-bottom)-14*var(--spacing))]"></div>'
+      heading: 'Driver app & eCMR'
+      descriptionPoints: '<p>The driver confirms delivery from their phone.</p><ul><li>Daily route and details of each delivery</li><li>Confirmation, photo and dispute reporting</li><li>Electronically signed eCMR, regulatory proof</li><li>Actual weight (weighbridge) sent back to Odoo</li></ul>'
+    - logo: Material-icon.svg
+      heading: 'Waste collection & traceability'
+      descriptionPoints: '<p>Same logic as delivery, with the waste vocabulary.</p><ul><li>DAP submitted from the Odoo customer portal</li><li>Validation, then sales order and reception orders generated</li><li>Collection orders: skip drop, pick-up, swap</li><li>DAP → BSD traceability up to the disposal site</li></ul>'
+    - logo: conseiller-financier.png
+      heading: 'Automated invoicing & finance'
+      descriptionPoints: '<p>No more re-keying: the invoice starts from the actual weight.</p><ul><li>Customer invoice generated each evening on validated deliveries</li><li>Carrier purchase order created automatically</li><li>Multi-company BE/FR, TGAP and Peppol e-invoicing</li><li>Reminders and outstanding tracking</li></ul>'
+    - logo: analytique.png
+      heading: 'Real-time steering & KPIs'
+      descriptionPoints: '<p>Dashboards without any data entry.</p><ul><li>Tonnage, service rate and disputes</li><li>View by depot, vehicle and driver</li><li>Planned and in-progress orders, active disputes</li><li>Fleet tracking and preventive maintenance</li></ul>'
+- discriminant: methodologies
+  value:
+    bgClass: white-bg
+    title: 'From order to truck, with no double entry'
+    description: ''
+    methodologies:
+    - heading: '① Order in Odoo'
+      description: '<p>The customer orders N tonnes of materials or a waste collection service. On validation, Odoo splits the order into logistics slices: for example 300 T become 2 Delivery Orders of 150 T.</p>'
+    - heading: '② Real-time sync'
+      description: '<p>Each Delivery Order is sent automatically to the TMS through the API. The dispatcher sees it appear without typing anything.</p>'
+    - heading: '③ Transport orders'
+      description: '<p>The dispatcher (or the TMS) breaks each DO down into transport orders according to vehicle and availability: 150 T become 6 trips of 25 T. One order = one truck trip.</p>'
+    - heading: '④ Delivery and invoicing'
+      description: '<p>The driver validates, the eCMR is signed and the actual weight flows back into Odoo. The customer invoice and the carrier purchase order are generated automatically.</p>'
+- discriminant: screenshotGallery
+  value:
+    title: 'The TMS in pictures'
+    intro: 'Mockups of our TMS connected to Odoo: planning, delivery orders, dashboard and driver view.'
+    shots:
+    - image: transport-tms-planification.webp
+      caption: 'Drag-and-drop transport order planning'
+    - image: transport-tms-ordres-livraison.webp
+      caption: 'Odoo delivery orders broken down into transport orders'
+    - image: transport-tms-dashboard.webp
+      caption: 'Dashboard: orders, active vehicles, disputes'
+    - image: transport-tms-chauffeur.webp
+      caption: 'Driver view: daily route and eCMR'
 - discriminant: applicationsUsed
   value:
     title: Applications Implemented

@@ -2,7 +2,7 @@
 title: Solution Transport & Logistique
 lang: fr
 seoTitle: Odoo pour le Transport & Logistique — Agitech
-seoDescription: 'Solution Odoo pour le transport et la logistique : TMS, planification des tournées, suivi de flotte, facturation.'
+seoDescription: 'Odoo pour le transport et la logistique : TMS intégré, planification des ordres de transport en glisser-déposer, app chauffeur et eCMR, collecte de déchets, facturation au poids réel.'
 blocks:
 - discriminant: innerHero
   value:
@@ -13,99 +13,66 @@ blocks:
 - discriminant: caseIntro
   value:
     bgClass: lighter-gray-bg
-    needsLabel: LES BESOINS
+    needsLabel: 'LES BESOINS'
     needs:
-    - TMS — Ordres de transport
-    - Planification des tournées
-    - Suivi de flotte
-    - Facturation transport
-    - CMR & conformité
-    challengesLabel: LES DÉFIS
-    challenge: '<p><strong>Gestion des ordres de transport (TMS) :</strong> Sans TMS centralisé, les ordres de transport arrivent par<br/>
-
-      email, téléphone et WhatsApp. Les affectations se font dans des tableurs, les confirmations partent<br/>
-
-      en PDF et les litiges sont impossibles à tracer. Chaque expédition est une opération manuelle.</p><p><strong>Planification des tournées &amp; chargements :</strong> Optimiser les chargements, affecter les bons<br/>
-
-      véhicules et chauffeurs, respecter les fenêtres de livraison client — sans outil dédié, ce travail prend<br/>
-
-      des heures chaque matin et génère des coûts de transport évitables.</p><p><strong>Suivi de flotte &amp; maintenance :</strong> Les kilométrages s’accumulent dans des carnets, les révisions<br/>
-
-      sont oubliées et les pannes immobilisent des véhicules sans préavis. Sans suivi centralisé, les<br/>
-
-      coûts de flotte sont incontrôlables.</p><p><strong>Facturation transport &amp; tarification :</strong> Facturer selon le poids, le volume, la distance, les zones<br/>
-
-      tarifaires ou les conditions spécifiques de chaque client — sans outil dédié — est une source<br/>
-
-      d’erreurs permanente et de marges grignotées silencieusement.</p><p><strong>Documents &amp; conformité CMR :</strong> Gérer les CMR, bons de livraison et attestations douanières sur<br/>
-
-      papier expose l’entreprise à des litiges coûteux. La dématérialisation est devenue un impératif<br/>
-
-      opérationnel et légal.</p>'
+    - 'Ordres de transport (TMS)'
+    - 'Planification glisser-déposer'
+    - 'App chauffeur & eCMR'
+    - 'Collecte de déchets (DAP/BSD)'
+    - 'Facturation au poids réel'
+    - 'Pilotage & KPI en temps réel'
+    challengesLabel: 'LES DÉFIS'
+    challenge: '<p><strong>Transport géré hors ERP :</strong> la planification se fait sur Excel ou sur papier, sans lien avec la commande. Le transporteur n''a aucune visibilité temps réel et les litiges se règlent par téléphone.</p><p><strong>Double saisie et erreurs de données :</strong> les ordres de transport sont ressaisis à la main, avec des écarts entre commandes, livraisons et factures. Chaque erreur est une perte financière potentielle.</p><p><strong>Facturation différée :</strong> 5 à 7 jours entre la livraison et la facture, des erreurs de quantité et aucune relance automatique : la trésorerie en pâtit.</p><p><strong>Traçabilité des déchets insuffisante :</strong> bordereaux (BSD) et demandes d''acceptation (DAP) gérés à la main, sans lien entre l''ordre de collecte et l''exutoire. Un risque de non-conformité réglementaire.</p><p><strong>Plusieurs sociétés, aucune vue consolidée :</strong> des entités et des pays différents sur des outils déconnectés rendent le pilotage en temps réel impossible.</p>'
 - discriminant: odooExpertise
   value:
     bgClass: white-bg
-    title: Notre solution pour le secteur de la logistique et des transports
+    title: 'Notre solution pour le transport et la logistique'
     items:
     - logo: box-add-outline-rounded.svg
-      heading: TMS — Gestion des ordres de transport
-      descriptionPoints: '<p>Centralisez et automatisez l’ensemble de vos opérations de transport</p><ul>
-
-        <li>Création et suivi des ordres de transport en temps réel</li>
-
-        <li>Affectation automatique chauffeur / véhicule / sous-traitant</li>
-
-        <li>Portail client pour le suivi des expéditions</li>
-
-        <li>Historique complet par ordre et par client</li>
-
-        </ul>'
+      heading: 'TMS intégré à Odoo'
+      descriptionPoints: '<p>Odoo reste la source de vérité commerciale, le TMS celle du transport.</p><ul><li>Commande client découpée automatiquement en Delivery Orders</li><li>Synchronisation API Odoo ↔ TMS en temps réel</li><li>Chaque DO décomposé en ordres de transport (1 OT = 1 voyage)</li><li>Règles par pays et par type de véhicule (semi, porteur, convoi)</li></ul>'
     - logo: automation-outline.svg
-      heading: Planification des tournées & chargements
-      descriptionPoints: '<p>Optimisez chaque tournée pour réduire les coûts et respecter les délais.</p><ul>
-
-        <li>Planification visuelle des tournées par zone et par véhicule</li>
-
-        <li>Optimisation des chargements selon capacité et poids</li>
-
-        <li>Gestion des fenêtres de livraison client</li>
-
-        <li>Réaffectation en temps réel en cas d’imprévu</li>
-
-        </ul>'
-    - logo: analytique.png
-      heading: Suivi de flotte & maintenance préventive
-      descriptionPoints: '<p>Anticipez les pannes et maîtrisez vos coûts de flotte.</p><ul>
-
-        <li>Suivi kilométrique et des heures moteur par véhicule</li>
-
-        <li>Alertes de maintenance préventive automatiques</li>
-
-        <li>Historique complet des interventions et coûts</li>
-
-        </ul>'
-    - logo: conseiller-financier.png
-      heading: Facturation transport & tarification
-      descriptionPoints: '<p>Facturez juste selon vos grilles tarifaires, sans ressaisie.</p><ul>
-
-        <li>Tarification par poids, volume, distance, zone ou palettes</li>
-
-        <li>Conditions tarifaires spécifiques par client</li>
-
-        <li>Facturation en masse et E-invoicing PEPPOL</li>
-
-        </ul>'
+      heading: 'Planification glisser-déposer'
+      descriptionPoints: '<p>L''affréteur voit tout, au même endroit.</p><ul><li>Ordres non planifiés à gauche, camions et chauffeurs à droite</li><li>Charge de chaque véhicule visible en un coup d''œil</li><li>Priorité aux camions internes, sous-traitance en complément</li><li>Date de livraison chantier protégée</li></ul>'
     - logo: codage.png
-      heading: Documents de transport & CMR
-      descriptionPoints: '<p>Dématérialisez vos documents et sécurisez votre conformité.</p><ul>
-
-        <li>Génération automatique des CMR et bons de livraison</li>
-
-        <li>Signature électronique à la livraison</li>
-
-        <li>Archivage centralisé et accès instantané en cas de litige</li>
-
-        </ul>'
+      heading: 'App chauffeur & eCMR'
+      descriptionPoints: '<p>Le chauffeur confirme la livraison depuis son téléphone.</p><ul><li>Itinéraire du jour et détail de chaque livraison</li><li>Confirmation, photo et déclaration de litige</li><li>eCMR signé électroniquement, preuve réglementaire</li><li>Poids réel (pont-bascule) renvoyé dans Odoo</li></ul>'
+    - logo: Material-icon.svg
+      heading: 'Collecte de déchets & traçabilité'
+      descriptionPoints: '<p>Même logique que la livraison, avec le lexique du déchet.</p><ul><li>Dépôt de la DAP depuis le portail client Odoo</li><li>Validation puis commande et ordres de réception générés</li><li>Ordres de collecte : pose de benne, reprise, échange</li><li>Traçabilité DAP → BSD jusqu''à l''exutoire</li></ul>'
+    - logo: conseiller-financier.png
+      heading: 'Facturation & finance automatisées'
+      descriptionPoints: '<p>Fini la ressaisie : la facture part du poids réel.</p><ul><li>Facture client générée le soir sur les livraisons validées</li><li>Bon d''achat transporteur créé automatiquement</li><li>Multi-sociétés BE/FR, TGAP et facturation électronique Peppol</li><li>Relances et suivi d''encours</li></ul>'
+    - logo: analytique.png
+      heading: 'Pilotage & KPI en temps réel'
+      descriptionPoints: '<p>Des tableaux de bord sans aucune saisie.</p><ul><li>Tonnages, taux de service et litiges</li><li>Vue par dépôt, véhicule et chauffeur</li><li>Ordres planifiés, en cours, litiges actifs</li><li>Suivi de flotte et maintenance préventive</li></ul>'
+- discriminant: methodologies
+  value:
+    bgClass: white-bg
+    title: 'De la commande au camion, sans double saisie'
+    description: ''
+    methodologies:
+    - heading: '① Commande dans Odoo'
+      description: '<p>Le client commande N tonnes de matériaux ou une prestation de collecte. À la validation, Odoo découpe la commande en tranches logistiques : par exemple 300 T deviennent 2 Delivery Orders de 150 T.</p>'
+    - heading: '② Synchronisation en temps réel'
+      description: '<p>Chaque Delivery Order est envoyé automatiquement au TMS par API. L''affréteur le voit apparaître sans rien saisir.</p>'
+    - heading: '③ Ordres de transport'
+      description: '<p>L''affréteur (ou le TMS) décompose chaque DO en ordres de transport selon le véhicule et la disponibilité : 150 T donnent 6 voyages de 25 T. Un ordre = un voyage de camion.</p>'
+    - heading: '④ Livraison et facturation'
+      description: '<p>Le chauffeur valide, l''eCMR est signé et le poids réel revient dans Odoo. La facture client et le bon d''achat transporteur sont générés automatiquement.</p>'
+- discriminant: screenshotGallery
+  value:
+    title: 'Le TMS en images'
+    intro: 'Maquettes de notre TMS connecté à Odoo : planification, ordres de livraison, tableau de bord et vue chauffeur.'
+    shots:
+    - image: transport-tms-planification.webp
+      caption: 'Planification des ordres de transport en glisser-déposer'
+    - image: transport-tms-ordres-livraison.webp
+      caption: 'Ordres de livraison Odoo décomposés en ordres de transport'
+    - image: transport-tms-dashboard.webp
+      caption: 'Tableau de bord : ordres, véhicules actifs, litiges'
+    - image: transport-tms-chauffeur.webp
+      caption: 'Vue chauffeur : itinéraire du jour et eCMR'
 - discriminant: applicationsUsed
   value:
     title: Applications implémentées

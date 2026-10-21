@@ -2,7 +2,7 @@
 title: Oplossing Transport & Logistiek
 lang: nl
 seoTitle: Odoo voor Transport & Logistiek — Agitech
-seoDescription: 'Odoo-oplossing voor transport en logistiek: TMS, ritplanning, wagenparkopvolging, facturatie.'
+seoDescription: 'Odoo voor transport en logistiek: geïntegreerde TMS, transportopdrachten plannen met slepen en neerzetten, chauffeursapp en eCMR, afvalinzameling, facturatie op reëel gewicht.'
 blocks:
 - discriminant: innerHero
   value:
@@ -13,99 +13,66 @@ blocks:
 - discriminant: caseIntro
   value:
     bgClass: lighter-gray-bg
-    needsLabel: DE BEHOEFTEN
+    needsLabel: 'DE BEHOEFTEN'
     needs:
-    - TMS — Transportopdrachten
-    - Ritplanning
-    - Wagenparkopvolging
-    - Transportfacturatie
-    - CMR & conformiteit
-    challengesLabel: DE UITDAGINGEN
-    challenge: '<p><strong>Beheer van transportopdrachten (TMS):</strong> Zonder gecentraliseerd TMS komen transportopdrachten binnen via<br/>
-
-      e-mail, telefoon en WhatsApp. Toewijzingen gebeuren in spreadsheets, bevestigingen worden verstuurd<br/>
-
-      als PDF en geschillen zijn onmogelijk te traceren. Elke zending is een manuele bewerking.</p><p><strong>Ritplanning &amp; laadoptimalisatie:</strong> De juiste ladingen optimaliseren, de juiste<br/>
-
-      voertuigen en chauffeurs toewijzen, de leveringsvensters van de klant respecteren — zonder specifieke tool kost dit werk<br/>
-
-      elke ochtend uren en veroorzaakt het vermijdbare transportkosten.</p><p><strong>Wagenparkopvolging &amp; onderhoud:</strong> Kilometerstanden stapelen zich op in schriftjes, revisies<br/>
-
-      worden vergeten en pannes leggen voertuigen zonder voorafgaande waarschuwing stil. Zonder gecentraliseerde opvolging zijn de<br/>
-
-      wagenparkkosten oncontroleerbaar.</p><p><strong>Transportfacturatie &amp; tarifering:</strong> Factureren op basis van gewicht, volume, afstand, tariefzones<br/>
-
-      of de specifieke voorwaarden van elke klant — zonder specifieke tool — is een blijvende bron<br/>
-
-      van fouten en stilletjes weggeknabbelde marges.</p><p><strong>Documenten &amp; CMR-conformiteit:</strong> Het beheer van CMR''s, leveringsbonnen en douaneattesten op<br/>
-
-      papier stelt het bedrijf bloot aan dure geschillen. Digitalisering is een operationele<br/>
-
-      en wettelijke noodzaak geworden.</p>'
+    - 'Transportopdrachten (TMS)'
+    - 'Planning met slepen en neerzetten'
+    - 'Chauffeursapp & eCMR'
+    - 'Afvalinzameling (DAP/BSD)'
+    - 'Facturatie op reëel gewicht'
+    - 'KPI''s in real time'
+    challengesLabel: 'DE UITDAGINGEN'
+    challenge: '<p><strong>Transport buiten het ERP:</strong> de planning staat in Excel of op papier, los van de bestelling. De vervoerder heeft geen real-time zicht en geschillen worden telefonisch geregeld.</p><p><strong>Dubbele invoer en gegevensfouten:</strong> transportopdrachten worden met de hand overgetypt, met verschillen tussen bestellingen, leveringen en facturen. Elke fout is een mogelijk financieel verlies.</p><p><strong>Vertraagde facturatie:</strong> 5 tot 7 dagen tussen levering en factuur, hoeveelheidsfouten en geen automatische herinneringen: de cashflow lijdt eronder.</p><p><strong>Onvoldoende traceerbaarheid van afval:</strong> afvalbordereaus (BSD) en aanvaardingsaanvragen (DAP) worden manueel beheerd, zonder link tussen de ophaalopdracht en de verwerker. Een risico op reglementaire niet-conformiteit.</p><p><strong>Meerdere vennootschappen, geen geconsolideerd overzicht:</strong> verschillende entiteiten en landen op losse tools maken sturing in real time onmogelijk.</p>'
 - discriminant: odooExpertise
   value:
     bgClass: white-bg
-    title: Onze oplossing voor de logistiek- en transportsector
+    title: 'Onze oplossing voor transport en logistiek'
     items:
     - logo: box-add-outline-rounded.svg
-      heading: TMS — Beheer van transportopdrachten
-      descriptionPoints: '<p>Centraliseer en automatiseer al uw transportactiviteiten</p><ul>
-
-        <li>Aanmaak en real-time opvolging van transportopdrachten</li>
-
-        <li>Automatische toewijzing chauffeur / voertuig / onderaannemer</li>
-
-        <li>Klantenportaal voor opvolging van zendingen</li>
-
-        <li>Volledige historiek per opdracht en per klant</li>
-
-        </ul>'
+      heading: 'TMS geïntegreerd in Odoo'
+      descriptionPoints: '<p>Odoo blijft de commerciële bron van waarheid, de TMS die van het transport.</p><ul><li>Klantenbestelling automatisch opgesplitst in Delivery Orders</li><li>Real-time API-synchronisatie Odoo ↔ TMS</li><li>Elke DO opgedeeld in transportopdrachten (1 TO = 1 rit)</li><li>Regels per land en voertuigtype (oplegger, vrachtwagen, konvooi)</li></ul>'
     - logo: automation-outline.svg
-      heading: Ritplanning & laadoptimalisatie
-      descriptionPoints: '<p>Optimaliseer elke rit om kosten te verlagen en termijnen te respecteren.</p><ul>
-
-        <li>Visuele ritplanning per zone en per voertuig</li>
-
-        <li>Optimalisatie van ladingen op basis van capaciteit en gewicht</li>
-
-        <li>Beheer van leveringsvensters voor de klant</li>
-
-        <li>Real-time herplanning bij onvoorziene gebeurtenissen</li>
-
-        </ul>'
-    - logo: analytique.png
-      heading: Wagenparkopvolging & preventief onderhoud
-      descriptionPoints: '<p>Anticipeer op pannes en beheers uw wagenparkkosten.</p><ul>
-
-        <li>Opvolging van kilometerstand en motoruren per voertuig</li>
-
-        <li>Automatische meldingen voor preventief onderhoud</li>
-
-        <li>Volledige historiek van interventies en kosten</li>
-
-        </ul>'
-    - logo: conseiller-financier.png
-      heading: Transportfacturatie & tarifering
-      descriptionPoints: '<p>Factureer correct volgens uw tariefroosters, zonder herinvoer.</p><ul>
-
-        <li>Tarifering per gewicht, volume, afstand, zone of pallets</li>
-
-        <li>Specifieke tariefvoorwaarden per klant</li>
-
-        <li>Massafacturatie en E-invoicing PEPPOL</li>
-
-        </ul>'
+      heading: 'Planning met slepen en neerzetten'
+      descriptionPoints: '<p>De planner ziet alles op één plaats.</p><ul><li>Niet-geplande opdrachten links, vrachtwagens en chauffeurs rechts</li><li>De lading van elk voertuig in één oogopslag</li><li>Eigen vrachtwagens eerst, onderaanneming als aanvulling</li><li>Leverdatum op de werf beschermd</li></ul>'
     - logo: codage.png
-      heading: Transportdocumenten & CMR
-      descriptionPoints: '<p>Digitaliseer uw documenten en waarborg uw conformiteit.</p><ul>
-
-        <li>Automatische aanmaak van CMR''s en leveringsbonnen</li>
-
-        <li>Elektronische ondertekening bij levering</li>
-
-        <li>Gecentraliseerde archivering en directe toegang bij geschillen</li>
-
-        </ul>'
+      heading: 'Chauffeursapp & eCMR'
+      descriptionPoints: '<p>De chauffeur bevestigt de levering vanaf zijn telefoon.</p><ul><li>Dagroute en detail van elke levering</li><li>Bevestiging, foto en melding van een geschil</li><li>Elektronisch ondertekende eCMR, reglementair bewijs</li><li>Reëel gewicht (weegbrug) terug naar Odoo</li></ul>'
+    - logo: Material-icon.svg
+      heading: 'Afvalinzameling & traceerbaarheid'
+      descriptionPoints: '<p>Dezelfde logica als levering, met het afvalvocabulaire.</p><ul><li>DAP ingediend via het klantenportaal van Odoo</li><li>Validatie, daarna bestelling en ontvangstopdrachten aangemaakt</li><li>Ophaalopdrachten: container plaatsen, ophalen, wisselen</li><li>Traceerbaarheid DAP → BSD tot de verwerker</li></ul>'
+    - logo: conseiller-financier.png
+      heading: 'Geautomatiseerde facturatie & financiën'
+      descriptionPoints: '<p>Geen overtypen meer: de factuur vertrekt van het reëel gewicht.</p><ul><li>Klantfactuur elke avond aangemaakt op gevalideerde leveringen</li><li>Inkooporder voor de vervoerder automatisch aangemaakt</li><li>Multi-vennootschap BE/FR, TGAP en Peppol e-facturatie</li><li>Herinneringen en opvolging van openstaande bedragen</li></ul>'
+    - logo: analytique.png
+      heading: 'Sturing & KPI''s in real time'
+      descriptionPoints: '<p>Dashboards zonder enige invoer.</p><ul><li>Tonnages, servicegraad en geschillen</li><li>Overzicht per depot, voertuig en chauffeur</li><li>Geplande en lopende opdrachten, actieve geschillen</li><li>Wagenparkopvolging en preventief onderhoud</li></ul>'
+- discriminant: methodologies
+  value:
+    bgClass: white-bg
+    title: 'Van bestelling tot vrachtwagen, zonder dubbele invoer'
+    description: ''
+    methodologies:
+    - heading: '① Bestelling in Odoo'
+      description: '<p>De klant bestelt N ton materialen of een ophaaldienst voor afval. Bij validatie splitst Odoo de bestelling in logistieke schijven: 300 T worden bijvoorbeeld 2 Delivery Orders van 150 T.</p>'
+    - heading: '② Real-time synchronisatie'
+      description: '<p>Elke Delivery Order wordt automatisch via API naar de TMS gestuurd. De planner ziet hem verschijnen zonder iets in te typen.</p>'
+    - heading: '③ Transportopdrachten'
+      description: '<p>De planner (of de TMS) deelt elke DO op in transportopdrachten volgens voertuig en beschikbaarheid: 150 T geven 6 ritten van 25 T. Eén opdracht = één rit.</p>'
+    - heading: '④ Levering en facturatie'
+      description: '<p>De chauffeur valideert, de eCMR wordt ondertekend en het reëel gewicht keert terug naar Odoo. De klantfactuur en het inkooporder voor de vervoerder worden automatisch aangemaakt.</p>'
+- discriminant: screenshotGallery
+  value:
+    title: 'De TMS in beeld'
+    intro: 'Mockups van onze TMS gekoppeld aan Odoo: planning, leveringsopdrachten, dashboard en chauffeursweergave.'
+    shots:
+    - image: transport-tms-planification.webp
+      caption: 'Transportopdrachten plannen met slepen en neerzetten'
+    - image: transport-tms-ordres-livraison.webp
+      caption: 'Odoo-leveringsopdrachten opgedeeld in transportopdrachten'
+    - image: transport-tms-dashboard.webp
+      caption: 'Dashboard: opdrachten, actieve voertuigen, geschillen'
+    - image: transport-tms-chauffeur.webp
+      caption: 'Chauffeursweergave: dagroute en eCMR'
 - discriminant: applicationsUsed
   value:
     title: Geïmplementeerde toepassingen
