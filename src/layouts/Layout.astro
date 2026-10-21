@@ -113,7 +113,10 @@ const altLinks = barePath
     <meta name="twitter:image" content={ogImage}>
   </>
 )}
-<link rel="icon" href="/assets/img/agitech-logo-dark.svg">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
 {isHome && <script type="application/ld+json" set:html={JSON.stringify(organizationLd)} />}
 <!-- Same base design system as agifid.be (fonts, tokens, layout primitives), recolored to
