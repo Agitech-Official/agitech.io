@@ -45,7 +45,7 @@ const industries: Record<Lang, Link[]> = {
 // "Comptabilité" hands off to AgiFid (sister company, separate site).
 const services: Record<Lang, Link[]> = {
   fr: [
-    { label: 'Comptabilité (AgiFid)', href: 'https://agifid.be', external: true },
+    { label: 'Comptabilité (AgiFid)', href: '/comptabilite-odoo-agifid/' },
     { label: 'Implémentation Odoo', href: '/odoo-erp/' },
     { label: 'Formation', href: '/formation/' },
     { label: 'Support', href: '/support/' },
@@ -56,7 +56,7 @@ const services: Record<Lang, Link[]> = {
     { label: 'Développement au forfait (IA)', href: '/developpement-odoo-forfait/' },
   ],
   en: [
-    { label: 'Accounting (AgiFid)', href: 'https://agifid.be', external: true },
+    { label: 'Accounting (AgiFid)', href: '/en/comptabilite-odoo-agifid/' },
     { label: 'Odoo Implementation', href: '/en/odoo-erp/' },
     { label: 'Training', href: '/en/formation/' },
     { label: 'Support', href: '/en/support/' },
@@ -67,7 +67,7 @@ const services: Record<Lang, Link[]> = {
     { label: 'Fixed-Price Development (AI)', href: '/en/developpement-odoo-forfait/' },
   ],
   nl: [
-    { label: 'Boekhouding (AgiFid)', href: 'https://agifid.be', external: true },
+    { label: 'Boekhouding (AgiFid)', href: '/nl/comptabilite-odoo-agifid/' },
     { label: 'Odoo Implementatie', href: '/nl/odoo-erp/' },
     { label: 'Opleiding', href: '/nl/formation/' },
     { label: 'Support', href: '/nl/support/' },
