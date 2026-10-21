@@ -1,5 +1,5 @@
 ---
-// Product screenshots: first shot full width, the rest side by side. Click opens the full image.
+// Product screenshots as a scroll-snap carousel (arrows, dots, swipe). Click opens the full image.
 import { blockImg } from '../../lib/img';
 export interface Props {
   title?: string;
@@ -7,43 +7,80 @@ export interface Props {
   shots?: { image?: string; caption?: string }[];
 }
 const { title, intro, shots = [] } = Astro.props;
-const [first, ...rest] = shots;
+const slides = shots.filter(s => s.image);
 ---
 <section class="shots-section">
   <div class="container">
     {title && <h2>{title}</h2>}
     {intro && <p class="shots-intro">{intro}</p>}
-    {first?.image && (
-      <figure class="shot shot-main">
-        <a href={blockImg(first.image)} target="_blank" rel="noopener"><img src={blockImg(first.image)} alt={first.caption ?? ''} loading="lazy"></a>
-        {first.caption && <figcaption>{first.caption}</figcaption>}
-      </figure>
-    )}
-    {rest.length > 0 && (
-      <div class="shots-row">
-        {rest.map(s => s.image && (
-          <figure class="shot">
-            <a href={blockImg(s.image)} target="_blank" rel="noopener"><img src={blockImg(s.image)} alt={s.caption ?? ''} loading="lazy"></a>
-            {s.caption && <figcaption>{s.caption}</figcaption>}
-          </figure>
-        ))}
+    {slides.length > 0 && (
+      <div class="shots-carousel" data-carousel role="region" aria-roledescription="carousel" aria-label={title || 'Captures d’écran'}>
+        <div class="shots-stage">
+          <div class="shots-track" tabindex="0">
+            {slides.map((s, i) => (
+              <figure class="shot" aria-roledescription="slide" aria-label={`${i + 1} / ${slides.length}`}>
+                <a href={blockImg(s.image!)} target="_blank" rel="noopener"><img src={blockImg(s.image!)} alt={s.caption ?? ''} loading={i === 0 ? 'eager' : 'lazy'}></a>
+                {s.caption && <figcaption>{s.caption}</figcaption>}
+              </figure>
+            ))}
+          </div>
+          {slides.length > 1 && (
+            <>
+              <button type="button" class="shots-nav prev" aria-label="Précédent" data-dir="-1">‹</button>
+              <button type="button" class="shots-nav next" aria-label="Suivant" data-dir="1">›</button>
+            </>
+          )}
+        </div>
+        {slides.length > 1 && (
+          <div class="shots-dots">
+            {slides.map((_, i) => <button type="button" class={i === 0 ? 'active' : ''} aria-label={`Capture ${i + 1}`} data-i={i}></button>)}
+          </div>
+        )}
       </div>
     )}
   </div>
 </section>
 
+<script>
+  document.querySelectorAll<HTMLElement>('[data-carousel]').forEach(root => {
+    const track = root.querySelector<HTMLElement>('.shots-track')!;
+    const dots = [...root.querySelectorAll<HTMLElement>('.shots-dots button')];
+    const go = (i: number) => {
+      const n = track.children.length;
+      track.scrollTo({ left: ((i + n) % n) * track.clientWidth, behavior: 'smooth' });
+    };
+    const current = () => Math.round(track.scrollLeft / track.clientWidth);
+    root.querySelectorAll<HTMLElement>('.shots-nav').forEach(b =>
+      b.addEventListener('click', () => go(current() + Number(b.dataset.dir))));
+    dots.forEach(d => d.addEventListener('click', () => go(Number(d.dataset.i))));
+    track.addEventListener('scroll', () => {
+      const c = current();
+      dots.forEach((d, i) => d.classList.toggle('active', i === c));
+    }, { passive: true });
+    track.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(current() + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(current() - 1); }
+    });
+  });
+</script>
+
 <style>
   .shots-section { padding: 4rem 0; }
   .shots-section h2 { font-size: clamp(1.5rem, 3vw, 1.9rem); margin-bottom: 0.75rem; }
   .shots-intro { color: var(--muted, #6b6b6b); max-width: 640px; margin-bottom: 2rem; }
-  .shot { margin: 0; }
-  .shot img { width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--border, #e5e5e5); box-shadow: 0 10px 30px rgba(0,0,0,0.08); background: #fff; transition: transform 0.3s, box-shadow 0.3s; }
-  .shot a:hover img { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,0,0,0.14); }
-  .shot figcaption { margin-top: 0.75rem; font-size: 0.88rem; color: var(--muted, #6b6b6b); }
-  .shot-main { margin-bottom: 1.75rem; }
-  /* A lone screenshot (no row below) is capped so small captures aren't blown up. */
-  .shot-main:last-child { margin-bottom: 0; }
-  .shot-main:last-child img { max-width: 900px; }
-  .shots-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.75rem; }
-  @media (max-width: 800px) { .shots-row { grid-template-columns: 1fr; } }
+  .shots-carousel { max-width: 1040px; margin: 0 auto; }
+  .shots-stage { position: relative; }
+  .shots-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; border-radius: 14px; outline-offset: 4px; }
+  .shots-track::-webkit-scrollbar { display: none; }
+  .shot { flex: 0 0 100%; scroll-snap-align: start; margin: 0; }
+  .shot img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: var(--offwhite, #f7f7f7); border: 1px solid var(--border, #e5e5e5); border-radius: 14px; }
+  .shot figcaption { margin-top: 0.9rem; font-size: 0.92rem; color: var(--muted, #6b6b6b); text-align: center; }
+  .shots-nav { position: absolute; top: calc(50% - 1.5rem); width: 2.75rem; height: 2.75rem; border: 0; border-radius: 50%; background: rgba(22, 21, 26, 0.72); color: #fff; font-size: 1.6rem; line-height: 1; cursor: pointer; display: grid; place-items: center; transition: background 0.2s; }
+  .shots-nav:hover { background: var(--violet, #984895); }
+  .shots-nav.prev { left: 0.9rem; }
+  .shots-nav.next { right: 0.9rem; }
+  .shots-dots { display: flex; justify-content: center; gap: 0.5rem; margin-top: 1rem; }
+  .shots-dots button { width: 9px; height: 9px; padding: 0; border: 0; border-radius: 50%; background: var(--border, #d6d6d6); cursor: pointer; transition: background 0.2s, transform 0.2s; }
+  .shots-dots button.active { background: var(--violet, #984895); transform: scale(1.25); }
+  @media (max-width: 800px) { .shots-nav { width: 2.25rem; height: 2.25rem; font-size: 1.3rem; } }
 </style>
