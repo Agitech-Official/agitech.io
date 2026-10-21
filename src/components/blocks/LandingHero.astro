@@ -1,4 +1,4 @@
----
+﻿---
 // Ported from template-parts/block/landing-hero.php
 import Cta from './Cta.astro';
 import { blockImg } from '../../lib/img';
@@ -28,7 +28,7 @@ const { kpis = [], title, subTitle, cta, bgImage, bottomLine = false } = Astro.p
         )}
         <div class="text">
           {title && <h6>{title}</h6>}
-          {subTitle && <h2 set:html={subTitle} />}
+          {subTitle && <h1 set:html={subTitle} />}
           {cta && <Cta label={cta.label} url={cta.url} newTab={cta.newTab} wrapClass="light-btn" />}
         </div>
       </div>

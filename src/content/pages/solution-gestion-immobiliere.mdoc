@@ -1,4 +1,4 @@
----
+﻿---
 title: Gestion Immobilière
 lang: fr
 seoTitle: Odoo pour la Gestion Immobilière Locative — Agitech
@@ -45,6 +45,39 @@ blocks:
     - logo: offer-icon.svg
       heading: Sinistres & incidents
       descriptionPoints: '<p>Gestion des sinistres et des incidents techniques par bien.</p><ul><li>Liaison des incidents avec les tickets Helpdesk</li><li>Fiche locataire enrichie : baux liés, bien loué actuellement</li></ul>'
+- discriminant: methodologies
+  value:
+    bgClass: white-bg
+    title: Du bien à la rentabilité, en un seul outil
+    description: ''
+    methodologies:
+    - heading: Immeubles & biens
+      description: '<p>Le parc est structuré par immeuble, avec la fiche complète de chaque bien.</p><ul><li>Quotités (millièmes), compteurs et codes EAN</li><li>Acquisition, revenu cadastral indexé, PEB, assurance</li><li>Rentabilité par bien et consolidée par immeuble</li></ul>'
+    - heading: Locataires & baux
+      description: '<p>Un contact devient locataire dès qu''il figure sur un bail.</p><ul><li>Bail créé, confirmé : le bien passe automatiquement à « Loué »</li><li>Garantie locative suivie (versée, bloquée, restituée)</li><li>Identification du locataire (registre national, état civil)</li></ul>'
+    - heading: Loyers & impayés
+      description: '<p>Les fiches de paiement du mois sont générées en brouillon, jamais envoyées par surprise.</p><ul><li>Validation en lot et envoi des appels de loyer en un clic</li><li>Suivi des impayés et fiche de paiement en PDF</li><li>Pièces comptables Odoo standard</li></ul>'
+    - heading: Indexation & charges
+      description: '<p>Les calculs répétitifs sont automatisés.</p><ul><li>Indexation annuelle sur l''indice santé, valeurs importées automatiquement</li><li>Charges d''immeuble réparties au prorata des millièmes</li><li>Décompte annuel : provisions perçues contre charges réelles</li></ul>'
+    - heading: Incidents & sinistres
+      description: '<p>Chaque intervention garde son historique, rattaché au bien et au locataire.</p><ul><li>Prise en charge, résolution, clôture</li><li>Déclaration d''assurance : montants réclamés et remboursés</li><li>Tickets Helpdesk liés aux incidents</li></ul>'
+    - heading: Patrimoine & documents
+      description: '<p>Une vue d''ensemble pour piloter le parc.</p><ul><li>Patrimoine brut, dettes, valeur nette et évolution mensuelle</li><li>Emprunts avec tableau d''amortissement</li><li>Documents obligatoires et alertes sur les pièces manquantes</li></ul>'
+- discriminant: screenshotGallery
+  value:
+    title: Une application Odoo à part entière
+    intro: AgiRealEstate s'installe comme une application Immobilier dans votre Odoo, à côté de la comptabilité, de la signature électronique et du Helpdesk.
+    shots:
+    - image: agirealestate-tableau-de-bord.png
+      caption: 'Tableau de bord des paiements : retards, fiches à valider, montants dus'
+    - image: agirealestate-baux-indexations.png
+      caption: Indexations à examiner et baux arrivant à échéance
+    - image: agirealestate-patrimoine.png
+      caption: Évolution du patrimoine net
+    - image: agirealestate-maintenance.png
+      caption: Entretiens, incidents et sinistres à traiter
+    - image: agirealestate-apps-odoo.png
+      caption: L'application Immobilier dans le menu Odoo
 - discriminant: applicationsUsed
   value:
     title: Applications implémentées

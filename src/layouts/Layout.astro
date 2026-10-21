@@ -28,6 +28,37 @@ const {
   includeContactScripts = false,
 } = Astro.props;
 
+// Tracking carried over from the WordPress theme (header.php / header-odoo.php /
+// template-odoo-landing.php / thank-you templates). Production only, so dev traffic
+// never pollutes the analytics.
+const GTM_ID = 'GTM-P7LT3M5';
+const ADS_ID = 'AW-10889064569';
+const pathname = Astro.url.pathname.replace(/^\/(en|nl)(?=\/)/, '');
+const isProd = import.meta.env.PROD;
+const isAdsLanding = /^\/(odoo-erp|erp-sea|landing-page-sea-pb)\/?$/.test(pathname);
+const isSeaLanding = /^\/(erp-sea|landing-page-sea-pb)\/?$/.test(pathname);
+const isThankYou = /^\/(merci-rdv|merci-formulaire|thank-you-meeting|thank-you-form)\/?$/.test(pathname);
+const needsGtag = isProd && (isAdsLanding || isThankYou);
+
+const isHome = /^\/(en\/|nl\/)?$/.test(Astro.url.pathname);
+const addr = (street: string, postalCode: string, city: string) => ({
+  '@type': 'PostalAddress', streetAddress: street, postalCode, addressLocality: city, addressCountry: 'BE',
+});
+const organizationLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Agitech',
+  url: 'https://agitech.io/',
+  logo: 'https://agitech.io/assets/img/agitech-logo-dark.svg',
+  telephone: '+32 2 616 69 87',
+  sameAs: ['https://www.linkedin.com/company/agitechbelgium/', 'https://www.youtube.com/@Agitech-OdooPartner'],
+  location: [
+    { '@type': 'Place', name: 'Agitech Bruxelles', address: addr('Clos Lucien Outers 11', '1160', 'Auderghem') },
+    { '@type': 'Place', name: 'Agitech Bouillon', address: addr('Grand-Rue 17', '6830', 'Bouillon') },
+    { '@type': 'Place', name: 'Agitech Anvers', address: addr('Frankrijklei 5', '2000', 'Antwerpen') },
+  ],
+};
+
 const rdvThankYouPath = lang === 'en' ? '/en/thank-you-meeting/' : lang === 'nl' ? '/nl/thank-you-meeting/' : '/merci-rdv/';
 
 // FR = default locale (no prefix), EN and NL under /en/ and /nl/ — matches current
@@ -72,12 +103,38 @@ const altLinks = barePath
 )}
 <link rel="icon" href="/assets/img/agitech-logo-dark.svg">
 {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+{isHome && <script type="application/ld+json" set:html={JSON.stringify(organizationLd)} />}
 <!-- Same base design system as agifid.be (fonts, tokens, layout primitives), recolored to
      Agitech's own mauve (#984895, from the official wordmark) instead of agifid's teal. -->
 <link rel="stylesheet" href="/assets/fonts.css">
 <link rel="stylesheet" href="/assets/style.css">
+{isProd && <script is:inline define:vars={{ GTM_ID }}>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+  var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;
+  j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer',GTM_ID);
+</script>}
+{needsGtag && <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${ADS_ID}`}></script>}
+{needsGtag && <script is:inline define:vars={{ ADS_ID, isThankYou, isSeaLanding }}>
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function(){dataLayer.push(arguments);};
+  gtag('js', new Date());
+  gtag('config', ADS_ID);
+  if (isSeaLanding) {
+    gtag('config', ADS_ID + '/Y22HCI_ynLwZEPngp8go', { phone_conversion_number: '26166987' });
+    gtag('config', ADS_ID + '/MLDdCP-FnbwZEPngp8go', { phone_conversion_number: '+32 (2) 616 69 87' });
+  }
+  if (isThankYou) {
+    gtag('event', 'conversion', { send_to: ADS_ID + '/LQJhCMGcj9AZEPngp8go' });
+  }
+</script>}
+{isProd && isSeaLanding && <script is:inline>
+  (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","mvdguyhsd9");
+</script>}
 </head>
 <body class={bodyClass}>
+{isProd && <noscript><iframe src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`} height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>}
 <slot name="header" />
 <slot />
 <slot name="footer" />

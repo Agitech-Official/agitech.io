@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",
+    "@astrojs/sitemap": "^3.7.4",
     "@astrojs/vercel": "^8.2.11",
     "@keystatic/astro": "^5.2.0",
     "@keystatic/core": "^0.6.8",

@@ -1,4 +1,4 @@
----
+﻿---
 // NL mirror of src/pages/[...slug].astro and src/pages/en/[...slug].astro — same merge
 // of `pages` + `blog` collections, filtered to lang 'nl', served under the /nl/ prefix.
 import Layout from '../../layouts/Layout.astro';
@@ -106,7 +106,6 @@ const pageJsonLd = pageFaqBlock
   >
     <Header slot="header" lang="nl" />
     <main>
-      {Astro.params.slug === 'developpement-odoo-forfait' && <h1 class="visually-hidden-h1">{entry.title}</h1>}
       <BlockRenderer blocks={entry.blocks} />
     </main>
     <Footer slot="footer" lang="nl" />
@@ -115,7 +114,7 @@ const pageJsonLd = pageFaqBlock
   <Layout
     lang="nl"
     title={entry.title}
-    description={entry.excerpt ?? ''}
+    description={entry.excerpt || bodyHtml.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 155)}
     canonical={`https://agitech.io/nl/${Astro.params.slug}/`}
   >
     <Header slot="header" lang="nl" />

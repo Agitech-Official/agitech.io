@@ -128,8 +128,10 @@
   .lines-button .lines, .lines-button .lines::before, .lines-button .lines::after { content:''; display:block; width: 22px; height: 2px; background: var(--white); transition: 0.3s; }
   .lines-button .lines::before { transform: translateY(-7px); }
   .lines-button .lines::after { transform: translateY(5px); }
-  .lang-flag { font-size: 0.85rem; color: var(--muted-onDark); }
-  .lang-flag .active { color: var(--white); font-weight: 600; }
+  .lang-flag { display: inline-flex; align-items: center; padding: 3px; border: 1px solid rgba(255,255,255,0.35); border-radius: 100px; font-size: 11px; letter-spacing: 0.06em; }
+  .lang-flag .lang-opt { padding: 4px 9px; border-radius: 100px; color: var(--muted-onDark); transition: background 0.2s, color 0.2s; line-height: 1.2; }
+  .lang-flag a.lang-opt:hover { color: var(--white); background: rgba(255,255,255,0.12); }
+  .lang-flag .active { color: var(--white); background: var(--violet); font-weight: 600; }
 
   /* Corner glow — agifid pattern: hero only (not every section), two swept glows.
      Agifid's home: teal top-right + mauve bottom-left. Agitech home: same spot, colors
@@ -150,7 +152,7 @@
   .home-banner, .banner-sec { background: var(--black); color: var(--white); padding: 6rem 0 7rem; }
   .banner-sec .row { position: relative; z-index: 2; }
   .banner-sec .text h6 { font-family: var(--font-body); color: var(--muted-onDark); font-size: 0.85rem; font-weight: 500; letter-spacing: 0.04em; margin-bottom: 1.25rem; }
-  .banner-sec .text h2 { font-size: clamp(1.6rem, 5vw, 2.7rem); line-height: 1.12; max-width: 680px; margin-bottom: 2.25rem; }
+  .banner-sec .text h1, .banner-sec .text h2 { font-size: clamp(1.6rem, 5vw, 2.7rem); line-height: 1.12; max-width: 680px; margin-bottom: 2.25rem; }
   /* agifid's hero is text + gradient glow only, no side artwork — dropping the WP
      decorative background SVGs (banner-bg-*.svg) kept in .right-img for brand consistency. */
   .banner-sec .right-img { display: none; }
@@ -163,8 +165,12 @@
   .certified-experts-section { padding: 4rem 0; background: var(--white); }
   .certified-experts-section h6 { color: var(--violet); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.02em; margin-bottom: 0.6rem; }
   .certified-experts-section h3 { font-size: clamp(1.6rem, 1.2rem + 1.5vw, 2.4rem); margin-bottom: 2.5rem; }
-  .experts-slider { display: flex; gap: 1.5rem; overflow-x: auto; padding-bottom: 0.5rem; }
-  .certified-experts-section .primary-btn { text-align: center; margin-top: 2.5rem; }
+  .experts-marquee { overflow: hidden; }
+  .experts-slider { display: flex; gap: 1.5rem; width: max-content; animation: experts-scroll 40s linear infinite; }
+  .experts-marquee:hover .experts-slider { animation-play-state: paused; }
+  @keyframes experts-scroll { to { transform: translateX(calc(-50% - 0.75rem)); } }
+  @media (prefers-reduced-motion: reduce) { .experts-marquee { overflow-x: auto; } .experts-slider { animation: none; } }
+  .certified-experts-section .primary-btn { text-align: left; margin-top: 2.5rem; }
   .expert-member { flex: 0 0 220px; }
   .expert-member img { width: 100%; height: 260px; object-fit: cover; border-radius: 14px; margin-bottom: 1rem; }
   .expert-info h5 { font-size: 1.05rem; margin-bottom: 0.15rem; }
@@ -301,8 +307,8 @@
   /* Contact hero (homepage bottom, ported from agifid — trust list + Calendly + form) */
   .contact-hero { padding: 4rem 0 5rem; background: var(--white); }
   .contact-hero-intro { max-width: 640px; margin-bottom: 3rem; }
-  .contact-hero-intro h2 { font-size: 2.3rem; margin-bottom: 1.5rem; }
-  .contact-hero-intro h2 span { color: var(--violet); text-decoration: underline; text-decoration-color: var(--violet-soft); text-underline-offset: 6px; }
+  .contact-hero-intro h1, .contact-hero-intro h2 { font-size: 2.3rem; margin-bottom: 1.5rem; }
+  .contact-hero-intro h1 span, .contact-hero-intro h2 span { color: var(--violet); text-decoration: underline; text-decoration-color: var(--violet-soft); text-underline-offset: 6px; }
   .trust-list { margin-bottom: 2.5rem; }
   .trust-list li { color: var(--ink); font-size: 0.95rem; font-weight: 500; margin-bottom: 0.6rem; padding-left: 1.6rem; position: relative; }
   .trust-list li::before { content: '✓'; position: absolute; left: 0; color: var(--violet); font-weight: 700; }

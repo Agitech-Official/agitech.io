@@ -14,6 +14,7 @@ export interface Props {
   thankYouPath?: string;
   offices?: string[];
   officeLabel?: string;
+  isPageTitle?: boolean;
 }
 const {
   titleBefore, titleHighlight, trustList = [],
@@ -24,12 +25,15 @@ const {
   thankYouPath = '/merci-formulaire/',
   offices = [],
   officeLabel = 'Bureau à contacter (optionnel)',
+  isPageTitle = false,
 } = Astro.props;
 ---
 <section class="contact-hero" id="contact">
   <div class="container">
     <div class="contact-hero-intro">
-      <h2>{titleBefore} <span>{titleHighlight}</span></h2>
+      {isPageTitle
+        ? <h1>{titleBefore} <span>{titleHighlight}</span></h1>
+        : <h2>{titleBefore} <span>{titleHighlight}</span></h2>}
       {trustList.length > 0 && <ul class="trust-list">{trustList.map(t => <li>{t}</li>)}</ul>}
       {directTitle && <h5>{directTitle}</h5>}
       {directText && <p>{directText}</p>}

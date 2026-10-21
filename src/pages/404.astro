@@ -1,0 +1,27 @@
+---
+// One 404 for every language: Vercel serves /404.html for any unknown URL.
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+<Layout lang="fr" title="Page introuvable — Agitech" description="Cette page n'existe pas ou a été déplacée." robotsNoIndex>
+  <Header slot="header" lang="fr" />
+  <main>
+    <section class="not-found">
+      <div class="container">
+        <p class="not-found-code">404</p>
+        <h1>Page introuvable</h1>
+        <p>La page que vous cherchez n'existe pas ou a été déplacée.</p>
+        <div class="primary-btn"><a href="/">Retour à l'accueil</a></div>
+      </div>
+    </section>
+  </main>
+  <Footer slot="footer" lang="fr" />
+</Layout>
+
+<style>
+  .not-found { padding: 7rem 0; text-align: center; }
+  .not-found-code { font-size: 0.9rem; font-weight: 600; letter-spacing: 0.1em; color: var(--violet, #984895); margin-bottom: 0.75rem; }
+  .not-found h1 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
+  .not-found p { color: var(--muted, #6b6b6b); margin-bottom: 2rem; }
+</style>

@@ -7,6 +7,13 @@ const { lang } = Astro.props;
 import { getNav } from '../lib/nav';
 const { strings, industries, services } = getNav(lang);
 const base = lang === 'fr' ? '' : `/${lang}`;
+import { switcherUrls } from '../lib/localePaths';
+const langUrls = await switcherUrls(Astro.url.pathname);
+const LANG_OPTIONS = [
+  { code: 'fr', label: 'FR', name: 'Français' },
+  { code: 'en', label: 'EN', name: 'English' },
+  { code: 'nl', label: 'NL', name: 'Nederlands' },
+] as const;
 ---
 <header>
   <div class="container header-wrap">
@@ -37,12 +44,10 @@ const base = lang === 'fr' ? '' : `/${lang}`;
         <li><a href={`${base}/blog/`}>{strings.blog}</a></li>
         <li><a href={`${base}/jobs/`}>{strings.team}</a></li>
       </ul>
-      <div class="lang-flag">
-        {lang === 'fr' ? <span class="active">FR</span> : <a href="/">FR</a>}
-        {' / '}
-        {lang === 'en' ? <span class="active">EN</span> : <a href="/en/">EN</a>}
-        {' / '}
-        {lang === 'nl' ? <span class="active">NL</span> : <a href="/nl/">NL</a>}
+      <div class="lang-flag" role="group" aria-label="Langue / Language / Taal">
+        {LANG_OPTIONS.map(o => o.code === lang
+          ? <span class="lang-opt active" aria-current="true" lang={o.code}>{o.label}</span>
+          : <a class="lang-opt" href={langUrls[o.code]} hreflang={o.code} lang={o.code} title={o.name}>{o.label}</a>)}
       </div>
       <div class="discuss-btn"><a href={`${base}/contact-us/`}>{strings.contact}</a></div>
     </nav>

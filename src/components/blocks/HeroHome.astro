@@ -1,4 +1,4 @@
----
+﻿---
 // Ported from template-parts/block/hero-home.php
 import Cta from './Cta.astro';
 import { blockImg } from '../../lib/img';
@@ -18,7 +18,7 @@ const { title, subTitle, cta, bottomLine = false, image } = Astro.props;
         <div class="col-lg-7 col-md-7 col-sm-12 col-12">
           <div class="text">
             {title && <h6>{title}</h6>}
-            {subTitle && <h2 set:html={subTitle} />}
+            {subTitle && <h1 set:html={subTitle} />}
             {cta && <Cta label={cta.label} url={cta.url} newTab={cta.newTab} wrapClass="light-btn" />}
           </div>
         </div>

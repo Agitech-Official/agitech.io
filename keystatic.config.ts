@@ -53,6 +53,7 @@ const blocksField = fields.array(
         { label: 'Forfait — Placeholder (cas chiffrés / galerie)', value: 'contentPlaceholder' },
         { label: 'Forfait — Bandeau CTA final', value: 'ctaBanner' },
         { label: 'Forfait — Cas exemples', value: 'forfaitCases' },
+        { label: 'Galerie de captures d\'écran', value: 'screenshotGallery' },
       ],
       defaultValue: 'heroHome',
     }),
@@ -422,6 +423,7 @@ const blocksField = fields.array(
         thankYouPath: fields.text({ label: 'Page de remerciement (formulaire)' }),
         offices: fields.array(fields.text({ label: 'Bureau' }), { label: 'Bureaux (dropdown formulaire)', itemLabel: props => props.value || 'Bureau' }),
         officeLabel: fields.text({ label: 'Libellé du champ bureau' }),
+        isPageTitle: fields.checkbox({ label: 'Ce titre est le H1 de la page (pages sans hero)', defaultValue: false }),
       }, { label: 'Contact + Calendly' }),
       faq: fields.object({
         title: fields.text({ label: 'Titre' }),
@@ -468,6 +470,17 @@ const blocksField = fields.array(
         intro: fields.text({ label: 'Intro', multiline: true }),
         count: fields.integer({ label: 'Nombre de placeholders', defaultValue: 3 }),
       }, { label: 'Forfait — Placeholder' }),
+      screenshotGallery: fields.object({
+        title: fields.text({ label: 'Titre (H2)' }),
+        intro: fields.text({ label: 'Intro', multiline: true }),
+        shots: fields.array(
+          fields.object({
+            image: imageField('Capture', 'blocks'),
+            caption: fields.text({ label: 'Légende' }),
+          }),
+          { label: 'Captures (la 1re est affichée en grand)', itemLabel: props => props.fields.caption.value || 'Capture' },
+        ),
+      }, { label: 'Galerie de captures d\'écran' }),
       forfaitCases: fields.object({
         title: fields.text({ label: 'Titre (H2)' }),
         intro: fields.text({ label: 'Intro', multiline: true }),

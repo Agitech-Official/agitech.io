@@ -1,4 +1,4 @@
----
+﻿---
 title: Vastgoedbeheer
 lang: nl
 seoTitle: Odoo voor Verhuurbeheer van Vastgoed — Agitech
@@ -45,6 +45,39 @@ blocks:
     - logo: offer-icon.svg
       heading: Schadegevallen & incidenten
       descriptionPoints: '<p>Beheer van schadegevallen en technische incidenten per pand.</p><ul><li>Koppeling van incidenten met Helpdesk-tickets</li><li>Verrijkte huurderfiche: gekoppelde huurcontracten, momenteel gehuurd pand</li></ul>'
+- discriminant: methodologies
+  value:
+    bgClass: white-bg
+    title: Van pand tot rendabiliteit, in één tool
+    description: ''
+    methodologies:
+    - heading: Gebouwen & panden
+      description: '<p>De portefeuille is gestructureerd per gebouw, met een volledige fiche per pand.</p><ul><li>Aandelen (duizendsten), meters en EAN-codes</li><li>Aankoop, geïndexeerd kadastraal inkomen, EPC, verzekering</li><li>Rendabiliteit per pand en geconsolideerd per gebouw</li></ul>'
+    - heading: Huurders & huurcontracten
+      description: '<p>Een contact wordt huurder zodra het op een huurcontract staat.</p><ul><li>Huurcontract aangemaakt en bevestigd: het pand staat automatisch op "Verhuurd"</li><li>Opvolging van de huurwaarborg (gestort, geblokkeerd, teruggegeven)</li><li>Identificatie van de huurder (rijksregister, burgerlijke staat)</li></ul>'
+    - heading: Huur & achterstallen
+      description: '<p>De betalingsfiches van de maand worden als ontwerp aangemaakt, nooit onverwacht verstuurd.</p><ul><li>Gegroepeerde validatie en verzending van huuroproepen in één klik</li><li>Opvolging van achterstallen en betalingsfiche als PDF</li><li>Standaard boekhoudkundige stukken van Odoo</li></ul>'
+    - heading: Indexatie & lasten
+      description: '<p>Terugkerende berekeningen worden geautomatiseerd.</p><ul><li>Jaarlijkse indexatie op de gezondheidsindex, waarden automatisch geïmporteerd</li><li>Gebouwlasten verdeeld naar rato van de aandelen</li><li>Jaarlijkse afrekening: ontvangen voorschotten tegenover werkelijke lasten</li></ul>'
+    - heading: Incidenten & schadegevallen
+      description: '<p>Elke interventie behoudt zijn historiek, gekoppeld aan het pand en de huurder.</p><ul><li>Opnemen, oplossen, afsluiten</li><li>Verzekeringsaangifte: geëiste en terugbetaalde bedragen</li><li>Helpdesk-tickets gekoppeld aan incidenten</li></ul>'
+    - heading: Patrimonium & documenten
+      description: '<p>Een overzicht om de portefeuille te sturen.</p><ul><li>Bruto patrimonium, schulden, nettowaarde en maandelijkse evolutie</li><li>Leningen met aflossingstabel</li><li>Verplichte documenten en waarschuwingen bij ontbrekende stukken</li></ul>'
+- discriminant: screenshotGallery
+  value:
+    title: Een volwaardige Odoo-toepassing
+    intro: AgiRealEstate installeert zich als Vastgoed-toepassing in uw Odoo, naast boekhouding, elektronische handtekening en Helpdesk.
+    shots:
+    - image: agirealestate-tableau-de-bord.png
+      caption: 'Dashboard van de betalingen: achterstallen, te valideren fiches, verschuldigde bedragen'
+    - image: agirealestate-baux-indexations.png
+      caption: Te onderzoeken indexaties en huurcontracten die bijna aflopen
+    - image: agirealestate-patrimoine.png
+      caption: Evolutie van het netto patrimonium
+    - image: agirealestate-maintenance.png
+      caption: Onderhoud, incidenten en schadegevallen om te behandelen
+    - image: agirealestate-apps-odoo.png
+      caption: De Vastgoed-toepassing in het Odoo-menu
 - discriminant: applicationsUsed
   value:
     title: Geïmplementeerde toepassingen

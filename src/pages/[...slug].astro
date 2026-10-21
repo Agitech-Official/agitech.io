@@ -1,4 +1,4 @@
----
+﻿---
 // Generic renderer for FR content living at the site root: Keystatic `pages` entries
 // (page-builder blocks) and `blog` entries (markdoc article body) share this one route
 // since both use flat root URLs on the live site (no /blog/ prefix on post URLs).
@@ -73,7 +73,6 @@ const pageJsonLd = pageFaqBlock
   >
     <Header slot="header" lang="fr" />
     <main>
-      {Astro.params.slug === 'developpement-odoo-forfait' && <h1 class="visually-hidden-h1">{entry.title}</h1>}
       <BlockRenderer blocks={entry.blocks} />
     </main>
     <Footer slot="footer" lang="fr" />
@@ -82,7 +81,7 @@ const pageJsonLd = pageFaqBlock
   <Layout
     lang="fr"
     title={entry.title}
-    description={entry.excerpt ?? ''}
+    description={entry.excerpt || bodyHtml.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 155)}
     canonical={`https://agitech.io/${Astro.params.slug}/`}
   >
     <Header slot="header" lang="fr" />

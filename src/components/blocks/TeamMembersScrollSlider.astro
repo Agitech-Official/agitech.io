@@ -1,6 +1,6 @@
 ---
 // Ported from template-parts/block/team-members-scroll-slider.php.
-// Simplified: static scroll row (owl-carousel JS deferred).
+// Auto-scrolling row (CSS marquee, no scrollbar, pauses on hover / reduced motion).
 import { blockImg } from '../../lib/img';
 import Cta from './Cta.astro';
 export interface Props {
@@ -16,16 +16,18 @@ const { subHeading, mainHeading, teamMembers = [], cta } = Astro.props;
     {subHeading && <h6>{subHeading}</h6>}
     {mainHeading && <h3>{mainHeading}</h3>}
     {teamMembers.length > 0 && (
-      <div class="experts-slider">
-        {teamMembers.map(member => (
-          <div class="expert-member">
-            {member.image && <img src={blockImg(member.image)} alt={member.name ?? ''}>}
-            <div class="expert-info">
-              {member.name && <h5>{member.name}</h5>}
-              {member.role && <h6>{member.role}</h6>}
+      <div class="experts-marquee">
+        <div class="experts-slider">
+          {[0, 1].map(copy => teamMembers.map(member => (
+            <div class="expert-member" aria-hidden={copy === 1 ? 'true' : undefined}>
+              {member.image && <img src={blockImg(member.image)} alt={copy === 0 ? (member.name ?? '') : ''} loading="lazy">}
+              <div class="expert-info">
+                {member.name && <h5>{member.name}</h5>}
+                {member.role && <h6>{member.role}</h6>}
+              </div>
             </div>
-          </div>
-        ))}
+          )))}
+        </div>
       </div>
     )}
     {cta && <Cta label={cta.label} url={cta.url} newTab={cta.newTab} />}

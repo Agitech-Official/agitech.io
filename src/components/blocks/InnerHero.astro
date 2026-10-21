@@ -1,4 +1,4 @@
----
+﻿---
 // Ported from template-parts/block/inner-hero.php
 import Cta from './Cta.astro';
 import { blockImg } from '../../lib/img';
@@ -21,7 +21,7 @@ const { logo, title, subTitle, cta, cta2, image, bottomLine = false, logoAtBotto
         <div class={`text ${logoAtBottom ? 'logo-bottom' : ''}`}>
           {logo && <div class="at-odoo-logo"><img src={blockImg(logo)} alt=""></div>}
           {title && <h6>{title}</h6>}
-          {subTitle && <h2 set:html={subTitle} />}
+          {subTitle && <h1 set:html={subTitle} />}
           {(cta || cta2) && (
             <div class="hero-cta-group">
               {cta && <Cta label={cta.label} url={cta.url} newTab={cta.newTab} wrapClass="light-btn" />}

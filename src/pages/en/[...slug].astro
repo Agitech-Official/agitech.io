@@ -1,4 +1,4 @@
----
+﻿---
 // EN mirror of src/pages/[...slug].astro — same merge of `pages` + `blog` collections,
 // filtered to lang 'en', served under the /en/ prefix.
 import Layout from '../../layouts/Layout.astro';
@@ -96,7 +96,6 @@ const pageJsonLd = pageFaqBlock
   >
     <Header slot="header" lang="en" />
     <main>
-      {Astro.params.slug === 'developpement-odoo-forfait' && <h1 class="visually-hidden-h1">{entry.title}</h1>}
       <BlockRenderer blocks={entry.blocks} />
     </main>
     <Footer slot="footer" lang="en" />
@@ -105,7 +104,7 @@ const pageJsonLd = pageFaqBlock
   <Layout
     lang="en"
     title={entry.title}
-    description={entry.excerpt ?? ''}
+    description={entry.excerpt || bodyHtml.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 155)}
     canonical={`https://agitech.io/en/${Astro.params.slug}/`}
   >
     <Header slot="header" lang="en" />
