@@ -633,3 +633,14 @@
   @media (max-width: 560px) {
     .odoo-expertise-content, .our-services-content, .help-fields, .we-implemented-section .items-wrap { grid-template-columns: 1fr; }
   }
+
+/* Cookie consent banner */
+.cookie-banner[hidden] { display: none; }
+.cookie-banner { position: fixed; left: 1rem; right: 1rem; bottom: 1rem; z-index: 1000; max-width: 880px; margin: 0 auto; display: flex; gap: 1.25rem; align-items: center; justify-content: space-between; flex-wrap: wrap; padding: 1rem 1.25rem; background: #16151a; color: #fff; border: 1px solid rgba(255,255,255,0.14); border-radius: 14px; box-shadow: 0 12px 40px rgba(0,0,0,0.3); font-size: 0.88rem; line-height: 1.5; }
+.cookie-banner p { margin: 0; flex: 1 1 320px; color: rgba(255,255,255,0.85); }
+.cookie-banner a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.cookie-actions { display: flex; gap: 0.6rem; }
+.cookie-actions button { cursor: pointer; border-radius: 100px; padding: 0.6rem 1.3rem; font-size: 0.88rem; font-weight: 500; border: 1px solid rgba(255,255,255,0.35); background: transparent; color: #fff; transition: background 0.2s; }
+.cookie-actions button.cookie-accept { background: var(--violet, #984895); border-color: var(--violet, #984895); }
+.cookie-actions button:hover { background: rgba(255,255,255,0.12); }
+.cookie-actions button.cookie-accept:hover { background: #7f3b7c; }

@@ -15,7 +15,7 @@ const { feedbacks = [] } = Astro.props;
             {f.title && <h6>{f.title}</h6>}
             {f.feedback && <h4>{f.feedback}</h4>}
             <div class="client-details">
-              {f.userImage && <img src={blockImg(f.userImage)} alt="">}
+              {f.userImage && <img src={blockImg(f.userImage)} alt={f.name ?? ''}>}
               <div class="details">
                 {f.name && <h5>{f.name}</h5>}
                 {f.role && <p>{f.role}</p>}

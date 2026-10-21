@@ -1,7 +1,7 @@
 ---
 // Ported from template-parts/block/why-choose-us.php
 import Cta from './Cta.astro';
-import { blockImg } from '../../lib/img';
+import { blockImg, altFromFile } from '../../lib/img';
 export interface Props {
   bgClass?: string;
   title?: string;
@@ -22,7 +22,7 @@ const { bgClass = '', title, badges = [], logo, image, items = [], cta } = Astro
           <div class="badge-oodo-img d-flex align-items-center">
             {badges.length > 0 && (
               <div class="badge-img d-flex align-items-center">
-                {badges.map(b => <img src={blockImg(b)} alt="">)}
+                {badges.map(b => <img src={blockImg(b)} alt={altFromFile(b)}>)}
               </div>
             )}
             {logo && <div class="img-odoo"><img src={blockImg(logo)} alt=""></div>}

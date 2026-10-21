@@ -15,7 +15,7 @@ const strings = {
     nav: 'Navigation',
     odoo: 'Odoo ERP', dev: 'Développement', infra: 'Infrastructure IT', cases: 'Réalisations', recruitment: 'Recrutement',
     rights: `© ${new Date().getFullYear()} Agitech. Tous droits réservés.`,
-    privacy: 'Politique de Confidentialité', terms: 'Termes et Conditions',
+    privacy: 'Politique de Confidentialité', terms: 'Termes et Conditions', cookies: 'Gérer les cookies',
     otherOffices: 'Voir nos 3 bureaux',
   },
   en: {
@@ -24,7 +24,7 @@ const strings = {
     nav: 'Navigation',
     odoo: 'Odoo ERP', dev: 'Development', infra: 'IT Infrastructure', cases: 'Case Studies', recruitment: 'Recruitment',
     rights: `© ${new Date().getFullYear()} Agitech. All rights reserved.`,
-    privacy: 'Privacy Policy', terms: 'Terms & Conditions',
+    privacy: 'Privacy Policy', terms: 'Terms & Conditions', cookies: 'Manage cookies',
     otherOffices: 'See our 3 offices',
   },
   nl: {
@@ -33,7 +33,7 @@ const strings = {
     nav: 'Navigatie',
     odoo: 'Odoo ERP', dev: 'Ontwikkeling', infra: 'IT-infrastructuur', cases: 'Realisaties', recruitment: 'Vacatures',
     rights: `© ${new Date().getFullYear()} Agitech. Alle rechten voorbehouden.`,
-    privacy: 'Privacybeleid', terms: 'Algemene Voorwaarden',
+    privacy: 'Privacybeleid', terms: 'Algemene Voorwaarden', cookies: 'Cookies beheren',
     otherOffices: 'Bekijk onze 3 kantoren',
   },
 }[lang];
@@ -104,7 +104,7 @@ const strings = {
       <a class="shiftingpact-logo" href="https://shiftingpact.be/agitech/" target="_blank" rel="noopener">
         <img src="/assets/img/blocks/shiftingpackt-logo.png" alt="ShiftingPact">
       </a>
-      <p class="privacy-links"><a href={`${base}/privacy-policy/`}>{strings.privacy}</a>&nbsp;|&nbsp;<a href={`${base}/terms-conditions/`}>{strings.terms}</a></p>
+      <p class="privacy-links"><a href={`${base}/privacy-policy/`}>{strings.privacy}</a>&nbsp;|&nbsp;<a href={`${base}/terms-conditions/`}>{strings.terms}</a>&nbsp;|&nbsp;<a href="#" data-cookie-settings>{strings.cookies}</a></p>
     </div>
   </div>
 </footer>

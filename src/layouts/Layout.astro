@@ -7,6 +7,8 @@ export interface Props {
   ogLocale?: string;
   jsonLd?: Record<string, unknown>;
   robotsNoIndex?: boolean;
+  /** Absolute or site-relative social preview image (defaults to the generic Agitech card). */
+  image?: string;
   /** Set on the homepage only — flips the dark-section corner glow to the opposite
    * corner from every other page (see .is-home rules in style.css). */
   bodyClass?: string;
@@ -19,11 +21,11 @@ const localeMap = { fr: 'fr_BE', en: 'en_US', nl: 'nl_BE' };
 const {
   lang, title, description,
   canonical, ogLocale = localeMap[lang],
-  jsonLd,
-  // Site not live yet — agitech.io (WP) is still the indexed site. Defaults to noindex
-  // everywhere so this preview never competes with it in search. Flip to false (or set
-  // per-page) only once this deployment actually replaces the live site.
-  robotsNoIndex = true,
+  jsonLd, image,
+  // Defaults to noindex until PUBLIC_INDEXABLE=true is set in the Vercel project (go-live
+  // switch — see src/pages/robots.txt.ts, which reads the same variable). Pages that pass
+  // robotsNoIndex explicitly (thank-you, 404) stay noindex either way.
+  robotsNoIndex = import.meta.env.PUBLIC_INDEXABLE !== 'true',
   bodyClass,
   includeContactScripts = false,
 } = Astro.props;
@@ -39,6 +41,14 @@ const isAdsLanding = /^\/(odoo-erp|erp-sea|landing-page-sea-pb)\/?$/.test(pathna
 const isSeaLanding = /^\/(erp-sea|landing-page-sea-pb)\/?$/.test(pathname);
 const isThankYou = /^\/(merci-rdv|merci-formulaire|thank-you-meeting|thank-you-form)\/?$/.test(pathname);
 const needsGtag = isProd && (isAdsLanding || isThankYou);
+
+const SITE_URL = 'https://agitech.io';
+const ogImage = image ? (image.startsWith('http') ? image : `${SITE_URL}${image}`) : `${SITE_URL}/assets/img/og-default.png`;
+const consent = {
+  fr: { text: 'Nous utilisons des cookies de mesure d’audience et publicitaires pour améliorer le site et mesurer nos campagnes. Vous pouvez les accepter ou les refuser.', accept: 'Accepter', refuse: 'Refuser', more: 'Politique de confidentialité', manage: 'Gérer les cookies', privacy: '/privacy-policy/' },
+  en: { text: 'We use analytics and advertising cookies to improve the site and measure our campaigns. You can accept or refuse them.', accept: 'Accept', refuse: 'Refuse', more: 'Privacy policy', manage: 'Manage cookies', privacy: '/en/privacy-policy/' },
+  nl: { text: 'Wij gebruiken analytische en advertentiecookies om de site te verbeteren en onze campagnes te meten. U kunt ze aanvaarden of weigeren.', accept: 'Aanvaarden', refuse: 'Weigeren', more: 'Privacybeleid', manage: 'Cookies beheren', privacy: '/nl/privacy-policy/' },
+}[lang];
 
 const isHome = /^\/(en\/|nl\/)?$/.test(Astro.url.pathname);
 const addr = (street: string, postalCode: string, city: string) => ({
@@ -96,9 +106,11 @@ const altLinks = barePath
     <meta property="og:site_name" content="Agitech">
     <meta property="og:title" content={title}>
     <meta property="og:description" content={description}>
+    <meta property="og:image" content={ogImage}>
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content={title}>
     <meta name="twitter:description" content={description}>
+    <meta name="twitter:image" content={ogImage}>
   </>
 )}
 <link rel="icon" href="/assets/img/agitech-logo-dark.svg">
@@ -108,36 +120,64 @@ const altLinks = barePath
      Agitech's own mauve (#984895, from the official wordmark) instead of agifid's teal. -->
 <link rel="stylesheet" href="/assets/fonts.css">
 <link rel="stylesheet" href="/assets/style.css">
-{isProd && <script is:inline define:vars={{ GTM_ID }}>
-  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
-  var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;
-  j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer',GTM_ID);
-</script>}
-{needsGtag && <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${ADS_ID}`}></script>}
-{needsGtag && <script is:inline define:vars={{ ADS_ID, isThankYou, isSeaLanding }}>
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = function(){dataLayer.push(arguments);};
-  gtag('js', new Date());
-  gtag('config', ADS_ID);
-  if (isSeaLanding) {
-    gtag('config', ADS_ID + '/Y22HCI_ynLwZEPngp8go', { phone_conversion_number: '26166987' });
-    gtag('config', ADS_ID + '/MLDdCP-FnbwZEPngp8go', { phone_conversion_number: '+32 (2) 616 69 87' });
-  }
-  if (isThankYou) {
-    gtag('event', 'conversion', { send_to: ADS_ID + '/LQJhCMGcj9AZEPngp8go' });
-  }
-</script>}
-{isProd && isSeaLanding && <script is:inline>
-  (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","mvdguyhsd9");
-</script>}
 </head>
 <body class={bodyClass}>
-{isProd && <noscript><iframe src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`} height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>}
 <slot name="header" />
 <slot />
 <slot name="footer" />
+{isProd && (
+  <div id="cookie-banner" class="cookie-banner" role="dialog" aria-label={consent.manage} hidden>
+    <p>{consent.text} <a href={consent.privacy}>{consent.more}</a></p>
+    <div class="cookie-actions">
+      <button type="button" class="cookie-refuse" data-consent="denied">{consent.refuse}</button>
+      <button type="button" class="cookie-accept" data-consent="granted">{consent.accept}</button>
+    </div>
+  </div>
+  <script is:inline define:vars={{ GTM_ID, ADS_ID, needsGtag, isThankYou, isSeaLanding }}>
+    // Analytics / ads / Clarity only load after an explicit "accept" (stored in localStorage).
+    // "Manage cookies" links (data-cookie-settings) re-open the banner.
+    (function () {
+      var KEY = 'agitech-consent';
+      function load(src) { var s = document.createElement('script'); s.async = true; s.src = src; document.head.appendChild(s); }
+      function startTracking() {
+        if (window.__trackingStarted) return; window.__trackingStarted = true;
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        load('https://www.googletagmanager.com/gtm.js?id=' + GTM_ID);
+        if (needsGtag) {
+          load('https://www.googletagmanager.com/gtag/js?id=' + ADS_ID);
+          window.gtag = function () { window.dataLayer.push(arguments); };
+          gtag('js', new Date());
+          gtag('config', ADS_ID);
+          if (isSeaLanding) {
+            gtag('config', ADS_ID + '/Y22HCI_ynLwZEPngp8go', { phone_conversion_number: '26166987' });
+            gtag('config', ADS_ID + '/MLDdCP-FnbwZEPngp8go', { phone_conversion_number: '+32 (2) 616 69 87' });
+          }
+          if (isThankYou) gtag('event', 'conversion', { send_to: ADS_ID + '/LQJhCMGcj9AZEPngp8go' });
+        }
+        if (isSeaLanding) {
+          (function (c, l, a, r, i, t, y) { c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
+            t = l.createElement(r); t.async = 1; t.src = 'https://www.clarity.ms/tag/' + i;
+            y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y); })(window, document, 'clarity', 'script', 'mvdguyhsd9');
+        }
+      }
+      var banner = document.getElementById('cookie-banner');
+      var saved = null; try { saved = localStorage.getItem(KEY); } catch (e) {}
+      if (saved === 'granted') startTracking();
+      else if (!saved && banner) banner.hidden = false;
+      banner && banner.addEventListener('click', function (e) {
+        var v = e.target && e.target.getAttribute && e.target.getAttribute('data-consent');
+        if (!v) return;
+        try { localStorage.setItem(KEY, v); } catch (err) {}
+        banner.hidden = true;
+        if (v === 'granted') startTracking();
+      });
+      document.addEventListener('click', function (e) {
+        if (e.target && e.target.closest && e.target.closest('[data-cookie-settings]')) { e.preventDefault(); if (banner) banner.hidden = false; }
+      });
+    })();
+  </script>
+)}
 <script>
   const burgerBtn = document.getElementById('burgerBtn');
   const mainMenu = document.getElementById('mainMenu');

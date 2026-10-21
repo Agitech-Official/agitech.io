@@ -22,7 +22,7 @@ const { logo, title, discoverCta, logos = [] } = Astro.props;
         <div class="logo-wrp">
           {logos.map(item => (
             <div class="item">
-              {item.logo && <img src={blockImg(item.logo)} alt="">}
+              {item.logo && <img src={blockImg(item.logo)} alt={item.title ?? ''}>}
               {item.title && <p>{item.title}</p>}
             </div>
           ))}

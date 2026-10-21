@@ -17,7 +17,7 @@ const { bgClass = '', image, title, subTitle, contentDetails, cta } = Astro.prop
     <div class="row">
       <div class="col-lg-6 col-md-6 col-sm-12 col-12">
         <div class="person-img">
-          {image && <img src={blockImg(image)} alt="">}
+          {image && <img src={blockImg(image)} alt={title ?? ''}>}
         </div>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-12 col-12">

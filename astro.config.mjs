@@ -25,6 +25,7 @@ export default defineConfig({
     '/en/home-page/': '/en/',
     '/newsletter-fr/': '/',
     '/en/newsletter/': '/en/',
+    '/en/industries-international-associations/': '/en/industries-construction-batiment/',
   },
   integrations: [
     react(),

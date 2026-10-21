@@ -3,7 +3,7 @@
 // photo — the odoo-erp landing page uses a variant with a large left image that
 // isn't in the original ACF block source (hand-authored Gutenberg content on that page).
 import Cta from './Cta.astro';
-import { blockImg } from '../../lib/img';
+import { blockImg, altFromFile } from '../../lib/img';
 export interface Props {
   badges?: string[];
   logo?: string;
@@ -27,7 +27,7 @@ const { badges = [], logo, title, cta, leftImage, variantClass = '' } = Astro.pr
           <div class="badge-oodo-img d-flex align-items-center">
             {badges.length > 0 && (
               <div class="badge-img d-flex align-items-center">
-                {badges.map(b => <img src={blockImg(b)} alt="">)}
+                {badges.map(b => <img src={blockImg(b)} alt={altFromFile(b)}>)}
               </div>
             )}
             {logo && <div class="img-odoo"><img src={blockImg(logo)} alt=""></div>}

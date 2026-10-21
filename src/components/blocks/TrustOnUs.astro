@@ -1,7 +1,7 @@
 ---
 // Ported from template-parts/block/trust-on-us.php
 import Cta from './Cta.astro';
-import { blockImg } from '../../lib/img';
+import { blockImg, altFromFile } from '../../lib/img';
 export interface Props {
   title?: string;
   subTitle?: string;
@@ -21,7 +21,7 @@ const { title, subTitle, logos = [], cta } = Astro.props;
         {logos.length > 0 && (
           <div class="companies-logos">
             {logos.map(logo => (
-              <div class="item"><img src={blockImg(logo)} alt=""></div>
+              <div class="item"><img src={blockImg(logo)} alt={altFromFile(logo)}></div>
             ))}
           </div>
         )}
