@@ -456,6 +456,7 @@ const blocksField = fields.array(
         title: fields.text({ label: 'Titre (H2)' }),
         content: fields.text({ label: 'Contenu (HTML)', multiline: true }),
         emphasis: fields.checkbox({ label: 'Mise en emphase (section limites)', defaultValue: false }),
+        number: fields.text({ label: 'Numéro (ex. 01) — active la mise en page numérotée' }),
       }, { label: 'Forfait — Section texte' }),
       contentPlaceholder: fields.object({
         variant: fields.select({

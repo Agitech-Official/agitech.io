@@ -6,15 +6,30 @@ export interface Props {
   title?: string;
   content?: string;
   emphasis?: boolean;
+  number?: string;
 }
-const { title, content, emphasis = false } = Astro.props;
+const { title, content, emphasis = false, number } = Astro.props;
 ---
-<section class={`forfait-text-section ${emphasis ? 'is-emphasis' : ''}`}>
-  <div class="container-sm">
-    {title && <h2>{title}</h2>}
-    {content && <div class="forfait-text-body" set:html={content} />}
-  </div>
-</section>
+{number ? (
+  <section class="forfait-text-section is-numbered">
+    <div class="container">
+      <div class="num-grid">
+        <div class="num-head">
+          <h6>{number}</h6>
+          {title && <h2>{title}</h2>}
+        </div>
+        {content && <div class="num-body forfait-text-body" set:html={content} />}
+      </div>
+    </div>
+  </section>
+) : (
+  <section class={`forfait-text-section ${emphasis ? 'is-emphasis' : ''}`}>
+    <div class="container-sm">
+      {title && <h2>{title}</h2>}
+      {content && <div class="forfait-text-body" set:html={content} />}
+    </div>
+  </section>
+)}
 
 <style>
   .forfait-text-section {
@@ -40,4 +55,16 @@ const { title, content, emphasis = false } = Astro.props;
     color: var(--ink, #1d1d1d);
     font-weight: 500;
   }
+  .is-numbered { border-top: 1px solid var(--border, rgba(20,20,20,0.09)); }
+  .num-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 4rem; align-items: start; }
+  .num-head h6 { color: var(--violet, #984895); font-family: var(--font-body); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.02em; margin-bottom: 0.75rem; }
+  .num-head h2 { font-size: clamp(1.6rem, 1.2rem + 1.5vw, 2.4rem); line-height: 1.2; margin: 0; }
+  .num-body { color: var(--ink, #16151a); }
+  .num-body :global(p:first-child) { font-size: 1.15rem; line-height: 1.6; }
+  .num-body :global(p) { color: var(--muted, #6b6b76); }
+  .num-body :global(p:first-child) { color: var(--ink, #16151a); }
+  .num-body :global(ul) { list-style: none; margin: 1.25rem 0 1.5rem; padding: 0; border-top: 1px solid var(--border, rgba(20,20,20,0.09)); }
+  .num-body :global(li) { position: relative; padding: 0.85rem 0 0.85rem 1.5rem; border-bottom: 1px solid var(--border, rgba(20,20,20,0.09)); font-size: 0.98rem; }
+  .num-body :global(li::before) { content: ''; position: absolute; left: 0; top: 1.4em; width: 7px; height: 7px; border-radius: 50%; background: var(--violet, #984895); }
+  @media (max-width: 900px) { .num-grid { grid-template-columns: 1fr; gap: 1.5rem; } }
 </style>
