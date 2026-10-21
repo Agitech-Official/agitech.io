@@ -20,7 +20,7 @@ const {
   titleBefore, titleHighlight, trustList = [],
   directTitle, directText,
   calendlyUrl = 'https://calendly.com/sam-agitech/25-min-intro',
-  formAction = 'https://formspree.io/f/xeajdqgr',
+  formAction = 'https://formspree.io/f/mwlvgnqo',
   formSubject = 'Nouvelle demande de contact - Agitech',
   thankYouPath = '/merci-formulaire/',
   offices = [],
@@ -71,7 +71,7 @@ const {
           <textarea id="ch-message" name="message" rows="4"></textarea>
         </div>
         <input type="hidden" name="_subject" value={formSubject}>
-        <input type="hidden" name="_next" value={thankYouPath}>
+        <input type="hidden" name="_next" value={thankYouPath.startsWith('/') ? `https://agitech.io${thankYouPath}` : thankYouPath}>
         <button type="submit" class="btn btn-violet">Envoyer →</button>
       </form>
     </div>
