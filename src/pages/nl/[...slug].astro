@@ -102,6 +102,7 @@ const pageJsonLd = pageFaqBlock
     title={entry.seoTitle || entry.title}
     description={entry.seoDescription ?? ''}
     canonical={`https://agitech.io/nl/${Astro.params.slug}/`}
+    robotsNoIndex={['erp-sea', 'landing-page-sea-pb'].includes(Astro.params.slug) || undefined}
     includeContactScripts={hasContactHero}
     jsonLd={pageJsonLd}
   >

@@ -32,7 +32,7 @@ export default defineConfig({
     keystatic(),
     sitemap({
       // Thank-you pages, admin and the static estimator app stay out of the sitemap.
-      filter: (page) => !/\/(keystatic|api|simulateur|merci-|thank-you-)/.test(page),
+      filter: (page) => !/\/(keystatic|api|simulateur|merci-|thank-you-|erp-sea|landing-page-sea-pb)/.test(page),
       i18n: {
         defaultLocale: 'fr',
         locales: { fr: 'fr-BE', en: 'en', nl: 'nl-BE' },
