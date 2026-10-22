@@ -54,18 +54,46 @@ const isHome = /^\/(en\/|nl\/)?$/.test(Astro.url.pathname);
 const addr = (street: string, postalCode: string, city: string) => ({
   '@type': 'PostalAddress', streetAddress: street, postalCode, addressLocality: city, addressCountry: 'BE',
 });
+const orgDescription = {
+  fr: 'Partenaire officiel Odoo Silver en Belgique : implémentation, migration, support et développement Odoo.',
+  en: 'Official Odoo Silver Partner in Belgium: Odoo implementation, migration, support and development.',
+  nl: 'Officiële Odoo Silver Partner in België: Odoo-implementatie, migratie, support en ontwikkeling.',
+}[lang];
+const office = (id: string, name: string, address: Record<string, unknown>) => ({
+  '@type': 'ProfessionalService',
+  '@id': `https://agitech.io/#office-${id}`,
+  name,
+  url: 'https://agitech.io/',
+  parentOrganization: { '@id': 'https://agitech.io/#organization' },
+  address,
+});
 const organizationLd = {
   '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'Agitech',
-  url: 'https://agitech.io/',
-  logo: 'https://agitech.io/assets/img/agitech-logo-dark.svg',
-  telephone: '+32 2 616 69 87',
-  sameAs: ['https://www.linkedin.com/company/agitechbelgium/', 'https://www.youtube.com/@Agitech-OdooPartner'],
-  location: [
-    { '@type': 'Place', name: 'Agitech Bruxelles', address: addr('Clos Lucien Outers 11', '1160', 'Auderghem') },
-    { '@type': 'Place', name: 'Agitech Bouillon', address: addr('Grand-Rue 17', '6830', 'Bouillon') },
-    { '@type': 'Place', name: 'Agitech Anvers', address: addr('Frankrijklei 5', '2000', 'Antwerpen') },
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': 'https://agitech.io/#organization',
+      name: 'Agitech',
+      legalName: 'Agile Technologies',
+      url: 'https://agitech.io/',
+      logo: 'https://agitech.io/assets/img/agitech-logo-dark.svg',
+      description: orgDescription,
+      telephone: '+32 2 616 69 87',
+      areaServed: ['BE', 'FR'],
+      knowsAbout: ['Odoo', 'ERP', 'Implémentation Odoo', 'Migration Odoo', 'Développement Odoo', 'Comptabilité Odoo'],
+      sameAs: ['https://www.linkedin.com/company/agitechbelgium/', 'https://www.youtube.com/@Agitech-OdooPartner'],
+    },
+    office('bruxelles', 'Agitech Bruxelles', { ...addr('Clos Lucien Outers 11', '1160', 'Auderghem'), addressRegion: 'Bruxelles' }),
+    office('bouillon', 'Agitech Bouillon', addr('Grand-Rue 17', '6830', 'Bouillon')),
+    office('anvers', 'Agitech Anvers', addr('Silversquare Antwerp Tower, Frankrijklei 5', '2000', 'Antwerpen')),
+    {
+      '@type': 'WebSite',
+      '@id': 'https://agitech.io/#website',
+      url: 'https://agitech.io/',
+      name: 'Agitech',
+      publisher: { '@id': 'https://agitech.io/#organization' },
+      inLanguage: ['fr-BE', 'en', 'nl-BE'],
+    },
   ],
 };
 

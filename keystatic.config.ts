@@ -545,6 +545,8 @@ export default config({
         publishedAt: fields.date({ label: 'Date de publication' }),
         category: fields.text({ label: 'Catégorie' }),
         excerpt: fields.text({ label: 'Résumé (SEO/liste)', multiline: true }),
+        seoTitle: fields.text({ label: 'Titre SEO (optionnel)' }),
+        seoDescription: fields.text({ label: 'Description SEO (optionnel)', multiline: true }),
         coverImage: fields.image({
           label: 'Image de couverture',
           directory: 'public/assets/img/blog',

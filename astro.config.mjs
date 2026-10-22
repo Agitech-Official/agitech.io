@@ -26,11 +26,16 @@ export default defineConfig({
     '/newsletter-fr/': '/',
     '/en/newsletter/': '/en/',
     '/en/industries-international-associations/': '/en/industries-construction-batiment/',
+    '/fr_be/home-page/': '/',
+    '/fr_be/[...slug]': '/[...slug]',
+    '/case-study/': '/business-cases/',
+    '/en/case-study/': '/en/business-cases/',
   },
   integrations: [
     react(),
     keystatic(),
     sitemap({
+      lastmod: new Date(),
       // Thank-you pages, admin and the static estimator app stay out of the sitemap.
       filter: (page) => !/\/(keystatic|api|simulateur|merci-|thank-you-|erp-sea|landing-page-sea-pb)/.test(page),
       i18n: {

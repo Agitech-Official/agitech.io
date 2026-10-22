@@ -41,7 +41,7 @@ async function build(): Promise<Index> {
     idx[e.lang as Lang].pages.add(`/business-cases/${strip(slug)}/`);
   }
   for (const l of LANGS) {
-    for (const p of ['/blog/', '/business-cases/', '/case-study/', '/thank-you-form/', '/thank-you-meeting/']) idx[l].pages.add(p);
+    for (const p of ['/blog/', '/business-cases/', '/thank-you-form/', '/thank-you-meeting/']) idx[l].pages.add(p);
   }
   idx.fr.pages.add('/merci-formulaire/');
   idx.fr.pages.add('/merci-rdv/');

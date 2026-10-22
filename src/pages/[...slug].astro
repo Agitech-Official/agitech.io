@@ -62,6 +62,30 @@ const pageJsonLd = pageFaqBlock
       })),
     }
   : undefined;
+const blogUrl = `https://agitech.io/${Astro.params.slug}/`;
+const blogJsonLd = kind === 'blog' ? [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: entry.title,
+    description: entry.seoDescription || entry.excerpt || undefined,
+    datePublished: entry.publishedAt || undefined,
+    dateModified: entry.publishedAt || undefined,
+    inLanguage: 'fr-BE',
+    mainEntityOfPage: blogUrl,
+    author: { '@type': 'Organization', name: 'Agitech', url: 'https://agitech.io/' },
+    publisher: { '@type': 'Organization', name: 'Agitech', url: 'https://agitech.io/' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Accueil', item: 'https://agitech.io/' },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://agitech.io/blog/' },
+      { '@type': 'ListItem', position: 3, name: entry.title, item: blogUrl },
+    ],
+  },
+] : undefined;
 ---
 {kind === 'page' ? (
   <Layout
@@ -82,9 +106,10 @@ const pageJsonLd = pageFaqBlock
 ) : (
   <Layout
     lang="fr"
-    title={entry.title}
-    description={entry.excerpt || bodyHtml.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 155)}
+    title={entry.seoTitle || entry.title}
+    description={entry.seoDescription || entry.excerpt || bodyHtml.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 155)}
     canonical={`https://agitech.io/${Astro.params.slug}/`}
+    jsonLd={blogJsonLd}
   >
     <Header slot="header" lang="fr" />
     <main>
