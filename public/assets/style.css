@@ -658,3 +658,24 @@
 .cookie-actions button.cookie-accept { background: var(--violet, #984895); border-color: var(--violet, #984895); }
 .cookie-actions button:hover { background: rgba(255,255,255,0.12); }
 .cookie-actions button.cookie-accept:hover { background: #7f3b7c; }
+
+/* Text sizes of the previous WordPress site (Inter 20px body copy, 46px H1/H2, 32px H3, 20px menu
+   and buttons). Appended last with !important so they win over component-scoped styles. */
+main p, footer p, .faq-item p, .forfait-row p { font-size: 20px !important; line-height: 30px !important; }
+main li, footer li, .faq-item summary { font-size: 18px !important; line-height: 28px !important; }
+h1, h2 { font-size: clamp(2rem, 1.2rem + 2.6vw, 46px) !important; line-height: 1.2 !important; }
+h3 { font-size: clamp(1.5rem, 1rem + 1.4vw, 32px) !important; line-height: 1.25 !important; }
+h4 { font-size: clamp(1.25rem, 1rem + 0.8vw, 24px) !important; }
+h5 { font-size: 20px !important; }
+h6 { font-size: 18px !important; }
+.main_menu > ul > li > a { font-size: clamp(14px, 1.35vw, 20px) !important; text-transform: none !important; letter-spacing: 0 !important; }
+.has-submenu .submenu a { font-size: 18px !important; }
+.discuss-btn a, .primary-btn a, .light-btn a, .btn, .forfait-outline-btn a, .hero-cta-secondary a { font-size: clamp(15px, 1.35vw, 20px) !important; }
+footer a, footer .copy-right, .ft-links .content ul a { font-size: 20px !important; }
+footer .copy-right p, .privacy-links a { font-size: 17px !important; }
+@media (max-width: 900px) {
+  main p, footer p, .faq-item p, .forfait-row p { font-size: 18px !important; line-height: 28px !important; }
+  main li, .faq-item summary { font-size: 17px !important; }
+  .main_menu > ul > li > a { font-size: 18px !important; }
+  footer a, .ft-links .content ul a { font-size: 18px !important; }
+}
