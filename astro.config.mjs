@@ -36,6 +36,12 @@ export default defineConfig({
     keystatic(),
     sitemap({
       lastmod: new Date(),
+      // hreflang x-default points to the French (default) version of each page.
+      serialize(item) {
+        const fr = item.links?.find((l) => l.lang === 'fr-BE');
+        if (fr && !item.links.some((l) => l.lang === 'x-default')) item.links.push({ url: fr.url, lang: 'x-default' });
+        return item;
+      },
       // Thank-you pages, admin and the static estimator app stay out of the sitemap.
       filter: (page) => !/\/(keystatic|api|simulateur|merci-|thank-you-|erp-sea|landing-page-sea-pb)/.test(page),
       i18n: {

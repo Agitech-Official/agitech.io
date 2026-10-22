@@ -37,12 +37,12 @@ def fetch(url, follow=True):
 
 def head_info(body):
     t = re.search(r"<title[^>]*>(.*?)</title>", body, re.S | re.I)
-    m = re.search(r'<meta[^>]+name=["\']description["\'][^>]*content=["\'](.*?)["\']', body, re.S | re.I) \
-        or re.search(r'<meta[^>]+content=["\'](.*?)["\'][^>]+name=["\']description["\']', body, re.S | re.I)
+    m = re.search(r'<meta[^>]+name=["\']description["\'][^>]*?content=(["\'])(.*?)\1', body, re.S | re.I) \
+        or re.search(r'<meta[^>]+content=(["\'])(.*?)\1[^>]+name=["\']description["\']', body, re.S | re.I)
     c = re.search(r'<link[^>]+rel=["\']canonical["\'][^>]*href=["\'](.*?)["\']', body, re.I)
     ld = re.findall(r'<script[^>]+application/ld\+json[^>]*>(.*?)</script>', body, re.S | re.I)
     return (html.unescape(t.group(1).strip()) if t else "",
-            html.unescape(m.group(1).strip()) if m else "",
+            html.unescape(m.group(2).strip()) if m else "",
             c.group(1) if c else "", ld)
 
 
