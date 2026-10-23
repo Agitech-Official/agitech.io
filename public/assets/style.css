@@ -123,13 +123,13 @@
   .has-submenu .submenu a { display: block; padding: 0.6rem 0.75rem; border-radius: 8px; font-size: 0.97rem; }
   .has-submenu .submenu a:hover { background: rgba(255,255,255,0.06); }
   .has-submenu .submenu .submenu-all a { color: var(--violet-light); font-weight: 500; border-top: 1px solid var(--border-onDark); margin-top: 0.25rem; padding-top: 0.75rem; }
-  .discuss-btn a { background: var(--violet); color: var(--white); padding: 14px 32px; border-radius: 200px; font-size: 13.5px; letter-spacing: 0.6px; text-transform: uppercase; font-weight: 400; transition: background 0.2s; }
+  .discuss-btn a { background: var(--violet); color: var(--white); padding: 14px 32px; border-radius: 200px; font-size: 12px; letter-spacing: 0.6px; text-transform: uppercase; font-weight: 400; transition: background 0.2s; }
   .discuss-btn a:hover { background: var(--violet-light); }
   .lines-button { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; }
   .lines-button .lines, .lines-button .lines::before, .lines-button .lines::after { content:''; display:block; width: 22px; height: 2px; background: var(--white); transition: 0.3s; }
   .lines-button .lines::before { transform: translateY(-7px); }
   .lines-button .lines::after { transform: translateY(5px); }
-  .lang-flag { display: inline-flex; align-items: center; padding: 3px; border: 1px solid rgba(255,255,255,0.35); border-radius: 100px; font-size: 12.5px; letter-spacing: 0.06em; }
+  .lang-flag { display: inline-flex; align-items: center; padding: 3px; border: 1px solid rgba(255,255,255,0.35); border-radius: 100px; font-size: 11px; letter-spacing: 0.06em; }
   .lang-flag .lang-opt { padding: 4px 9px; border-radius: 100px; color: var(--muted-onDark); transition: background 0.2s, color 0.2s; line-height: 1.2; }
   .lang-flag a.lang-opt:hover { color: var(--white); background: rgba(255,255,255,0.12); }
   .lang-flag .active { color: var(--white); background: var(--violet); font-weight: 600; }
@@ -668,11 +668,11 @@ h3 { font-size: clamp(1.5rem, 1rem + 1.4vw, 32px) !important; line-height: 1.25 
 h4 { font-size: clamp(1.25rem, 1rem + 0.8vw, 24px) !important; }
 h5 { font-size: 20px !important; }
 h6 { font-size: 18px !important; }
-.main_menu > ul > li > a { font-size: clamp(12px, 1.05vw, 15px) !important; text-transform: uppercase !important; letter-spacing: 0.6px !important; }
-.has-submenu .submenu a { font-size: 16px !important; }
-.discuss-btn a, .primary-btn a, .light-btn a, .btn, .forfait-outline-btn a, .hero-cta-secondary a { font-size: clamp(15px, 1.35vw, 20px) !important; }
+.main_menu > ul > li > a { font-size: 12px !important; text-transform: uppercase !important; letter-spacing: 0.6px !important; }
+.has-submenu .submenu a { font-size: 14px !important; }
+.primary-btn a, .light-btn a, .btn, .forfait-outline-btn a, .hero-cta-secondary a { font-size: clamp(15px, 1.35vw, 20px) !important; }
 @media (max-width: 900px) {
   main p, .faq-item p, .forfait-row p { font-size: 18px !important; line-height: 28px !important; }
   main li, .faq-item summary { font-size: 17px !important; }
-  .main_menu > ul > li > a { font-size: 15px !important; }
+  .main_menu > ul > li > a { font-size: 14px !important; }
 }
