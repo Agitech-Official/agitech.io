@@ -14,7 +14,7 @@ export interface Props {
 const { bgClass = '', title, badges = [], logo, image, items = [], cta } = Astro.props;
 ---
 <section class={`why-section ${bgClass}`}>
-  <div class="container-sm">
+  <div class="container">
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-12 why-title">{title && <h3>{title}</h3>}</div>
       <div class="col-lg-6 col-md-6 col-sm-12 col-12 why-image">
@@ -29,6 +29,7 @@ const { bgClass = '', title, badges = [], logo, image, items = [], cta } = Astro
           </div>
         )}
         <div class="why-img">{image && <img src={blockImg(image)} alt="">}</div>
+        {cta && <Cta label={cta.label} url={cta.url} newTab={cta.newTab} />}
       </div>
       {items.length > 0 && (
         <div class="col-lg-6 col-md-6 col-sm-12 col-12 why-content">
@@ -39,7 +40,6 @@ const { bgClass = '', title, badges = [], logo, image, items = [], cta } = Astro
               {item.content && <Fragment set:html={item.content} />}
             </div>
           ))}
-          {cta && <Cta label={cta.label} url={cta.url} newTab={cta.newTab} />}
         </div>
       )}
     </div>

@@ -180,11 +180,15 @@
 
   /* Why section */
   .why-section { padding: 4rem 0; background: var(--offwhite); }
-  .why-section .row { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center; }
-  .why-title { grid-column: 1 / -1; }
-  .why-title h3 { font-size: clamp(1.6rem, 1.2rem + 1.5vw, 2.4rem); margin-bottom: 2.5rem; max-width: 640px; }
+  .why-section .row { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto 1fr; grid-template-areas: "title content" "image content"; column-gap: 3.5rem; row-gap: 1.5rem; align-items: stretch; }
+  .why-title { grid-area: title; }
+  .why-image { grid-area: image; display: flex; flex-direction: column; }
+  .why-content { grid-area: content; }
+  .why-title h3 { font-size: clamp(1.6rem, 1.2rem + 1.5vw, 2.4rem); margin-bottom: 0; max-width: 640px; }
   .why-image h3 { display: none; }
-  .why-img img { border-radius: 16px; width: 100%; height: 420px; object-fit: cover; }
+  .why-img { flex: 1; min-height: 320px; position: relative; overflow: hidden; border-radius: 16px; }
+  .why-img img { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 16px; object-fit: cover; object-position: 50% 15%; }
+  .why-image .primary-btn { margin-top: 1.5rem; }
   .why-content .item { padding: 1.5rem 0; border-top: 1px solid var(--border); }
   .why-content .item:last-of-type { border-bottom: 1px solid var(--border); }
   .why-content h4 { color: var(--violet); font-size: 0.95rem; font-weight: 600; margin-bottom: 0.4rem; }
@@ -641,6 +645,7 @@
     .discuss-btn { margin-top: 0.5rem; }
     .discuss-btn a { display: block; text-align: center; }
     .why-section .row, .talk-section .row, .credite-section .row { grid-template-columns: 1fr; }
+    .why-section .row { grid-template-areas: "title" "image" "content"; }
     .odoo-expertise-content, .our-services-content, .help-fields, .we-implemented-section .items-wrap { grid-template-columns: 1fr 1fr; }
     footer .row.main-row { grid-template-columns: 1fr; gap: 2.5rem; }
     .copy-right { flex-direction: column; align-items: flex-start; }
