@@ -1,112 +1,165 @@
 ---
-// New block: "Nos bureaux" — added when Agitech grew to 3 offices (BE).
-// Locally scoped styles, reuses existing tokens only.
+// "Nos bureaux" — eyebrow + big title on the left, office list with a
+// "Contacter" CTA, a stylised SVG map of Belgium with pins on the right.
+// Hovering a row highlights it and pulses the matching pin (see <script> below).
 export interface Props {
   title?: string;
-  subTitle?: string;
-  mapLabel?: string;
-  showMap?: boolean;
-  offices?: { city?: string; address?: string }[];
+  heading?: string;
+  ctaLabel?: string;
+  ctaUrl?: string;
+  offices?: { city?: string; address?: string; pinTop?: string; pinLeft?: string }[];
 }
-const { title, subTitle, mapLabel = 'Voir sur la carte', showMap = false, offices = [] } = Astro.props;
+const { title, heading, ctaLabel = 'Contacter', ctaUrl = '/contact-us/', offices = [] } = Astro.props;
+
+const slug = (s?: string) =>
+  (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 ---
-<section class="offices-section" id="bureaux">
+<section class="offices-section" id="bureaux" aria-labelledby="offices-heading">
   <div class="container">
-    <div class="offices-title">
-      {title && <h3>{title}</h3>}
-      {subTitle && <p>{subTitle}</p>}
+  <div class="offices-inner">
+    <div class="offices-text">
+      {title && <h6 class="offices-eyebrow">{title}</h6>}
+      {heading && <h3 class="offices-heading" id="offices-heading" set:html={heading} />}
+
+      {offices.length > 0 && (
+        <ul class="offices-list">
+          {offices.map(o => (
+            <li class="office-row" data-office={slug(o.city)}>
+              <span class="office-dot" aria-hidden="true"></span>
+              <div class="office-body">
+                {o.city && <p class="office-city">{o.city}</p>}
+                {o.address && <p class="office-address">{o.address}</p>}
+              </div>
+              <a class="office-cta" href={ctaUrl} aria-label={`Contacter le bureau de ${o.city}`}>
+                {ctaLabel}
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"></path></svg>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
-    {offices.length > 0 && (
-      <div class={`offices-grid ${showMap ? 'has-map' : ''}`}>
-        {offices.map(o => {
-          const fullAddress = `${o.address}, ${o.city}`;
-          const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fullAddress)}`;
-          return (
-            <div class="office-card">
-              {showMap && (
-                <div class="office-map-embed">
-                  <iframe
-                    src={`https://www.google.com/maps?q=${encodeURIComponent(fullAddress)}&output=embed`}
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"
-                    title={`Kaart — ${o.city}`}
-                  ></iframe>
-                </div>
-              )}
-              {o.city && <h5>{o.city}</h5>}
-              {o.address && <p>{o.address}</p>}
-              <a class="office-map-link" href={mapsHref} target="_blank" rel="noopener">{mapLabel}</a>
+
+    <div class="offices-map-col">
+      <div class="offices-map">
+        <div class="offices-map-frame">
+          <svg viewBox="0 0 480 400" role="img" aria-label="Carte stylisée de la Belgique avec nos bureaux">
+            <defs>
+              <pattern id="offices-dots" width="12" height="12" patternUnits="userSpaceOnUse">
+                <circle cx="6" cy="6" r="1.3" fill="#984895" fill-opacity="0.45"></circle>
+              </pattern>
+              <filter id="offices-glow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="18"></feGaussianBlur>
+              </filter>
+            </defs>
+            <polygon points="17,92 112,41 213,41 276,18 311,27 334,59 397,81 380,135 409,153 449,198 461,234 438,261 397,279 386,324 392,369 357,378 334,346 308,326 265,297 282,266 265,270 219,288 202,288 184,252 150,234 92,180 69,153 35,144 17,108" fill="#984895" fill-opacity="0.10" filter="url(#offices-glow)"></polygon>
+            <polygon points="17,92 112,41 213,41 276,18 311,27 334,59 397,81 380,135 409,153 449,198 461,234 438,261 397,279 386,324 392,369 357,378 334,346 308,326 265,297 282,266 265,270 219,288 202,288 184,252 150,234 92,180 69,153 35,144 17,108" fill="url(#offices-dots)" stroke="#984895" stroke-opacity="0.7" stroke-width="1.5" stroke-linejoin="round"></polygon>
+          </svg>
+
+          {offices.filter(o => o.pinTop && o.pinLeft).map(o => (
+            <div class="office-pin" data-pin={slug(o.city)} style={`left:${o.pinLeft}%; top:${o.pinTop}%`}>
+              <span class="office-pin-marker" aria-hidden="true"></span>
+              <span class="office-pin-label">{o.city}</span>
             </div>
-          );
-        })}
+          ))}
+        </div>
       </div>
-    )}
+    </div>
+  </div>
   </div>
 </section>
 
 <style>
   .offices-section {
-    padding: 4rem 0;
-    background: var(--offwhite, #f7f7f7);
+    padding: 6rem 0;
+    background: var(--offwhite);
+    color: var(--ink);
   }
-  .offices-title {
-    max-width: 620px;
-    margin: 0 auto 3rem;
-    text-align: center;
+  .offices-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4rem;
+    align-items: center;
   }
-  .offices-title h3 {
-    font-size: 1.9rem;
-    margin-bottom: 0.75rem;
+
+  .offices-text { flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 1.25rem; }
+  .offices-eyebrow { margin: 0; font-family: var(--font-body); color: var(--violet); }
+  .offices-heading { margin: 0; max-width: 560px; line-height: 1.2; }
+  .offices-heading :global(em) { font-style: normal; color: var(--violet); }
+
+  .offices-list { list-style: none; margin: 0.5rem 0 0; padding: 0; display: flex; flex-direction: column; }
+  .office-row {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1.25rem 1rem; margin: 0 -1rem; border-radius: 12px;
+    border-top: 1px solid var(--border);
+    transition: background-color 0.25s ease, box-shadow 0.25s ease;
   }
-  .offices-title p {
-    color: var(--muted, #6b6b6b);
+  .office-row:last-child { border-bottom: 1px solid var(--border); }
+  .office-row:hover, .office-row.is-active { background: var(--white); box-shadow: 0 4px 16px rgba(20,20,20,0.08); }
+
+  .office-dot { flex: 0 0 auto; width: 10px; height: 10px; margin-top: 9px; border-radius: 999px; background: var(--violet); }
+  .office-body { flex: 1 1 200px; min-width: 0; display: flex; flex-direction: column; gap: 0.25rem; }
+  .office-city { margin: 0; font-family: var(--font-display); font-size: 1.2rem; font-weight: 500; color: var(--ink); }
+  .office-address { margin: 0; font-size: 0.95rem; line-height: 1.5; color: var(--muted); }
+
+  .office-cta {
+    flex: 0 0 auto; display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.85rem 0; font-family: var(--font-display); font-size: 0.8rem;
+    font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--violet); text-decoration: none;
   }
-  .offices-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+  .office-cta:hover { color: var(--violet-light); }
+  .office-cta svg { width: 14px; height: 14px; }
+
+  .offices-map-col { flex: 1 1 420px; min-width: 0; display: flex; justify-content: center; }
+  .offices-map { position: relative; width: 100%; max-width: 520px; padding: 1.5rem 0; }
+  .offices-map-frame { position: relative; width: 100%; aspect-ratio: 480 / 400; }
+  .offices-map-frame svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+
+  .office-pin { position: absolute; transform: translate(-50%, -50%); display: flex; align-items: center; gap: 0.6rem; }
+  .office-pin-marker {
+    position: relative; width: 34px; height: 34px; border-radius: 999px;
+    border: 1px solid var(--violet); display: flex; align-items: center; justify-content: center;
+    opacity: 0.6; transition: transform 0.3s ease, opacity 0.3s ease;
   }
-  .office-card {
-    display: block;
-    background: var(--white, #fff);
-    border: 1px solid var(--border, #e5e5e5);
-    border-radius: 16px;
-    padding: 1.75rem;
-    transition: border-color 0.25s, transform 0.25s;
+  .office-pin-marker::after { content: ''; width: 12px; height: 12px; border-radius: 999px; background: var(--violet); }
+  .office-pin.is-active .office-pin-marker { opacity: 1; transform: scale(1.4); animation: offices-pulse 1.4s ease-out infinite; }
+  .office-pin-label { margin-left: -0.25rem; font-family: var(--font-display); font-size: 0.95rem; font-weight: 500; color: var(--ink); white-space: nowrap; }
+
+  @keyframes offices-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(152,72,149,0.35); }
+    100% { box-shadow: 0 0 0 14px rgba(152,72,149,0); }
   }
-  .office-card:hover {
-    border-color: var(--violet, #984895);
-    transform: translateY(-4px);
-  }
-  .office-card h5 {
-    font-size: 1.1rem;
-    margin-bottom: 0.6rem;
-  }
-  .office-card p {
-    color: var(--muted, #6b6b6b);
-    font-size: 1.02rem;
-    line-height: 1.5;
-    margin-bottom: 1.25rem;
-  }
-  .office-map-link {
-    display: inline-block;
-    color: var(--violet, #984895);
-    font-weight: 600;
-    font-size: 0.98rem;
-  }
-  .office-map-embed {
-    border-radius: 10px;
-    overflow: hidden;
-    margin-bottom: 1.25rem;
-    aspect-ratio: 4 / 3;
-  }
-  .office-map-embed iframe {
-    display: block;
-    width: 100%;
-    height: 100%;
-    border: 0;
-  }
+
   @media (max-width: 900px) {
-    .offices-grid { grid-template-columns: 1fr; }
+    .offices-section { padding: 4rem 0; }
+    .office-row { flex-wrap: wrap; }
+    .office-cta { padding-left: 1.6rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .office-pin.is-active .office-pin-marker { animation: none; }
   }
 </style>
+
+<script>
+  // Hovering/focusing an office row highlights it and pulses the matching map pin.
+  const sections = document.querySelectorAll<HTMLElement>('.offices-section');
+  sections.forEach(section => {
+    const rows = section.querySelectorAll<HTMLElement>('.office-row');
+    const pins = section.querySelectorAll<HTMLElement>('.office-pin');
+
+    function setActive(key: string | null) {
+      rows.forEach(r => r.classList.toggle('is-active', r.dataset.office === key));
+      pins.forEach(p => p.classList.toggle('is-active', p.dataset.pin === key));
+    }
+
+    rows.forEach(row => {
+      const key = row.dataset.office ?? null;
+      row.addEventListener('mouseenter', () => setActive(key));
+      row.addEventListener('mouseleave', () => setActive(null));
+      const cta = row.querySelector<HTMLElement>('.office-cta');
+      cta?.addEventListener('focus', () => setActive(key));
+      cta?.addEventListener('blur', () => setActive(null));
+    });
+  });
+</script>

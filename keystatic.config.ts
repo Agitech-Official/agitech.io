@@ -327,14 +327,16 @@ const blocksField = fields.array(
         cta: fields.object(ctaFields, { label: 'CTA' }),
       }, { label: 'Section contact' }),
       officesSection: fields.object({
-        title: fields.text({ label: 'Titre' }),
-        subTitle: fields.text({ label: 'Sous-titre' }),
-        mapLabel: fields.text({ label: 'Texte du lien carte', defaultValue: 'Voir sur la carte' }),
-        showMap: fields.checkbox({ label: 'Afficher une carte intégrée par bureau', defaultValue: false }),
+        title: fields.text({ label: 'Sur-titre (petit, au-dessus du grand titre)' }),
+        heading: fields.text({ label: 'Grand titre (HTML autorisé, ex: <em>mot</em> pour le mettre en mauve, <br> pour un saut de ligne)', multiline: true }),
+        ctaLabel: fields.text({ label: 'Texte du bouton (répété pour chaque bureau)', defaultValue: 'Contacter' }),
+        ctaUrl: fields.text({ label: 'Lien du bouton (même lien pour tous les bureaux)', defaultValue: '/contact-us/' }),
         offices: fields.array(
           fields.object({
             city: fields.text({ label: 'Ville' }),
             address: fields.text({ label: 'Adresse' }),
+            pinTop: fields.text({ label: 'Repère sur la carte — position verticale (%, ex: 39.5)' }),
+            pinLeft: fields.text({ label: 'Repère sur la carte — position horizontale (%, ex: 49.4)' }),
           }),
           { label: 'Bureaux', itemLabel: props => props.fields.city.value || 'Bureau' },
         ),
