@@ -451,6 +451,7 @@ const blocksField = fields.array(
         ctaSecondary: fields.object(ctaFields, { label: 'CTA secondaire' }),
         diyTitle: fields.text({ label: 'Lien DIY — phrase' }),
         diyCta: fields.object(ctaFields, { label: 'Lien DIY — CTA' }),
+        moreLink: fields.object(ctaFields, { label: 'Lien texte "en savoir plus" (sous les points, à droite)' }),
       }, { label: 'Forfait — Section accueil' }),
       textSection: fields.object({
         title: fields.text({ label: 'Titre (H2)' }),
