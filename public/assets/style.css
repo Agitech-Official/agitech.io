@@ -152,8 +152,9 @@
   /* Hero */
   .home-banner, .banner-sec { background: var(--black); color: var(--white); padding: 6rem 0 7rem; }
   .banner-sec .row { position: relative; z-index: 2; }
-  .banner-sec .text h6 { font-family: var(--font-body); color: var(--muted-onDark); font-size: 0.95rem; font-weight: 500; letter-spacing: 0.04em; margin-bottom: 1.25rem; }
+  .banner-sec .text h6 { color: var(--violet-light); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.02em; margin-bottom: 1.25rem; }
   .banner-sec .text h1, .banner-sec .text h2 { font-size: clamp(1.6rem, 5vw, 2.7rem); line-height: 1.12; max-width: 680px; margin-bottom: 2.25rem; }
+  .home-banner .text h1 { max-width: 760px; }
   /* agifid's hero is text + gradient glow only, no side artwork — dropping the WP
      decorative background SVGs (banner-bg-*.svg) kept in .right-img for brand consistency. */
   .banner-sec .right-img { display: none; }

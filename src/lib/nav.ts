@@ -4,7 +4,7 @@ export type Lang = 'fr' | 'en' | 'nl';
 type Link = { label: string; href: string; external?: boolean };
 
 const strings = {
-  fr: { odoo: 'Odoo ERP', industries: 'Solutions', services: 'Services', cases: 'Réalisations', blog: 'Blog', team: 'Jobs', contact: 'Contact', allIndustries: 'Toutes les solutions' },
+  fr: { odoo: 'Odoo ERP', industries: 'Solutions', services: 'Services', cases: 'Réalisations', blog: 'Blog', team: 'Jobs', contact: 'Discutons', allIndustries: 'Toutes les solutions' },
   en: { odoo: 'Odoo ERP', industries: 'Solutions', services: 'Services', cases: 'Case Studies', blog: 'Blog', team: 'Jobs', contact: 'Contact', allIndustries: 'All solutions' },
   nl: { odoo: 'Odoo ERP', industries: 'Oplossingen', services: 'Diensten', cases: 'Realisaties', blog: 'Blog', team: 'Jobs', contact: 'Contact', allIndustries: 'Alle oplossingen' },
 };
