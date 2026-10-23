@@ -135,6 +135,9 @@ const altLinks = barePath
     <meta property="og:title" content={title}>
     <meta property="og:description" content={description}>
     <meta property="og:image" content={ogImage}>
+    {!image && <meta property="og:image:width" content="1200">}
+    {!image && <meta property="og:image:height" content="630">}
+    <meta property="og:image:alt" content="Agitech — Partenaire Odoo Silver">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content={title}>
     <meta name="twitter:description" content={description}>
