@@ -2,12 +2,12 @@
 title: 'Hosting & Monitoring'
 lang: nl
 seoTitle: 'Odoo Hosting & Monitoring: bewaking en alerts | Agitech'
-seoDescription: 'Bewaking van uw Odoo-instanties: storingen in real time, automatische AI-diagnose, controles om de 15 minuten en een wekelijkse opvolging.'
+seoDescription: 'Uw Odoo continu bewaakt: onmiddellijke storingsmelding, AI-diagnose, gezondheidscontrole om de 15 minuten en een wekelijks rapport.'
 blocks:
 - discriminant: innerHero
   value:
     title: 'Diensten'
-    subTitle: 'Hosting & Monitoring: uw Odoo-instanties onder toezicht'
+    subTitle: 'Uw Odoo blijft draaien. En valt hij uit, dan weten wij het vóór u.'
     bottomLine: true
     image: banner-bg-3.svg
     cta:
@@ -19,37 +19,34 @@ blocks:
 - discriminant: textSection
   value:
     title: 'Een Odoo-storing legt uw activiteit stil'
-    content: '<p>Wij bewaken uw instanties continu, onderzoeken zodra er een incident is en waarschuwen u nog voor uw teams het merken. Vandaag rekenen zo’n honderd Odoo-instanties op ons om 24/7 beschikbaar te blijven.</p>'
+    content: '<p>Vandaag rekenen zo’n honderd Odoo-instanties op ons om 24/7 beschikbaar te blijven. Wij bewaken, onderzoeken en waarschuwen: u houdt uw hoofd bij uw business.</p>'
     emphasis: false
 - discriminant: odooExpertise
   value:
     bgClass: white-bg
-    title: 'Wat de bewaking dekt'
+    title: 'Wat u wint'
     items:
     - logo: monitoring-icon.svg
-      heading: 'Storingen in real time detecteren'
-      descriptionPoints: '<p>Elke instantie wordt continu bewaakt met Uptime Kuma.</p><ul><li>Onmiddellijke sms-melding zodra een instantie uitvalt</li><li>Eén enkele sms groepeert alle getroffen instanties (venster van 45 seconden), ook als een hele server uitvalt</li><li>Parallel een Slack-melding</li></ul>'
+      heading: 'Wij weten het vóór u'
+      descriptionPoints: '<p>Elke instantie wordt continu bewaakt.</p><ul><li>Onmiddellijke melding per sms en Slack zodra een instantie stopt</li><li>Eén enkele sms, ook als een hele server uitvalt: geen nutteloze paniek</li></ul>'
     - logo: automation-outline.svg
-      heading: 'Automatische diagnose van een storing'
-      descriptionPoints: '<p>Zodra een storing wordt gedetecteerd, onderzoekt een AI-agent de betrokken server.</p><ul><li>Toegang enkel-lezen, beperkt tot een witte lijst van observatiecommando’s: niets kan worden gewijzigd</li><li>Rapport: waarschijnlijke oorzaak, onmiddellijke acties, loguittreksels, aanbevelingen voor server, Odoo-configuratie en code, diagnose-SQL</li><li>Helpdeskticket in Odoo met dit rapport, plus een samenvattende e-mail</li></ul>'
+      heading: 'De AI onderzoekt terwijl u slaapt'
+      descriptionPoints: '<p>Bij een storing zoekt een AI-agent meteen de oorzaak op de server.</p><ul><li>Waarschijnlijke oorzaak, directe acties en advies in een helder rapport</li><li>Ticket in Odoo en een samenvattende e-mail, zonder uw gegevens aan te raken</li></ul>'
     - logo: cloud-servers-icon.svg
-      heading: 'Kritieke controles om de 15 minuten'
-      descriptionPoints: '<p>Controles enkel-lezen op elke productieserver.</p><ul><li>PostgreSQL-verbindingen, blokkerende locks van meer dan 60 s, actieve queries van meer dan 300 s</li><li>Vastgelopen pdf-generatie, verzadigde workers, volle of intens gebruikte swap, onbereikbare server</li><li>Escalatie door herhaling: kritiek vanaf de 1e keer, gemiddeld vanaf de 3e, laag vanaf de 5e</li><li>Vooronderzoek door de AI, helpdeskticket (hoge prioriteit indien kritiek) en één samenvattende e-mail, geen sms</li></ul>'
+      heading: 'Wij herstellen vóór het breekt'
+      descriptionPoints: '<p>Elke 15 minuten een gezondheidscontrole van uw servers.</p><ul><li>Vertragingen, blokkades, volle geheugens: opgespoord voor uw teams er last van hebben</li><li>Eén samenvattende e-mail, nooit ruis voor niets</li></ul>'
     - logo: network-icon.svg
-      heading: 'AWS-machinealerts'
-      descriptionPoints: '<p>Alarmen van de infrastructuur worden ontvangen, geverifieerd en vergeleken met de Odoo-status van de server.</p><ul><li>Ernst per metriek: kritiek voor statuscontroles, geheugen, swap en schijf; gemiddeld voor CPU; laag voor netwerk</li><li>Eén ticket en één e-mail per alarm, met 6 uur wachttijd voor een nieuw ticket bij hetzelfde alarm</li></ul>'
+      heading: 'De server waarschuwt ons zelf'
+      descriptionPoints: '<p>De alarmen van uw AWS-hosting komen rechtstreeks bij ons binnen.</p><ul><li>Gerangschikt op ernst: eerst wat echt kritiek is</li><li>Eén ticket en één e-mail per alarm</li></ul>'
     - logo: analytique.png
-      heading: 'Wekelijkse opvolging'
-      descriptionPoints: '<p>Elke maandag een rapport over 7 dagen werking van uw servers.</p><ul><li>Resources (CPU, RAM, swap, schijf, PostgreSQL-verbindingen), timeouts, schrijfconflicten, trage queries</li><li>Aanbevolen aantal workers per instantie, op basis van de werkelijk gemeten gelijktijdigheid</li><li>Aanbevolen acties ingedeeld als “Te behandelen”, “Te plannen”, “Wanneer u wilt”</li></ul>'
+      heading: 'Elke maandag een helder overzicht'
+      descriptionPoints: '<p>Een eenvoudig rapport over de voorbije week.</p><ul><li>Wat goed gaat, wat vertraagt, wat beter kan</li><li>Acties gerangschikt: “Te behandelen”, “Te plannen”, “Wanneer u wilt”</li></ul>'
     - logo: codage.png
-      heading: 'DNS-beveiligingsaudit'
-      descriptionPoints: '<p>Een controle van DNS-records die naar een resource verwijzen die niet meer van u is.</p><ul><li>Spoort risico’s op overname van subdomeinen op</li><li>Op aanvraag uitgevoerd</li></ul>'
-    - logo: Material-icon.svg
-      heading: 'Versterkt opstarten van diensten'
-      descriptionPoints: '<p>Na een incident waarbij een automatische PostgreSQL-update een instantie stilgelegd liet, hebben we de configuratie van onze servers versterkt.</p><ul><li>Odoo-instanties wachten op PostgreSQL, proberen elke 10 seconden opnieuw en verdragen tot 5 minuten onderbreking voor ze opgeven</li><li>Toegepast op onze 3 servers (23, 29 en 12 diensten)</li></ul>'
+      heading: 'Veiligheid en automatisch herstel'
+      descriptionPoints: '<p>Zodat uw Odoo na een probleem vanzelf weer opstart.</p><ul><li>Na een update die de database onderbreekt, wachten uw instanties en starten ze zelf opnieuw op</li><li>Controle van uw internetadressen zodat niemand ze kan kapen</li></ul>'
 - discriminant: ctaBanner
   value:
-    title: 'Laten we praten over de bewaking van uw Odoo'
+    title: 'Laten we praten over de gemoedsrust van uw Odoo'
     ctaLabel: 'Praat met een expert'
     ctaUrl: /nl/contact-us/
 ---
