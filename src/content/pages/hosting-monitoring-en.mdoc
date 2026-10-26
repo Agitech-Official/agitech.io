@@ -1,0 +1,55 @@
+---
+title: 'Hosting & Monitoring'
+lang: en
+seoTitle: 'Odoo Hosting & Monitoring: Alerts and Supervision | Agitech'
+seoDescription: 'Supervision of your Odoo instances: real-time outage detection, automatic AI diagnosis, checks every 15 minutes and a weekly review.'
+blocks:
+- discriminant: innerHero
+  value:
+    title: 'Services'
+    subTitle: 'Hosting & Monitoring: your Odoo instances under watch'
+    bottomLine: true
+    image: banner-bg-3.svg
+    cta:
+      label: 'Talk to an expert'
+      url: /en/contact-us/
+    cta2:
+      label: 'See Odoo support'
+      url: /en/support/
+- discriminant: textSection
+  value:
+    title: 'When Odoo goes down, your business stops'
+    content: '<p>We monitor your instances continuously, investigate as soon as an incident occurs and warn you before your teams even notice. Today, 25 production Odoo instances are under supervision.</p>'
+    emphasis: false
+- discriminant: odooExpertise
+  value:
+    bgClass: white-bg
+    title: 'What the monitoring covers'
+    items:
+    - logo: monitoring-icon.svg
+      heading: 'Real-time outage detection'
+      descriptionPoints: '<p>Every instance is monitored continuously with Uptime Kuma.</p><ul><li>Immediate SMS alert as soon as an instance goes down</li><li>A single SMS groups all affected instances (45-second window), even when a whole server goes down</li><li>Slack notification in parallel</li></ul>'
+    - logo: automation-outline.svg
+      heading: 'Automatic outage diagnosis'
+      descriptionPoints: '<p>As soon as an outage is detected, an AI agent investigates the affected server.</p><ul><li>Read-only access, limited to a whitelist of observation commands: nothing can be modified</li><li>Report: probable cause, immediate actions, log extracts, server, Odoo configuration and code recommendations, diagnostic SQL queries</li><li>Helpdesk ticket created in Odoo with the report, plus a summary email</li></ul>'
+    - logo: cloud-servers-icon.svg
+      heading: 'Critical checks every 15 minutes'
+      descriptionPoints: '<p>Read-only checks on every production server.</p><ul><li>PostgreSQL connections, blocking locks over 60 s, active queries over 300 s</li><li>Stuck PDF generation, saturated workers, full or heavily swapping memory, unreachable server</li><li>Escalation by repetition: critical on the 1st occurrence, medium on the 3rd, low on the 5th</li><li>AI pre-investigation, helpdesk ticket (high priority if critical) and a single summary email, no SMS</li></ul>'
+    - logo: network-icon.svg
+      heading: 'AWS machine alerts'
+      descriptionPoints: '<p>Infrastructure alarms are received, verified and cross-checked against the server’s Odoo state.</p><ul><li>Severity per metric: critical for status checks, memory, swap and disk; medium for CPU; low for network</li><li>One ticket and one email per alarm, with a 6 h delay before reopening one for the same alarm</li></ul>'
+    - logo: analytique.png
+      heading: 'Weekly review'
+      descriptionPoints: '<p>Every Monday, a report on 7 days of your servers’ operation.</p><ul><li>Resources (CPU, RAM, swap, disk, PostgreSQL connections), timeouts, write conflicts, slow queries</li><li>Recommended number of workers per instance, based on the concurrency actually measured</li><li>Recommended actions sorted as “To do”, “To plan”, “Whenever you want”</li></ul>'
+    - logo: codage.png
+      heading: 'DNS security audit'
+      descriptionPoints: '<p>A check of DNS records that point to a resource that is no longer yours.</p><ul><li>Spots subdomain takeover risks</li><li>Run on demand</li></ul>'
+    - logo: Material-icon.svg
+      heading: 'Hardened service start-up'
+      descriptionPoints: '<p>After an incident where an automatic PostgreSQL update left an instance stopped, we reinforced our servers’ configuration.</p><ul><li>Odoo instances wait for PostgreSQL, retry every 10 seconds and tolerate up to 5 minutes of downtime before giving up</li><li>Applied on our 3 servers (23, 29 and 12 services)</li></ul>'
+- discriminant: ctaBanner
+  value:
+    title: 'Let’s talk about monitoring your Odoo'
+    ctaLabel: 'Talk to an expert'
+    ctaUrl: /en/contact-us/
+---

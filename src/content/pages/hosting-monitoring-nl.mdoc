@@ -1,0 +1,55 @@
+---
+title: 'Hosting & Monitoring'
+lang: nl
+seoTitle: 'Odoo Hosting & Monitoring: bewaking en alerts | Agitech'
+seoDescription: 'Bewaking van uw Odoo-instanties: storingen in real time, automatische AI-diagnose, controles om de 15 minuten en een wekelijkse opvolging.'
+blocks:
+- discriminant: innerHero
+  value:
+    title: 'Diensten'
+    subTitle: 'Hosting & Monitoring: uw Odoo-instanties onder toezicht'
+    bottomLine: true
+    image: banner-bg-3.svg
+    cta:
+      label: 'Praat met een expert'
+      url: /nl/contact-us/
+    cta2:
+      label: 'Bekijk Odoo-support'
+      url: /nl/support/
+- discriminant: textSection
+  value:
+    title: 'Een Odoo-storing legt uw activiteit stil'
+    content: '<p>Wij bewaken uw instanties continu, onderzoeken zodra er een incident is en waarschuwen u nog voor uw teams het merken. Vandaag staan 25 Odoo-productie-instanties onder toezicht.</p>'
+    emphasis: false
+- discriminant: odooExpertise
+  value:
+    bgClass: white-bg
+    title: 'Wat de bewaking dekt'
+    items:
+    - logo: monitoring-icon.svg
+      heading: 'Storingen in real time detecteren'
+      descriptionPoints: '<p>Elke instantie wordt continu bewaakt met Uptime Kuma.</p><ul><li>Onmiddellijke sms-melding zodra een instantie uitvalt</li><li>Eén enkele sms groepeert alle getroffen instanties (venster van 45 seconden), ook als een hele server uitvalt</li><li>Parallel een Slack-melding</li></ul>'
+    - logo: automation-outline.svg
+      heading: 'Automatische diagnose van een storing'
+      descriptionPoints: '<p>Zodra een storing wordt gedetecteerd, onderzoekt een AI-agent de betrokken server.</p><ul><li>Toegang enkel-lezen, beperkt tot een witte lijst van observatiecommando’s: niets kan worden gewijzigd</li><li>Rapport: waarschijnlijke oorzaak, onmiddellijke acties, loguittreksels, aanbevelingen voor server, Odoo-configuratie en code, diagnose-SQL</li><li>Helpdeskticket in Odoo met dit rapport, plus een samenvattende e-mail</li></ul>'
+    - logo: cloud-servers-icon.svg
+      heading: 'Kritieke controles om de 15 minuten'
+      descriptionPoints: '<p>Controles enkel-lezen op elke productieserver.</p><ul><li>PostgreSQL-verbindingen, blokkerende locks van meer dan 60 s, actieve queries van meer dan 300 s</li><li>Vastgelopen pdf-generatie, verzadigde workers, volle of intens gebruikte swap, onbereikbare server</li><li>Escalatie door herhaling: kritiek vanaf de 1e keer, gemiddeld vanaf de 3e, laag vanaf de 5e</li><li>Vooronderzoek door de AI, helpdeskticket (hoge prioriteit indien kritiek) en één samenvattende e-mail, geen sms</li></ul>'
+    - logo: network-icon.svg
+      heading: 'AWS-machinealerts'
+      descriptionPoints: '<p>Alarmen van de infrastructuur worden ontvangen, geverifieerd en vergeleken met de Odoo-status van de server.</p><ul><li>Ernst per metriek: kritiek voor statuscontroles, geheugen, swap en schijf; gemiddeld voor CPU; laag voor netwerk</li><li>Eén ticket en één e-mail per alarm, met 6 uur wachttijd voor een nieuw ticket bij hetzelfde alarm</li></ul>'
+    - logo: analytique.png
+      heading: 'Wekelijkse opvolging'
+      descriptionPoints: '<p>Elke maandag een rapport over 7 dagen werking van uw servers.</p><ul><li>Resources (CPU, RAM, swap, schijf, PostgreSQL-verbindingen), timeouts, schrijfconflicten, trage queries</li><li>Aanbevolen aantal workers per instantie, op basis van de werkelijk gemeten gelijktijdigheid</li><li>Aanbevolen acties ingedeeld als “Te behandelen”, “Te plannen”, “Wanneer u wilt”</li></ul>'
+    - logo: codage.png
+      heading: 'DNS-beveiligingsaudit'
+      descriptionPoints: '<p>Een controle van DNS-records die naar een resource verwijzen die niet meer van u is.</p><ul><li>Spoort risico’s op overname van subdomeinen op</li><li>Op aanvraag uitgevoerd</li></ul>'
+    - logo: Material-icon.svg
+      heading: 'Versterkt opstarten van diensten'
+      descriptionPoints: '<p>Na een incident waarbij een automatische PostgreSQL-update een instantie stilgelegd liet, hebben we de configuratie van onze servers versterkt.</p><ul><li>Odoo-instanties wachten op PostgreSQL, proberen elke 10 seconden opnieuw en verdragen tot 5 minuten onderbreking voor ze opgeven</li><li>Toegepast op onze 3 servers (23, 29 en 12 diensten)</li></ul>'
+- discriminant: ctaBanner
+  value:
+    title: 'Laten we praten over de bewaking van uw Odoo'
+    ctaLabel: 'Praat met een expert'
+    ctaUrl: /nl/contact-us/
+---

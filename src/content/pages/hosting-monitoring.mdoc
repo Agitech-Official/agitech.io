@@ -1,0 +1,55 @@
+---
+title: 'Hosting & Monitoring'
+lang: fr
+seoTitle: 'Hosting & Monitoring Odoo : surveillance et alertes | Agitech'
+seoDescription: 'Supervision de vos instances Odoo : détection des pannes en temps réel, diagnostic automatique par IA, contrôles toutes les 15 minutes et veille hebdomadaire.'
+blocks:
+- discriminant: innerHero
+  value:
+    title: 'Services'
+    subTitle: 'Hosting & Monitoring : vos instances Odoo sous surveillance'
+    bottomLine: true
+    image: banner-bg-3.svg
+    cta:
+      label: 'Parler à un expert'
+      url: /contact-us/
+    cta2:
+      label: 'Voir le support Odoo'
+      url: /support/
+- discriminant: textSection
+  value:
+    title: 'Une panne d’Odoo, c’est votre activité à l’arrêt'
+    content: '<p>Nous supervisons vos instances en continu, nous enquêtons dès qu’un incident survient et nous vous prévenons avant que vos équipes ne s’en aperçoivent. Aujourd’hui, 25 instances Odoo de production sont sous surveillance.</p>'
+    emphasis: false
+- discriminant: odooExpertise
+  value:
+    bgClass: white-bg
+    title: 'Ce que couvre la supervision'
+    items:
+    - logo: monitoring-icon.svg
+      heading: 'Détection des pannes en temps réel'
+      descriptionPoints: '<p>Chaque instance est surveillée en continu avec Uptime Kuma.</p><ul><li>Alerte immédiate par SMS dès qu’une instance tombe</li><li>Un seul SMS regroupe toutes les instances touchées (fenêtre de 45 secondes), même quand tout un serveur tombe</li><li>Notification Slack en parallèle</li></ul>'
+    - logo: automation-outline.svg
+      heading: 'Diagnostic automatique d’une panne'
+      descriptionPoints: '<p>Dès qu’une panne est détectée, un agent IA enquête sur le serveur concerné.</p><ul><li>Accès en lecture seule, limité à une liste blanche de commandes d’observation : aucune modification possible</li><li>Rapport : cause probable, actions immédiates, extraits de logs, recommandations serveur, configuration Odoo et code, requêtes SQL de diagnostic</li><li>Ticket helpdesk créé dans Odoo avec ce rapport, et mail récapitulatif</li></ul>'
+    - logo: cloud-servers-icon.svg
+      heading: 'Contrôles critiques toutes les 15 minutes'
+      descriptionPoints: '<p>Des vérifications en lecture seule sur chaque serveur de production.</p><ul><li>Connexions PostgreSQL, verrous bloquants de plus de 60 s, requêtes actives de plus de 300 s</li><li>Génération de PDF bloquée, workers saturés, swap plein ou en échange soutenu, serveur injoignable</li><li>Escalade par répétition : critique dès la 1re occurrence, moyen à la 3e, faible à la 5e</li><li>Pré-enquête par l’IA, ticket helpdesk (priorité haute si critique) et un seul mail récapitulatif, sans SMS</li></ul>'
+    - logo: network-icon.svg
+      heading: 'Alertes machine AWS'
+      descriptionPoints: '<p>Les alarmes de l’infrastructure sont reçues, vérifiées et recoupées avec l’état Odoo du serveur.</p><ul><li>Gravité par métrique : critique pour les contrôles de statut, la mémoire, le swap et le disque ; moyenne pour le CPU ; faible pour le réseau</li><li>Un ticket et un seul mail par alarme, avec un délai de 6 h avant d’en rouvrir un pour la même alarme</li></ul>'
+    - logo: analytique.png
+      heading: 'Veille hebdomadaire'
+      descriptionPoints: '<p>Chaque lundi, un rapport sur 7 jours de fonctionnement de vos serveurs.</p><ul><li>Ressources (CPU, RAM, swap, disque, connexions PostgreSQL), timeouts, conflits d’écriture, requêtes lentes</li><li>Nombre de workers conseillé par instance, selon la concurrence réellement mesurée</li><li>Actions recommandées classées « À traiter », « À planifier », « Quand vous voulez »</li></ul>'
+    - logo: codage.png
+      heading: 'Audit de sécurité DNS'
+      descriptionPoints: '<p>Un contrôle des enregistrements DNS qui pointent vers une ressource qui n’est plus à vous.</p><ul><li>Repère les risques de détournement de sous-domaine (subdomain takeover)</li><li>Lancé à la demande</li></ul>'
+    - logo: Material-icon.svg
+      heading: 'Durcissement du démarrage des services'
+      descriptionPoints: '<p>Après un incident où une mise à jour automatique de PostgreSQL avait laissé une instance à l’arrêt, nous avons renforcé la configuration de nos serveurs.</p><ul><li>Les instances Odoo attendent PostgreSQL, réessaient toutes les 10 secondes et tolèrent jusqu’à 5 minutes de coupure avant d’abandonner</li><li>Appliqué sur nos 3 serveurs (23, 29 et 12 services)</li></ul>'
+- discriminant: ctaBanner
+  value:
+    title: 'Parlons de la supervision de votre Odoo'
+    ctaLabel: 'Parler à un expert'
+    ctaUrl: /contact-us/
+---
