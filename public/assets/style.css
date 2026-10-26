@@ -98,6 +98,8 @@
 
   /* Header */
   header { position: sticky; top: 0; z-index: 100; background: var(--black); border-bottom: 1px solid #fff; }
+  /* Home hero flows straight into the nav (no seam) — the new scoped .hero-home design replaces the old banner-sec border look. */
+  .is-home header { border-bottom: none; }
   .brand-bar { height: 4px; background: linear-gradient(90deg, #984895, #b671b3, #984895); }
   .header-wrap { display: flex; align-items: center; justify-content: space-between; padding-top: 0.75rem; padding-bottom: 0.75rem; }
   .logo img { height: 34px; width: auto; }

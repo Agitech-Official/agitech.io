@@ -1,31 +1,190 @@
 ﻿---
-// Ported from template-parts/block/hero-home.php
+// Home hero — title + lede + CTA, with an animated decorative backdrop
+// (glow + two ring arcs that drift on their own and follow the mouse)
+// and a proof row of counters that tick up on load.
 import Cta from './Cta.astro';
-import { blockImg } from '../../lib/img';
 export interface Props {
   title?: string;
-  subTitle?: string;
+  lede?: string;
   cta?: { label?: string; url?: string; newTab?: boolean };
-  bottomLine?: boolean;
-  image?: string;
+  stats?: { value?: number; label?: string }[];
 }
-const { title, subTitle, cta, bottomLine = false, image } = Astro.props;
+const { title, lede, cta, stats = [] } = Astro.props;
 ---
-<section class={`banner-sec home-banner dark-bg ${bottomLine ? 'bottom-line-img' : ''}`}>
+<section class="hero-home" id="hero">
+  <div class="hero-home__deco" aria-hidden="true">
+    <span class="hero-home__glow"></span>
+    <div class="hero-home__rings">
+      <svg viewBox="0 0 1040 1040" fill="none" stroke-width="1">
+        <circle class="ring-base" cx="520" cy="520" r="519.5"></circle>
+        <circle class="ring-base2" cx="520" cy="520" r="379.5"></circle>
+        <circle class="ring-arc" id="heroArcA" cx="520" cy="520" r="519.5"></circle>
+        <circle class="ring-arc2" id="heroArcB" cx="520" cy="520" r="379.5"></circle>
+      </svg>
+    </div>
+  </div>
+
   <div class="container">
-    <div class="row">
-      {(title || subTitle) && (
-        <div class="col-lg-7 col-md-7 col-sm-12 col-12">
-          <div class="text">
-            {title && <h6>{title}</h6>}
-            {subTitle && <h1 set:html={subTitle} />}
-            {cta && <Cta label={cta.label} url={cta.url} newTab={cta.newTab} wrapClass="light-btn" />}
-          </div>
+    <div class="hero-home__inner">
+      {title && <h1 class="hero-home__title" set:html={title} />}
+      {lede && <p class="hero-home__lede">{lede}</p>}
+      {cta && (
+        <div class="hero-home__actions">
+          <Cta label={`${cta.label} →`} url={cta.url} newTab={cta.newTab} wrapClass="light-btn hero-home__btn" />
         </div>
+      )}
+      {stats.length > 0 && (
+        <p class="hero-home__proof">
+          <span class="hero-home__seg" id="heroSeg" aria-hidden="true"></span>
+          {stats.map(s => (
+            <span><span class="hero-home__num" data-count={s.value}>0</span> {s.label}</span>
+          ))}
+        </p>
       )}
     </div>
   </div>
-  <div class="right-img">
-    {image && <img src={blockImg(image)} alt="">}
-  </div>
 </section>
+
+<style>
+  .hero-home {
+    position: relative;
+    overflow: hidden;
+    padding: 6rem 0;
+    background: var(--dark2);
+    color: var(--white);
+  }
+  .hero-home__deco { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+  .hero-home__glow {
+    position: absolute;
+    width: 820px; height: 820px;
+    right: -270px; top: -190px;
+    border-radius: 999px;
+    background: radial-gradient(circle, rgba(152,72,149,.34) 0%, rgba(152,72,149,.12) 38%, rgba(152,72,149,0) 70%);
+  }
+  .hero-home__rings {
+    position: absolute;
+    width: 1040px; height: 1040px;
+    right: -140px; top: 220px;
+    transform: translate(50%, -50%);
+  }
+  .hero-home__rings svg { width: 100%; height: 100%; overflow: visible; }
+  .ring-base  { stroke: rgba(255,255,255,.07); }
+  .ring-base2 { stroke: rgba(255,255,255,.045); }
+  .ring-arc   { stroke: var(--violet-light); stroke-width: 2px; stroke-opacity: .75; stroke-linecap: round; }
+  .ring-arc2  { stroke: var(--violet-light); stroke-width: 2px; stroke-opacity: .55; stroke-linecap: round; }
+
+  .hero-home__inner { position: relative; display: flex; flex-direction: column; gap: 2rem; }
+  .hero-home__title {
+    margin: 0; max-width: 1050px;
+    font-size: clamp(1.9rem, 1.1rem + 3.2vw, 56px) !important;
+    line-height: 1.1; font-weight: 400; color: var(--white);
+  }
+  .hero-home__title :global(.soft) { font-weight: 300; color: var(--muted-onDark); }
+  .hero-home__lede { margin: 0; max-width: 520px; font-size: 1.1rem; line-height: 1.6; font-weight: 300; color: var(--muted-onDark); }
+  .hero-home__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1.75rem; }
+
+  .hero-home__proof {
+    position: relative;
+    margin: 0.5rem 0 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-onDark);
+    display: flex; flex-wrap: wrap; gap: 0.5rem 2.5rem;
+    font-family: var(--font-display); font-size: 0.9rem; font-weight: 400;
+    letter-spacing: 0.02em; color: var(--muted-onDark);
+  }
+  .hero-home__seg {
+    position: absolute; top: -1px; left: 6%;
+    width: 140px; height: 1px;
+    background: var(--violet-light);
+    transform: translateX(-50%);
+  }
+  .hero-home__num { color: var(--white); font-weight: 500; font-variant-numeric: tabular-nums; }
+
+  @media (max-width: 900px) {
+    .hero-home { padding: 5rem 0; }
+    .hero-home__title { font-size: clamp(1.9rem, 1.1rem + 3.2vw, 40px); line-height: 1.15; }
+    .hero-home__rings { display: none; }
+    .hero-home__glow { width: 420px; height: 420px; right: -220px; top: -160px; }
+  }
+</style>
+
+<script>
+  const hero = document.getElementById('hero');
+  if (hero) {
+    const arcA = document.getElementById('heroArcA') as unknown as SVGCircleElement | null;
+    const arcB = document.getElementById('heroArcB') as unknown as SVGCircleElement | null;
+    const seg = document.getElementById('heroSeg') as HTMLElement | null;
+    const nums = hero.querySelectorAll<HTMLElement>('.hero-home__num[data-count]');
+
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // French-style thousands separator (narrow no-break space).
+    function fmt(n: number) {
+      return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    }
+
+    const ARC = 48; // degrees
+    function setDash(el: SVGCircleElement | null, r: number) {
+      if (!el) return;
+      const c = 2 * Math.PI * r;
+      const a = (c * ARC) / 360;
+      el.setAttribute('stroke-dasharray', a.toFixed(1) + ' ' + (c - a).toFixed(1));
+    }
+    setDash(arcA, 519.5);
+    setDash(arcB, 379.5);
+
+    if (reduce) {
+      nums.forEach(el => { el.textContent = fmt(Number(el.dataset.count)); });
+      arcA?.setAttribute('transform', 'rotate(-84 520 520)');
+      arcB?.setAttribute('transform', 'rotate(126 520 520)');
+    } else {
+      const cur = { a: -60, b: 150, seg: 0.06 };
+      let mouse: { x: number; y: number; w: number } | null = null;
+
+      hero.addEventListener('mousemove', e => {
+        const r = hero.getBoundingClientRect();
+        mouse = { x: e.clientX - r.left, y: e.clientY - r.top, w: r.width };
+      });
+      hero.addEventListener('mouseleave', () => { mouse = null; });
+
+      function wrap(d: number) { return ((d + 540) % 360) - 180; }
+
+      const start = performance.now();
+      const DUR = 2000; // counter duration
+
+      function tick(now: number) {
+        const el = (now - start) / 1000;
+
+        const p = Math.min(1, (now - start) / DUR);
+        const eased = 1 - Math.pow(1 - p, 3);
+        if (p <= 1) {
+          nums.forEach(n => { n.textContent = fmt(Number(n.dataset.count) * eased); });
+        }
+
+        let ta: number, tb: number, ts: number;
+        if (mouse) {
+          const cx = mouse.w - 140, cy = 220;
+          const ang = (Math.atan2(mouse.y - cy, mouse.x - cx) * 180) / Math.PI;
+          ta = ang; tb = ang;
+          ts = Math.min(0.945, Math.max(0.055, mouse.x / mouse.w));
+        } else {
+          ta = -60 + el * (360 / 28);
+          tb = 150 - el * (360 / 36);
+          ts = 0.5 + 0.44 * Math.sin(el / 4.5);
+        }
+
+        const k = mouse ? 0.08 : 0.04;
+        cur.a += wrap(ta - cur.a) * k;
+        cur.b += wrap(tb - cur.b) * k;
+        cur.seg += (ts - cur.seg) * k;
+
+        arcA?.setAttribute('transform', `rotate(${(cur.a - ARC / 2).toFixed(2)} 520 520)`);
+        arcB?.setAttribute('transform', `rotate(${(cur.b - ARC / 2).toFixed(2)} 520 520)`);
+        if (seg) seg.style.left = (cur.seg * 100).toFixed(2) + '%';
+
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+  }
+</script>

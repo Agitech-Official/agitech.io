@@ -59,11 +59,16 @@ const blocksField = fields.array(
     }),
     {
       heroHome: fields.object({
-        title: fields.text({ label: 'Titre' }),
-        subTitle: fields.text({ label: 'Sous-titre' }),
+        title: fields.text({ label: 'Titre (H1, HTML autorisé : <br> pour un saut de ligne, <span class="soft">...</span> pour la partie en gris clair)', multiline: true }),
+        lede: fields.text({ label: 'Texte d\'intro sous le titre', multiline: true }),
         cta: fields.object(ctaFields, { label: 'CTA' }),
-        bottomLine: fields.checkbox({ label: 'Ligne décorative bas', defaultValue: false }),
-        image: imageField('Image droite', 'blocks'),
+        stats: fields.array(
+          fields.object({
+            value: fields.integer({ label: 'Valeur (nombre entier, animé au chargement)' }),
+            label: fields.text({ label: 'Texte' }),
+          }),
+          { label: 'Chiffres clés (3 recommandé)', itemLabel: props => props.fields.label.value || 'Chiffre' },
+        ),
       }, { label: 'Hero — Accueil' }),
       innerHero: fields.object({
         logo: imageField('Logo', 'blocks'),
