@@ -52,6 +52,9 @@ const rules = [
   // spam pages from the old hacked WordPress and tracking IDs mistaken for URLs: gone for good
   { src: '^/.*(?:kazino|1xbet|casino|pinco).*$', status: 410 },
   { src: '^/(?:LQJhCMGcj9AZEPngp8go|MLDdCP-FnbwZEPngp8go|Y22HCI_ynLwZEPngp8go|locations\\.kml)/?$', status: 410 },
+  // WordPress RSS feeds (/feed/, /some-article/feed/, /author/x/feed/): the new site has none
+  { src: '^/(?:.*/)?(?:feed|comments/feed)/?$', status: 410 },
+  { src: '^/(?:fr_be/)?newsletter/?$', headers: { Location: '/' }, status: 301 },
   // malformed e-mail links of the old blog posts: /some-article/sam@agitech.io -> /some-article/
   { src: '^/(.+?)/[^/@]+@agitech\\.io/?$', headers: { Location: '/$1/' }, status: 301 },
   // old WordPress archives (any language, with or without the /fr_be prefix)
