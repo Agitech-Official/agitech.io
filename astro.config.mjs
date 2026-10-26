@@ -30,6 +30,12 @@ export default defineConfig({
     '/fr_be/[...slug]': '/[...slug]',
     '/case-study/': '/business-cases/',
     '/en/case-study/': '/en/business-cases/',
+    // Old WordPress leftovers seen as 404 in Search Console
+    '/en/fr_be/[...slug]': '/en/[...slug]',
+    '/nl/fr_be/[...slug]': '/nl/[...slug]',
+    '/sitemap_index.xml': '/sitemap-index.xml',
+    '/wp-sitemap.xml': '/sitemap-index.xml',
+    '/sitemap.xml': '/sitemap-index.xml',
   },
   integrations: [
     react(),
