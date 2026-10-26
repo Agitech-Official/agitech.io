@@ -51,7 +51,14 @@ const LANG_OPTIONS = [
           ? <span class="lang-opt active" aria-current="true" lang={o.code}>{o.label}</span>
           : <a class="lang-opt" href={langUrls[o.code]} hreflang={o.code} lang={o.code} title={o.name}>{o.label}</a>)}
       </div>
-      <div class="discuss-btn"><a href={`${base}/contact-us/`}>{strings.contact}</a></div>
+      <div class="discuss-btn">
+        <a href={`${base}/contact-us/`}>
+          {strings.contact}
+          <span class="discuss-btn-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 8h19M14 2l7 6-7 6"></path></svg>
+          </span>
+        </a>
+      </div>
     </nav>
     <div class="lines-button" id="burgerBtn"><span class="lines"></span></div>
   </div>

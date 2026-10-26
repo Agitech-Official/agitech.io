@@ -125,16 +125,20 @@
   .has-submenu .submenu a { display: block; padding: 0.6rem 0.75rem; border-radius: 8px; font-size: 0.97rem; }
   .has-submenu .submenu a:hover { background: rgba(255,255,255,0.06); }
   .has-submenu .submenu .submenu-all a { color: var(--violet-light); font-weight: 500; border-top: 1px solid var(--border-onDark); margin-top: 0.25rem; padding-top: 0.75rem; }
-  .discuss-btn a { background: var(--violet); color: var(--white); padding: 14px 32px; border-radius: 200px; font-size: 12px; letter-spacing: 0.6px; text-transform: uppercase; font-weight: 400; transition: background 0.2s; }
-  .discuss-btn a:hover { background: var(--violet-light); }
+  .discuss-btn a { display: inline-flex; align-items: center; gap: 8px; background: transparent; border: 1px solid var(--muted-onDark); color: var(--white); padding: 0.67rem 32px; border-radius: 200px; font-size: 12px; letter-spacing: 0.6px; text-transform: uppercase; font-weight: 400; transition: background 0.2s, border-color 0.2s; }
+  .discuss-btn a:hover { background: var(--violet); border-color: var(--violet); }
+  .discuss-btn-arrow { display: inline-flex; align-items: center; color: var(--violet-light); transition: color 0.2s; }
+  .discuss-btn-arrow svg { width: 20px; height: 13px; }
+  .discuss-btn a:hover .discuss-btn-arrow { color: var(--white); }
   .lines-button { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; }
   .lines-button .lines, .lines-button .lines::before, .lines-button .lines::after { content:''; display:block; width: 22px; height: 2px; background: var(--white); transition: 0.3s; }
   .lines-button .lines::before { transform: translateY(-7px); }
   .lines-button .lines::after { transform: translateY(5px); }
-  .lang-flag { display: inline-flex; align-items: center; padding: 3px; border: 1px solid rgba(255,255,255,0.35); border-radius: 100px; font-size: 11px; letter-spacing: 0.06em; }
-  .lang-flag .lang-opt { padding: 4px 9px; border-radius: 100px; color: var(--muted-onDark); transition: background 0.2s, color 0.2s; line-height: 1.2; }
-  .lang-flag a.lang-opt:hover { color: var(--white); background: rgba(255,255,255,0.12); }
-  .lang-flag .active { color: var(--white); background: var(--violet); font-weight: 600; }
+  .lang-flag { display: inline-flex; align-items: center; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .lang-flag .lang-opt { padding: 4px 10px; color: var(--muted-onDark); border-bottom: 1px solid transparent; transition: color 0.2s, border-color 0.2s; line-height: 1.2; }
+  .lang-flag .lang-opt:not(:first-child) { border-left: 1px solid var(--border-onDark); }
+  .lang-flag a.lang-opt:hover { color: var(--white); }
+  .lang-flag .active { color: var(--white); font-weight: 600; border-bottom-color: var(--violet-light); }
 
   /* Corner glow — agifid pattern: hero only (not every section), two swept glows.
      Agifid's home: teal top-right + mauve bottom-left. Agitech home: same spot, colors
