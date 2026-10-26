@@ -34,6 +34,12 @@ const escape = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const variantRedirects = [];
 for (const [slug, found] of bySlug) {
   const target = found.fr ?? found.en ?? found.nl;
+  // old WordPress duplicate slugs (my-article-2 ... my-article-9) -> the article itself,
+  // unless a real page happens to use that slug
+  const base = slug.replace(/\/$/, '');
+  if (![2, 3, 4, 5, 6, 7, 8, 9].some((n) => bySlug.has(`${base}-${n}/`))) {
+    variantRedirects.push({ src: `^(?:/(?:en|nl))?${escape(base)}-[2-9]/?$`, headers: { Location: target }, status: 301 });
+  }
   for (const lang of ['fr', 'en', 'nl']) {
     if (found[lang]) continue;
     const from = lang === 'fr' ? slug : `/${lang}${slug}`;
@@ -43,9 +49,15 @@ for (const [slug, found] of bySlug) {
 
 // --- hand-written rules ---------------------------------------------------------------------
 const rules = [
+  // old pricing sub-domain (the estimator used to live there): only applies once pricing.agitech.io
+  // is attached to this project in Vercel (and its DNS points to Vercel)
+  { src: '^/.*$', has: [{ type: 'host', value: 'pricing\\.agitech\\.io' }], headers: { Location: 'https://agitech.io/simulateur/' }, status: 301 },
   // spam pages from the old hacked WordPress and tracking IDs mistaken for URLs: gone for good
   { src: '^/.*(?:kazino|1xbet|casino|pinco).*$', status: 410 },
   { src: '^/(?:LQJhCMGcj9AZEPngp8go|MLDdCP-FnbwZEPngp8go|Y22HCI_ynLwZEPngp8go|locations\\.kml)/?$', status: 410 },
+  // WordPress RSS feeds (/feed/, /some-article/feed/, /author/x/feed/): the new site has none
+  { src: '^/(?:.*/)?(?:feed|comments/feed)/?$', status: 410 },
+  { src: '^/(?:fr_be/)?newsletter/?$', headers: { Location: '/' }, status: 301 },
   // malformed e-mail links of the old blog posts: /some-article/sam@agitech.io -> /some-article/
   { src: '^/(.+?)/[^/@]+@agitech\\.io/?$', headers: { Location: '/$1/' }, status: 301 },
   // old WordPress archives (any language, with or without the /fr_be prefix)
