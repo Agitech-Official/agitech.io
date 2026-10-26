@@ -25,6 +25,8 @@ const split = (p) => (/^\/(en|nl)\//.test(p) ? [p.split('/')[1], p.replace(/^\/(
 const bySlug = new Map(); // '/foo/' -> { fr: '/foo/', en: '/en/foo/' }
 for (const p of pages) {
   const [lang, slug] = split(p);
+  // the three home pages are separate pages, never variants of each other (/ must stay the French home)
+  if (slug === '/') continue;
   if (/^\/(merci-|thank-you-|keystatic|api|simulateur|404|assets|_astro|wp-content)/.test(slug)) continue;
   bySlug.set(slug, { ...(bySlug.get(slug) ?? {}), [lang]: p });
 }
@@ -59,6 +61,8 @@ const rules = [
   { src: '^/web/image/.*$', headers: { Location: '/assets/img/agitech-logo-dark.svg' }, status: 301 },
   // old WordPress article that was not migrated: closest topic
   { src: '^/odoo-standard-versus-developpement-specifique/?$', headers: { Location: '/development/' }, status: 301 },
+  // old WordPress duplicate slug (-3 suffix) of an article that exists in English
+  { src: '^/odoo-version-edition-and-hosting-which-one-should-i-choose-3/?$', headers: { Location: '/en/odoo-version-edition-and-hosting-which-one-should-i-choose/' }, status: 301 },
   // the old EN "construction" page was published under this slug
   { src: '^/industries-international-associations/?$', headers: { Location: '/en/industries-construction-batiment/' }, status: 301 },
 ];
