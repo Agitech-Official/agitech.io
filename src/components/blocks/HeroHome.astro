@@ -2,7 +2,6 @@
 // Home hero — title + lede + CTA, with an animated decorative backdrop
 // (glow + two ring arcs that drift on their own and follow the mouse)
 // and a proof row of counters that tick up on load.
-import Cta from './Cta.astro';
 export interface Props {
   title?: string;
   lede?: string;
@@ -30,7 +29,14 @@ const { title, lede, cta, stats = [] } = Astro.props;
       {lede && <p class="hero-home__lede">{lede}</p>}
       {cta && (
         <div class="hero-home__actions">
-          <Cta label={`${cta.label} →`} url={cta.url} newTab={cta.newTab} wrapClass="light-btn hero-home__btn" />
+          <div class="light-btn hero-home__btn">
+            <a href={cta.url} target={cta.newTab ? '_blank' : undefined} rel={cta.newTab ? 'noopener' : undefined}>
+              {cta.label}
+              <span class="hero-home__arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 8h19M14 2l7 6-7 6"></path></svg>
+              </span>
+            </a>
+          </div>
         </div>
       )}
       {stats.length > 0 && (
@@ -50,7 +56,7 @@ const { title, lede, cta, stats = [] } = Astro.props;
     position: relative;
     overflow: hidden;
     padding: 6rem 0;
-    background: var(--dark2);
+    background: #282828;
     color: var(--white);
   }
   .hero-home__deco { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
@@ -82,6 +88,13 @@ const { title, lede, cta, stats = [] } = Astro.props;
   .hero-home__title :global(.soft) { font-weight: 300; color: var(--muted-onDark); }
   .hero-home__lede { margin: 0; max-width: 520px; font-size: 1.1rem; line-height: 1.6; font-weight: 300; color: var(--muted-onDark); }
   .hero-home__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1.75rem; }
+  .hero-home__btn :global(a) {
+    padding-top: 0.67rem; padding-bottom: 0.67rem; border-color: var(--muted-onDark);
+    font-size: 12px !important; letter-spacing: 0.6px; text-transform: uppercase;
+  }
+  .hero-home__arrow { display: inline-flex; align-items: center; color: var(--violet-light); }
+  .hero-home__arrow svg { width: 20px; height: 13px; }
+  .hero-home__btn:hover .hero-home__arrow { color: var(--white); }
 
   .hero-home__proof {
     position: relative;
