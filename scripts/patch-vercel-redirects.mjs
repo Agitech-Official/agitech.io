@@ -34,6 +34,12 @@ const escape = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const variantRedirects = [];
 for (const [slug, found] of bySlug) {
   const target = found.fr ?? found.en ?? found.nl;
+  // old WordPress duplicate slugs (my-article-2 ... my-article-9) -> the article itself,
+  // unless a real page happens to use that slug
+  const base = slug.replace(/\/$/, '');
+  if (![2, 3, 4, 5, 6, 7, 8, 9].some((n) => bySlug.has(`${base}-${n}/`))) {
+    variantRedirects.push({ src: `^(?:/(?:en|nl))?${escape(base)}-[2-9]/?$`, headers: { Location: target }, status: 301 });
+  }
   for (const lang of ['fr', 'en', 'nl']) {
     if (found[lang]) continue;
     const from = lang === 'fr' ? slug : `/${lang}${slug}`;
