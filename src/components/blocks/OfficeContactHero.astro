@@ -1,0 +1,95 @@
+---
+// Office-specific contact page hero: intro + contact person (left) paired with a
+// Calendly booking card (right). One per office (Bouillon, Bruxelles, Anvers),
+// built to the pixel spec in bouillon-reservation.html.
+import { blockImg } from '../../lib/img';
+export interface Props {
+  eyebrow?: string;
+  titleBefore?: string;
+  titleHighlight?: string;
+  lede?: string;
+  photo?: string;
+  contactName?: string;
+  contactRole?: string;
+  contactEmail?: string;
+  bookingTitle?: string;
+  bookingMeta?: string;
+  calendlyUrl?: string;
+  isPageTitle?: boolean;
+}
+const {
+  eyebrow, titleBefore, titleHighlight, lede,
+  photo, contactName, contactRole, contactEmail,
+  bookingTitle, bookingMeta,
+  calendlyUrl = 'https://calendly.com/sam-agitech/25-min-intro',
+  isPageTitle = true,
+} = Astro.props;
+const resolvedBookingTitle = bookingTitle || 'Réserver un appel';
+const resolvedBookingMeta = bookingMeta || '25 minutes · visio ou téléphone · sans engagement';
+---
+<section class="office-hero" id="contact">
+  <div class="office-hero-inner">
+    <div class="office-hero-intro">
+      {eyebrow && <p class="office-hero-eyebrow">{eyebrow}</p>}
+      {isPageTitle
+        ? <h1 class="office-hero-title">{titleBefore} <span>{titleHighlight}</span></h1>
+        : <h2 class="office-hero-title">{titleBefore} <span>{titleHighlight}</span></h2>}
+      {lede && <p class="office-hero-lede">{lede}</p>}
+      {(photo || contactName) && (
+        <div class="office-hero-person">
+          {photo && <div class="office-hero-person-photo"><img src={blockImg(photo)} alt={contactName || ''}></div>}
+          <div class="office-hero-person-info">
+            {contactName && <span class="office-hero-person-name">{contactName}</span>}
+            {contactRole && <span class="office-hero-person-role">{contactRole}</span>}
+            {contactEmail && <a href={`mailto:${contactEmail}`} class="office-hero-person-email">{contactEmail}</a>}
+          </div>
+        </div>
+      )}
+    </div>
+    <div class="office-hero-booking">
+      <div class="office-hero-booking-head">
+        <h2>{resolvedBookingTitle}</h2>
+        <span class="office-hero-booking-meta">{resolvedBookingMeta}</span>
+      </div>
+      <div class="calendly-inline-widget" data-url={`${calendlyUrl}?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=984895&text_color=1d1d1d&background_color=ffffff`} style="min-width:280px;height:650px;"></div>
+      <noscript>
+        <p class="office-hero-calendly-fallback"><a href={calendlyUrl} target="_blank" rel="noopener">Réserver un créneau sur Calendly</a></p>
+      </noscript>
+    </div>
+  </div>
+</section>
+
+<style>
+  .office-hero { padding: 64px; display: flex; justify-content: center; background: var(--white); }
+  .office-hero-inner { width: 100%; max-width: 1152px; display: flex; flex-wrap: wrap; gap: 48px 64px; align-items: stretch; }
+
+  .office-hero-intro { flex: 1 1 400px; min-width: 0; max-width: 480px; display: flex; flex-direction: column; gap: 32px; justify-content: space-between; }
+  .office-hero-eyebrow { margin: 0; font-family: var(--font-display); font-size: 15px; line-height: 20px; font-weight: 400; letter-spacing: 0.2px; color: var(--violet); }
+  .office-hero-title { margin: 0; font-size: 44px !important; line-height: 50px !important; letter-spacing: -0.5px; font-weight: 400; color: var(--ink); }
+  .office-hero-title span { color: var(--violet); }
+  .office-hero-lede { margin: 0; font-size: 17px !important; line-height: 27px !important; font-weight: 300; color: #555555; }
+
+  .office-hero-person { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+  .office-hero-person-photo { flex: 0 0 300px; width: 300px; height: 300px; border-radius: 20px; overflow: hidden; background: var(--offwhite); }
+  .office-hero-person-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .office-hero-person-info { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .office-hero-person-name { font-family: var(--font-display); font-size: 20px; line-height: 26px; font-weight: 500; color: var(--ink); }
+  .office-hero-person-role { font-size: 14px; line-height: 20px; font-weight: 300; color: #666666; }
+  .office-hero-person-email { margin-top: 4px; font-family: var(--font-display); font-size: 12px; line-height: 16px; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; color: var(--violet); }
+
+  .office-hero-booking {
+    flex: 1 1 480px; min-width: 0; box-sizing: border-box; padding: 40px;
+    background: var(--white); border: 1px solid #ebe9ee; border-radius: 20px;
+    box-shadow: 0 16px 32px rgba(29,29,29,.05); display: flex; flex-direction: column; gap: 24px;
+  }
+  .office-hero-booking-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 24px; }
+  .office-hero-booking-head h2 { margin: 0; font-size: 28px !important; line-height: 34px !important; font-weight: 400; color: var(--ink); }
+  .office-hero-booking-meta { font-size: 14px; line-height: 20px; font-weight: 300; color: #666666; }
+  .office-hero-calendly-fallback { margin: 0; }
+  .office-hero-calendly-fallback a { color: var(--violet); font-weight: 500; }
+
+  @media (max-width: 900px) {
+    .office-hero { padding: 56px 20px; }
+    .office-hero-title { font-size: 32px !important; line-height: 38px !important; }
+  }
+</style>

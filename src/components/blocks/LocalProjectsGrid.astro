@@ -1,0 +1,49 @@
+---
+// Local client-examples grid for an office contact page (logo or text cards, no links —
+// visitors on a booking page shouldn't have an easy exit to a case-study page).
+import { blockImg } from '../../lib/img';
+export interface Props {
+  title?: string;
+  projects?: { logo?: string; logoHeight?: number; title?: string; subtitle?: string }[];
+}
+const { title, projects = [] } = Astro.props;
+---
+{projects.length > 0 && (
+  <section class="local-projects">
+    <div class="local-projects-inner">
+      {title && <h2 class="local-projects-title">{title}</h2>}
+      <div class="local-projects-grid">
+        {projects.map(p => (
+          <div class="local-projects-card">
+            {p.logo
+              ? <img class="local-projects-card-logo" src={blockImg(p.logo)} alt={p.title || ''} style={`height:${p.logoHeight || 56}px`}>
+              : <>
+                  {p.title && <span class="local-projects-card-title">{p.title}</span>}
+                  {p.subtitle && <span class="local-projects-card-subtitle">{p.subtitle}</span>}
+                </>}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+
+<style>
+  .local-projects { padding: 64px; display: flex; justify-content: center; background: #f3f2f5; }
+  .local-projects-inner { width: 100%; max-width: 1152px; display: flex; flex-direction: column; gap: 32px; }
+  .local-projects-title { margin: 0; font-size: 28px !important; line-height: 34px !important; font-weight: 400; color: var(--ink); }
+  .local-projects-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+  .local-projects-card {
+    box-sizing: border-box; height: 160px; padding: 20px; background: var(--white);
+    border: 1px solid #ebe9ee; border-radius: 14px; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 6px; text-align: center; overflow: hidden;
+  }
+  .local-projects-card-title { font-family: var(--font-display); font-size: 15px; line-height: 20px; font-weight: 500; color: var(--ink); }
+  .local-projects-card-subtitle { font-size: 12px; line-height: 16px; font-weight: 300; color: #888888; }
+  .local-projects-card-logo { width: auto; max-width: 100%; height: 56px; max-height: 120px; object-fit: contain; }
+
+  @media (max-width: 900px) {
+    .local-projects { padding: 56px 20px; }
+    .local-projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+</style>

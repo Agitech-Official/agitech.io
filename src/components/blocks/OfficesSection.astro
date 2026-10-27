@@ -7,7 +7,7 @@ export interface Props {
   heading?: string;
   ctaLabel?: string;
   ctaUrl?: string;
-  offices?: { city?: string; address?: string; pinTop?: string; pinLeft?: string }[];
+  offices?: { city?: string; address?: string; contact?: string; url?: string; pinTop?: string; pinLeft?: string }[];
 }
 const { title, heading, ctaLabel = 'Contacter', ctaUrl = '/contact-us/', offices = [] } = Astro.props;
 
@@ -30,8 +30,8 @@ const slug = (s?: string) =>
                 {o.city && <p class="office-city">{o.city}</p>}
                 {o.address && <p class="office-address">{o.address}</p>}
               </div>
-              <a class="office-cta" href={ctaUrl} aria-label={`Contacter le bureau de ${o.city}`}>
-                {ctaLabel}
+              <a class="office-cta" href={o.url || ctaUrl} aria-label={`Contacter le bureau de ${o.city}`}>
+                {ctaLabel}{o.contact && ` ${o.contact}`}
                 <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"></path></svg>
               </a>
             </li>
@@ -71,7 +71,7 @@ const slug = (s?: string) =>
 
 <style>
   .offices-section {
-    padding: 6rem 0;
+    padding: 2.5rem 0 6rem;
     background: var(--offwhite);
     color: var(--ink);
   }
@@ -82,9 +82,9 @@ const slug = (s?: string) =>
     align-items: center;
   }
 
-  .offices-text { flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 1.25rem; }
-  .offices-eyebrow { margin: 0; font-family: var(--font-body); color: var(--violet); }
-  .offices-heading { margin: 0; max-width: 560px; line-height: 1.2; }
+  .offices-text { flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; }
+  .offices-eyebrow { margin: 0 0 0.6rem; font-family: var(--font-body); color: var(--violet); }
+  .offices-heading { margin: 0 0 1.25rem; max-width: 560px; line-height: 1.2; }
   .offices-heading :global(em) { font-style: normal; color: var(--violet); }
 
   .offices-list { list-style: none; margin: 0.5rem 0 0; padding: 0; display: flex; flex-direction: column; }
@@ -100,7 +100,7 @@ const slug = (s?: string) =>
   .office-dot { flex: 0 0 auto; width: 10px; height: 10px; margin-top: 9px; border-radius: 999px; background: var(--violet); }
   .office-body { flex: 1 1 200px; min-width: 0; display: flex; flex-direction: column; gap: 0.25rem; }
   .office-city { margin: 0; font-family: var(--font-display); font-size: 1.2rem; font-weight: 500; color: var(--ink); }
-  .office-address { margin: 0; font-size: 0.95rem; line-height: 1.5; color: var(--muted); }
+  .office-address { margin: 0; font-size: 0.95rem !important; line-height: 1.5 !important; color: var(--muted); }
 
   .office-cta {
     flex: 0 0 auto; display: inline-flex; align-items: center; gap: 0.5rem;
@@ -132,7 +132,7 @@ const slug = (s?: string) =>
   }
 
   @media (max-width: 900px) {
-    .offices-section { padding: 4rem 0; }
+    .offices-section { padding: 2rem 0 4rem; }
     .office-row { flex-wrap: wrap; }
     .office-cta { padding-left: 1.6rem; }
   }

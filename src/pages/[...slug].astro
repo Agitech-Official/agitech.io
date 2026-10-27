@@ -48,7 +48,7 @@ if (kind === 'blog') {
   bodyHtml = withToc.html;
   toc = withToc.toc;
 }
-const hasContactHero = kind === 'page' && entry.blocks?.some((b: { discriminant: string }) => b.discriminant === 'contactHero');
+const hasContactHero = kind === 'page' && entry.blocks?.some((b: { discriminant: string }) => b.discriminant === 'contactHero' || b.discriminant === 'officeContactHero');
 
 const pageFaqBlock = kind === 'page' ? entry.blocks?.find((b: any) => b.discriminant === 'faq') : undefined;
 const pageJsonLd = pageFaqBlock

@@ -1,0 +1,85 @@
+---
+// Office contact page's email form, styled as its own bordered card (underline inputs)
+// per the bouillon-reservation.html spec — separate section from the booking card above.
+export interface Props {
+  title?: string;
+  meta?: string;
+  formAction?: string;
+  formSubject?: string;
+  thankYouPath?: string;
+}
+const {
+  title, meta,
+  formAction = 'https://formspree.io/f/mwlvgnqo',
+  formSubject = 'Nouvelle demande de contact - Agitech',
+  thankYouPath = '/merci-formulaire/',
+} = Astro.props;
+const resolvedTitle = title || 'Écrivez-nous';
+const resolvedMeta = meta || 'Réponse sous un jour ouvré';
+---
+<section class="office-write">
+  <div class="office-write-inner">
+    <div class="office-write-card">
+      <div class="office-write-head">
+        <h2>{resolvedTitle}</h2>
+        <span class="office-write-meta">{resolvedMeta}</span>
+      </div>
+      <form class="office-write-form" action={formAction} method="POST">
+        <div class="office-write-row">
+          <label class="office-write-field"><span>Nom *</span><input type="text" name="name" required></label>
+          <label class="office-write-field"><span>Société *</span><input type="text" name="company" required></label>
+        </div>
+        <div class="office-write-row">
+          <label class="office-write-field"><span>Email *</span><input type="email" name="email" required></label>
+          <label class="office-write-field"><span>Téléphone</span><input type="tel" name="phone"></label>
+        </div>
+        <label class="office-write-field office-write-field-full"><span>Comment pouvons-nous vous aider ?</span><textarea name="message" rows="4"></textarea></label>
+        <div class="office-write-footer">
+          <span class="office-write-required">* Champs obligatoires</span>
+          <input type="hidden" name="_subject" value={formSubject}>
+          <input type="hidden" name="_next" value={thankYouPath.startsWith('/') ? `https://agitech.io${thankYouPath}` : thankYouPath}>
+          <button type="submit" class="office-write-submit">Envoyer <span aria-hidden="true">→</span></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  .office-write { padding: 64px 64px 80px; display: flex; justify-content: center; background: var(--white); }
+  .office-write-inner { width: 100%; max-width: 1152px; }
+  .office-write-card {
+    box-sizing: border-box; padding: 40px; background: var(--white); border: 1px solid #ebe9ee;
+    border-radius: 20px; box-shadow: 0 16px 32px rgba(29,29,29,.05); display: flex; flex-direction: column; gap: 28px;
+  }
+  .office-write-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 24px; }
+  .office-write-head h2 { margin: 0; font-size: 28px !important; line-height: 34px !important; font-weight: 400; color: var(--ink); }
+  .office-write-meta { font-size: 14px; line-height: 20px; font-weight: 300; color: #666666; }
+
+  .office-write-form { display: flex; flex-direction: column; gap: 20px; }
+  .office-write-row { display: flex; flex-wrap: wrap; gap: 20px 32px; }
+  .office-write-field { flex: 1 1 220px; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+  .office-write-field-full { flex: 1 1 100%; }
+  .office-write-field span { font-family: var(--font-display); font-size: 12px; line-height: 16px; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; color: #666666; }
+  .office-write-field input, .office-write-field textarea {
+    box-sizing: border-box; width: 100%; padding: 12px 0; border: 0; border-bottom: 1px solid #d8d6dc;
+    background: transparent; font-family: var(--font-body); font-size: 15px; color: var(--ink);
+  }
+  .office-write-field textarea { resize: vertical; }
+  .office-write-field input:focus, .office-write-field textarea:focus { outline: none; border-bottom-color: var(--violet); }
+
+  .office-write-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; padding-top: 4px; }
+  .office-write-required { font-size: 13px; line-height: 18px; font-weight: 300; color: #999999; }
+  .office-write-submit {
+    cursor: pointer; display: inline-flex; align-items: center; gap: 10px; padding: 14px 26px;
+    border: 1px solid var(--ink); border-radius: 999px; background: transparent;
+    font-family: var(--font-display); font-size: 13px; line-height: 16px; font-weight: 500;
+    letter-spacing: 1.2px; text-transform: uppercase; color: var(--ink);
+    transition: border-color .2s ease, color .2s ease;
+  }
+  .office-write-submit:hover { border-color: var(--violet); color: var(--violet); }
+
+  @media (max-width: 900px) {
+    .office-write { padding: 56px 20px 72px; }
+  }
+</style>
