@@ -1,0 +1,98 @@
+---
+title: "Peppol: is your Odoo receiving your supplier invoices?"
+lang: "en"
+publishedAt: "2026-10-27"
+category: "Odoo"
+excerpt: "Peppol fines have applied since April 2026: a 6-point audit to check that your Odoo receives, processes and evidences your supplier invoices."
+---
+
+Many companies have sorted out sending their invoices and never looked at receiving them. Yet Peppol fines have been running since 1 April 2026.
+
+Here is what you need to know, followed by a 6-point checklist to put to your finance director or accountant this week.
+
+## Where do things stand?
+
+The law of 6 February 2024 made Peppol mandatory for B2B transactions from 1 January 2026.
+
+The FPS Finance (SPF Finances) grace period ended on 31 March 2026.
+
+The fine is €1,500 for a first offence, €3,000 for a second and €5,000 for any subsequent one. It targets the lack of technical means to both send and receive.
+
+Sources differ on how offences are counted. One states that a second offence is only recorded after it has been established, and no earlier than three months after the previous one. Others speak of a fine per non-compliant invoice. Have your accountant validate the count. Do not count on leniency.
+
+The key point: the obligation to receive is separate from the obligation to send.
+
+Even if you only sell to private individuals, you must be able to receive electronic invoices via Peppol.
+
+## The 6 audit points
+
+### 1. Your registration is active, with the right role
+
+In Odoo, go to Accounting, Configuration, Settings, E-Invoicing section. The participation role must be "Send and receive", not "Send only".
+
+Check the status too. After the request, the status shows "pending activation" and usually switches within 24 hours.
+
+Until it has switched, you are not on the network, even if Odoo shows your invoices as ready.
+
+### 2. Reception has been tested for real
+
+Do not settle for a configuration screen. Ask a supplier to send a real invoice via Peppol. Follow it all the way to your accounts.
+
+According to the Odoo 19 documentation, new documents received via Peppol are checked several times a day.
+
+Depending on your settings, they arrive as drafts in the purchase journal, or in the Documents app. If you have several purchase journals, check that the receiving journal is the right one.
+
+### 3. Sending is not blocked by your customer records
+
+An invoice that does not go out is the first symptom. A record without a usable VAT number cannot be addressed on the network, which is the leading cause of sending failures.
+
+In the customer invoice list, add the Peppol Status column. You can also apply the "Peppol ready" filter. The invoices that stay stuck show you which records need correcting.
+
+### 4. You know who is still sending you PDFs
+
+Some suppliers will still send PDFs. For Belgian suppliers, the structured invoice is the only valid one. The PDF is then merely a courtesy.
+
+According to the efacture.belgium.be website, you may refuse a PDF or paper invoice where an electronic invoice should have been sent to you.
+
+Avoid blocking a payment without warning: it creates needless disputes. Draw up a list of the suppliers concerned and write to them. Foreign suppliers not established in Belgium fall outside the Belgian obligation.
+
+This list has another benefit. The same document can arrive twice, via Peppol and then by email. An older integrator's feedback notes that Odoo does not block the multiple receipt of the same invoice, but warns you with a banner. Hence the next point.
+
+### 5. Your purchase invoices are processed without duplicates or coding errors
+
+This is where Odoo 20 helps. Odoo 20 was released on 24 September 2026 at Brussels Expo. Three accounting features are useful for the audit:
+
+- **Invoice line prediction.** Odoo suggests the product, account, tax and analytic distribution based on history and description. Values already entered by hand are kept.
+
+- **Two-level duplicate detection.** A red warning flags a record that needs correcting, a yellow one an invoice to check before posting.
+
+- **Matching with purchase orders.** Odoo can warn you when quantities or prices differ from what was expected.
+
+These tools do not replace a month-end check. They reduce data entry errors. A keynote summarised by a partner also mentions automatic posting of "normal" incoming invoices, with duplicates and discrepancies left as drafts. We could not confirm this in the official documentation. Check it on your version before relying on it.
+
+Not on Odoo 20? Nothing forces you to be. Odoo maintains previous versions for several years. Peppol reception already works on versions 18 and 19, as their documentation shows. If you migrate, test on a staging copy first.
+
+### 6. You handle rejections and can prove your compliance
+
+A "refused" status in your software is not a dispute. Anyone disputing an invoice must do so in good time and in clear terms. Otherwise it may be considered accepted. So back up the status with a reasoned written statement. Keep the original invoice, the proof of receipt, your protest and any subsequent exchanges.
+
+For invoices that are not meant for you, the rule is simple. Do not post them. You can refuse them via Peppol with an Invoice Response with status RE, if your software supports it.
+
+As for evidence, put together a simple file:
+
+- the Peppol registration confirmation and the "send and receive" role;
+- the results of your sending and receiving tests, with dates;
+- the list of suppliers and customers still outside Peppol, and the letters sent;
+- the export of received invoices. Odoo 20 allows you to bulk download a zip with all the attachments (PDF, XML) of the selected invoices.
+
+During the grace period, you had to be able to show that you had taken the necessary measures in good time. The grace period is over. This file remains your best defence.
+
+## What comes next
+
+According to several guides, Belgium plans an e-reporting system for 2028: the VAT data from your invoices will be sent to the FPS Finance in near real time. Clean accounts today will make that step simpler.
+
+## Where to start
+
+Do points 1 and 2 today. They take an hour and tell you whether you are exposed. The rest can be organised over a few weeks.
+
+If you would like an outside view of your Peppol configuration or a move to Odoo 20, our team can help through [Odoo support](/en/support/) or a [data migration](/en/migration/). You can also [contact us](/en/contact-us/) for a quick audit.
