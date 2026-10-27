@@ -13,7 +13,7 @@ const industries: Record<Lang, Link[]> = {
   fr: [
     { label: 'E-Commerce', href: '/industries-e-commerce/' },
     { label: 'Grossiste & Vente B2B', href: '/industries-grossiste-vente-b2b/' },
-    { label: 'Construction & Bâtiment', href: '/industries-construction-batiment/' },
+    { label: 'Constructions & ouvrages', href: '/industries-construction-batiment/' },
     { label: 'Services aux Entreprises', href: '/industries-services-aux-entreprises/' },
     { label: 'Transport & Logistique', href: '/solution-transport-logistique/' },
     { label: 'Associations Internationales', href: '/industries-associations-internationales/' },
