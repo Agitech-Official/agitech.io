@@ -1,0 +1,94 @@
+---
+title: "Peppol: ontvangt uw Odoo uw leveranciersfacturen?"
+lang: "nl"
+publishedAt: "2026-10-27"
+category: "Odoo"
+excerpt: "Peppol-boetes lopen sinds april 2026: 6 auditpunten om na te gaan of uw Odoo uw leveranciersfacturen ontvangt, verwerkt en kan bewijzen."
+---
+
+Veel bedrijven hebben het verzenden van hun facturen geregeld, maar hebben nooit naar de ontvangst gekeken. De Peppol-boetes lopen nochtans al sinds 1 april 2026.
+
+Hieronder leest u wat u moet weten, gevolgd door een checklist met 6 punten die u deze week kunt laten afwerken door uw financieel directeur of uw boekhouder.
+
+## Waar staan we?
+
+De wet van 6 februari 2024 maakt Peppol sinds 1 januari 2026 verplicht voor B2B-transacties.
+
+De tolerantieperiode van de FOD Financiën liep af op 31 maart 2026.
+
+De boete bedraagt 1.500 € bij de eerste inbreuk, 3.000 € bij de tweede en 5.000 € bij de volgende. Ze viseert het ontbreken van technische middelen om facturen te versturen én te ontvangen.
+
+De bronnen verschillen over de manier van tellen. Een bron preciseert dat een tweede inbreuk pas wordt weerhouden na een vaststelling, en ten vroegste drie maanden na de vorige. Andere bronnen spreken van een boete per niet-conforme factuur. Laat de telling valideren door uw boekhouder. Reken niet op clementie.
+
+Het belangrijkste om te onthouden: de verplichting om te ontvangen staat los van de verplichting om te verzenden.
+
+Zelfs als u uitsluitend aan particulieren verkoopt, moet u elektronische facturen via Peppol kunnen ontvangen.
+
+## De 6 auditpunten
+
+### 1. Uw registratie is actief, met de juiste rol
+
+Ga in Odoo naar Boekhouding, Configuratie, Instellingen, sectie Elektronische facturatie. De deelnemersrol moet "Verzenden en ontvangen" zijn, en niet "Enkel verzenden".
+
+Controleer ook de status. Na de aanvraag staat de status op "pending activation" en schakelt die doorgaans binnen 24 uur om. Zolang de status niet is omgeschakeld, zit u niet op het netwerk, ook al toont Odoo uw facturen als klaar.
+
+### 2. De ontvangst is in de praktijk getest
+
+Beperk u niet tot een configuratiescherm. Vraag een leverancier om een echte factuur via Peppol te versturen. Volg die factuur tot in uw boekhouding.
+
+Volgens de documentatie van Odoo 19 worden nieuwe documenten die via Peppol binnenkomen meermaals per dag opgehaald. Afhankelijk van uw instellingen komen ze binnen als concept in het aankoopjournaal, of in de toepassing Documents. Hebt u meerdere aankoopjournalen, controleer dan of het ontvangstjournaal het juiste is.
+
+### 3. Het verzenden loopt niet vast op uw klantenfiches
+
+Een factuur die niet vertrekt, is het eerste symptoom. Een fiche zonder bruikbaar btw-nummer kan niet op het netwerk worden geadresseerd, en dat is de belangrijkste oorzaak van mislukte verzendingen.
+
+Voeg in de lijst met klantenfacturen de kolom Peppol-status toe. U kunt ook de filter "Peppol klaar" toepassen. De facturen die blijven steken, tonen u welke fiches u moet corrigeren.
+
+### 4. U weet wie u nog pdf's stuurt
+
+Sommige leveranciers zullen nog pdf's sturen. Voor Belgische leveranciers is enkel de gestructureerde factuur geldig. De pdf is dan slechts een beleefdheidsgebaar.
+
+Volgens de website efacture.belgium.be mag u een pdf of een papieren factuur weigeren wanneer u een elektronische factuur had moeten ontvangen.
+
+Vermijd het om een betaling zonder verwittiging te blokkeren: dat leidt tot nodeloze geschillen. Maak een lijst van de betrokken leveranciers en schrijf hen aan. Buitenlandse leveranciers die niet in België gevestigd zijn, vallen buiten de Belgische verplichting.
+
+Die lijst heeft nog een ander nut. Hetzelfde document kan tweemaal binnenkomen, via Peppol en via e-mail. Een ouder ervaringsverslag van een integrator merkt op dat Odoo de meervoudige ontvangst van dezelfde factuur niet blokkeert, maar daarvoor wel een waarschuwing toont via een banner. Vandaar het volgende punt.
+
+### 5. Uw aankoopfacturen worden verwerkt zonder dubbels of codeerfouten
+
+Hier helpt Odoo 20. Odoo 20 is uitgebracht op 24 september 2026 in Brussels Expo. Drie nieuwigheden op het vlak van boekhouding zijn nuttig voor de audit:
+
+- **Voorspelling van factuurlijnen.** Odoo stelt het product, de rekening, de belasting en de analytische verdeling voor op basis van de historiek en de omschrijving. Waarden die u al handmatig hebt ingevoerd, blijven behouden.
+
+- **Detectie van dubbels op twee niveaus.** Een rode waarschuwing wijst op een registratie die u moet corrigeren, een gele op een factuur die u moet nakijken vóór de boeking.
+
+- **Afstemming met aankooporders.** Odoo kan waarschuwen wanneer hoeveelheden of prijzen afwijken van wat verwacht werd.
+
+Deze tools vervangen geen controle op het einde van de maand. Ze beperken wel de invoerfouten. Een keynote, samengevat door een partner, vermeldt ook een automatische boeking van "normale" inkomende facturen, waarbij dubbels en afwijkingen in concept blijven staan. Wij konden dat niet bevestigen in de officiële documentatie. Controleer dit op uw versie voordat u erop vertrouwt.
+
+Zit u niet op Odoo 20? Niets verplicht u daartoe. Odoo ondersteunt de vorige versies meerdere jaren. Peppol-ontvangst werkt al op de versies 18 en 19, zoals hun documentatie aantoont. Als u migreert, test dan eerst op een testkopie.
+
+### 6. U beheert afwijzingen en kunt uw conformiteit bewijzen
+
+Een status "geweigerd" in uw software is geen betwisting. Wie een factuur betwist, moet dat tijdig en duidelijk doen. Anders kan ze worden beschouwd als aanvaard. Laat de status dus vergezeld gaan van een gemotiveerd schrijven. Bewaar de oorspronkelijke factuur, het bewijs van ontvangst, uw protest en de daaropvolgende briefwisseling.
+
+Voor facturen die niet voor u bestemd zijn, is de regel eenvoudig. Boek ze niet. U kunt ze via Peppol weigeren met een Invoice Response met status RE, als uw software dat ondersteunt.
+
+Stel voor het bewijs een eenvoudig dossier samen:
+
+- de bevestiging van uw Peppol-registratie en de rol "verzenden en ontvangen";
+- het resultaat van uw test van verzending en ontvangst, met data;
+- de lijst van leveranciers en klanten die nog niet op Peppol zitten, en de brieven die u hebt verstuurd;
+- de export van de ontvangen facturen. Odoo 20 laat toe om in bulk een zipbestand te downloaden met alle bijlagen (pdf, xml) van de geselecteerde facturen.
+
+Tijdens de tolerantieperiode moest u kunnen aantonen dat u tijdig de nodige maatregelen had genomen. De tolerantieperiode is voorbij. Dit dossier blijft uw beste verdediging.
+
+## Wat er nog aankomt
+
+Volgens verschillende gidsen voorziet België voor 2028 een e-reporting: de btw-gegevens van uw facturen zullen bijna in real time aan de FOD Financiën worden doorgegeven. Een nette boekhouding vandaag maakt die stap eenvoudiger.
+
+## Waar beginnen?
+
+Doe de punten 1 en 2 vandaag nog. Ze nemen een uur in beslag en tonen u of u blootgesteld bent. De rest regelt u in enkele weken.
+
+Wenst u een externe blik op uw Peppol-configuratie of een overstap naar Odoo 20? Dan kan ons team dat opnemen via de [Odoo-support](/nl/support/) of een [datamigratie](/nl/migration/). U kunt ons ook [contacteren](/nl/contact-us/) voor een snelle audit.
