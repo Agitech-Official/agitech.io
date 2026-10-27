@@ -1,0 +1,146 @@
+---
+title: "Peppol : votre Odoo reçoit-il vos factures fournisseurs ?"
+lang: "fr"
+publishedAt: "2026-10-27"
+category: "Odoo"
+excerpt: "Amendes Peppol actives depuis avril 2026 : 6 points d'audit pour vérifier que votre Odoo reçoit, traite et prouve vos factures fournisseurs."
+---
+
+Beaucoup d'entreprises ont réglé l'envoi de leurs factures et n'ont jamais regardé la réception. Les amendes Peppol courent pourtant depuis le 1er avril 2026.
+
+Voici ce que vous devez savoir, puis une checklist en 6 points à faire passer à votre DAF ou à votre comptable cette semaine.
+
+## Où en est-on ?
+
+
+La loi du 6 février 2024 rend Peppol obligatoire pour les transactions B2B depuis le 1er janvier 2026.
+ 
+La tolérance du SPF Finances s'est terminée le 31 mars 2026.
+ 
+L'amende est de 1 500 € à la première infraction, 3 000 € à la deuxième et 5 000 € aux suivantes.
+ Elle vise l'absence de moyens techniques pour émettre et pour recevoir.
+
+Les sources divergent sur la façon de compter. L'une précise qu'
+une deuxième infraction n'est retenue qu'après constatation, et au plus tôt trois mois après la précédente.
+ D'autres parlent d'une amende par facture non conforme. Faites valider le décompte par votre comptable. Ne misez pas sur la clémence.
+
+Le point à retenir : 
+l'obligation de réception est distincte de celle d'émission.
+ 
+Même si vous ne vendez qu'à des particuliers, vous devez pouvoir recevoir des factures électroniques via Peppol.
+
+
+## Les 6 points d'audit
+
+### 1. Votre inscription est active, avec le bon rôle
+
+Dans Odoo, allez dans Comptabilité, Configuration, Paramètres, section Facturation électronique. 
+Le rôle de participation doit être « Envoi et réception », et non « Envoi uniquement ».
+
+
+Vérifiez aussi le statut. Après la demande, 
+le statut passe en « pending activation » et bascule en général sous 24 heures.
+ 
+Tant qu'il n'a pas basculé, vous n'êtes pas sur le réseau, même si Odoo affiche vos factures comme prêtes.
+
+
+### 2. La réception a été testée en réel
+
+Ne vous contentez pas d'un écran de configuration. Demandez à un fournisseur d'envoyer une vraie facture via Peppol. Suivez-la jusqu'à votre comptabilité.
+
+D'après la documentation Odoo 19, 
+les nouveaux documents reçus via Peppol sont vérifiés plusieurs fois par jour.
+ 
+Selon vos paramètres, ils arrivent comme brouillons dans le journal d'achat, ou dans l'application Documents.
+ Si vous avez plusieurs journaux d'achat, vérifiez que le journal de réception est le bon.
+
+### 3. L'envoi ne bute pas sur vos fiches clients
+
+Une facture qui ne part pas est le premier symptôme. 
+Une fiche sans numéro de TVA exploitable ne peut pas être adressée sur le réseau, ce qui est la première cause d'échec d'envoi.
+
+
+Dans la liste des factures clients, ajoutez la colonne Statut Peppol. 
+Vous pouvez aussi appliquer le filtre « Peppol prêt ».
+ Les factures qui restent bloquées vous montrent les fiches à corriger.
+
+### 4. Vous savez qui vous envoie encore des PDF
+
+Certains fournisseurs enverront encore des PDF. Pour les fournisseurs belges, la facture structurée est la seule valable. 
+Le PDF n'est alors qu'un geste de courtoisie.
+ 
+Selon le site efacture.belgium.be, vous pouvez refuser un PDF ou un papier lorsqu'une facture électronique aurait dû vous être transmise.
+
+
+Évitez de bloquer un paiement sans prévenir : 
+cela crée des litiges inutiles.
+ Dressez la liste des fournisseurs concernés et écrivez-leur. Les fournisseurs étrangers non établis en Belgique sont 
+hors de l'obligation belge.
+
+
+Cette liste a un autre intérêt. Un même document peut arriver deux fois, par Peppol puis par e-mail. Un ancien retour d'expérience d'intégrateur note qu'
+Odoo ne bloque pas la réception multiple de la même facture, mais avertit via un bandeau.
+ D'où le point suivant.
+
+### 5. Vos factures d'achat sont traitées sans doublons ni erreurs de codage
+
+C'est ici qu'Odoo 20 aide. 
+Odoo 20 est sorti le 24 septembre 2026 à Brussels Expo.
+ Trois nouveautés comptables sont utiles pour l'audit :
+
+- **Prédiction des lignes de facture.** 
+Odoo suggère le produit, le compte, la taxe et la répartition analytique d'après l'historique et le libellé.
+ 
+Les valeurs déjà saisies à la main sont conservées.
+
+- **Détection des doublons à deux niveaux.** 
+Un avertissement rouge signale un enregistrement à corriger, un jaune une facture à vérifier avant comptabilisation.
+
+- **Rapprochement avec les bons de commande.** 
+Odoo peut avertir quand quantités ou prix diffèrent de ce qui était attendu.
+
+
+Ces outils ne remplacent pas un contrôle de fin de mois. Ils réduisent les erreurs de saisie. Une keynote résumée par un partenaire évoque aussi une comptabilisation automatique des factures entrantes « normales », avec doublons et écarts laissés en brouillon. Nous n'avons pas pu le confirmer dans la documentation officielle. Vérifiez-le sur votre version avant de vous y fier.
+
+Vous n'êtes pas sur Odoo 20 ? Rien ne vous y oblige. 
+Odoo maintient les versions précédentes plusieurs années.
+ La réception Peppol fonctionne déjà sur les versions 18 et 19, comme le montre leur documentation. Si vous migrez, 
+testez d'abord sur une copie de recette.
+
+
+### 6. Vous gérez les rejets et vous pouvez prouver votre conformité
+
+Un statut « refusé » dans votre logiciel n'est pas une contestation. 
+Qui conteste une facture doit le faire en temps utile et clairement. Sinon elle peut être considérée comme acceptée.
+ Doublez donc le statut d'un écrit motivé. 
+Conservez la facture d'origine, la preuve de réception, votre protestation et les échanges suivants.
+
+
+Pour les factures qui ne vous sont pas destinées, la règle est simple. 
+Ne les comptabilisez pas. Vous pouvez les refuser via Peppol avec un Invoice Response de statut RE, si votre logiciel le gère.
+
+
+Côté preuve, constituez un dossier simple :
+
+- la confirmation d'inscription Peppol et le rôle « envoi et réception » ;
+- le résultat de vos tests d'envoi et de réception, avec dates ;
+- la liste des fournisseurs et clients encore hors Peppol, et les courriers envoyés ;
+- l'export des factures reçues. Odoo 20 permet 
+le téléchargement en lot d'un zip avec toutes les pièces jointes (PDF, XML) des factures sélectionnées.
+
+
+Pendant la tolérance, il fallait 
+pouvoir démontrer qu'on avait pris les mesures nécessaires en temps utile.
+ La tolérance est finie. Ce dossier reste votre meilleure défense.
+
+## Ce qui arrive ensuite
+
+D'après plusieurs guides, 
+la Belgique prévoit pour 2028 un e-reporting : les données TVA de vos factures seront transmises au SPF Finances en quasi-temps réel.
+ Une comptabilité propre aujourd'hui rendra cette étape plus simple.
+
+## Par où commencer
+
+Faites les points 1 et 2 aujourd'hui. Ils prennent une heure et vous disent si vous êtes exposé. Le reste s'organise en quelques semaines.
+
+Si vous voulez un regard extérieur sur votre configuration Peppol ou un passage à Odoo 20, notre équipe peut s'en charger via le [support Odoo](/support/) ou une [migration de données](/migration/). Vous pouvez aussi nous [contacter](/contact-us/) pour un audit rapide.
