@@ -15,7 +15,7 @@ const strings = {
     nav: 'Navigation',
     odoo: 'Odoo ERP', dev: 'Développement', infra: 'Infrastructure IT', cases: 'Réalisations', recruitment: 'Recrutement',
     rights: `© ${new Date().getFullYear()} Agitech. Tous droits réservés.`,
-    privacy: 'Politique de Confidentialité', terms: 'Termes et Conditions', cookies: 'Gérer les cookies',
+    privacy: 'Politique de Confidentialité', terms: 'Termes et Conditions', cookies: 'Gérer les cookies', support: 'Support client : ouvrir un ticket',
     otherOffices: 'Voir nos 3 bureaux',
   },
   en: {
@@ -24,7 +24,7 @@ const strings = {
     nav: 'Navigation',
     odoo: 'Odoo ERP', dev: 'Development', infra: 'IT Infrastructure', cases: 'Case Studies', recruitment: 'Recruitment',
     rights: `© ${new Date().getFullYear()} Agitech. All rights reserved.`,
-    privacy: 'Privacy Policy', terms: 'Terms & Conditions', cookies: 'Manage cookies',
+    privacy: 'Privacy Policy', terms: 'Terms & Conditions', cookies: 'Manage cookies', support: 'Customer support: open a ticket',
     otherOffices: 'See our 3 offices',
   },
   nl: {
@@ -33,7 +33,7 @@ const strings = {
     nav: 'Navigatie',
     odoo: 'Odoo ERP', dev: 'Ontwikkeling', infra: 'IT-infrastructuur', cases: 'Realisaties', recruitment: 'Vacatures',
     rights: `© ${new Date().getFullYear()} Agitech. Alle rechten voorbehouden.`,
-    privacy: 'Privacybeleid', terms: 'Algemene Voorwaarden', cookies: 'Cookies beheren',
+    privacy: 'Privacybeleid', terms: 'Algemene Voorwaarden', cookies: 'Cookies beheren', support: 'Klantensupport: een ticket openen',
     otherOffices: 'Bekijk onze 3 kantoren',
   },
 }[lang];
@@ -100,6 +100,7 @@ const strings = {
           <a href="https://wa.me/32460241589" target="_blank" rel="noopener"><img src="/assets/img/blocks/whatsap.svg" alt="WhatsApp"></a>
         </div>
         <p>{strings.rights}</p>
+        <p class="support-line"><a href="https://agitech.cloudpepper.site/fr/helpdesk/service-clientele-2" target="_blank" rel="noopener">{strings.support} →</a></p>
       </div>
       <a class="shiftingpact-logo" href="https://shiftingpact.be/agitech/" target="_blank" rel="noopener">
         <img src="/assets/img/blocks/shiftingpackt-logo.png" alt="ShiftingPact">
