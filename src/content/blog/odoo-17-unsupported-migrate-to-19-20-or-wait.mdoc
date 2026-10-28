@@ -1,0 +1,97 @@
+---
+title: "Odoo 17 unsupported: migrate to 19, 20 or wait?"
+lang: "en"
+publishedAt: "2026-10-28"
+category: "Odoo"
+excerpt: "Odoo 20 is out and Odoo 17 is no longer supported. A decision grid to choose between 19, 20 or waiting, with the risks of each option."
+---
+
+Odoo 20 was unveiled in Brussels on 24 September 2026. With this release, Odoo 17 falls outside official support. If your company is still running this version, you need to decide before the end of the year.
+
+Here is a decision grid for business leaders. It makes no promises on price. The cost depends on your modules, your custom developments and your data, and only an audit can put a figure on it.
+
+## What "no longer supported" means
+
+Odoo maintains three major versions at a time. When a new version is released, the oldest one drops out of the cycle. Today, the maintained versions are 18, 19 and 20. Version 17 is no longer among them.
+
+In practical terms, your system will not stop overnight. But the publisher no longer releases fixes for this version. Every flaw or bug discovered from now on stays without an official fix.
+
+The risk builds up silently, and that is what makes it dangerous.
+
+## The three risks to consider
+
+**Security.** An ERP holds your customers, your prices, your invoices and your banking data. Without official fixes, you depend on stopgap patches or on your partner. The longer you wait, the wider the gap with the maintained versions grows.
+
+**Compliance and Peppol.** In Belgium, electronic invoicing between businesses runs through the Peppol network. Changes to formats and rules are built into the maintained versions. On an abandoned version, you may have to patch together your invoice exchanges. Check with your accountant exactly what your version handles today.
+
+**Compatibility.** Third-party modules, connectors (webshop, bank, carrier) and integrations target recent versions first. On version 17, you will find fewer and fewer updates. New tools, such as connecting Odoo to an AI via MCP, also rely on recent versions.
+
+## Migrate to 19 or to 20?
+
+Both choices are defensible. It all depends on your tolerance for risk.
+
+**Option 19: the proven version.** It was released more than a year ago. Its teething problems are known, and third-party modules have had time to adapt. Under the three-version rule, it will remain supported until a more recent version arrives, which leaves you some margin. It is the cautious choice for a business whose operations cannot tolerate surprises.
+
+**Option 20: the longest support.** You get the longest possible support period. But it has only just been released. Some community modules or connectors may not be ready yet. You may also run into frequent fixes in the first few months. It is the right choice if your usage is standard, if your custom developments are limited and if you want to avoid a second migration in the short term.
+
+Our rule of thumb: if you have many third-party modules or bespoke code, 19 is safer today. If you are close to standard Odoo, 20 is justified. In both cases, ask your partner for a list of your modules with their compatibility status on the target version.
+
+## Waiting: what it really costs
+
+Waiting is a decision, not an absence of decision. It has a price, even if it does not appear on an invoice.
+
+- **The gap widens.** Every extra version to cross adds testing and adaptation work. A jump from 17 to 20 is heavier than a jump from 17 to 19.
+- **Your developments age.** Custom code has to be reviewed for every change to the API or the data structure. The longer you wait, the more technical debt builds up.
+- **Your room for manoeuvre shrinks.** If a serious flaw or a legal obligation forces you to migrate urgently, you will pay a premium for the urgency. You will also have less choice over the target version and the dates.
+
+I am not giving you a percentage for the extra cost. I have no verified figure to put forward. What we see with our clients is that a prepared migration costs less and causes less disruption than one forced upon you.
+
+## Jumping several versions: what changes
+
+Going from 17 to 19 means crossing 18. Going to 20 means crossing two versions. In practice, the data passes through the intermediate versions. Each step can change models, views and reports.
+
+The workload breaks down into four blocks:
+
+1. **Audit**: installed modules, custom code, integrations, data volume.
+2. **Adaptation**: reworking developments and third-party modules for the target version.
+3. **Testing**: validation by your teams on real cases (sales, purchasing, accounting, inventory, Peppol).
+4. **Go-live**: scheduling outside peak periods, with a rollback plan.
+
+The third block is the one that companies underestimate the most. Your users must test, and that takes time on their part.
+
+## The decision grid
+
+| Criterion | Migrate to 19 | Migrate to 20 | Wait |
+|---|---|---|---|
+| Publisher support | Yes | Yes, the longest | No |
+| Version maturity | High | Recent | Not applicable |
+| Third-party modules and connectors | More likely to be ready | To be checked one by one | Available on 17, but increasingly rarely updated |
+| Security | Official fixes | Official fixes | No official fixes |
+| Peppol and compliance | Tracked by the publisher | Tracked by the publisher | To be checked case by case |
+| Gap to cross later | Reduced | Reduced | Growing |
+| Suitable profile | Bespoke code, caution | Standard, long-term vision | None, unless there is a dated, deliberate plan |
+
+## Hosting and monitoring by option
+
+Hosting is not a detail. It determines how you migrate.
+
+**Migrating now.** Plan for a test environment separate from production. You load a copy of your data into it, replay the migration as many times as necessary, then switch over. Monitoring must cover the testing phase (performance, errors) and the first weeks after go-live, when problems come to light.
+
+**Choosing 20.** Keep a closer watch during the first few months: error logs, response times, scheduled tasks, integrations. A recent version calls for more frequent corrective updates. You therefore need a host able to apply them quickly and cleanly.
+
+**Waiting.** You keep a system without official fixes. This means hardening the surrounding infrastructure: restricted access, tested backups, and monitoring of access and of system and database updates. This reduces exposure, but does not replace publisher support. Treat it as a short-term bridge, with a written end date.
+
+## What to decide before the end of the year
+
+Here is a realistic sequence for the coming weeks:
+
+1. Take stock of your modules, your custom developments and your integrations.
+2. Choose the target version with your partner, based on that inventory.
+3. Set a go-live date outside your peak periods.
+4. If you wait, write down the deadline and the protective measures until then.
+
+The worst scenario is to decide nothing and let version 17 run without a plan. It is the only choice that gives you no control at all.
+
+## Going further
+
+If you want to frame your transition, our team can audit your instance and propose a [data migration](/en/migration/) plan suited to your target version. To secure operations during and after the switchover, discover our [hosting and monitoring](/en/hosting-monitoring/) offering.
