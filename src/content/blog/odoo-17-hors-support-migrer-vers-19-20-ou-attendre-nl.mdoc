@@ -1,0 +1,97 @@
+---
+title: "Odoo 17 zonder support: migreren naar 19, 20 of wachten?"
+lang: "nl"
+publishedAt: "2026-10-28"
+category: "Odoo"
+excerpt: "Odoo 20 is uit, Odoo 17 wordt niet meer ondersteund. Een beslissingskader om te kiezen tussen 19, 20 of afwachten, met de risico's van elke optie."
+---
+
+Odoo 20 werd op 24 september 2026 voorgesteld in Brussel. Met deze release valt Odoo 17 buiten de officiële support. Draait uw bedrijf nog op deze versie, dan moet u vóór het einde van het jaar een beslissing nemen.
+
+Hieronder vindt u een beslissingskader voor bedrijfsleiders. Het bevat geen prijsbelofte. De kostprijs hangt af van uw modules, uw specifieke ontwikkelingen en uw gegevens, en enkel een audit kan die berekenen.
+
+## Wat "niet meer ondersteund" betekent
+
+Odoo onderhoudt drie hoofdversies tegelijk. Wanneer er een nieuwe versie uitkomt, valt de oudste uit de cyclus. Op dit moment worden versie 18, 19 en 20 onderhouden. Versie 17 hoort daar niet meer bij.
+
+Concreet stopt uw systeem niet van de ene dag op de andere. Maar de uitgever publiceert voor deze versie geen correcties meer. Elke kwetsbaarheid of bug die vanaf nu wordt ontdekt, blijft zonder officiële oplossing.
+
+Het risico stapelt zich ongemerkt op, en dat maakt het gevaarlijk.
+
+## De drie risico's om in het oog te houden
+
+**Beveiliging.** Een ERP bevat uw klanten, uw prijzen, uw facturen en uw bankgegevens. Zonder officiële patches bent u afhankelijk van noodoplossingen of van uw partner. Hoe meer tijd er verstrijkt, hoe groter de kloof met de onderhouden versies wordt.
+
+**Compliance en Peppol.** In België verloopt de elektronische facturatie tussen bedrijven via het Peppol-netwerk. Wijzigingen in formaten en regels worden verwerkt in de onderhouden versies. Op een verlaten versie riskeert u uw factuuruitwisseling met lapmiddelen te moeten draaiende houden. Controleer samen met uw boekhouder wat uw versie vandaag precies ondersteunt.
+
+**Compatibiliteit.** Modules van derden, connectoren (webshop, bank, vervoerder) en integraties richten zich eerst op de recente versies. Voor versie 17 vindt u steeds minder updates. Ook nieuwe tools, zoals de koppeling van Odoo met een AI via MCP, steunen op recente versies.
+
+## Migreren naar 19 of naar 20?
+
+Beide keuzes zijn verdedigbaar. Alles hangt af van uw risicotolerantie.
+
+**Optie 19: de beproefde versie.** Ze is meer dan een jaar geleden uitgekomen. De kinderziektes zijn bekend en modules van derden hebben de tijd gehad om zich aan te passen. Volgens de regel van de drie versies blijft ze ondersteund tot er een nieuwere versie verschijnt, wat u marge geeft. Het is de voorzichtige keuze voor een bedrijf waarvan de activiteit geen onverwachte problemen verdraagt.
+
+**Optie 20: de versie met de langste looptijd.** U kiest voor de langst mogelijke supportduur. Maar ze is net uit. Sommige communitymodules of connectoren zijn mogelijk nog niet klaar. In de eerste maanden kunt u ook frequente patches verwachten. Het is de juiste keuze als uw gebruik standaard is, als uw specifieke ontwikkelingen beperkt zijn en als u op korte termijn een tweede migratie wilt vermijden.
+
+Onze vuistregel: hebt u veel modules van derden of maatwerkcode, dan is 19 vandaag veiliger. Blijft u dicht bij de standaard, dan is 20 verantwoord. Vraag in beide gevallen aan uw partner een lijst van uw modules met hun compatibiliteitsstatus op de doelversie.
+
+## Wachten: wat het echt kost
+
+Wachten is een beslissing, geen afwezigheid van beslissing. Er hangt een prijs aan, ook al verschijnt die niet op een factuur.
+
+- **De kloof wordt groter.** Elke extra versie die u moet overbruggen, voegt test- en aanpassingswerk toe. Een sprong van 17 naar 20 is zwaarder dan een sprong van 17 naar 19.
+- **Uw ontwikkelingen verouderen.** Maatwerkcode moet worden herzien bij elke wijziging van de API of van de gegevensstructuur. Hoe langer u wacht, hoe meer technische schuld zich opstapelt.
+- **Uw manoeuvreerruimte krimpt.** Als een ernstige kwetsbaarheid of een wettelijke verplichting u dwingt om dringend te migreren, betaalt u de meerprijs van de hhoogdringendheid. U hebt dan ook minder keuze qua doelversie en data.
+
+Ik geef u geen percentage meerkost. Ik heb geen geverifieerd cijfer om u voor te leggen. Wat we bij onze klanten vaststellen, is dat een voorbereide migratie minder kost en minder verstoring veroorzaakt dan een migratie die u opgedrongen wordt.
+
+## Een sprong over meerdere versies: wat verandert er
+
+Van 17 naar 19 gaan betekent versie 18 doorlopen. Naar 20 gaan betekent er twee doorlopen. In de praktijk doorlopen de gegevens de tussenliggende versies. Elke stap kan modellen, weergaven en rapporten wijzigen.
+
+De werklast is verdeeld over vier blokken:
+
+1. **Audit**: geïnstalleerde modules, specifieke code, integraties, gegevensvolume.
+2. **Aanpassing**: overname van de ontwikkelingen en de modules van derden op de doelversie.
+3. **Testen**: validatie door uw teams op echte gevallen (verkoop, aankoop, boekhouding, voorraad, Peppol).
+4. **Livegang**: planning buiten de piekperiodes, met een terugvalplan.
+
+Het derde blok is datgene wat bedrijven het meest onderschatten. Uw gebruikers moeten testen, en dat vraagt tijd van hen.
+
+## Het beslissingskader
+
+| Criterium | Migreren naar 19 | Migreren naar 20 | Wachten |
+|---|---|---|---|
+| Support van de uitgever | Ja | Ja, de langste | Nee |
+| Maturiteit van de versie | Hoog | Recent | Niet van toepassing |
+| Modules van derden en connectoren | Grotere kans dat ze klaar zijn | Eén voor één te controleren | Beschikbaar op 17, maar steeds minder bijgewerkt |
+| Beveiliging | Officiële patches | Officiële patches | Geen officiële patches |
+| Peppol en compliance | Opgevolgd door de uitgever | Opgevolgd door de uitgever | Geval per geval te controleren |
+| Later te overbruggen kloof | Beperkt | Beperkt | Groeiend |
+| Geschikt profiel | Maatwerkcode, voorzichtigheid | Standaard, langetermijnvisie | Geen, tenzij met een gedateerd en bewust gekozen plan |
+
+## Hosting en monitoring volgens de gekozen optie
+
+Hosting is geen detail. Het bepaalt hoe u migreert.
+
+**Nu migreren.** Voorzie een testomgeving die los staat van de productie. U laadt er een kopie van uw gegevens in, speelt de migratie zo vaak als nodig opnieuw af en schakelt dan over. De monitoring moet de testfase (prestaties, fouten) dekken, evenals de eerste weken na de livegang, wanneer de problemen aan het licht komen.
+
+**Kiezen voor 20.** Volg de eerste maanden van dichterbij op: foutenlogs, responstijden, geplande taken, integraties. Een recente versie vraagt om snellere opeenvolgende correctieve updates. U hebt dus een hostingpartner nodig die ze snel en correct kan uitrollen.
+
+**Wachten.** U behoudt een systeem zonder officiële patches. Dat verplicht u om de infrastructuur errond te verstevigen: beperkte toegangen, geteste back-ups, bewaking van de toegangen en van de updates van het systeem en de database. Dat beperkt de blootstelling, maar vervangt de support van de uitgever niet. Beschouw het als een brug van korte duur, met een einddatum die op papier staat.
+
+## Wat beslissen vóór het einde van het jaar
+
+Hier is een realistische volgorde voor de komende weken:
+
+1. Maak een inventaris van uw modules, uw specifieke ontwikkelingen en uw integraties.
+2. Kies samen met uw partner de doelversie, op basis van die inventaris.
+3. Leg een datum voor de livegang vast, buiten uw drukke periodes.
+4. Kiest u ervoor om te wachten, leg dan de uiterste datum en de beschermingsmaatregelen tot dan schriftelijk vast.
+
+Het slechtste scenario is niets beslissen en Odoo 17 zonder plan laten doordraaien. Het is de enige keuze die u geen enkele controle geeft.
+
+## Meer weten
+
+Wilt u uw overgang afbakenen, dan kan ons team uw instantie auditeren en u een plan voor [gegevensmigratie](/nl/migration/) voorstellen dat is afgestemd op uw doelversie. Om de werking te beveiligen tijdens en na de livegang, ontdek ons aanbod voor [hosting en monitoring](/nl/hosting-monitoring/).

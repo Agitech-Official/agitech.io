@@ -1,0 +1,97 @@
+---
+title: "Odoo 17 hors support : migrer vers 19, 20 ou attendre ?"
+lang: "fr"
+publishedAt: "2026-10-28"
+category: "Odoo"
+excerpt: "Odoo 20 est sorti, Odoo 17 n'est plus supporté. Une grille de décision pour choisir entre la 19, la 20 ou l'attente, avec les risques de chaque option."
+---
+
+Odoo 20 a été présenté à Bruxelles le 24 septembre 2026. Avec cette sortie, Odoo 17 quitte le périmètre du support officiel. Si votre entreprise tourne encore sur cette version, il faut décider avant la fin de l'année.
+
+Voici une grille de décision pour un dirigeant. Elle ne contient pas de promesse de prix. Le coût dépend de vos modules, de vos développements spécifiques et de vos données, et seul un audit le chiffre.
+
+## Ce que "plus supporté" veut dire
+
+Odoo maintient trois versions majeures à la fois. Quand une nouvelle version sort, la plus ancienne sort du cycle. Aujourd'hui, les versions maintenues sont la 18, la 19 et la 20. La 17 n'en fait plus partie.
+
+Concrètement, votre système ne s'arrête pas du jour au lendemain. Mais l'éditeur ne publie plus de correctifs pour cette version. Chaque faille ou bug découvert à partir de maintenant reste sans correction officielle.
+
+Le risque s'accumule en silence, et c'est ce qui le rend dangereux.
+
+## Les trois risques à regarder
+
+**Sécurité.** Un ERP contient vos clients, vos prix, vos factures et vos données bancaires. Sans correctifs officiels, vous dépendez de rustines ou de votre partenaire. Plus le temps passe, plus l'écart avec les versions maintenues grandit.
+
+**Conformité et Peppol.** En Belgique, la facturation électronique entre entreprises passe par le réseau Peppol. Les évolutions de formats et de règles sont intégrées aux versions maintenues. Sur une version abandonnée, vous risquez de devoir bricoler vos échanges de factures. Vérifiez avec votre comptable ce que votre version gère exactement aujourd'hui.
+
+**Compatibilité.** Les modules tiers, les connecteurs (webshop, banque, transporteur) et les intégrations ciblent d'abord les versions récentes. Sur la 17, vous trouverez de moins en moins de mises à jour. Les nouveaux outils, comme la connexion d'Odoo à une IA via MCP, s'appuient aussi sur des versions récentes.
+
+## Migrer vers 19 ou vers 20 ?
+
+Les deux choix se défendent. Tout dépend de votre tolérance au risque.
+
+**Option 19 : la version éprouvée.** Elle est sortie il y a plus d'un an. Ses défauts de jeunesse sont connus, et les modules tiers ont eu le temps de s'adapter. Selon la règle des trois versions, elle restera supportée jusqu'à l'arrivée d'une version plus récente, ce qui vous laisse de la marge. C'est le choix prudent pour une entreprise dont l'activité ne tolère pas d'aléas.
+
+**Option 20 : la version la plus longue.** Vous partez sur la durée de support la plus étendue possible. Mais elle vient de sortir. Certains modules communautaires ou connecteurs ne sont peut-être pas encore prêts. Vous pouvez aussi tomber sur des correctifs fréquents dans les premiers mois. C'est le bon choix si votre usage est standard, si vos développements spécifiques sont limités et si vous voulez éviter une seconde migration à court terme.
+
+Notre règle pratique : si vous avez beaucoup de modules tiers ou de code sur mesure, la 19 est plus sûre aujourd'hui. Si vous êtes proche du standard, la 20 se justifie. Dans les deux cas, demandez à votre partenaire une liste de vos modules avec leur état de compatibilité sur la version cible.
+
+## Attendre : ce que ça coûte vraiment
+
+Attendre est une décision, pas une absence de décision. Elle a un prix, même s'il n'apparaît pas sur une facture.
+
+- **L'écart se creuse.** Chaque version de plus à franchir ajoute du travail de test et d'adaptation. Un saut de 17 à 20 est plus lourd qu'un saut de 17 à 19.
+- **Vos développements vieillissent.** Le code sur mesure doit être revu pour chaque changement d'API ou de structure de données. Plus vous attendez, plus la dette technique s'accumule.
+- **Votre marge de manœuvre diminue.** Si une faille grave ou une obligation légale vous force à migrer en urgence, vous paierez l'urgence. Vous aurez aussi moins de choix sur la version cible et sur les dates.
+
+Je ne vous donne pas de pourcentage de surcoût. Je n'ai pas de chiffre vérifié à vous opposer. Ce que nous constatons chez nos clients, c'est que la migration préparée coûte moins cher et perturbe moins que la migration subie.
+
+## Un saut de plusieurs versions : ce qui change
+
+Passer de la 17 à la 19, c'est franchir la 18. Passer à la 20, c'est en franchir deux. Les données traversent en pratique les versions intermédiaires. Chaque étape peut modifier des modèles, des vues et des rapports.
+
+La charge de travail se répartit en quatre blocs :
+
+1. **Audit** : modules installés, code spécifique, intégrations, volume de données.
+2. **Adaptation** : reprise des développements et des modules tiers sur la version cible.
+3. **Tests** : validation par vos équipes sur des cas réels (ventes, achats, compta, stock, Peppol).
+4. **Bascule** : planification hors période de pointe, avec un plan de retour arrière.
+
+Le troisième bloc est celui que les entreprises sous-estiment le plus. Vos utilisateurs doivent tester, et cela demande du temps de leur part.
+
+## La grille de décision
+
+| Critère | Migrer vers 19 | Migrer vers 20 | Attendre |
+|---|---|---|---|
+| Support éditeur | Oui | Oui, le plus long | Non |
+| Maturité de la version | Élevée | Récente | Sans objet |
+| Modules tiers et connecteurs | Plus de chances d'être prêts | À vérifier un par un | Disponibles sur la 17, mais de moins en moins mis à jour |
+| Sécurité | Correctifs officiels | Correctifs officiels | Aucun correctif officiel |
+| Peppol et conformité | Suivi par l'éditeur | Suivi par l'éditeur | À vérifier au cas par cas |
+| Écart à franchir plus tard | Réduit | Réduit | Croissant |
+| Profil adapté | Code sur mesure, prudence | Standard, vision long terme | Aucun, sauf plan daté et assumé |
+
+## Hébergement et monitoring selon l'option
+
+L'hébergement n'est pas un détail. Il conditionne la façon dont vous migrez.
+
+**Migrer maintenant.** Prévoyez un environnement de test distinct de la production. Vous y chargez une copie de vos données, vous rejouez la migration autant de fois que nécessaire, puis vous basculez. Le monitoring doit couvrir la phase de test (performances, erreurs) et les premières semaines après la bascule, quand les problèmes remontent.
+
+**Choisir la 20.** Surveillez de plus près les premiers mois : journaux d'erreurs, temps de réponse, tâches planifiées, intégrations. Une version récente demande des mises à jour correctives plus rapprochées. Il faut donc un hébergeur capable de les appliquer vite et proprement.
+
+**Attendre.** Vous gardez un système sans correctifs officiels. Cela impose de durcir l'infrastructure autour : accès restreints, sauvegardes testées, surveillance des accès et des mises à jour du système et de la base. Cela réduit l'exposition, mais ne remplace pas le support éditeur. Considérez-le comme un pont de courte durée, avec une date de fin écrite.
+
+## Que décider avant la fin de l'année
+
+Voici une séquence réaliste pour les semaines qui viennent :
+
+1. Faites l'inventaire de vos modules, de vos développements spécifiques et de vos intégrations.
+2. Choisissez la version cible avec votre partenaire, sur la base de cet inventaire.
+3. Fixez une date de bascule, en dehors de vos pics d'activité.
+4. Si vous attendez, écrivez la date limite et les mesures de protection d'ici là.
+
+Le pire scénario est de ne rien décider et de laisser la 17 tourner sans plan. C'est le seul choix qui ne vous donne aucun contrôle.
+
+## Pour aller plus loin
+
+Si vous voulez cadrer votre transition, notre équipe peut auditer votre instance et vous proposer un plan de [migration de données](/migration/) adapté à votre version cible. Pour sécuriser l'exploitation pendant et après la bascule, découvrez notre offre de [hosting et monitoring](/hosting-monitoring/).

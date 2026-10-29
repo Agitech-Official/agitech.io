@@ -120,6 +120,21 @@ const altLinks = barePath
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{isProd && (
+  <script is:inline define:vars={{ GTM_ID }}>
+    // Consent Mode v2: GTM loads right away (so the container is detected and conversions
+    // are modelled) but every storage is denied until the visitor accepts the banner.
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { dataLayer.push(arguments); };
+    gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied', wait_for_update: 500 });
+    try { if (localStorage.getItem('agitech-consent') === 'granted') gtag('consent', 'update', { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted', analytics_storage: 'granted' }); } catch (e) {}
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer',GTM_ID);
+  </script>
+)}
 {robotsNoIndex && <meta name="robots" content="noindex, nofollow">}
 <title>{title}</title>
 <meta name="description" content={description}>
@@ -159,6 +174,7 @@ const altLinks = barePath
 <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body class={bodyClass}>
+{isProd && <noscript><iframe src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`} height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>}
 <slot name="header" />
 <slot />
 <slot name="footer" />
@@ -170,20 +186,16 @@ const altLinks = barePath
       <button type="button" class="cookie-accept" data-consent="granted">{consent.accept}</button>
     </div>
   </div>
-  <script is:inline define:vars={{ GTM_ID, ADS_ID, needsGtag, isThankYou, isSeaLanding }}>
-    // Analytics / ads / Clarity only load after an explicit "accept" (stored in localStorage).
+  <script is:inline define:vars={{ ADS_ID, needsGtag, isThankYou, isSeaLanding }}>
+    // Ads conversion tag / Clarity only load after an explicit "accept"; GTM itself is in <head> (Consent Mode) (stored in localStorage).
     // "Manage cookies" links (data-cookie-settings) re-open the banner.
     (function () {
       var KEY = 'agitech-consent';
       function load(src) { var s = document.createElement('script'); s.async = true; s.src = src; document.head.appendChild(s); }
       function startTracking() {
         if (window.__trackingStarted) return; window.__trackingStarted = true;
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-        load('https://www.googletagmanager.com/gtm.js?id=' + GTM_ID);
         if (needsGtag) {
           load('https://www.googletagmanager.com/gtag/js?id=' + ADS_ID);
-          window.gtag = function () { window.dataLayer.push(arguments); };
           gtag('js', new Date());
           gtag('config', ADS_ID);
           if (isSeaLanding) {
@@ -207,6 +219,8 @@ const altLinks = barePath
         if (!v) return;
         try { localStorage.setItem(KEY, v); } catch (err) {}
         banner.hidden = true;
+        var st = v === 'granted' ? 'granted' : 'denied';
+        gtag('consent', 'update', { ad_storage: st, ad_user_data: st, ad_personalization: st, analytics_storage: st });
         if (v === 'granted') startTracking();
       });
       document.addEventListener('click', function (e) {
