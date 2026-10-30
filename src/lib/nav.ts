@@ -19,6 +19,7 @@ const industries: Record<Lang, Link[]> = {
     { label: 'Associations Internationales', href: '/industries-associations-internationales/' },
     { label: 'Gestion Immobilière', href: '/solution-gestion-immobiliere/' },
     { label: 'Auto-École', href: '/solution-auto-ecole/' },
+    { label: 'Agitech Apps', href: '/agitech-apps/' },
   ],
   en: [
     { label: 'E-Commerce', href: '/en/industries-e-commerce/' },
