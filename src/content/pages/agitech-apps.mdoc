@@ -16,16 +16,24 @@ blocks:
 - discriminant: textSection
   value:
     title: 'Odoo fait déjà beaucoup. Nous ajoutons ce qui manque à votre métier.'
-    content: '<p>Chaque application Agitech est développée par nos équipes et s’intègre à Odoo : mêmes données, mêmes écrans, mêmes factures. Pas de deuxième logiciel à ressaisir. Cinq applications aujourd’hui.</p>'
+    content: '<p>Chaque application Agitech est développée par nos équipes et s’intègre à Odoo : mêmes données, mêmes écrans, mêmes factures. Pas de deuxième logiciel à ressaisir. Pour chacune : le manuel d’utilisateur, le code source et la solution métier associée.</p>'
     emphasis: false
-- discriminant: textSection
+- discriminant: appSection
   value:
     number: '01'
+    icon: app-icon-immobilier.svg
     title: 'AgiRealEstate, la gestion immobilière'
-    content: '<p>Une application Immobilier dans votre Odoo, à côté de la comptabilité, de la signature électronique et du Helpdesk.</p><ul><li>Biens, immeubles et baux : loyers générés chaque mois, indexation annuelle, garantie locative</li><li>Impayés, charges et décompte annuel</li><li>Rentabilité et patrimoine net, évolution mois après mois</li><li>Sinistres et incidents rattachés au bien et au locataire</li></ul><p><a href="/solution-gestion-immobiliere/">Découvrir la solution immobilière →</a></p>'
-- discriminant: screenshotGallery
-  value:
-    title: 'AgiRealEstate en images'
+    content: '<p>Une application Immobilier dans votre Odoo, à côté de la comptabilité, de la signature électronique et du Helpdesk.</p><ul><li>Biens, immeubles et baux : loyers générés chaque mois, indexation annuelle, garantie locative</li><li>Impayés, charges et décompte annuel</li><li>Rentabilité et patrimoine net, évolution mois après mois</li><li>Sinistres et incidents rattachés au bien et au locataire</li></ul>'
+    manual:
+      label: 'Manuel d’utilisateur (PDF)'
+      url: /docs/manuel-immobilier.pdf
+    github:
+    - label: 'Code source sur GitHub'
+      url: https://github.com/Agitech-Official/agirealestate
+    solution:
+      label: 'Découvrir la solution immobilière'
+      url: /solution-gestion-immobiliere/
+    shotsTitle: 'AgiRealEstate en images'
     shots:
     - image: agirealestate-tableau-de-bord.png
       caption: 'Tableau de bord des paiements : retards, fiches à valider, montants dus'
@@ -37,14 +45,24 @@ blocks:
       caption: 'Entretiens, incidents et sinistres à traiter'
     - image: agirealestate-apps-odoo.png
       caption: 'L’application Immobilier dans le menu Odoo'
-- discriminant: textSection
+- discriminant: appSection
   value:
     number: '02'
+    icon: app-icon-btp.svg
     title: 'Onsite Pro et AgiBTP, le chantier de A à Z'
-    content: '<p>Deux briques pour les entreprises de construction, de chauffage et d’installation : un devis qui calcule vos ouvrages, et une app mobile pour vos équipes de terrain.</p><ul><li><strong>AgiBTP :</strong> des ouvrages (matériaux et main-d’œuvre avec leurs coefficients) qui génèrent les lignes du devis à partir d’une quantité, un chantier créé à la confirmation, des avenants, des achats regroupés par fournisseur et une facturation par situations de travaux</li><li><strong>Onsite Pro :</strong> l’app du technicien sur son téléphone, avec de gros boutons utilisables avec des gants</li></ul><p><strong>Le parcours en six étapes (la documentation en bref)</strong></p><ol><li>Le patron fait un devis dans Odoo : les produits décident de la suite (intervention à planifier, chantier créé).</li><li>Il glisse l’intervention sur un technicien dans le planning et la publie : elle apparaît sur le téléphone.</li><li>Le technicien commence sa journée (position GPS), arrive sur site, ajoute les pièces posées et prend des photos.</li><li>Le client signe au doigt ; le technicien clôture. Les heures sont réservées sur la commande.</li><li>Le patron valide les présences et les heures ; les trajets déclarés (mobilité CP 124) arrivent dans Odoo.</li><li>La commande est livrée, la facture se crée sans rien ressaisir.</li></ol><p><a href="/industries-construction-batiment/">Découvrir la solution Constructions &amp; ouvrages →</a></p>'
-- discriminant: screenshotGallery
-  value:
-    title: 'Onsite Pro en images'
+    content: '<p>Deux briques pour les entreprises de construction, de chauffage et d’installation : un devis qui calcule vos ouvrages, et une app mobile pour vos équipes de terrain.</p><ul><li><strong>AgiBTP :</strong> des ouvrages (matériaux et main-d’œuvre avec leurs coefficients) qui génèrent les lignes du devis, un chantier créé à la confirmation, des avenants, des achats regroupés par fournisseur et une facturation par situations de travaux</li><li><strong>Onsite Pro :</strong> l’app du technicien sur son téléphone : pointage, arrivée sur site, pièces posées, photos, signature du client, heures et trajets</li><li>Le manuel suit la journée type, du devis à la facture</li></ul>'
+    manual:
+      label: 'Manuel d’utilisateur (PDF)'
+      url: /docs/manuel-onsite-pro.pdf
+    github:
+    - label: 'Code source Onsite Pro'
+      url: https://github.com/Agitech-Official/odoo-btp-service
+    - label: 'Code source AgiBTP'
+      url: https://github.com/Agitech-Official/agibtp
+    solution:
+      label: 'Découvrir la solution Constructions & ouvrages'
+      url: /industries-construction-batiment/
+    shotsTitle: 'Onsite Pro en images'
     shots:
     - image: onsitepro-parcours.png
       caption: 'Du devis à la facture : le bureau dans Odoo, le technicien sur son téléphone'
@@ -56,15 +74,20 @@ blocks:
       caption: 'Travaux réalisés, photos et signature du client au doigt'
     - image: onsitepro-mobile-heures-trajets.png
       caption: 'Heures pointées et déclaration des trajets'
-- discriminant: textSection
+- discriminant: appSection
   value:
     number: '03'
+    icon: app-icon-transport.svg
     title: 'Agitech TMS, le transport'
-    content: '<p>Odoo reste la source de vérité commerciale, le TMS celle du transport.</p><ul><li>Commande client découpée en ordres de livraison, puis en ordres de transport (un ordre, un voyage)</li><li>Planification en glisser-déposer des camions et des chauffeurs</li><li>App chauffeur et eCMR signé électroniquement</li><li>Poids réel renvoyé dans Odoo, facture client et bon d’achat transporteur générés</li></ul><p><a href="/solution-transport-logistique/">Découvrir la solution transport →</a></p>'
-- discriminant: screenshotGallery
-  value:
-    title: 'Le TMS en images'
-    intro: 'Maquettes de notre TMS connecté à Odoo : planification, ordres de livraison, tableau de bord et vue chauffeur.'
+    content: '<p>Odoo reste la source de vérité commerciale, le TMS celle du transport.</p><ul><li>Commande client découpée en ordres de livraison, puis en ordres de transport (un ordre, un voyage)</li><li>Planification en glisser-déposer des camions et des chauffeurs</li><li>App chauffeur et eCMR signé électroniquement</li><li>Poids réel renvoyé dans Odoo, facture client et bon d’achat transporteur générés</li></ul>'
+    manual:
+      label: 'Manuel d’utilisateur (PDF)'
+      url: /docs/manuel-transport.pdf
+    solution:
+      label: 'Découvrir la solution transport'
+      url: /solution-transport-logistique/
+    shotsTitle: 'Le TMS en images'
+    shotsIntro: 'Maquettes de notre TMS connecté à Odoo : planification, ordres de livraison, tableau de bord et vue chauffeur.'
     shots:
     - image: transport-tms-planification.webp
       caption: 'Planification des ordres de transport en glisser-déposer'
@@ -74,16 +97,30 @@ blocks:
       caption: 'Tableau de bord'
     - image: transport-tms-chauffeur.webp
       caption: 'Vue chauffeur'
-- discriminant: textSection
+- discriminant: appSection
   value:
     number: '04'
+    icon: app-icon-approbation.svg
     title: 'Approbation des factures d’achat'
-    content: '<p>Une double approbation, dans l’ordre, de chaque facture fournisseur. La facture est comptabilisée d’abord, et le paiement reste bloqué tant qu’elle n’est pas approuvée.</p><ul><li>La comptabilité choisit le binôme d’approbateurs ; un binôme par société suffit, avec des critères facultatifs (comptes, analytique)</li><li>Chaque approbateur reçoit un e-mail et approuve ou refuse (motif obligatoire) depuis une page « Factures à approuver »,</li><li>Le document et les lignes sont visibles avant de décider</li><li>La comptabilité est prévenue à chaque étape et le responsable peut forcer l’approbation</li></ul>'
-- discriminant: textSection
+    content: '<p>Une double approbation, dans l’ordre, de chaque facture fournisseur. La facture est comptabilisée d’abord, et le paiement reste bloqué tant qu’elle n’est pas approuvée.</p><ul><li>La comptabilité choisit le binôme d’approbateurs ; un binôme par société suffit, avec des critères facultatifs (comptes, analytique)</li><li>Chaque approbateur reçoit un e-mail et approuve ou refuse (motif obligatoire) depuis une page « Factures à approuver »</li><li>Le document et les lignes sont visibles avant de décider</li><li>La comptabilité est prévenue à chaque étape et le responsable peut forcer l’approbation</li></ul>'
+    manual:
+      label: 'Manuel d’utilisateur (PDF)'
+      url: /docs/manuel-approbation-factures.pdf
+    github:
+    - label: 'Code source sur GitHub'
+      url: https://github.com/Diego-Agitech/approbation-facture
+- discriminant: appSection
   value:
     number: '05'
+    icon: app-icon-collaboration.svg
     title: 'Collaboration, vos sous-traitants dans Odoo'
     content: '<p>Vos sous-traitants externes encodent eux-mêmes leurs heures sur vos projets, depuis un portail simple.</p><ul><li>Vous désignez, projet par projet, les sous-traitants autorisés : ils ne voient que ces projets</li><li>Ils saisissent projet, tâche, date, heures et description, et retrouvent leurs propres lignes</li><li>Les heures apparaissent dans les feuilles de temps du projet, au nom du sous-traitant</li><li>Retirer un sous-traitant d’un projet lui retire l’accès immédiatement</li></ul>'
+    manual:
+      label: 'Manuel d’utilisateur (PDF)'
+      url: /docs/manuel-collaboration.pdf
+    github:
+    - label: 'Code source sur GitHub'
+      url: https://github.com/Agitech-Official/collaboration
 - discriminant: ctaBanner
   value:
     title: 'Une application pour votre métier ?'
