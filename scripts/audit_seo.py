@@ -424,6 +424,13 @@ def audit(src, args):
     for b in blog_idx:
         articles |= {key(l) for l in pages[b].links} - glob - blog_idx
     articles = {a for a in articles if a in keys and a not in ("/", "/en", "/nl")}
+    # A page linked from the blog index is an article only if it carries an article signal (og:type, article:*
+    # meta or an Article JSON-LD). Without this, the CTA pages the index links to (contact, services...) were
+    # audited as articles and failed article-meta / og-type / jsonld for nothing.
+    def _article_signal(g):
+        return (g.p.meta.get("og:type") == "article" or any(m.startswith("article:") for m in g.p.meta)
+                or bool(set(g.types) & {"Article", "BlogPosting", "NewsArticle"}))
+    articles = {a for a in articles if _article_signal(pages[a])}
     articles |= {k for k, g in pages.items() if g.p.meta.get("og:type") == "article"}
     homes = {"/", "/en", "/nl"}
 
@@ -441,13 +448,15 @@ def audit(src, args):
         if not g.title:
             add("title-missing", disp, "Pas de <title>")
         else:
-            titles[g.title].append(disp)
+            if not g.noindex:                      # noindex pages (SEA twins...) may share a title
+                titles[g.title].append((k, disp))
             if len(g.title) > 60:
                 add("title-long", disp, "%d caractères : %s" % (len(g.title), g.title))
         if not g.desc:
             add("meta-missing", disp, "Pas de meta description")
         else:
-            descs[g.desc].append(disp)
+            if not g.noindex:
+                descs[g.desc].append((k, disp))
             if len(g.desc) > 155:
                 add("meta-long", disp, "%d caractères" % len(g.desc))
         n_pme = len(re.findall(r"\bPME", g.text))
@@ -562,12 +571,13 @@ def audit(src, args):
                     elif tk != k and tk in pages and k not in pages[tk].alts.values():
                         add("hreflang-reciprocal", disp, "%s ne renvoie pas vers cette page" % tk)
 
-    for t, ps in titles.items():
-        if len(ps) > 1:
-            add("title-dup", ps[0], "Même title sur %d pages : %s" % (len(ps), ", ".join(ps[:4])))
-    for t, ps in descs.items():
-        if len(ps) > 1:
-            add("meta-dup", ps[0], "Même meta sur %d pages : %s" % (len(ps), ", ".join(ps[:4])))
+    # A title shared only by the translations of ONE page (same base path: a brand or client name that is the
+    # same in every language) is not a duplicate; two different pages sharing it is.
+    for rule, bucket, label in (("title-dup", titles, "title"), ("meta-dup", descs, "meta")):
+        for t, ps in bucket.items():
+            if len({base_of(k) for k, _ in ps}) > 1:
+                names = [d for _, d in ps]
+                add(rule, names[0], "Même %s sur %d pages : %s" % (label, len(names), ", ".join(names[:4])))
 
     # robots Disallow vs liens
     for d in disallow:
