@@ -42,6 +42,8 @@ export default defineConfig({
     keystatic(),
     sitemap({
       lastmod: new Date(),
+      // /simulateur/ is a static app in public/ (not an Astro page): list it explicitly.
+      customPages: ['https://agitech.io/simulateur/'],
       // hreflang x-default points to the French (default) version of each page.
       serialize(item) {
         const fr = item.links?.find((l) => l.lang === 'fr-BE');
@@ -49,7 +51,7 @@ export default defineConfig({
         return item;
       },
       // Thank-you pages, admin and the static estimator app stay out of the sitemap.
-      filter: (page) => !/\/(keystatic|api|simulateur|merci-|thank-you-|erp-sea|landing-page-sea-pb)/.test(page),
+      filter: (page) => !/\/(keystatic|api|merci-|thank-you-|erp-sea|landing-page-sea-pb)/.test(page),
       i18n: {
         defaultLocale: 'fr',
         locales: { fr: 'fr-BE', en: 'en', nl: 'nl-BE' },
