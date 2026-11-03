@@ -52,6 +52,8 @@ const rules = [
   // old pricing sub-domain (the estimator used to live there): only applies once pricing.agitech.io
   // is attached to this project in Vercel (and its DNS points to Vercel)
   { src: '^/.*$', has: [{ type: 'host', value: 'pricing\\.agitech\\.io' }], headers: { Location: 'https://agitech.io/simulateur/' }, status: 301 },
+  // images and PDFs moved from /wp-content/uploads/ to /assets/uploads/: old URLs (backlinks, Google Images) keep working
+  { src: '^/wp-content/uploads/(.*)$', headers: { Location: '/assets/uploads/$1' }, status: 301 },
   // spam pages from the old hacked WordPress and tracking IDs mistaken for URLs: gone for good
   { src: '^/.*(?:kazino|1xbet|casino|pinco).*$', status: 410 },
   { src: '^/(?:LQJhCMGcj9AZEPngp8go|MLDdCP-FnbwZEPngp8go|Y22HCI_ynLwZEPngp8go|locations\\.kml)/?$', status: 410 },

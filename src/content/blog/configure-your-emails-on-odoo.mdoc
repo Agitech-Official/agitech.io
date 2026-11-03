@@ -53,7 +53,7 @@ Use case: Email sent by Odoo to clients and providers arrive in email inboxes th
 This first step is super easy ! As an admin just go into your Odoo Settings> General Settings> Discuss and in "custom email" enter your own domain.
 
 
-![](/wp-content/uploads/2025/05/configure-email-1024x570-1.png)
+![](/assets/uploads/2025/05/configure-email-1024x570-1.png)
 
 
 
@@ -101,7 +101,7 @@ I hope you will be able to pick up how to do this based on my explanations if no
 Connect to your Gmail account using the admin user, click on admin console (right hand corner ->settings-> Admin console:
 
 
-![](/wp-content/uploads/2025/05/account.png)
+![](/assets/uploads/2025/05/account.png)
 
 
 
@@ -112,31 +112,31 @@ Go to user, and create a new user with the email "[catchall@mydomain.com"](https
 In the admin console, open the Gmail parameters and find the "Routing" tab:
 
 
-![](/wp-content/uploads/2025/05/graph-1024x430-1.png)
+![](/assets/uploads/2025/05/graph-1024x430-1.png)
 
 
 
 In the routing tab on the top "**Routing"** you'll create your [catchall@mydomain.com](https://catchall@mydomain.com/) email by clicking on creating a new  rule.
 
 
-![](/wp-content/uploads/2025/05/data-1024x358-1.png)
+![](/assets/uploads/2025/05/data-1024x358-1.png)
 
 
 
 Pay attention to the following parameters that you will need to include into your configuration:
 
 
-![](/wp-content/uploads/2025/05/tab-768x858-1.png)
+![](/assets/uploads/2025/05/tab-768x858-1.png)
 
 
 
 Scroll down until you make sure you have added all the right parameters.
 
 
-![](/wp-content/uploads/2025/05/setting.png)
+![](/assets/uploads/2025/05/setting.png)
 
 
-![](/wp-content/uploads/2025/05/gmail-setting.png)
+![](/assets/uploads/2025/05/gmail-setting.png)
 
 
 
@@ -151,24 +151,24 @@ Redirect all incoming emails from [catchall@mydomain.com](https://catchall@mydo
 Go to your settings using you admin user on Gmail. Then go to the admin console and select Gmail>Routing like we have selected above.
 
 
-![](/wp-content/uploads/2025/05/agile.png)
+![](/assets/uploads/2025/05/agile.png)
 
 
-![](/wp-content/uploads/2025/05/Routing-1024x430-1.png)
+![](/assets/uploads/2025/05/Routing-1024x430-1.png)
 
 
 
 Scroll to the bottom and stop at "Email forwarding using recipient address" (do NOT get confuse with "Routing" above! It's another config in another place :), create a new rule:
 
 
-![](/wp-content/uploads/2025/05/Gmail_Routing_2ndstep-1-1024x543-1.png)
+![](/assets/uploads/2025/05/Gmail_Routing_2ndstep-1-1024x543-1.png)
 
 
 
 Now add the following parameters:
 
 
-![](/wp-content/uploads/2025/05/Gmail_Routing_2ndstep-2.png)
+![](/assets/uploads/2025/05/Gmail_Routing_2ndstep-2.png)
 
 
 
@@ -209,7 +209,7 @@ Here is what you need to do step by step to setup a external email server:
 On [Mailgun.com](https://mailgun.com/) create a new account. After your sign in process, go into Sending>Domain> Add a new domain.
 
 
-![](/wp-content/uploads/2025/05/Mailgun2-1024x426-1.png)
+![](/assets/uploads/2025/05/Mailgun2-1024x426-1.png)
 
 
 
@@ -220,7 +220,7 @@ As soon as you created a new domain, Mailgun will invite you to confirm your dom
  You can retrieve this setup at anytime by clicking on Sending> Domain>Select the domain then Domain setting on the bottom and finally by clicking on DNS Records.
 
 
-![](/wp-content/uploads/2025/05/Mailgun1-1024x378-1.png)
+![](/assets/uploads/2025/05/Mailgun1-1024x378-1.png)
 
 
 
@@ -239,14 +239,14 @@ Finally, we need to tell Odoo to use this email server when sending emails.
 Go into your Odoo database in Settings>General settings> Discuss> Outgoing email server.
 
 
-![](/wp-content/uploads/2025/05/Odoo_settings-1024x385-1-1.png)
+![](/assets/uploads/2025/05/Odoo_settings-1024x385-1-1.png)
 
 
 
 Create a new server and use the Mailgun SMTP credentials.
 
 
-![](/wp-content/uploads/2025/05/Odoo_externalemailserversetup-1024x365-1.png)
+![](/assets/uploads/2025/05/Odoo_externalemailserversetup-1024x365-1.png)
 
 
 
