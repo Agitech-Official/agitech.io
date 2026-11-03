@@ -110,6 +110,7 @@ const blogJsonLd = kind === 'blog' ? [
     description={entry.seoDescription || entry.excerpt || bodyHtml.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 155)}
     canonical={`https://agitech.io/${Astro.params.slug}/`}
     jsonLd={blogJsonLd}
+    article={entry.publishedAt ? { publishedTime: entry.publishedAt, modifiedTime: entry.publishedAt } : undefined}
   >
     <Header slot="header" lang="fr" />
     <main>

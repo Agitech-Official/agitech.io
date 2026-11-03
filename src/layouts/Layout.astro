@@ -15,6 +15,8 @@ export interface Props {
   /** Calendly widget + the postMessage listener that redirects to the "merci-rdv"
    * thank-you page on booking — only needed on pages with the Calendly embed. */
   includeContactScripts?: boolean;
+  /** Blog posts: og:type=article + article:published_time / article:modified_time (ISO date from the content data). */
+  article?: { publishedTime?: string; modifiedTime?: string };
 }
 
 const localeMap = { fr: 'fr_BE', en: 'en_US', nl: 'nl_BE' };
@@ -28,6 +30,7 @@ const {
   robotsNoIndex = import.meta.env.PUBLIC_INDEXABLE !== 'true',
   bodyClass,
   includeContactScripts = false,
+  article,
 } = Astro.props;
 
 // Tracking carried over from the WordPress theme (header.php / header-odoo.php /
@@ -143,7 +146,9 @@ const altLinks = barePath
     <link rel="canonical" href={canonical}>
     {altLinks.map(a => <link rel="alternate" hreflang={a.hreflang} href={a.href}>)}
     <link rel="alternate" hreflang="x-default" href="https://agitech.io/">
-    <meta property="og:type" content="website">
+    <meta property="og:type" content={article ? 'article' : 'website'}>
+    {article?.publishedTime && <meta property="article:published_time" content={article.publishedTime}>}
+    {article?.modifiedTime && <meta property="article:modified_time" content={article.modifiedTime}>}
     <meta property="og:locale" content={ogLocale}>
     <meta property="og:url" content={canonical}>
     <meta property="og:site_name" content="Agitech">
