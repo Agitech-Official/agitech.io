@@ -54,7 +54,8 @@ export async function languagesWithPage(bare: string): Promise<Lang[]> {
   cache ??= build();
   const idx = await cache;
   const path = bare.endsWith('/') ? bare : `${bare}/`;
-  return LANGS.filter((l) => idx[l].pages.has(path));
+  // FR has no /thank-you-*/ page (it is /merci-*/): build() lists them for every language for the switcher only.
+  return LANGS.filter((l) => idx[l].pages.has(path) && !(l === 'fr' && /^\/thank-you-/.test(path)));
 }
 
 /** URL of the current page in each language: the real translation if it exists, else a sensible fallback. */
