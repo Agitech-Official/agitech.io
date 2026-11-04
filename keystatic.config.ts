@@ -57,6 +57,7 @@ const blocksField = fields.array(
         { label: 'Forfait — Bandeau CTA final', value: 'ctaBanner' },
         { label: 'Forfait — Cas exemples', value: 'forfaitCases' },
         { label: 'Galerie de captures d\'écran', value: 'screenshotGallery' },
+        { label: 'Agitech Apps — Une app', value: 'appSection' },
       ],
       defaultValue: 'heroHome',
     }),
@@ -517,6 +518,27 @@ const blocksField = fields.array(
         intro: fields.text({ label: 'Intro', multiline: true }),
         count: fields.integer({ label: 'Nombre de placeholders', defaultValue: 3 }),
       }, { label: 'Forfait — Placeholder' }),
+      appSection: fields.object({
+        number: fields.text({ label: 'Numéro (ex. 01)' }),
+        icon: imageField('Icône', 'blocks'),
+        title: fields.text({ label: 'Nom de l\'app (H2)' }),
+        content: fields.text({ label: 'Contenu (HTML)', multiline: true }),
+        manual: fields.object(ctaFields, { label: 'Manuel d\'utilisateur (PDF)' }),
+        github: fields.array(
+          fields.object(ctaFields, { label: 'Lien GitHub' }),
+          { label: 'Liens GitHub', itemLabel: props => props.fields.label.value || 'GitHub' },
+        ),
+        solution: fields.object(ctaFields, { label: 'Page solution' }),
+        shotsTitle: fields.text({ label: 'Titre de la galerie' }),
+        shotsIntro: fields.text({ label: 'Intro de la galerie', multiline: true }),
+        shots: fields.array(
+          fields.object({
+            image: imageField('Capture', 'blocks'),
+            caption: fields.text({ label: 'Légende' }),
+          }),
+          { label: 'Captures', itemLabel: props => props.fields.caption.value || 'Capture' },
+        ),
+      }, { label: 'Agitech Apps — Une app' }),
       screenshotGallery: fields.object({
         title: fields.text({ label: 'Titre (H2)' }),
         intro: fields.text({ label: 'Intro', multiline: true }),

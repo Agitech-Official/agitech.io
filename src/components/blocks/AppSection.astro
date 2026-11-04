@@ -1,0 +1,62 @@
+---
+// One Agitech app: icon, name, short pitch, bullets, then the same three actions for every app
+// (user manual, source code on GitHub, dedicated solution page) and its screenshot carousel.
+import { blockImg } from '../../lib/img';
+import ScreenshotGallery from './ScreenshotGallery.astro';
+type L = { label?: string; url?: string };
+export interface Props {
+  number?: string;
+  icon?: string;
+  title?: string;
+  content?: string;
+  manual?: L;
+  github?: L[];
+  solution?: L;
+  shotsTitle?: string;
+  shotsIntro?: string;
+  shots?: { image?: string; caption?: string }[];
+}
+const { number, icon, title, content, manual, github = [], solution, shotsTitle, shotsIntro, shots = [] } = Astro.props;
+const ghLinks = github.filter(g => g?.url);
+---
+<section class="app-section">
+  <div class="container">
+    <div class="app-grid">
+      <div class="app-head">
+        {icon && <img class="app-icon" src={blockImg(icon)} alt="" width="48" height="48">}
+        {number && <h6>{number}</h6>}
+        {title && <h2>{title}</h2>}
+      </div>
+      <div class="app-body">
+        {content && <div class="app-text" set:html={content} />}
+        <div class="app-links">
+          {manual?.url && <a class="app-link app-link-main" href={manual.url} target="_blank" rel="noopener">{manual.label || 'Manuel d’utilisateur (PDF)'}</a>}
+          {ghLinks.map(g => <a class="app-link" href={g.url} target="_blank" rel="noopener">{g.label || 'Code source sur GitHub'}</a>)}
+          {solution?.url && <a class="app-link" href={solution.url}>{solution.label || 'Découvrir la solution'}</a>}
+        </div>
+      </div>
+    </div>
+  </div>
+  {shots.length > 0 && <ScreenshotGallery title={shotsTitle} intro={shotsIntro} shots={shots} />}
+</section>
+
+<style>
+  .app-section { padding-top: 4rem; border-top: 1px solid var(--border, rgba(20,20,20,0.09)); }
+  .app-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 4rem; align-items: start; }
+  .app-icon { display: block; width: 48px; height: 48px; margin-bottom: 1rem; }
+  .app-head h6 { color: var(--violet, #984895); font-family: var(--font-body); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.02em; margin-bottom: 0.75rem; }
+  .app-head h2 { font-size: clamp(1.6rem, 1.2rem + 1.5vw, 2.4rem); line-height: 1.2; margin: 0; }
+  .app-text :global(p) { color: var(--muted, #6b6b76); margin-bottom: 1rem; }
+  .app-text :global(p:first-child) { font-size: 1.15rem; line-height: 1.6; color: var(--ink, #16151a); }
+  .app-text :global(ul) { list-style: none; margin: 1.25rem 0 1.5rem; padding: 0; border-top: 1px solid var(--border, rgba(20,20,20,0.09)); }
+  .app-text :global(li) { position: relative; padding: 0.85rem 0 0.85rem 1.5rem; border-bottom: 1px solid var(--border, rgba(20,20,20,0.09)); font-size: 0.98rem; }
+  .app-text :global(li::before) { content: ''; position: absolute; left: 0; top: 1.4em; width: 7px; height: 7px; border-radius: 50%; background: var(--violet, #984895); }
+  .app-text :global(ol) { margin: 1rem 0 1.5rem 1.2rem; color: var(--muted, #6b6b76); }
+  .app-text :global(ol li) { padding: 0.35rem 0; border: 0; list-style: decimal; }
+  .app-text :global(ol li::before) { display: none; }
+  .app-links { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.5rem; }
+  .app-link { display: inline-block; padding: 0.7rem 1.3rem; border: 1px solid var(--violet, #984895); border-radius: 999px; color: var(--violet, #984895); font-size: 0.98rem; text-decoration: none; transition: background 0.2s, color 0.2s; }
+  .app-link:hover, .app-link-main { background: var(--violet, #984895); color: #fff; }
+  .app-link-main:hover { background: var(--violet-light, #b05bad); }
+  @media (max-width: 900px) { .app-grid { grid-template-columns: 1fr; gap: 1.5rem; } }
+</style>

@@ -1,0 +1,99 @@
+---
+title: "Odoo 14 op Odoo.sh: zo redt u uw geblokkeerde database"
+lang: "nl"
+publishedAt: "2026-10-30"
+category: "Odoo"
+excerpt: "Odoo.sh blokkeert Odoo 14-databases op 31 oktober 2026. Wat er gebeurt, de toeslag van 25 % en een plan in 3 stappen om zonder dataverlies te migreren."
+---
+
+Morgen, 31 oktober 2026, haalt Odoo versie 14 van Odoo.sh. Odoo 14, uitgebracht in oktober 2020, verdwijnt op die datum van het platform. Draait uw database nog op die versie? Lees dan vandaag nog verder, niet pas maandag.
+
+## De regel: zes jaar, daarna niets meer
+
+Wanneer een Odoo-versie 6 jaar oud is, wordt ze op 31 oktober van het betreffende jaar van Odoo.sh gehaald. De kalender ligt dus vooraf vast:
+
+- Odoo 14: 31 oktober 2026.
+
+- Odoo 15: 31 oktober 2027.
+
+- Odoo 16: 31 oktober 2028.
+
+Deze regel hangt niet af van uw supportcontract. Het is een hostingregel.
+
+## Wat gebeurt er wanneer de database geblokkeerd is?
+
+Het project en de upgradetools blijven toegankelijk. Maar een database die nog draait op een verwijderde versie, wordt definitief geblokkeerd, zonder mogelijkheid tot uitzondering.
+
+Concreet kunnen uw gebruikers Odoo niet meer openen. Facturatie, voorraad, bestellingen: alles ligt stil. De enige gedocumenteerde uitweg om een verlopen database terug te halen, is de dump ervan te downloaden.
+
+Een database die elders wordt gehost, wordt door deze deadline niet getroffen. Een zelf gehoste Odoo 14-database valt niet stil op 31 oktober omdat Odoo.sh ze niet meer host. Ze blijft wel draaien op een verouderde versie, met de risico's die daarbij horen.
+
+## De toeslag van 25 %: wat de bronnen zeggen
+
+Odoo heeft zijn support uitgebreid naar alle versies, maar maakt die betalend voor de oudste. Vanaf april 2026 geldt een toeslag van 25 % op het jaarlijkse abonnement voor versies die meer dan drie hoofdversies oud zijn.
+
+Ze geldt voor klanten van Odoo.sh en on-premise, bij nieuwe of vernieuwde contracten. Odoo Online is uitgesloten.
+
+De formuleringen verschillen naargelang de bron. De FAQ van Odoo.sh spreekt over het moment waarop een versie 3 jaar en 6 maanden oud is, waarbij automatisch een toeslag van 25 % op het abonnement wordt toegepast. Odoo 14 en Odoo 15 zitten hoe dan ook ruim voorbij die drempels.
+
+Het exacte beginpunt hangt af van uw contract en de vernieuwingsdatum. Bekijk uw laatste factuur: een lijn "legacy version surcharge" of een totaalbedrag dat 25 % hoger ligt dan bij de vorige vernieuwing, wijst erop dat de toeslag actief is. Twijfelt u? Stel de vraag dan aan uw Odoo-contactpersoon.
+
+Voor Odoo 14 is de toeslag niet het echte probleem. De blokkering is dat wel.
+
+## Inhaalplan in 3 stappen
+
+### Stap 1: uw gegevens veiligstellen (vandaag)
+
+Dit mag u niet tot morgen laten liggen.
+
+- **Genereer en download een manuele dump.** U doet dat in de tab Backups van uw productietak.
+
+- **Reken niet alleen op de automatische back-ups.** Odoo bewaart 14 volledige back-ups van de productie, over maximaal 3 maanden. Development- en staging-builds worden niet geback-upt en hun herstel is niet gegarandeerd. Hebt u in staging gewerkt? Exporteer dan wat belangrijk is.
+
+- **Bewaar de dump buiten Odoo.sh** en herstel hem vervolgens één keer op een testserver om te controleren of hij opent. Odoo documenteert hoe u een dump importeert op uw eigen Odoo-server.
+
+Een dump die nooit iemand heeft hersteld, is geen back-up. Het is een hypothese.
+
+### Stap 2: de migratie testen in staging
+
+U werkt op een kopie, nooit op de productie.
+
+Op Odoo.sh stuurt een upgradetest in staging de laatste dagelijkse back-up van de productie door. Manuele back-ups worden niet in aanmerking genomen. Is de database geblokkeerd, ga er dan niet van uit dat deze weg bruikbaar blijft. Werk liever vanuit uw dump, in een omgeving die u zelf controleert.
+
+De werking is die van het upgradeplatform van Odoo: het ontvangt de database, converteert ze en stuurt vervolgens een testkopie of de gemigreerde productiedatabase terug. Test zoals op een gewone dag: facturen, voorraad, rapporten, afdrukken, integraties.
+
+Hier komen ook uw maatwerkmodules aan het licht. De documentatie van Odoo vermeldt dat een database met aangepaste modules niet kan worden gemigreerd zolang er voor de doelversie geen versie van die modules bestaat. Een integrator wijst er bovendien op dat de webinterface van Odoo tussen versie 14 en 17 is herbouwd op het OWL-framework. Dat weegt zwaar door voor modules die de interface raken.
+
+### Stap 3: de versiesprong
+
+Kies de doelversie met de data van Odoo bij de hand. U kunt vanuit eender welke versie migreren naar een hoofdversie die nog standaardsupport heeft, of waarvan de standaardsupport minder dan zes maanden geleden is geëindigd. Volgens de tabel van Odoo is Odoo 20 uitgebracht in september 2026, Odoo 19 in september 2025 en Odoo 18 in oktober 2024. De standaardsupport loopt tot september 2029 voor versie 20, september 2028 voor versie 19 en september 2027 voor versie 18.
+
+U hoeft niet langs elke tussenliggende versie te gaan. Odoo laat toe om rechtstreeks van versie 14 naar de nieuwste versie te migreren, met één enkele aanvraag voor de standaardgegevens. Alleen de eigen code en modules van derden vragen apart werk.
+
+Een punt om te controleren voordat u versie 20 viseert: volgens Cloudpepper kan het 3 tot 4 maanden duren na de release van een hoofdversie voordat de productiemigratiescripts klaar zijn. De testscripts zijn daarentegen bijna meteen beschikbaar. Voor een productiestart op korte termijn is versie 19 een voorzichtigere keuze. Bevestig dit met uw integrator.
+
+Op het moment van de overschakeling gelden twee beperkingen qua planning:
+
+- Zodra de tests zijn afgerond, moet de productiemigratie binnen de 3 dagen na de upgradetest worden gestart.
+
+- De database is niet beschikbaar tijdens de productiemigratie. Plan ze in een weekend.
+
+Herhaal de volledige procedure de dag voordien. Odoo raadt aan om de hele procedure de dag vóór de productiemigratie opnieuw uit te voeren.
+
+## Realistische termijnen
+
+Odoo publiceert geen projectduur. De cijfers komen van integratoren en zijn slechts grootteordes:
+
+- Een integrator spreekt van 2 tot 3 weken voor een standaardinstantie, 4 tot 6 weken met 5 tot 10 maatwerkmodules en 8 tot 16 weken voor een sterk aangepaste omgeving met integraties.
+
+- Een andere noemt 2 tot 4 weken met enkele aangepaste modules en 4 tot 8 weken voor sterk aangepaste databases of sprongen over meerdere versies.
+
+De conclusie is overal dezelfde: de termijn hangt af van het overzetten van de maatwerkmodules, niet van de standaardmigratie. Reken dus in weken, soms in maanden. Zeg dat vanaf nu aan uw directie.
+
+## En als u op Odoo 15 zit?
+
+U hebt nog een jaar: Odoo 15 verlaat Odoo.sh op 31 oktober 2027. Op papier is dat comfortabel. Maar als uw maatwerkmodules maandenlang werk vragen, moet u ruim vooraf beginnen. Maak al dit kwartaal een inventaris van uw modules en integraties. Hou er rekening mee dat u misschien al de toeslag betaalt.
+
+## Tot slot
+
+Staat uw Odoo 14-database nog op Odoo.sh? Begin dan met de dump. Het migratieplan komt daarna. Om de versiesprong voor te bereiden, beschrijven onze teams de aanpak op de pagina [Gegevensmigratie](/nl/migration/). Om uw database tijdens de overgangsperiode te hosten en te monitoren, kijkt u bij [Hosting & Monitoring](/nl/hosting-monitoring/).

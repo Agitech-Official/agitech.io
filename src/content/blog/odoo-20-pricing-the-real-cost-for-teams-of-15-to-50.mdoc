@@ -1,0 +1,92 @@
+---
+title: "Odoo 20 pricing: the real cost for teams of 15 to 50"
+lang: "en"
+publishedAt: "2026-11-02"
+category: "Odoo"
+excerpt: "Odoo 20: Custom at €44.90, Light User at €7.90 and billable employee records. Costed simulations for 15, 30 and 50 people in Belgium."
+---
+
+Odoo 20 changes two things on your invoice. The Custom plan goes up, and employee records without a login become billable. Together, the two can push a budget up by more than 30%.
+
+Here are the prices, the rules and three simulations. The calculations are our own, based on public prices.
+
+## What changed, and when
+
+Odoo launched version 20 at Odoo Experience on 24 September 2026 and changed its prices the same day.
+
+It is the first increase in four years, of around 20% according to Odoo, to offset salaries and hosting costs.
+
+Prices in Belgium, per user per month, excluding VAT:
+
+- Standard at €24.90 and Custom at €44.90, with first-year discounts. Light User at €7.90. These figures come from the pricing page as of 30 September.
+- The first-year price is €19.90 for Standard and €35.90 for Custom. It only applies to the users on the initial order.
+- Standard stays the same. Custom, however, goes from €37.40 to €44.90 at list price. The old price comes from odoo.com/pricing in July 2026.
+
+The amounts below are at list price, billed annually.
+
+## Employee records: the rule that hurts
+
+A Light User is a user with limited access. They can access their own leave, expenses and attendance, as well as payslips, the point of sale and the Shop Floor.
+
+The trap lies in the contract's definition. The Enterprise Agreement also counts as a Light User "any active employee record (from the human resources App) not linked to an active non-portal user account".
+
+In practice, a person in the Employees app without a login is billed. The same goes for someone who only clocks in at a kiosk or who only has portal access. Only archived records are not billed.
+
+This is not retroactive on Odoo 19. On that version, the role does not exist and these records cost nothing.
+
+To get the Light User price, you need to be on Odoo 20 and sign a new Enterprise Agreement. Light Users cannot be bought online: you have to go through an Odoo advisor. The exact price can therefore be negotiated or checked in your quote.
+
+## Why you may be forced onto Custom
+
+Standard does not cover everything. It gives access to all the apps, but only on Odoo Online. Custom adds Studio, the external API, multi-company and a choice of hosting: Online, Odoo.sh or on-premise.
+
+You are therefore affected if:
+
+- you are on Odoo.sh or host Odoo yourself;
+- you use Studio;
+- your tools call the external API;
+- you manage several companies in one database.
+
+One point to keep in mind for AI projects. Odoo 20's native MCP server is listed in the Custom plan, according to Pantalytics' comparison. If you want to connect Claude or ChatGPT to Odoo, check what your plan allows.
+
+The gap between the two plans is €20 per user per month. A company that needs neither Studio, nor the API, nor multi-company, nor its own hosting saves that €20 per user. That comes to €240 per year per full user.
+
+## Three simulations
+
+Our assumptions: the number of active employee records equals headcount. Some people have a full login, while the others only have a record. These are not client cases.
+
+Annual prices per person, calculated from the prices above: Standard €298.80, Custom €538.80, Light User €94.80. The old Custom, at €37.40, comes to €448.80 per year.
+
+| Headcount | Full logins / records only | Standard | Custom | Custom before Odoo 20 | Custom difference |
+|---|---|---|---|---|---|
+| 15 | 10 / 5 | €3,462 | €5,862 | €4,488 | +€1,374 (+31%) |
+| 30 | 18 / 12 | €6,516 | €10,836 | €8,078 | +€2,758 (+34%) |
+| 50 | 30 / 20 | €10,860 | €18,060 | €13,464 | +€4,596 (+34%) |
+
+The "before" column includes no records, since they were free. Take the 30-person company on Custom. Of the €2,758 increase, €1,620 comes from the plan price rise (18 users × €90 per year). The remaining €1,138 comes from the 12 billed records.
+
+On Standard, only the records are added: +15.9% at 15 people for 5 records-only people.
+
+## The lever: moving logins to Light
+
+A full login is not always necessary. A single access right outside the Light scope turns the account into a full user. You therefore need to check rights one by one.
+
+A worked example exists on the German side: for 20 users on Custom, 12 full and 8 Light come to €7,224, against €10,776 with 20 full users.
+
+Let's return to our 30-person company on Custom. If 6 of the 18 logins only use leave, expenses and attendance, the bill goes from €10,836 to €8,172. That is barely above the old budget of €8,078. This scenario remains a hypothesis: it depends on who really works with sales, purchasing and accounting. Those functions require a full user.
+
+## What remains uncertain
+
+- **Existing Custom customers.** The increase is capped at 7% per year at renewal, in line with the subscription contract. The +20% mainly affects new customers and new users. Users or Light Users added during the contract term are billed at list price.
+- **The exact Light User price.** It is published at €7.90 in Europe, but sold by quote. Only one site quotes a different amount, in a non-Belgian context. Ask for it in writing.
+- **Amounts to the nearest euro.** Our simulations exclude VAT, first-year discounts and AI credits. Odoo 20's AI is billed in credits, and nobody can yet put a precise figure on it.
+
+## What we advise you to do before upgrading
+
+1. **Count** your active employee records, with and without a login.
+2. **Archive** only the people who have left. Do not touch the records of those you still pay: payroll depends on them.
+3. **List** who really needs a full login, and who can move to Light.
+4. **Check** whether Custom is required by real usage (Odoo.sh, Studio, API) or just by habit.
+5. **Read** the Enterprise Agreement v13 and ask for a priced quote before signing.
+
+If you would like a costing based on your actual database, with an audit of records and access rights, we can do it. For hosting and monitoring of your instances, see [Hosting & Monitoring](/en/hosting-monitoring/). To request a simulation, go through the [Contact](/en/contact-us/) page.

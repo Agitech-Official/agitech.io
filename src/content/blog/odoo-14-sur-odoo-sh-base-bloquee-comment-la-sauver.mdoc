@@ -1,0 +1,155 @@
+---
+title: "Odoo 14 sur Odoo.sh : base bloquée, comment la sauver"
+lang: "fr"
+publishedAt: "2026-10-30"
+category: "Odoo"
+excerpt: "Odoo.sh bloque les bases Odoo 14 le 31 octobre 2026. Ce qui se passe, la surcharge de 25 % et un plan en 3 étapes pour migrer sans perdre vos données."
+---
+
+Demain, 31 octobre 2026, Odoo retire la version 14 d'Odoo.sh. 
+Odoo 14, sortie en octobre 2020, disparaît de la plateforme à cette date.
+ Si votre base tourne encore dessus, lisez ce qui suit aujourd'hui, pas lundi.
+
+## La règle : six ans, puis plus rien
+
+
+Quand une version d'Odoo atteint 6 ans, elle est retirée d'Odoo.sh le 31 octobre de l'année concernée.
+ Le calendrier est donc fixé d'avance :
+
+- 
+Odoo 14 : 31 octobre 2026.
+
+- 
+Odoo 15 : 31 octobre 2027.
+
+- 
+Odoo 16 : 31 octobre 2028.
+
+
+Cette règle ne dépend pas de votre contrat de support. C'est une règle d'hébergement.
+
+## Que se passe-t-il quand la base est bloquée ?
+
+
+Le projet et les outils d'upgrade restent accessibles. Mais une base qui tourne encore sur une version retirée est bloquée définitivement, sans exception possible.
+
+
+Concrètement, vos utilisateurs n'ouvrent plus Odoo. Facturation, stocks, commandes : tout s'arrête. 
+La seule issue documentée pour récupérer une base expirée est d'en télécharger le dump.
+
+
+Une base hébergée ailleurs n'est pas touchée par cette échéance. 
+Une base Odoo 14 auto-hébergée ne s'arrête pas le 31 octobre parce qu'Odoo.sh arrête de l'héberger.
+ Elle reste cependant sur une version ancienne, avec les risques que cela suppose.
+
+## La surcharge de 25 % : ce que disent les sources
+
+Odoo a élargi son support à toutes les versions, mais l'a rendu payant pour les plus anciennes. 
+À partir d'avril 2026, une surcharge de 25 % s'applique à l'abonnement annuel pour les versions de plus de trois versions majeures.
+ 
+Elle concerne les clients Odoo.sh et on-premise, pour les contrats nouveaux ou renouvelés. Odoo Online est exclu.
+
+
+Les formulations varient selon les sources. La FAQ d'Odoo.sh parle du moment où une version atteint 
+3 ans et 6 mois, avec une surcharge de 25 % appliquée automatiquement à l'abonnement.
+ Odoo 14 et Odoo 15 sont de toute façon bien au-delà de ces seuils.
+
+Le déclencheur exact dépend de votre contrat et de sa date de renouvellement. Regardez votre dernière facture : 
+une ligne « legacy version surcharge » ou un total supérieur de 25 % au renouvellement précédent signale que la surcharge est active.
+ En cas de doute, posez la question à votre interlocuteur Odoo.
+
+La surcharge n'est pas le vrai sujet pour Odoo 14. Le blocage l'est.
+
+## Plan de rattrapage en 3 étapes
+
+### Étape 1 : sécuriser les données (aujourd'hui)
+
+Pas question de laisser cela pour demain.
+
+- **Générez et téléchargez un dump manuel.** 
+Vous le faites dans l'onglet Backups de votre branche de production.
+
+- **Ne comptez pas sur les sauvegardes automatiques seules.** 
+Odoo garde 14 sauvegardes complètes de la production, sur 3 mois maximum.
+ 
+Les builds de développement et de staging ne sont ni sauvegardés ni garantis en récupération.
+ Si vous avez travaillé sur du staging, exportez ce qui compte.
+- **Stockez le dump hors d'Odoo.sh**, puis restaurez-le une fois sur un serveur de test pour vérifier qu'il s'ouvre. 
+Odoo documente l'import d'un dump sur votre propre serveur Odoo.
+
+
+Un dump que personne n'a jamais restauré n'est pas une sauvegarde. C'est une hypothèse.
+
+### Étape 2 : tester la migration en staging
+
+Vous travaillez sur une copie, jamais sur la production.
+
+
+Sur Odoo.sh, un test d'upgrade en staging envoie la dernière sauvegarde quotidienne de production. Les sauvegardes manuelles ne sont pas prises en compte.
+ Si la base est bloquée, ne supposez pas que ce chemin reste utilisable. Travaillez plutôt à partir de votre dump, sur un environnement que vous contrôlez.
+
+La mécanique est celle de la plateforme d'upgrade d'Odoo : 
+elle reçoit la base, la convertit, puis renvoie une copie de test ou la base de production migrée.
+ Testez comme un jour normal : factures, stocks, rapports, imprimés, intégrations.
+
+C'est aussi là que se révèlent vos modules sur mesure. 
+La documentation d'Odoo indique qu'une base avec des modules personnalisés ne peut pas être migrée tant qu'une version de ces modules n'existe pas pour la version cible.
+ Un intégrateur relève aussi que 
+l'interface web d'Odoo a été reconstruite sur le framework OWL entre les versions 14 et 17.
+ Ce point pèse lourd sur les modules qui touchent l'interface.
+
+### Étape 3 : le saut de version
+
+Choisissez la cible avec les dates d'Odoo en main. 
+Vous pouvez migrer depuis n'importe quelle version vers une version majeure encore en support standard, ou dont le support standard s'est terminé il y a moins de six mois.
+ Selon le tableau d'Odoo, 
+Odoo 20 est sortie en septembre 2026, Odoo 19 en septembre 2025 et Odoo 18 en octobre 2024.
+ Le support standard est prévu jusqu'en 
+septembre 2029 pour la 20, septembre 2028 pour la 19 et septembre 2027 pour la 18.
+
+
+Pas besoin de passer par chaque version intermédiaire. 
+Odoo permet de migrer de la 14 directement vers la dernière version, avec une seule demande pour les données standard.
+ Seul le code maison et les modules tiers demandent un travail à part.
+
+Un point à vérifier avant de viser la version 20 : 
+selon Cloudpepper, les scripts de migration de production peuvent mettre 3 à 4 mois à être prêts après la sortie d'une version majeure.
+ Les scripts de test sont en revanche disponibles presque tout de suite. Pour une mise en production proche, la 19 est un choix plus prudent. Confirmez-le avec votre intégrateur.
+
+Au moment de basculer, deux contraintes de calendrier :
+
+- 
+Une fois les tests terminés, la migration de production doit être lancée dans les 3 jours qui suivent le test d'upgrade.
+
+- 
+La base est indisponible pendant la migration de production.
+ Prévoyez-la un week-end.
+
+Répétez le processus complet la veille. 
+Odoo recommande de rejouer toute la procédure le jour précédant la migration de production.
+
+
+## Des délais réalistes
+
+Odoo ne publie pas de durée de projet. Les chiffres viennent d'intégrateurs, et ce sont des ordres de grandeur :
+
+- Un intégrateur annonce 
+2 à 3 semaines pour une instance standard, 4 à 6 semaines avec 5 à 10 modules maison, et 8 à 16 semaines pour un environnement très customisé avec intégrations.
+
+- Un autre cite 
+2 à 4 semaines avec quelques modules personnalisés, et 4 à 8 semaines pour les bases très customisées ou les sauts de plusieurs versions.
+
+
+La conclusion est la même partout : 
+le délai dépend du portage des modules sur mesure, pas de la migration standard.
+ Comptez donc en semaines, parfois en mois. Dites-le à votre direction dès maintenant.
+
+## Et si vous êtes sur Odoo 15 ?
+
+Vous avez un an : 
+Odoo 15 quitte Odoo.sh le 31 octobre 2027.
+ C'est confortable sur le papier. Mais si vos modules sur mesure demandent plusieurs mois de travail, il faut démarrer bien avant. Dressez l'inventaire de vos modules et de vos intégrations dès ce trimestre. Gardez en tête que vous payez peut-être déjà la surcharge.
+
+## Pour finir
+
+Si votre base Odoo 14 est encore sur Odoo.sh, commencez par le dump. Le plan de migration viendra ensuite. Pour préparer le saut de version, nos équipes détaillent la démarche sur la page [Migration de données](/migration/). Pour héberger et surveiller votre base le temps de la transition, voyez [Hosting & Monitoring](/hosting-monitoring/).

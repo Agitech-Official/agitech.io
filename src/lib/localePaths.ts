@@ -48,6 +48,16 @@ async function build(): Promise<Index> {
   return idx;
 }
 
+/** Languages in which the page at `bare` (FR-shaped path, e.g. "/avis-odoo/") really exists. Used for hreflang:
+ *  a language that has no such page must not be declared (hreflang to a redirect/404 is an SEO error). */
+export async function languagesWithPage(bare: string): Promise<Lang[]> {
+  cache ??= build();
+  const idx = await cache;
+  const path = bare.endsWith('/') ? bare : `${bare}/`;
+  // FR has no /thank-you-*/ page (it is /merci-*/): build() lists them for every language for the switcher only.
+  return LANGS.filter((l) => idx[l].pages.has(path) && !(l === 'fr' && /^\/thank-you-/.test(path)));
+}
+
 /** URL of the current page in each language: the real translation if it exists, else a sensible fallback. */
 export async function switcherUrls(pathname: string): Promise<Record<Lang, string>> {
   cache ??= build();
