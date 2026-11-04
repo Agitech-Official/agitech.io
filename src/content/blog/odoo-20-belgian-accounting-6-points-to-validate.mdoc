@@ -1,0 +1,83 @@
+---
+title: "Odoo 20 Belgian accounting: 6 points to validate"
+lang: "en"
+publishedAt: "2026-11-04"
+category: "Odoo"
+excerpt: "Before migrating to Odoo 20, 6 accounting points to have your accountant validate on a PCMN chart: bank, duplicates, invoices, stock, reports."
+---
+
+Odoo 20 was released on 24 September 2026, the opening day of Odoo Experience in Brussels. Since then, articles about the new accounting features have been multiplying. Few say what you, as a business owner, should ask your accountancy firm before migrating.
+
+Here is a checklist of six points. Each one should be tested on a copy of your database, using your PCMN chart of accounts. We have not found a public source describing the exact behaviour of the Belgian localisation on each of them. Testing on your own data is therefore the only real answer.
+
+## 1. Bank entries must come from a bank transaction
+
+This is the change that affects habits the most. Any entry that affects a bank account must now originate from a bank transaction.
+
+Manual miscellaneous entries on bank accounts are no longer possible without a transaction.
+
+The labels change too. "In Payment" becomes "Paid", and "Paid" becomes "Reconciled". Warn your teams, otherwise they will misread their screens.
+
+To test with your accountancy firm:
+- Review the miscellaneous journal entries you currently make on your class 55 accounts: adjustments, corrections, internal transfers.
+- Check that each case can now be handled from a bank statement (your CODA files, for example).
+- Try the new report. It lists reconciled and unreconciled items at a chosen date. Your accountant can use it for period-end closings.
+
+## 2. Parent accounts instead of account groups
+
+Account groups are replaced by parent accounts, and account codes become optional. In a PCMN chart, these groups are often used to structure the subtotals in reports.
+
+One technical point deserves attention. According to community code repositories, groups migrate to archived parent accounts, which therefore cannot receive entries. An account that already carries entries cannot be used as a parent. If your chart uses the same account both as a total and as a posting account, it will need to be corrected.
+
+To test:
+- Compare the trial balance between the old and the new version. Compare the reports line by line before going live.
+- Open the account coverage report. An unbalanced balance sheet almost always comes from an account that is not mapped in the report, and this report flags them in red.
+- Check your exports and dashboards built on groups. They will need to be reworked.
+
+## 3. Two-level duplicate detection
+
+Customer and vendor invoices now display two alert levels: red for highly probable duplicates, and yellow for potential duplicates to examine before posting. After posting, only the red alerts remain.
+
+There are two other safeguards. The payment wizard detects pending payments and deducts them from the amount due. On the bank side, a "Find duplicate transactions" function flags duplicates, which you then delete manually.
+
+To test: replay your real cases. Think of rents, subscriptions and recurring invoices of the same amount. Ask your accountancy firm which yellow alerts it is willing to clear on its own, and which ones come back to you.
+
+## 4. Vendor bills posted automatically
+
+Odoo automatically posts the bills of certain vendors. This option requires automatic digitisation to be enabled for vendor bills. It offers to activate itself after three validations without modification. The vendor must already exist in the database, and each bill must carry a date.
+
+Alongside this, Odoo 20 suggests invoice lines. Product, account, tax and analytic distribution are pre-filled based on history. Values entered manually on an existing line are kept.
+
+The question to put to your accountancy firm is not a technical one. Which vendors are stable enough to go through without review? Three bills validated without correction do not prove that the PCMN account and the VAT rate will be right on the fourth. We recommend starting with a short list of recurring vendors.
+
+## 5. Stock valuation
+
+This point mainly concerns companies that manage stock. Since version 19, Odoo no longer creates an accounting entry for every stock movement.
+
+In version 20, a landed cost that arrives after delivery is allocated automatically: the share already delivered goes to cost of sales, and the share still in stock increases the stock value.
+
+Another change to explain to your accountant: with perpetual inventory, adjustment entries (goods received not invoiced, invoiced not received, etc.) are created from the valuation closing report and hit the valuation account directly, without going through the stock variation account.
+
+In the Belgian PCMN, the stock variation is traditionally booked between the stock account (class 3) and a variation account in class 60. A published example shows €1,250 debited to 340000 Marchandises (goods) and credited to 609400 Variations des stocks de marchandises (change in goods stock), on 31 December. Test a complete closing and check that these accounts behave the way your accountancy firm expects.
+
+Also ask the fundamental question. Perpetual inventory is possible, but it is a choice to make with your accountant.
+
+## 6. Faster reports
+
+A firm has reported figures from a presentation session. Odoo is moving away from the dictionaries of version 19 to data objects. In the demo, a user report goes from 2.5 s to 0.2 s. Memory use goes from 4.5 GB to 1.6 GB. These are demo figures, not those of a real database. The firm says so itself.
+
+So do not promise this gain to your CFO. Measure it on your own database: general ledger, aged balance, comparative balance sheet. The balance sheet also accepts more columns than in version 19. Your accountant may need to do fewer comparisons in Excel.
+
+## How to organise the test
+
+1. Make a copy of your database, with the complete PCMN history.
+2. Migrate it to Odoo 20.
+3. Give your accountancy firm the six points above, along with real cases.
+4. Note every discrepancy. Then decide with them what can be fixed through configuration and what requires development.
+5. Only go live after a complete monthly closing on the copy.
+
+Nothing forces you to migrate in a hurry. A test copy costs almost nothing. A bad closing does.
+
+## Going further
+
+If you want to prepare this test, our team can scope the [data migration](/en/migration/) to Odoo 20 with your accountancy firm. You can also [contact us](/en/contact-us/) to discuss it.
