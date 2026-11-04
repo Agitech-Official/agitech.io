@@ -1,0 +1,85 @@
+---
+title: "Odoo 20 en Belgische boekhouding: 6 punten om te valideren"
+lang: "nl"
+publishedAt: "2026-11-04"
+category: "Odoo"
+excerpt: "Vóór de migratie naar Odoo 20: 6 boekhoudpunten die uw boekhoudkantoor best valideert op uw MAR: bank, dubbels, facturen, voorraad, rapporten."
+---
+
+Odoo 20 is uitgebracht op 24 september 2026, de openingsdag van Odoo Experience in Brussel. Sindsdien verschijnen er steeds meer artikelen over de boekhoudkundige nieuwigheden. Weinig artikelen vertellen u als bedrijfsleider wat u aan uw boekhoudkantoor moet vragen voordat u migreert.
+
+Hier is een checklist van zes punten. Elk punt moet worden getest op een kopie van uw database, met uw eigen MAR-rekeningstelsel. Wij hebben geen openbare bron gevonden die het exacte gedrag van de Belgische lokalisatie voor elk van deze punten beschrijft. Een test op uw eigen gegevens blijft dus het enige echte antwoord.
+
+## 1. Bankboekingen moeten voortkomen uit een banktransactie
+
+Dit is de wijziging die uw gewoontes het meest raakt. Elke boeking die een bankrekening beïnvloedt, moet voortaan afkomstig zijn van een banktransactie.
+
+Handmatige diverse boekingen op bankrekeningen zijn niet langer mogelijk zonder transactie.
+
+Ook de benamingen veranderen. "In betaling" wordt "Betaald", en "Betaald" wordt "Afgestemd". Verwittig uw teams, anders interpreteren zij hun schermen verkeerd.
+
+Te testen met het boekhoudkantoor:
+- Overloop de diverse verrichtingen (OD) die u vandaag uitvoert op uw rekeningen van klasse 55: regularisaties, correcties, interne overschrijvingen.
+- Controleer of elk geval voortaan kan worden verwerkt vanuit een bankafschrift (bijvoorbeeld uw CODA-bestanden).
+- Probeer het nieuwe rapport uit. Het toont de afgestemde en niet-afgestemde elementen op een gekozen datum. Uw boekhouder kan het gebruiken bij zijn afsluitingen.
+
+## 2. Bovenliggende rekeningen in plaats van rekeninggroepen
+
+De rekeninggroepen worden vervangen door bovenliggende rekeningen, en de rekeningcodes worden optioneel. In een MAR-stelsel dienen die groepen vaak om de subtotalen van de rapporten te structureren.
+
+Eén technisch punt verdient uw aandacht. Volgens code-repositories van de community migreren de groepen naar gearchiveerde bovenliggende rekeningen, die dus geen boekingen kunnen ontvangen. Een rekening waarop al boekingen staan, kan niet als bovenliggende rekening dienen. Als uw rekeningstelsel dezelfde rekening gebruikt als totaal én als boekingsrekening, moet u dat corrigeren.
+
+Te testen:
+- Vergelijk de proefbalans tussen de oude en de nieuwe versie. Vergelijk de rapporten lijn per lijn vóór de productiegang.
+- Open het rapport over de rekeningdekking. Een onevenwichtige balans komt bijna altijd door een rekening die niet is gekoppeld in het rapport, en dit rapport markeert die in het rood.
+- Controleer uw exports en dashboards die op de groepen zijn gebouwd. Die moeten worden herwerkt.
+
+## 3. Detectie van dubbels op twee niveaus
+
+Klanten- en leveranciersfacturen tonen nu twee waarschuwingsniveaus: rood voor zeer waarschijnlijke dubbels, geel voor mogelijke dubbels die u moet nakijken vóór de boeking.
+
+Na de boeking blijven alleen de rode waarschuwingen over.
+
+Er zijn nog twee andere beveiligingen. De betaalassistent detecteert openstaande betalingen en trekt ze af van het verschuldigde bedrag. Aan de bankzijde meldt een functie "Find duplicate transactions" de dubbels, die u daarna met de hand verwijdert.
+
+Te testen: speel uw echte gevallen opnieuw af. Denk aan huurgelden, abonnementen en terugkerende facturen met een identiek bedrag. Vraag aan uw boekhoudkantoor welke gele waarschuwing het zelf mag wegwerken en welke naar u moet doorstromen.
+
+## 4. Automatisch geboekte leveranciersfacturen
+
+Odoo boekt de facturen van bepaalde leveranciers automatisch. Voor deze optie moet de automatische digitalisering van leveranciersfacturen geactiveerd zijn. Ze stelt voor om zichzelf te activeren na drie validaties zonder wijziging. De leverancier moet al in de database bestaan en elke factuur moet een datum dragen.
+
+Daarnaast stelt Odoo 20 factuurlijnen voor. Product, rekening, belasting en analytische verdeling worden vooraf ingevuld op basis van de historiek. Waarden die u met de hand op een bestaande lijn hebt ingevoerd, blijven behouden.
+
+De vraag die u aan het boekhoudkantoor moet stellen, is niet technisch. Welke leveranciers zijn stabiel genoeg om zonder nazicht door te gaan? Drie facturen die zonder correctie zijn gevalideerd, bewijzen niet dat de MAR-rekening en het btw-tarief ook bij de vierde juist zullen zijn. Wij raden aan te starten met een korte lijst van terugkerende leveranciers.
+
+## 5. Voorraadwaardering
+
+Dit punt geldt vooral voor bedrijven met voorraadbeheer. Sinds versie 19 maakt Odoo niet langer bij elke voorraadbeweging een boeking aan.
+
+In versie 20 wordt een bijkomende kost (landed cost) die na de levering binnenkomt, automatisch verdeeld: het reeds geleverde deel gaat naar de kostprijs van de verkopen, het deel in voorraad verhoogt de voorraadwaarde.
+
+Een andere wijziging die u uw boekhouder moet laten begrijpen: bij permanente inventaris worden de regularisatieboekingen (te ontvangen facturen, gefactureerd maar niet ontvangen, enz.) aangemaakt vanuit het afsluitrapport van de waardering. Ze raken rechtstreeks de waarderingsrekening, zonder via de rekening voor voorraadwijziging te gaan.
+
+In het Belgische MAR wordt de voorraadwijziging klassiek geboekt tussen de voorraadrekening (klasse 3) en een rekening voor voorraadwijziging in klasse 60. Een gepubliceerd voorbeeld toont 1.250 € in debet van 340000 Handelsgoederen en in credit van 609400 Voorraadwijzigingen handelsgoederen, op 31 december. Test een volledige afsluiting en controleer of deze rekeningen zich gedragen zoals uw boekhoudkantoor verwacht.
+
+Stel ook de fundamentele vraag. Permanente inventaris is mogelijk, maar het is een keuze die u samen met uw boekhouder maakt.
+
+## 6. Snellere rapporten
+
+Een adviesbureau rapporteerde cijfers uit een presentatiesessie. Odoo laat de dictionaries van versie 19 vallen ten gunste van dataobjecten. In de demo gaat een gebruikersrapport van 2,5 s naar 0,2 s. Het gebruikte geheugen daalt van 4,5 GB naar 1,6 GB. Dit zijn demonstratiecijfers, geen cijfers van een echte database. Het adviesbureau preciseert dat zelf.
+
+Beloof deze winst dus niet aan uw CFO. Meet ze op uw eigen database: grootboek, ouderdomsbalans, vergelijkende balans. De balans aanvaardt ook meer kolommen dan in versie 19. Uw boekhouder zal misschien minder vergelijkingen in Excel moeten maken.
+
+## Hoe organiseert u de test
+
+1. Maak een kopie van uw database, met de volledige MAR-historiek.
+2. Laat die migreren naar Odoo 20.
+3. Bezorg het boekhoudkantoor de zes punten hierboven, samen met echte gevallen.
+4. Noteer elke afwijking. Beslis vervolgens samen met het kantoor wat in de configuratie wordt gecorrigeerd en wat een ontwikkeling vergt.
+5. Ga pas in productie na een volledige maandafsluiting op de kopie.
+
+Niets verplicht u om overhaast te migreren. Een testkopie kost bijna niets. Een mislukte afsluiting wel.
+
+## Meer weten
+
+Wilt u deze test voorbereiden? Ons team kan de [gegevensmigratie](/nl/migration/) naar Odoo 20 samen met uw boekhoudkantoor afbakenen. U kunt ook [contact met ons opnemen](/nl/contact-us/) om erover te praten.
