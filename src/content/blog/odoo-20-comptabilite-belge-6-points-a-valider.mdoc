@@ -1,0 +1,139 @@
+---
+title: "Odoo 20 comptabilité belge : 6 points à valider"
+lang: "fr"
+publishedAt: "2026-11-04"
+category: "Odoo"
+excerpt: "Avant de migrer vers Odoo 20, 6 points comptables à faire valider par votre fiduciaire sur un plan PCMN : banque, doublons, factures, stock, rapports."
+---
+
+
+Odoo 20 est sorti le 24 septembre 2026, le jour d'ouverture d'Odoo Experience à Bruxelles.
+ Depuis, les articles sur les nouveautés comptables se multiplient. Peu disent ce que vous, dirigeant, devez demander à votre fiduciaire avant de migrer.
+
+Voici une checklist de six points. Chacun doit être testé sur une copie de votre base, avec votre plan comptable PCMN. Nous n'avons pas trouvé de source publique qui décrive le comportement exact de la localisation belge sur chacun d'eux. Le test sur vos propres données reste donc la seule vraie réponse.
+
+## 1. Les écritures bancaires doivent venir d'une transaction bancaire
+
+C'est le changement qui touche le plus les habitudes. 
+Toute écriture qui affecte un compte bancaire doit désormais provenir d'une transaction bancaire.
+ 
+Les écritures diverses manuelles sur les comptes bancaires ne sont plus possibles sans transaction.
+
+
+Les libellés changent aussi. 
+« En cours de paiement » devient « Payé », et « Payé » devient « Rapproché ».
+ Prévenez vos équipes, sinon elles liront mal leurs écrans.
+
+À tester avec la fiduciaire :
+- Passez en revue les OD que vous faites aujourd'hui sur vos comptes de classe 55 : régularisations, corrections, virements internes.
+- Vérifiez que chaque cas se traite désormais depuis un extrait (vos fichiers CODA, par exemple).
+- Essayez le nouveau rapport. 
+Il liste les éléments rapprochés et non rapprochés à une date choisie.
+ Votre comptable peut s'en servir pour ses clôtures.
+
+## 2. Comptes parents à la place des groupes de comptes
+
+
+Les groupes de comptes sont remplacés par des comptes parents, et les codes de compte deviennent optionnels.
+ Dans un plan PCMN, ces groupes servent souvent à structurer les sous-totaux des rapports.
+
+Un point technique mérite l'attention. D'après des dépôts de code de la communauté, 
+les groupes migrent vers des comptes parents archivés, qui ne peuvent donc pas recevoir d'écritures.
+ 
+Un compte qui porte déjà des écritures ne peut pas servir de parent.
+ Si votre plan utilise un même compte comme total et comme compte d'imputation, il faudra le corriger.
+
+À tester :
+- Comparez la balance des comptes entre l'ancienne et la nouvelle version. 
+Comparez les rapports ligne par ligne avant la mise en production.
+
+- Ouvrez le rapport de couverture des comptes. 
+Un bilan déséquilibré vient presque toujours d'un compte non mappé dans le rapport, et ce rapport les marque en rouge.
+
+- Vérifiez vos exports et tableaux de bord construits sur les groupes. 
+Ils sont à retravailler.
+
+
+## 3. Détection des doublons à deux niveaux
+
+
+Les factures clients et fournisseurs affichent maintenant deux niveaux d'alerte : rouge pour les doublons très probables, jaune pour les doublons potentiels à examiner avant la comptabilisation.
+ 
+Après comptabilisation, seules les alertes rouges restent.
+
+
+Il y a deux autres protections. 
+L'assistant de paiement détecte les paiements en attente et les déduit du montant dû.
+ Côté banque, 
+une fonction « Find duplicate transactions » signale les doublons, que vous supprimez ensuite à la main.
+
+
+À tester : rejouez vos cas réels. Pensez aux loyers, abonnements et factures récurrentes d'un même montant. Demandez à votre fiduciaire quelle alerte jaune elle accepte de lever seule, et laquelle remonte à vous.
+
+## 4. Factures fournisseurs comptabilisées automatiquement
+
+Odoo comptabilise automatiquement les factures de certains fournisseurs. 
+Cette option exige que la numérisation automatique soit activée pour les factures fournisseurs.
+ 
+Elle propose de s'activer après trois validations sans modification.
+ 
+Le fournisseur doit déjà exister dans la base, et chaque facture doit porter une date.
+
+
+À côté, Odoo 20 suggère les lignes de facture. 
+Produit, compte, taxe et répartition analytique sont préremplis d'après l'historique.
+ 
+Les valeurs saisies à la main sur une ligne existante sont conservées.
+
+
+La question à poser à la fiduciaire n'est pas technique. Quels fournisseurs sont assez stables pour passer sans relecture ? Trois factures validées sans correction ne prouvent pas que le compte PCMN et le taux de TVA seront justes à la quatrième. Nous conseillons de commencer par une courte liste de fournisseurs récurrents.
+
+## 5. Valorisation du stock
+
+Ce point concerne surtout les entreprises qui gèrent du stock. 
+Depuis la version 19, Odoo ne passe plus d'écriture comptable à chaque mouvement de stock.
+ 
+En version 20, un coût d'approche arrivé après la livraison est réparti automatiquement : la part déjà livrée va au coût des ventes, la part en stock augmente la valeur du stock.
+
+
+Autre changement à faire comprendre au comptable : 
+en comptabilité permanente, les écritures de régularisation (factures à recevoir, facturé non reçu, etc.) se créent depuis le rapport de clôture de valorisation et touchent directement le compte de valorisation, sans passer par le compte de variation de stock.
+
+
+En PCMN belge, la variation de stock s'écrit classiquement entre le compte de stock (classe 3) et un compte de variation de la classe 60. 
+Un exemple publié montre 1 250 € au débit de 340000 Marchandises et au crédit de 609400 Variations des stocks de marchandises, au 31 décembre.
+ Testez une clôture complète et vérifiez que ces comptes se comportent comme votre fiduciaire l'attend.
+
+Posez aussi la question de fond. 
+L'inventaire permanent est possible, mais c'est un choix à faire avec votre comptable.
+
+
+## 6. Rapports plus rapides
+
+Un cabinet a rapporté des chiffres issus d'une session de présentation. 
+Odoo abandonne les dictionnaires de la version 19 pour des objets de données.
+ 
+Dans la démo, un rapport utilisateur passe de 2,5 s à 0,2 s.
+ 
+La mémoire utilisée passe de 4,5 Go à 1,6 Go.
+ Ce sont des chiffres de démonstration, pas ceux d'une base réelle. 
+Le cabinet le précise lui-même.
+
+
+Ne promettez donc pas ce gain à votre CFO. Mesurez-le sur votre base : grand livre, balance âgée, bilan comparatif. 
+Le bilan accepte aussi davantage de colonnes qu'en version 19.
+ Votre comptable fera peut-être moins de comparaisons sous Excel.
+
+## Comment organiser le test
+
+1. Faites une copie de votre base, avec l'historique PCMN complet.
+2. Faites-la migrer vers Odoo 20.
+3. Donnez à la fiduciaire les six points ci-dessus, avec des cas réels.
+4. Notez chaque écart. Décidez ensuite avec elle de ce qui se corrige dans la configuration et de ce qui demande un développement.
+5. Ne passez en production qu'après une clôture mensuelle complète sur la copie.
+
+Rien ne vous oblige à migrer dans l'urgence. Une copie de test ne coûte presque rien. Une mauvaise clôture, si.
+
+## Pour aller plus loin
+
+Si vous voulez préparer ce test, notre équipe peut cadrer la [migration de données](/migration/) vers Odoo 20 avec votre fiduciaire. Vous pouvez aussi [nous contacter](/contact-us/) pour en parler.
