@@ -1,5 +1,6 @@
 ---
-// Home: the AgiFid accounting service (sister fiduciary, independent company) next to our industry verticals.
+// Home: two blocks side by side. Left: the AgiFid accounting service (sister fiduciary, independent company),
+// short pitch on a dark panel. Right: our industry verticals as a compact list (names; optional one-liner).
 type L = { label?: string; url?: string; newTab?: boolean };
 export interface Props {
   eyebrow?: string;
@@ -25,11 +26,11 @@ const b1 = btn(cta), b2 = btn(cta2);
         {title && <h3>{title}</h3>}
         {text && <p class="av-lead">{text}</p>}
         {bullets.length > 0 && <ul>{bullets.map(b => <li>{b}</li>)}</ul>}
-        {note && <p class="av-note">{note}</p>}
         <div class="av-actions">
           {b1 && <a class="av-btn av-btn-main" href={b1.href} target={b1.ext ? '_blank' : undefined} rel={b1.ext ? 'noopener' : undefined}>{b1.label}</a>}
           {b2 && <a class="av-btn" href={b2.href} target={b2.ext ? '_blank' : undefined} rel={b2.ext ? 'noopener' : undefined}>{b2.label}</a>}
         </div>
+        {note && <p class="av-note">{note}</p>}
       </div>
       <div class="av-verticals">
         {verticalsTitle && <h6>{verticalsTitle}</h6>}
@@ -38,8 +39,9 @@ const b1 = btn(cta), b2 = btn(cta2);
           {verticals.map(v => (
             <li>
               <a href={v.href}>
-                <strong>{v.label}</strong>
-                {v.text && <span>{v.text}</span>}
+                <span class="av-name">{v.label}</span>
+                {v.text && <span class="av-sub">{v.text}</span>}
+                <span class="av-arrow" aria-hidden="true">→</span>
               </a>
             </li>
           ))}
@@ -50,25 +52,35 @@ const b1 = btn(cta), b2 = btn(cta2);
 </section>
 
 <style>
-  .av-section { padding: 5rem 0; background: var(--offwhite, #f7f7f7); border-top: 1px solid var(--border, rgba(20,20,20,0.09)); }
-  .av-grid { display: grid; grid-template-columns: 5fr 6fr; gap: 4rem; align-items: start; }
+  .av-section { padding: 5rem 0; background: #fff; border-top: 1px solid var(--border, rgba(20,20,20,0.09)); }
+  .av-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 3.5rem; align-items: stretch; }
   .av-agifid, .av-verticals { min-width: 0; }
-  h6 { color: var(--muted, #6b6b76); text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.78rem; font-weight: 600; margin-bottom: 0.8rem; }
-  h3 { font-size: clamp(1.6rem, 1.2rem + 1.5vw, 2.3rem); line-height: 1.2; margin: 0 0 1.25rem; }
-  .av-lead { font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.25rem; }
-  .av-agifid ul { list-style: none; margin: 0 0 1.25rem; padding: 0; border-top: 1px solid var(--border, rgba(20,20,20,0.09)); }
-  .av-agifid li { position: relative; padding: 0.75rem 0 0.75rem 1.5rem; border-bottom: 1px solid var(--border, rgba(20,20,20,0.09)); }
-  .av-agifid li::before { content: ''; position: absolute; left: 0; top: 1.3em; width: 7px; height: 7px; border-radius: 50%; background: var(--violet, #984895); }
-  .av-note { color: var(--muted, #6b6b76); font-size: 0.95rem; margin-bottom: 1.5rem; }
-  .av-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-  .av-btn { display: inline-block; padding: 0.75rem 1.4rem; border: 1px solid var(--violet, #984895); border-radius: 4px; color: var(--violet, #984895); text-decoration: none; transition: background 0.2s, color 0.2s; }
-  .av-btn:hover, .av-btn-main { background: var(--violet, #984895); color: #fff; }
-  .av-btn-main:hover { background: var(--violet-light, #b05bad); }
-  .av-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border, rgba(20,20,20,0.09)); border: 1px solid var(--border, rgba(20,20,20,0.09)); }
-  .av-list li { background: #fff; }
-  .av-list a { display: block; height: 100%; padding: 1.1rem 1.25rem; border-left: 3px solid transparent; text-decoration: none; color: var(--ink, #16151a); transition: border-color 0.2s, background 0.2s; }
-  .av-list a:hover { border-left-color: var(--violet, #984895); background: var(--offwhite, #f7f7f7); }
-  .av-list strong { display: block; font-size: 1.05rem; margin-bottom: 0.25rem; }
-  .av-list span { display: block; color: var(--muted, #6b6b76); font-size: 0.9rem; line-height: 1.4; }
-  @media (max-width: 900px) { .av-grid { grid-template-columns: 1fr; gap: 2.5rem; } .av-list { grid-template-columns: 1fr; } .av-section { padding: 3.5rem 0; } }
+  h6 { text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.78rem; font-weight: 600; margin: 0 0 0.8rem; }
+  h3 { font-size: clamp(1.5rem, 1.1rem + 1.3vw, 2.05rem); line-height: 1.2; margin: 0 0 1.5rem; }
+
+  /* Dark AgiFid panel */
+  .av-agifid { background: var(--ink, #16151a); color: #fff; padding: 2.5rem; border-radius: 4px; display: flex; flex-direction: column; }
+  .av-agifid h6 { color: rgba(255,255,255,0.6); }
+  .av-agifid h3 { color: #fff; }
+  .av-lead { color: rgba(255,255,255,0.8); margin: 0 0 1.25rem; }
+  .av-agifid ul { list-style: none; margin: 0 0 2rem; padding: 0; }
+  .av-agifid li { padding: 0.7rem 0; border-top: 1px solid rgba(255,255,255,0.14); font-size: 1.02rem; }
+  .av-agifid li:last-child { border-bottom: 1px solid rgba(255,255,255,0.14); }
+  .av-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: auto; }
+  .av-btn { display: inline-block; padding: 0.75rem 1.4rem; border: 1px solid rgba(255,255,255,0.5); border-radius: 4px; color: #fff; text-decoration: none; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+  .av-btn:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+  .av-btn-main { background: var(--violet, #984895); border-color: var(--violet, #984895); }
+  .av-btn-main:hover { background: var(--violet-light, #b05bad); border-color: var(--violet-light, #b05bad); }
+  .av-note { color: rgba(255,255,255,0.55); font-size: 0.82rem; line-height: 1.4; margin: 1.5rem 0 0; }
+
+  /* Verticals: compact list */
+  .av-verticals h6 { color: var(--violet, #984895); }
+  .av-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); column-gap: 2rem; border-top: 2px solid var(--ink, #16151a); }
+  .av-list a { display: flex; align-items: baseline; gap: 0.75rem; padding: 1rem 0; border-bottom: 1px solid var(--border, rgba(20,20,20,0.09)); text-decoration: none; color: var(--ink, #16151a); transition: color 0.2s, padding 0.2s; }
+  .av-name { font-weight: 600; font-size: 1.05rem; }
+  .av-sub { color: var(--muted, #6b6b76); font-size: 0.85rem; }
+  .av-arrow { margin-left: auto; color: var(--violet, #984895); opacity: 0; transform: translateX(-6px); transition: opacity 0.2s, transform 0.2s; }
+  .av-list a:hover { color: var(--violet, #984895); }
+  .av-list a:hover .av-arrow { opacity: 1; transform: none; }
+  @media (max-width: 900px) { .av-grid { grid-template-columns: 1fr; gap: 2.5rem; } .av-list { grid-template-columns: 1fr; } .av-section { padding: 3.5rem 0; } .av-agifid { padding: 1.75rem; } }
 </style>
