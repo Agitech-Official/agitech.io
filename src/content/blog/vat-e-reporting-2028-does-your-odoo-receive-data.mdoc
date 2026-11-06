@@ -1,0 +1,88 @@
+---
+title: "VAT e-reporting 2028: does your Odoo receive data?"
+lang: "en"
+publishedAt: "2026-11-06"
+category: "Digital Transformation"
+excerpt: "The 2028 VAT e-reporting bill runs through Peppol. Do your supplier invoices reach Odoo as data, or are they re-keyed by hand?"
+---
+
+Ask your accounts payable clerk a simple question: "When an invoice arrives, do you key anything in?"
+
+If the answer is "sometimes", you have an issue for 2028. Invoice-level VAT reporting cannot be solved with a module. It depends on the quality of the data entering your accounts. This is a matter of finance, VAT rules and master data, not just IT.
+
+## Where the text stands
+
+On 18 July 2026, the Council of Ministers approved a draft bill. It amends the VAT Code to introduce an e-reporting obligation for invoicing data. Since then, the next step has been taken: the government tabled the bill in the Chamber of Representatives on 27 October 2026. It has yet to be voted on.
+
+In summary, the text provides for:
+
+- An obligation from 1 January 2028, with reporting on both sides: the supplier and the customer each transmit the key data.
+- Reporting via the Peppol network, within a maximum of five calendar days, except in cases of force majeure. The royal decree will set the exact deadlines.
+- Only information already required on the structured electronic invoice may be requested.
+- The annual customer listing disappears for the transactions concerned. The listing for 2027 transactions is still due on 31 March 2028.
+
+One important caveat. The bill sets the five-day maximum and the use of Peppol. The royal decree has yet to determine the actual deadlines, the mandatory data and the transmission arrangements. So do not budget for development on specific fields. Prepare the ground instead.
+
+## What this changes for your received invoices
+
+Much is said about issuing invoices. The text also targets the customer. Your purchase invoices count as much as your sales invoices.
+
+Another point to note. Reporting may take place before the invoice has been validated by the business. What you report therefore starts from the structured invoice as received, not from the version your team corrected three weeks later.
+
+Here is our reading, to be taken as a deduction and not as a written rule: if someone amends or retypes the amounts, the VAT or the supplier after receipt, your accounts may diverge from what the tax authorities receive. A discrepancy between the supplier's and the customer's declarations is not automatically an irregularity, but significant or repeated discrepancies may trigger an inspection. Best not to create any through carelessness.
+
+## The test: where does each supplier invoice come from?
+
+Since 1 January 2026, invoices between Belgian VAT-registered businesses must be structured electronic invoices, normally sent via Peppol. A PDF sent by email no longer counts. Graduated fines of €1,500, €3,000 and then €5,000 have applied since 1 April 2026.
+
+In theory, then, your Belgian invoices arrive as data. In practice, a purchasing flow mixes several routes. In Odoo, there are four:
+
+1. **Peppol to draft.** Odoo checks for new documents several times a day and creates draft vendor bills in the chosen purchase journal. This is the clean route.
+2. **Peppol to Documents.** If you have several purchase journals, documents may land in the Documents app. Someone must then select the files and click "Create Vendor Bill". The data remains structured, but a human steps in.
+3. **Email with XML or PDF.** Odoo reads structured XML (UBL, ZUGFeRD, Factur-X) directly, without OCR. A plain PDF goes through text recognition. OCR guesses; it does not read reliable data.
+4. **Manual entry.** A PDF, a keyboard, and someone with good intentions.
+
+Routes 1 and 2 are data. Route 4 is a risk. Route 3 depends on what your suppliers send.
+
+### How to measure it in practice
+
+Take the last quarter. Pull the list of posted vendor bills. For each one, check whether it arrived via Peppol, by email or by manual entry. Depending on your configuration, the XML attachment and the Peppol trace make this visible. If it is not readable, that is already a result.
+
+Then put three questions to finance:
+
+- What share of received invoices comes from Peppol?
+- Of those, how many are modified between draft and validation, and why?
+- Which suppliers still send PDFs, and for what reasons: foreign supplier, small supplier, wrong Peppol address on their side or yours?
+
+Also keep an eye on the cost of OCR. The Odoo 19 documentation mentions an IAP service charged at one credit per document for digitisation. If this line item is growing, then disguised re-keying is growing too.
+
+## Master data: the real project
+
+Once invoices arrive as data, the work shifts. It concerns supplier records, customer records and taxes.
+
+An ERP consultancy recommends, among its no-regret actions: deduplicating customers and suppliers, validating VAT numbers, documenting tax determination and appointing an owner for exceptions. We share that view. In Odoo, this translates into:
+
+- **Duplicate partners.** Manual re-keying and duplicate records increase the risk of mismatches. Two records for the same supplier, and the Peppol invoice attaches to the wrong one.
+- **Peppol identifiers.** A customer identifier entered without the right scheme causes rejections. For a Belgian company, the scheme is 0208, the one for the BCE number.
+- **Tax codes.** Document which VAT code applies to which situation: domestic sale, intra-Community, reverse charge, credit note. Finance decides, not the developer.
+- **Default account and tax per supplier.** The more accurate they are, the fewer manual corrections are needed.
+
+Scope matters too. VAT-registered businesses not established in Belgium but identified for VAT would not be subject to mandatory e-reporting. If you have a foreign company with a Belgian number, check its situation separately.
+
+## Your Odoo version matters
+
+The Peppol module exists from version 16 to version 20, but only versions 18, 19 and 20 are still under standard support, according to a partner guide we consulted. Regulatory fixes will not arrive on an unsupported version. If you are on 17 or earlier, the question of migration will arise before that of e-reporting.
+
+At the time of writing, we have not found any official Odoo announcement detailing a Belgian e-reporting feature. Be wary of promises of "2028 compatibility": the FPS Finance has said it aims for at least one year of preparation after the legal framework is published. The specifications are not final.
+
+## What you can do right now
+
+1. **Measure** the share of invoices received as data and the share that is re-keyed.
+2. **Clean up** partner records: duplicates, VAT numbers, Peppol identifiers.
+3. **Write down** the tax rules by type of transaction, validated by finance.
+4. **Appoint** an owner for exceptions: rejected invoices, discrepancies, corrections.
+5. **Check** your Odoo version and Peppol configuration, including the journal and Documents.
+
+The aim is to arrive in 2028 with a flow that is already clean. When the royal decree is published, you will only have to plug in a rule, not clean up three years of data.
+
+If you would like a review of your purchasing flow in Odoo, our [Odoo support](/en/support/) team can examine it with your finance department. If your master data needs reworking or your version is old, let us talk first about [data migration](/en/migration/).
