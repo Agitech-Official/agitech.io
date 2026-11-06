@@ -40,20 +40,22 @@ const { title, subTitle, segments = [] } = Astro.props;
 </section>
 
 <style>
-  .segments-section { padding: 5rem 0; background: var(--offwhite, #f7f7f7); }
-  .segments-head { text-align: center; margin-bottom: 3rem; }
-  .segments-head h6 { color: var(--violet, #984895); margin-bottom: 0.6rem; }
-  .segments-head h3 { font-size: clamp(1.6rem, 1.2rem + 1.5vw, 2.3rem); margin: 0; }
-  .segments-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.75rem; }
-  .segment { background: #fff; border: 1px solid var(--border, rgba(20,20,20,0.09)); border-radius: 18px; padding: 2rem; display: flex; flex-direction: column; gap: 1.75rem; }
-  .segment-label { display: inline-block; padding: 0.25rem 0.8rem; border-radius: 999px; background: var(--violet, #984895); color: #fff; font-size: 0.85rem; letter-spacing: 0.06em; margin-bottom: 0.9rem; }
-  .segment-top h4 { font-size: 1.5rem; margin: 0 0 0.5rem; }
-  .segment-top p { color: var(--muted, #6b6b76); margin: 0; }
-  .clients { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.85rem; }
-  .clients li > a, .clients li > div { display: flex; align-items: center; justify-content: center; height: 92px; padding: 0.75rem 1rem; border: 1px solid var(--border, rgba(20,20,20,0.09)); border-radius: 12px; text-decoration: none; color: var(--ink, #16151a); transition: border-color 0.2s, transform 0.2s; }
-  .clients li > a:hover { border-color: var(--violet, #984895); transform: translateY(-2px); }
-  .clients img { max-width: 100%; max-height: 58px; object-fit: contain; filter: grayscale(1); opacity: 0.85; }
-  .clients a:hover img { filter: none; opacity: 1; }
-  .client-name { font-family: var(--font-heading, inherit); font-size: 1.2rem; font-weight: 600; letter-spacing: 0.01em; text-align: center; }
-  @media (max-width: 900px) { .segments-grid { grid-template-columns: 1fr; } .segments-section { padding: 3.5rem 0; } }
+  /* Corporate look: flat, hairlines instead of cards/shadows, small radii, muted logos. */
+  .segments-section { padding: 5rem 0; background: #fff; border-top: 1px solid var(--border, rgba(20,20,20,0.09)); }
+  .segments-head { max-width: 720px; margin-bottom: 3rem; }
+  .segments-head h6 { color: var(--muted, #6b6b76); text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.78rem; font-weight: 600; margin-bottom: 0.8rem; }
+  .segments-head h3 { font-size: clamp(1.6rem, 1.2rem + 1.5vw, 2.3rem); line-height: 1.2; margin: 0; }
+  .segments-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 3.5rem; }
+  .segment { border-top: 2px solid var(--ink, #16151a); padding-top: 1.5rem; display: flex; flex-direction: column; gap: 1.75rem; }
+  .segment-label { display: block; color: var(--violet, #984895); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.6rem; }
+  .segment-top h4 { font-size: 1.35rem; margin: 0 0 0.5rem; }
+  .segment-top p { color: var(--muted, #6b6b76); margin: 0; font-size: 0.97rem; }
+  .clients { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1px; background: var(--border, rgba(20,20,20,0.09)); border: 1px solid var(--border, rgba(20,20,20,0.09)); }
+  .clients li { background: #fff; }
+  .clients li > a, .clients li > div { display: flex; align-items: center; justify-content: center; height: 96px; padding: 1rem 1.25rem; text-decoration: none; color: var(--ink, #16151a); transition: background 0.2s; }
+  .clients li > a:hover { background: var(--offwhite, #f7f7f7); }
+  .clients img { max-width: 100%; max-height: 44px; object-fit: contain; filter: grayscale(1); opacity: 0.8; transition: opacity 0.2s; }
+  .clients a:hover img { opacity: 1; }
+  .client-name { font-weight: 600; font-size: 1.05rem; letter-spacing: 0.02em; text-align: center; color: #3a3a44; }
+  @media (max-width: 900px) { .segments-grid { grid-template-columns: 1fr; gap: 2.5rem; } .segments-section { padding: 3.5rem 0; } }
 </style>

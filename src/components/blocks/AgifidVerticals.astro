@@ -50,10 +50,10 @@ const b1 = btn(cta), b2 = btn(cta2);
 </section>
 
 <style>
-  .av-section { padding: 5rem 0; }
+  .av-section { padding: 5rem 0; background: var(--offwhite, #f7f7f7); border-top: 1px solid var(--border, rgba(20,20,20,0.09)); }
   .av-grid { display: grid; grid-template-columns: 5fr 6fr; gap: 4rem; align-items: start; }
   .av-agifid, .av-verticals { min-width: 0; }
-  h6 { color: var(--violet, #984895); margin-bottom: 0.6rem; }
+  h6 { color: var(--muted, #6b6b76); text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.78rem; font-weight: 600; margin-bottom: 0.8rem; }
   h3 { font-size: clamp(1.6rem, 1.2rem + 1.5vw, 2.3rem); line-height: 1.2; margin: 0 0 1.25rem; }
   .av-lead { font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.25rem; }
   .av-agifid ul { list-style: none; margin: 0 0 1.25rem; padding: 0; border-top: 1px solid var(--border, rgba(20,20,20,0.09)); }
@@ -61,12 +61,13 @@ const b1 = btn(cta), b2 = btn(cta2);
   .av-agifid li::before { content: ''; position: absolute; left: 0; top: 1.3em; width: 7px; height: 7px; border-radius: 50%; background: var(--violet, #984895); }
   .av-note { color: var(--muted, #6b6b76); font-size: 0.95rem; margin-bottom: 1.5rem; }
   .av-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-  .av-btn { display: inline-block; padding: 0.75rem 1.4rem; border: 1px solid var(--violet, #984895); border-radius: 999px; color: var(--violet, #984895); text-decoration: none; transition: background 0.2s, color 0.2s; }
+  .av-btn { display: inline-block; padding: 0.75rem 1.4rem; border: 1px solid var(--violet, #984895); border-radius: 4px; color: var(--violet, #984895); text-decoration: none; transition: background 0.2s, color 0.2s; }
   .av-btn:hover, .av-btn-main { background: var(--violet, #984895); color: #fff; }
   .av-btn-main:hover { background: var(--violet-light, #b05bad); }
-  .av-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.85rem; }
-  .av-list a { display: block; height: 100%; padding: 1rem 1.1rem; border: 1px solid var(--border, rgba(20,20,20,0.09)); border-radius: 12px; text-decoration: none; color: var(--ink, #16151a); transition: border-color 0.2s, transform 0.2s; }
-  .av-list a:hover { border-color: var(--violet, #984895); transform: translateY(-2px); }
+  .av-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border, rgba(20,20,20,0.09)); border: 1px solid var(--border, rgba(20,20,20,0.09)); }
+  .av-list li { background: #fff; }
+  .av-list a { display: block; height: 100%; padding: 1.1rem 1.25rem; border-left: 3px solid transparent; text-decoration: none; color: var(--ink, #16151a); transition: border-color 0.2s, background 0.2s; }
+  .av-list a:hover { border-left-color: var(--violet, #984895); background: var(--offwhite, #f7f7f7); }
   .av-list strong { display: block; font-size: 1.05rem; margin-bottom: 0.25rem; }
   .av-list span { display: block; color: var(--muted, #6b6b76); font-size: 0.9rem; line-height: 1.4; }
   @media (max-width: 900px) { .av-grid { grid-template-columns: 1fr; gap: 2.5rem; } .av-list { grid-template-columns: 1fr; } .av-section { padding: 3.5rem 0; } }
