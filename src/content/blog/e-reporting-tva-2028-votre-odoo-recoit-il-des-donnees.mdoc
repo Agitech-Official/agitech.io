@@ -1,0 +1,138 @@
+---
+title: "E-reporting TVA 2028 : votre Odoo reçoit-il des données ?"
+lang: "fr"
+publishedAt: "2026-11-06"
+category: "Transformation numérique"
+excerpt: "Le projet de loi e-reporting TVA 2028 passe par Peppol. Vos factures fournisseurs arrivent-elles en données dans Odoo, ou sont-elles ressaisies ?"
+---
+
+Posez une question simple à votre comptable fournisseurs : « Quand une facture arrive, tu tapes quelque chose ? »
+
+Si la réponse est « parfois », vous avez un sujet pour 2028. Le reporting TVA par facture ne se règle pas avec un module. Il dépend de la qualité des données qui entrent dans votre comptabilité. C'est un sujet de finance, de règles TVA et de données de base, pas seulement d'informatique.
+
+## Où en est le texte
+
+
+Le Conseil des ministres a approuvé le 18 juillet 2026 un avant-projet de loi.
+ Il modifie le Code de la TVA pour introduire une obligation d'e-reporting des données de facturation. Depuis, l'étape suivante a été franchie : 
+le gouvernement a déposé le projet de loi à la Chambre le 27 octobre 2026.
+ 
+Il doit encore être voté.
+
+
+Ce que le texte prévoit, en résumé :
+
+- 
+Une obligation à partir du 1er janvier 2028, avec un reporting des deux côtés : le fournisseur et le client transmettent chacun les données clés.
+
+- 
+Le reporting passe par le réseau Peppol, dans un délai maximal de cinq jours calendrier, sauf force majeure.
+ 
+L'arrêté royal fixera les délais exacts.
+
+- 
+Seules les informations déjà exigées sur la facture électronique structurée peuvent être demandées.
+
+- 
+La liste annuelle des clients disparaît
+ pour les opérations concernées. 
+Celle des opérations de 2027 reste due au 31 mars 2028.
+
+
+Une réserve importante. 
+Le projet de loi fixe le maximum de cinq jours et le recours à Peppol. L'arrêté royal doit encore déterminer les délais réels, les données obligatoires et les modalités de transmission.
+ Ne budgétez donc pas de développement sur des champs précis. Préparez le terrain.
+
+## Ce que cela change pour vos factures reçues
+
+On parle beaucoup de l'émission. Le texte vise aussi le client. Vos factures d'achat comptent autant que vos factures de vente.
+
+Autre point à noter. 
+Le reporting peut intervenir avant la validation métier de la facture.
+ Ce que vous déclarez part donc de la facture structurée reçue, pas de la version corrigée par votre équipe trois semaines plus tard.
+
+Voici notre lecture, à prendre comme une déduction et non comme une règle écrite : si quelqu'un modifie ou retape les montants, la TVA ou le fournisseur après réception, votre comptabilité peut s'écarter de ce que l'administration reçoit. Or 
+un écart entre les déclarations du fournisseur et du client n'est pas automatiquement une irrégularité, mais des écarts importants ou répétés peuvent déclencher un contrôle.
+ Autant ne pas en produire par négligence.
+
+## Le test : d'où vient chaque facture fournisseur ?
+
+Depuis le 1er janvier 2026, 
+les factures entre assujettis belges doivent être des factures électroniques structurées, normalement via Peppol. Un PDF par email ne compte plus.
+ 
+Des amendes graduées de 1 500, 3 000 puis 5 000 euros s'appliquent depuis le 1er avril 2026.
+
+
+En théorie, vos factures belges arrivent donc en données. En pratique, un flux d'achats mélange plusieurs chemins. Dans Odoo, il y en a quatre :
+
+1. **Peppol vers brouillon.** 
+Odoo vérifie plusieurs fois par jour les nouveaux documents et crée des factures fournisseurs en brouillon dans le journal d'achats choisi.
+ C'est le chemin propre.
+2. **Peppol vers Documents.** Si vous avez plusieurs journaux d'achats, les documents peuvent atterrir dans l'application Documents. 
+Quelqu'un doit alors sélectionner les pièces et cliquer sur « Créer une facture fournisseur ».
+ Les données restent structurées, mais un humain intervient.
+3. **Email avec XML ou PDF.** 
+Odoo lit directement un XML structuré (UBL, ZUGFeRD, Factur-X) sans OCR. Un PDF simple passe par la reconnaissance de texte.
+ L'OCR devine, il ne lit pas une donnée fiable.
+4. **Saisie manuelle.** Un PDF, un clavier, quelqu'un de bonne volonté.
+
+Les chemins 1 et 2 sont de la donnée. Le 4 est un risque. Le 3 dépend de ce que vos fournisseurs envoient.
+
+### Comment mesurer, concrètement
+
+Prenez le dernier trimestre. Sortez la liste des factures fournisseurs comptabilisées. Pour chacune, regardez si elle est arrivée par Peppol, par email ou par saisie. Selon votre configuration, la pièce jointe XML et la trace Peppol permettent de le voir. Si ce n'est pas lisible, c'est déjà un résultat.
+
+Puis posez trois questions à la finance :
+
+- Quelle part des factures reçues vient de Peppol ?
+- Parmi elles, combien sont modifiées entre le brouillon et la validation, et pourquoi ?
+- Quels fournisseurs envoient encore des PDF, et pour quelles raisons : fournisseur étranger, petit fournisseur, mauvaise adresse Peppol chez eux ou chez vous ?
+
+Attention aussi au coût de l'OCR. 
+La documentation d'Odoo 19 mentionne un service IAP facturé un crédit par document
+ pour la numérisation. Si ce poste grossit, c'est que la ressaisie déguisée grossit aussi.
+
+## Les données de base : le vrai chantier
+
+Quand les factures arrivent en données, le travail se déplace. Il porte sur les fiches fournisseurs, clients et taxes.
+
+Un cabinet de conseil spécialisé en ERP recommande, parmi les actions sans regret : 
+dédoublonner clients et fournisseurs, valider les numéros de TVA, documenter la détermination des taxes et nommer un responsable des exceptions.
+ Nous partageons cet avis. Dans Odoo, cela donne :
+
+- **Doublons de partenaires.** 
+La ressaisie manuelle et les fiches en double augmentent le risque de décalage.
+ Deux fiches pour le même fournisseur, et la facture Peppol s'attache à la mauvaise.
+- **Identifiants Peppol.** 
+Un identifiant client saisi sans le bon schéma provoque des rejets.
+ 
+Pour une entreprise belge, le schéma est 0208, celui du numéro BCE.
+
+- **Codes taxes.** Documentez quel code TVA correspond à quelle situation : vente intérieure, intracommunautaire, autoliquidation, note de crédit. C'est la finance qui décide, pas le développeur.
+- **Compte et taxe par défaut par fournisseur.** Plus ils sont justes, moins on corrige à la main.
+
+Le périmètre compte aussi. 
+Les assujettis non établis en Belgique mais identifiés à la TVA ne seraient pas soumis à l'e-reporting obligatoire.
+ Si vous avez une société étrangère avec un numéro belge, vérifiez son cas séparément.
+
+## Votre version d'Odoo compte
+
+
+Le module Peppol existe de la version 16 à la version 20, mais seules les versions 18, 19 et 20 sont encore en support standard
+, selon un guide de partenaire que nous avons consulté. Les correctifs réglementaires n'arriveront pas sur une version hors support. Si vous êtes en 17 ou avant, la question de la migration se posera avant celle de l'e-reporting.
+
+Nous n'avons pas trouvé, au moment d'écrire, d'annonce officielle d'Odoo détaillant une fonction d'e-reporting belge. Méfiez-vous des promesses de « compatibilité 2028 » : 
+le SPF Finances a dit viser au moins un an de préparation après la publication du cadre légal.
+ Les spécifications ne sont pas finales.
+
+## Ce qu'on peut faire dès maintenant
+
+1. **Mesurez** la part de factures reçues en données et celle qui est ressaisie.
+2. **Nettoyez** les fiches partenaires : doublons, numéros de TVA, identifiants Peppol.
+3. **Écrivez** les règles de taxes par type d'opération, validées par la finance.
+4. **Nommez** un responsable des exceptions : facture rejetée, écart, correction.
+5. **Contrôlez** la version d'Odoo et la configuration Peppol, journal et Documents compris.
+
+Le but est d'arriver en 2028 avec un flux déjà propre. Quand l'arrêté royal paraîtra, il vous restera à brancher une règle, pas à nettoyer trois ans de données.
+
+Si vous voulez un état des lieux de votre flux d'achats dans Odoo, notre équipe de [support Odoo](/support/) peut l'examiner avec votre finance. Si vos données de base sont à reprendre ou si votre version est ancienne, parlons d'abord de [migration de données](/migration/).
