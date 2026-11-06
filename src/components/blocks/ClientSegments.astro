@@ -50,11 +50,11 @@ const { title, subTitle, segments = [] } = Astro.props;
   .segment-label { display: block; color: var(--violet, #984895); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.6rem; }
   .segment-top h4 { font-size: 1.35rem; margin: 0 0 0.5rem; }
   .segment-top p { color: var(--muted, #6b6b76); margin: 0; font-size: 0.97rem; }
-  .clients { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1px; background: var(--border, rgba(20,20,20,0.09)); border: 1px solid var(--border, rgba(20,20,20,0.09)); }
-  .clients li { background: #fff; }
+  .clients { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0; border-top: 1px solid var(--border, rgba(20,20,20,0.09)); border-left: 1px solid var(--border, rgba(20,20,20,0.09)); }
+  .clients li { border-right: 1px solid var(--border, rgba(20,20,20,0.09)); border-bottom: 1px solid var(--border, rgba(20,20,20,0.09)); }
   .clients li > a, .clients li > div { display: flex; align-items: center; justify-content: center; height: 96px; padding: 1rem 1.25rem; text-decoration: none; color: var(--ink, #16151a); transition: background 0.2s; }
   .clients li > a:hover { background: var(--offwhite, #f7f7f7); }
-  .clients img { max-width: 100%; max-height: 44px; object-fit: contain; filter: grayscale(1); opacity: 0.8; transition: opacity 0.2s; }
+  .clients img { width: 100%; height: 56px; object-fit: contain; filter: grayscale(1); opacity: 0.8; transition: opacity 0.2s; }
   .clients a:hover img { opacity: 1; }
   .client-name { font-weight: 600; font-size: 1.05rem; letter-spacing: 0.02em; text-align: center; color: #3a3a44; }
   @media (max-width: 900px) { .segments-grid { grid-template-columns: 1fr; gap: 2.5rem; } .segments-section { padding: 3.5rem 0; } }

@@ -58,4 +58,7 @@ export default defineConfig({
       },
     }),
   ],
+  // Dev only: scan just our own pages, so Vite's esbuild dep scan doesn't crawl Keystatic's injected
+  // routes (they import virtual:keystatic-config, which esbuild can't resolve -> overlay error).
+  vite: { optimizeDeps: { entries: ['src/pages/**/*.astro'] } },
 });
