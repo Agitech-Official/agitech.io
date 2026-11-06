@@ -58,6 +58,8 @@ const blocksField = fields.array(
         { label: 'Forfait — Cas exemples', value: 'forfaitCases' },
         { label: 'Galerie de captures d\'écran', value: 'screenshotGallery' },
         { label: 'Agitech Apps — Une app', value: 'appSection' },
+        { label: 'Accueil — Réalisations par segment (MMC / PME)', value: 'clientSegments' },
+        { label: 'Accueil — AgiFid et verticaux', value: 'agifidVerticals' },
       ],
       defaultValue: 'heroHome',
     }),
@@ -518,6 +520,45 @@ const blocksField = fields.array(
         intro: fields.text({ label: 'Intro', multiline: true }),
         count: fields.integer({ label: 'Nombre de placeholders', defaultValue: 3 }),
       }, { label: 'Forfait — Placeholder' }),
+      clientSegments: fields.object({
+        title: fields.text({ label: 'Surtitre' }),
+        subTitle: fields.text({ label: 'Titre' }),
+        segments: fields.array(
+          fields.object({
+            label: fields.text({ label: 'Étiquette (ex. MMC)' }),
+            name: fields.text({ label: 'Nom du segment' }),
+            description: fields.text({ label: 'Description', multiline: true }),
+            clients: fields.array(
+              fields.object({
+                name: fields.text({ label: 'Nom du client' }),
+                logo: imageField('Logo (sinon le nom est affiché)', 'blocks'),
+                href: fields.text({ label: 'Lien vers le cas client (facultatif)' }),
+              }),
+              { label: 'Clients', itemLabel: props => props.fields.name.value || 'Client' },
+            ),
+          }),
+          { label: 'Segments', itemLabel: props => props.fields.label.value || 'Segment' },
+        ),
+      }, { label: 'Accueil — Réalisations par segment' }),
+      agifidVerticals: fields.object({
+        eyebrow: fields.text({ label: 'Surtitre AgiFid' }),
+        title: fields.text({ label: 'Titre AgiFid' }),
+        text: fields.text({ label: 'Texte AgiFid', multiline: true }),
+        bullets: fields.array(fields.text({ label: 'Point' }), { label: 'Points', itemLabel: props => props.value || 'Point' }),
+        note: fields.text({ label: 'Mention (indépendance)', multiline: true }),
+        cta: fields.object(ctaFields, { label: 'Bouton principal' }),
+        cta2: fields.object(ctaFields, { label: 'Bouton secondaire' }),
+        verticalsTitle: fields.text({ label: 'Surtitre verticaux' }),
+        verticalsSubTitle: fields.text({ label: 'Titre verticaux' }),
+        verticals: fields.array(
+          fields.object({
+            label: fields.text({ label: 'Nom' }),
+            text: fields.text({ label: 'Phrase', multiline: true }),
+            href: fields.text({ label: 'Lien' }),
+          }),
+          { label: 'Verticaux', itemLabel: props => props.fields.label.value || 'Vertical' },
+        ),
+      }, { label: 'Accueil — AgiFid et verticaux' }),
       appSection: fields.object({
         number: fields.text({ label: 'Numéro (ex. 01)' }),
         icon: imageField('Icône', 'blocks'),

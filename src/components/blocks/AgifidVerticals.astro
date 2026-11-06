@@ -1,0 +1,73 @@
+---
+// Home: the AgiFid accounting service (sister fiduciary, independent company) next to our industry verticals.
+type L = { label?: string; url?: string; newTab?: boolean };
+export interface Props {
+  eyebrow?: string;
+  title?: string;
+  text?: string;
+  bullets?: string[];
+  note?: string;
+  cta?: L;
+  cta2?: L;
+  verticalsTitle?: string;
+  verticalsSubTitle?: string;
+  verticals?: { label?: string; text?: string; href?: string }[];
+}
+const { eyebrow, title, text, bullets = [], note, cta, cta2, verticalsTitle, verticalsSubTitle, verticals = [] } = Astro.props;
+const btn = (l?: L) => l?.url && l?.label ? { href: l.url, label: l.label, ext: !!l.newTab } : null;
+const b1 = btn(cta), b2 = btn(cta2);
+---
+<section class="av-section">
+  <div class="container">
+    <div class="av-grid">
+      <div class="av-agifid">
+        {eyebrow && <h6>{eyebrow}</h6>}
+        {title && <h3>{title}</h3>}
+        {text && <p class="av-lead">{text}</p>}
+        {bullets.length > 0 && <ul>{bullets.map(b => <li>{b}</li>)}</ul>}
+        {note && <p class="av-note">{note}</p>}
+        <div class="av-actions">
+          {b1 && <a class="av-btn av-btn-main" href={b1.href} target={b1.ext ? '_blank' : undefined} rel={b1.ext ? 'noopener' : undefined}>{b1.label}</a>}
+          {b2 && <a class="av-btn" href={b2.href} target={b2.ext ? '_blank' : undefined} rel={b2.ext ? 'noopener' : undefined}>{b2.label}</a>}
+        </div>
+      </div>
+      <div class="av-verticals">
+        {verticalsTitle && <h6>{verticalsTitle}</h6>}
+        {verticalsSubTitle && <h3>{verticalsSubTitle}</h3>}
+        <ul class="av-list">
+          {verticals.map(v => (
+            <li>
+              <a href={v.href}>
+                <strong>{v.label}</strong>
+                {v.text && <span>{v.text}</span>}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .av-section { padding: 5rem 0; }
+  .av-grid { display: grid; grid-template-columns: 5fr 6fr; gap: 4rem; align-items: start; }
+  .av-agifid, .av-verticals { min-width: 0; }
+  h6 { color: var(--violet, #984895); margin-bottom: 0.6rem; }
+  h3 { font-size: clamp(1.6rem, 1.2rem + 1.5vw, 2.3rem); line-height: 1.2; margin: 0 0 1.25rem; }
+  .av-lead { font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.25rem; }
+  .av-agifid ul { list-style: none; margin: 0 0 1.25rem; padding: 0; border-top: 1px solid var(--border, rgba(20,20,20,0.09)); }
+  .av-agifid li { position: relative; padding: 0.75rem 0 0.75rem 1.5rem; border-bottom: 1px solid var(--border, rgba(20,20,20,0.09)); }
+  .av-agifid li::before { content: ''; position: absolute; left: 0; top: 1.3em; width: 7px; height: 7px; border-radius: 50%; background: var(--violet, #984895); }
+  .av-note { color: var(--muted, #6b6b76); font-size: 0.95rem; margin-bottom: 1.5rem; }
+  .av-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .av-btn { display: inline-block; padding: 0.75rem 1.4rem; border: 1px solid var(--violet, #984895); border-radius: 999px; color: var(--violet, #984895); text-decoration: none; transition: background 0.2s, color 0.2s; }
+  .av-btn:hover, .av-btn-main { background: var(--violet, #984895); color: #fff; }
+  .av-btn-main:hover { background: var(--violet-light, #b05bad); }
+  .av-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.85rem; }
+  .av-list a { display: block; height: 100%; padding: 1rem 1.1rem; border: 1px solid var(--border, rgba(20,20,20,0.09)); border-radius: 12px; text-decoration: none; color: var(--ink, #16151a); transition: border-color 0.2s, transform 0.2s; }
+  .av-list a:hover { border-color: var(--violet, #984895); transform: translateY(-2px); }
+  .av-list strong { display: block; font-size: 1.05rem; margin-bottom: 0.25rem; }
+  .av-list span { display: block; color: var(--muted, #6b6b76); font-size: 0.9rem; line-height: 1.4; }
+  @media (max-width: 900px) { .av-grid { grid-template-columns: 1fr; gap: 2.5rem; } .av-list { grid-template-columns: 1fr; } .av-section { padding: 3.5rem 0; } }
+</style>

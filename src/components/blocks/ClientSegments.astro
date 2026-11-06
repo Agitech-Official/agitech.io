@@ -1,0 +1,59 @@
+---
+// Home: our clients split by size (MMC = mid-market corporate, PME). A tile shows the client's logo
+// when we have one, its name otherwise; it links to the case study when there is one.
+import { blockImg } from '../../lib/img';
+type Client = { name: string; logo?: string; href?: string };
+type Segment = { label?: string; name?: string; description?: string; clients?: Client[] };
+export interface Props {
+  title?: string;
+  subTitle?: string;
+  segments?: Segment[];
+}
+const { title, subTitle, segments = [] } = Astro.props;
+---
+<section class="segments-section">
+  <div class="container">
+    <div class="segments-head">
+      {title && <h6>{title}</h6>}
+      {subTitle && <h3>{subTitle}</h3>}
+    </div>
+    <div class="segments-grid">
+      {segments.map(s => (
+        <div class="segment">
+          <div class="segment-top">
+            {s.label && <span class="segment-label">{s.label}</span>}
+            {s.name && <h4>{s.name}</h4>}
+            {s.description && <p>{s.description}</p>}
+          </div>
+          <ul class="clients">
+            {(s.clients ?? []).map(c => {
+              const inner = c.logo
+                ? <img src={blockImg(c.logo)} alt={c.name} loading="lazy">
+                : <span class="client-name">{c.name}</span>;
+              return <li>{c.href ? <a href={c.href} aria-label={c.name}>{inner}</a> : <div>{inner}</div>}</li>;
+            })}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .segments-section { padding: 5rem 0; background: var(--offwhite, #f7f7f7); }
+  .segments-head { text-align: center; margin-bottom: 3rem; }
+  .segments-head h6 { color: var(--violet, #984895); margin-bottom: 0.6rem; }
+  .segments-head h3 { font-size: clamp(1.6rem, 1.2rem + 1.5vw, 2.3rem); margin: 0; }
+  .segments-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.75rem; }
+  .segment { background: #fff; border: 1px solid var(--border, rgba(20,20,20,0.09)); border-radius: 18px; padding: 2rem; display: flex; flex-direction: column; gap: 1.75rem; }
+  .segment-label { display: inline-block; padding: 0.25rem 0.8rem; border-radius: 999px; background: var(--violet, #984895); color: #fff; font-size: 0.85rem; letter-spacing: 0.06em; margin-bottom: 0.9rem; }
+  .segment-top h4 { font-size: 1.5rem; margin: 0 0 0.5rem; }
+  .segment-top p { color: var(--muted, #6b6b76); margin: 0; }
+  .clients { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.85rem; }
+  .clients li > a, .clients li > div { display: flex; align-items: center; justify-content: center; height: 92px; padding: 0.75rem 1rem; border: 1px solid var(--border, rgba(20,20,20,0.09)); border-radius: 12px; text-decoration: none; color: var(--ink, #16151a); transition: border-color 0.2s, transform 0.2s; }
+  .clients li > a:hover { border-color: var(--violet, #984895); transform: translateY(-2px); }
+  .clients img { max-width: 100%; max-height: 58px; object-fit: contain; filter: grayscale(1); opacity: 0.85; }
+  .clients a:hover img { filter: none; opacity: 1; }
+  .client-name { font-family: var(--font-heading, inherit); font-size: 1.2rem; font-weight: 600; letter-spacing: 0.01em; text-align: center; }
+  @media (max-width: 900px) { .segments-grid { grid-template-columns: 1fr; } .segments-section { padding: 3.5rem 0; } }
+</style>
