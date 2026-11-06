@@ -1,0 +1,88 @@
+---
+title: "E-reporting btw 2028: ontvangt uw Odoo wel data?"
+lang: "nl"
+publishedAt: "2026-11-06"
+category: "Digitale transformatie"
+excerpt: "Het wetsontwerp e-reporting btw 2028 loopt via Peppol. Komen uw aankoopfacturen als data binnen in Odoo, of worden ze overgetikt?"
+---
+
+Stel uw boekhouder leveranciers een eenvoudige vraag: “Als er een factuur binnenkomt, typ je dan iets in?”
+
+Als het antwoord “soms” is, dan hebt u een dossier voor 2028. De btw-rapportering per factuur los je niet op met een module. Ze hangt af van de kwaliteit van de gegevens die in uw boekhouding terechtkomen. Het is een kwestie van financiën, btw-regels en basisgegevens, niet enkel van IT.
+
+## Waar staat de tekst nu
+
+De ministerraad keurde op 18 juli 2026 een voorontwerp van wet goed. Het wijzigt het Btw-wetboek om een verplichte e-reporting van factuurgegevens in te voeren. Intussen is de volgende stap gezet: de regering diende het wetsontwerp op 27 oktober 2026 in bij de Kamer. Het moet nog worden gestemd.
+
+Wat de tekst voorziet, in het kort:
+
+- Een verplichting vanaf 1 januari 2028, met rapportering langs beide kanten: de leverancier en de klant bezorgen elk de kerngegevens.
+- De rapportering verloopt via het Peppol-netwerk, binnen een maximumtermijn van vijf kalenderdagen, behalve in geval van overmacht. Het koninklijk besluit zal de exacte termijnen vastleggen.
+- Enkel informatie die al vereist is op de gestructureerde elektronische factuur, mag worden opgevraagd.
+- De jaarlijkse klantenlisting verdwijnt voor de betrokken verrichtingen. De listing van de verrichtingen van 2027 blijft verschuldigd op 31 maart 2028.
+
+Een belangrijk voorbehoud: het wetsontwerp legt het maximum van vijf dagen en het gebruik van Peppol vast. Het koninklijk besluit moet nog de effectieve termijnen, de verplichte gegevens en de wijze van doorgifte bepalen. Budgetteer dus geen ontwikkelwerk voor specifieke velden. Bereid het terrein voor.
+
+## Wat dit verandert voor uw ontvangen facturen
+
+Er wordt veel gesproken over de uitgifte van facturen. De tekst viseert ook de klant. Uw aankoopfacturen tellen even zwaar als uw verkoopfacturen.
+
+Nog een aandachtspunt: de rapportering kan plaatsvinden vóór de inhoudelijke goedkeuring van de factuur. Wat u meldt, vertrekt dus van de ontvangen gestructureerde factuur, niet van de versie die uw team drie weken later heeft verbeterd.
+
+Hier is onze lezing, die u moet beschouwen als een afleiding en niet als een geschreven regel: als iemand na ontvangst de bedragen, de btw of de leverancier wijzigt of opnieuw intikt, kan uw boekhouding afwijken van wat de administratie ontvangt. Een verschil tussen de aangiften van de leverancier en die van de klant is niet automatisch een onregelmatigheid, maar grote of herhaalde verschillen kunnen een controle uitlokken. Het is beter om er geen te veroorzaken door onzorgvuldigheid.
+
+## De test: waar komt elke leveranciersfactuur vandaan?
+
+Sinds 1 januari 2026 moeten facturen tussen Belgische btw-plichtigen gestructureerde elektronische facturen zijn, normaal via Peppol. Een pdf per e-mail volstaat niet meer. Sinds 1 april 2026 gelden oplopende boetes van 1.500, 3.000 en vervolgens 5.000 euro.
+
+In theorie komen uw Belgische facturen dus als data binnen. In de praktijk combineert een aankoopstroom meerdere wegen. In Odoo zijn dat er vier:
+
+1. **Peppol naar concept.** Odoo controleert meerdere keren per dag op nieuwe documenten en maakt leveranciersfacturen aan in concept, in het aankoopdagboek dat u hebt gekozen. Dit is de nette weg.
+2. **Peppol naar Documents.** Als u meerdere aankoopdagboeken hebt, kunnen de documenten in de applicatie Documents terechtkomen. Iemand moet dan de stukken selecteren en op “Leveranciersfactuur aanmaken” klikken. De gegevens blijven gestructureerd, maar er komt een mens aan te pas.
+3. **E-mail met XML of pdf.** Odoo leest een gestructureerde XML (UBL, ZUGFeRD, Factur-X) rechtstreeks, zonder OCR. Een gewone pdf gaat langs tekstherkenning. OCR gokt, het leest geen betrouwbaar gegeven.
+4. **Manuele invoer.** Een pdf, een toetsenbord en iemand met goede wil.
+
+Weg 1 en 2 zijn data. Weg 4 is een risico. Weg 3 hangt af van wat uw leveranciers versturen.
+
+### Hoe u dit concreet meet
+
+Neem het laatste kwartaal. Haal de lijst van de geboekte leveranciersfacturen op. Kijk voor elke factuur of ze via Peppol, e-mail of manuele invoer is binnengekomen. Afhankelijk van uw configuratie kunt u dat zien aan de XML-bijlage en het Peppol-spoor. Als dat niet leesbaar is, is dat al een resultaat.
+
+Stel vervolgens drie vragen aan de financiële afdeling:
+
+- Welk deel van de ontvangen facturen komt via Peppol binnen?
+- Hoeveel daarvan worden tussen concept en validatie gewijzigd, en waarom?
+- Welke leveranciers sturen nog pdf’s, en om welke redenen: buitenlandse leverancier, kleine leverancier, verkeerd Peppol-adres bij hen of bij u?
+
+Let ook op de kostprijs van OCR. De documentatie van Odoo 19 vermeldt een IAP-dienst die één krediet per document aanrekent voor de digitalisering. Als die kostenpost groeit, groeit ook de verkapte herinvoer.
+
+## De basisgegevens: de echte werf
+
+Wanneer de facturen als data binnenkomen, verschuift het werk. Het draait dan om de fiches van leveranciers, klanten en btw-codes.
+
+Een adviesbureau gespecialiseerd in ERP beveelt onder de “no-regretacties” aan: klanten en leveranciers ontdubbelen, btw-nummers valideren, de bepaling van de btw documenteren en een verantwoordelijke voor uitzonderingen aanduiden. Wij delen dat advies. In Odoo vertaalt zich dat als volgt:
+
+- **Dubbele partners.** Manuele herinvoer en dubbele fiches verhogen het risico op afwijkingen. Twee fiches voor dezelfde leverancier, en de Peppol-factuur wordt aan de verkeerde gekoppeld.
+- **Peppol-identificatiegegevens.** Een klantidentificatie die zonder het juiste schema is ingevoerd, leidt tot weigeringen. Voor een Belgische onderneming is het schema 0208, dat van het KBO-nummer.
+- **Btw-codes.** Documenteer welke btw-code bij welke situatie hoort: binnenlandse verkoop, intracommunautaire verkoop, verlegging van heffing, creditnota. De financiële afdeling beslist, niet de ontwikkelaar.
+- **Standaardrekening en standaardbelasting per leverancier.** Hoe correcter die zijn, hoe minder men manueel moet corrigeren.
+
+Ook het toepassingsgebied telt. Btw-plichtigen die niet in België gevestigd zijn maar er wel btw-geïdentificeerd zijn, zouden niet onderworpen zijn aan de verplichte e-reporting. Als u een buitenlandse vennootschap met een Belgisch nummer hebt, controleer dan haar situatie afzonderlijk.
+
+## Uw Odoo-versie telt
+
+De Peppol-module bestaat van versie 16 tot en met versie 20, maar enkel versies 18, 19 en 20 worden nog in standaardsupport ondersteund, volgens een partnergids die we hebben geraadpleegd. Reglementaire correcties zullen niet beschikbaar zijn voor een versie buiten support. Als u op versie 17 of ouder zit, zal de vraag naar migratie zich stellen vóór die van e-reporting.
+
+Op het moment van schrijven vonden we geen officiële aankondiging van Odoo die een Belgische e-reportingfunctie beschrijft. Wees dus op uw hoede voor beloftes van “compatibiliteit 2028”: de FOD Financiën heeft aangegeven minstens een jaar voorbereidingstijd te willen na de publicatie van het wettelijk kader. De specificaties zijn niet definitief.
+
+## Wat u nu al kunt doen
+
+1. **Meet** het aandeel ontvangen facturen als data en het aandeel dat opnieuw wordt ingetikt.
+2. **Ruim** de partnerfiches **op**: dubbels, btw-nummers, Peppol-identificatiegegevens.
+3. **Schrijf** de btw-regels per type verrichting **uit**, gevalideerd door de financiële afdeling.
+4. **Duid** een verantwoordelijke voor uitzonderingen **aan**: geweigerde factuur, afwijking, correctie.
+5. **Controleer** uw Odoo-versie en de Peppol-configuratie, inclusief dagboek en Documents.
+
+Het doel is om in 2028 aan te komen met een stroom die al zuiver is. Wanneer het koninklijk besluit verschijnt, hoeft u enkel nog een regel aan te sluiten, in plaats van drie jaar aan gegevens op te kuisen.
+
+Wenst u een stand van zaken van uw aankoopstroom in Odoo? Ons team van [Odoo-support](/nl/support/) kan die samen met uw financiële afdeling onderzoeken. Moeten uw basisgegevens worden hernomen of is uw versie oud, laten we dan eerst praten over [datamigratie](/nl/migration/).
