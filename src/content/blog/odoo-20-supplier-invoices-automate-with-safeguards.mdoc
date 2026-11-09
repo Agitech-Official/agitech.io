@@ -1,0 +1,99 @@
+---
+title: "Odoo 20 supplier invoices: automate with safeguards"
+lang: "en"
+publishedAt: "2026-11-09"
+category: "Odoo"
+excerpt: "Odoo 20 can post your recurring invoices on its own. Which suppliers to hand over first, and which controls a business owner should keep."
+---
+
+Odoo 20 was unveiled on 24 September 2026 at Odoo Experience in Brussels. Since then, the demos have shown an invoice that posts itself. It is appealing. But nobody says what a business owner should lock down before letting it run.
+
+Here is a step-by-step approach. It starts with the simplest suppliers and stops where human judgement becomes necessary again.
+
+## What Odoo does, and what is not new
+
+The mechanism is simple. After three consecutive invoices confirmed without any changes, Odoo offers automatic validation.
+
+Subsequent invoices are then scanned and posted automatically, with an alert if the amount is identical to the previous one.
+
+A useful clarification: this setting did not originate with Odoo 20. The 18.0 documentation already offers, per supplier, the options Always, Ask after 3 validations without edits, or Never. What changes in version 20 is the safety net around it. Duplicate detection works on two levels: red for a very likely duplicate, yellow for a potential duplicate to check before posting.
+
+Matching between invoice and purchase order also flags a price or quantity that differs from what was expected.
+
+The accountant does not disappear as a result. Their role changes: they supervise instead of keying in data.
+
+## Step 1: start with recurring suppliers received via Peppol
+
+Since 1 January 2026, invoices between Belgian VAT-registered businesses must be structured electronic invoices, exchanged via Peppol. Your recurring suppliers are therefore already sending you structured data, not PDFs that have to be guessed at. These invoices arrive either as a draft vendor bill or in the Documents app.
+
+A structured XML file avoids OCR reading. According to a third-party guide, Odoo reads UBL 2.1 directly, which bypasses OCR and IAP credits. That is a clear advantage: fewer reading errors and fewer credits consumed.
+
+Good candidates share three characteristics:
+
+- the invoice arrives every month or every quarter;
+- the structure does not change (same lines, same account, same VAT);
+- no purchase order or goods receipt needs to be checked.
+
+Think telecoms, energy, hosting and software subscriptions. An integrator recommends reserving automatic posting for predictable suppliers, and never applying it as a global setting where lines vary or an order has to be matched. We agree.
+
+## Step 2: activate supplier by supplier, never in bulk
+
+The setting is found on the supplier record. In Accounting, Vendors, Accounting tab, the automatic posting field offers the three options.
+
+There are three technical conditions to be aware of:
+
+- automatic scanning must be enabled for vendor bills;
+- the supplier must already exist in the database;
+- each invoice must carry an invoice date.
+
+One point to test before promising anything: the documentation ties the option to scanning. I have not found a source confirming the exact behaviour for a Peppol invoice received as XML. Run a test on a copy of your database, with a real supplier.
+
+## Safeguard 1: duplicates and identical amounts
+
+This is an underestimated trap. A rent payment or subscription has, by definition, the same amount every month. Yet Odoo displays a potential duplicate warning when the amount is identical to the previous invoice.
+
+There are two consequences:
+
+1. For your fixed-amount suppliers, the alert is likely to come back every month. If the team ignores it out of habit, it no longer protects anything.
+2. I have not seen a source saying whether this warning blocks posting or remains a simple alert. Check this on your version.
+
+Also keep the safety net on the payment side. Odoo 20 announces a block on double payments. And if you pay from Odoo, remember that invoice payments can be made individually or in batches, but availability depends on your bank and your country.
+
+## Safeguard 2: who validates what
+
+This is the heart of the internal control framework. Write it on one page, sign it, apply it.
+
+- **The business owner or finance director decides** which suppliers move to automatic posting. Not the accountant alone, and not the assistant who saw the pop-up appear.
+- **The accountant keeps control** of every new supplier, every supplier with a purchase order and every invoice that falls outside the ordinary.
+- **Access rights** limit who can change this setting on a supplier record. To be configured, not assumed.
+- **The person who pays is not the person who activates the automation.** Separate the roles, especially if payment is made from Odoo.
+- **Any change to the bank details** of an automated supplier goes back through a human check. This is my recommendation, not a native feature that I have been able to confirm.
+
+Also set a threshold in euros above which an invoice is reviewed, even for an automated supplier. The amount of the threshold depends on your organisation. What you cannot delegate is having one.
+
+## Safeguard 3: AI credits
+
+According to the release notes, all of Odoo 20's AI features now require credits purchased via IAP. According to a partner, each credit costs €1 and each database receives 20 free credits. Odoo does not publish a price per feature. Check these figures against your contract before budgeting.
+
+For invoices, two points matter:
+
+- PDF scanning would consume one prepaid credit per document. This source specifies that scanning has its own balance, separate from the AI agent credits. Check the balance of each service.
+- One source indicates that, as of 7 October 2026, Odoo 20's matching and duplicate checks rely on rules, not on AI. Your safeguards should therefore not depend on your credit balance. To be confirmed on your database.
+
+Appoint one person to monitor consumption. Another partner recommends deciding from the outset who keeps an eye on usage. An invoice left in draft for lack of credits is a better incident than an invoice that was misread and posted.
+
+## Monthly review: ten minutes that justify everything else
+
+Once a month, the finance director or business owner looks at three things:
+
+1. the list of automatically posted invoices, supplier by supplier;
+2. the red and yellow duplicate alerts, and what was done about them;
+3. the credit balance and its consumption.
+
+If a supplier's behaviour changes (extra lines, drifting amounts), switch them back to "Never" and check their invoices by hand for a few cycles. Automation can be withdrawn as easily as it is activated.
+
+## Where to start on Monday
+
+Take five recurring suppliers received via Peppol. Write the validation rule. Activate two of them, observe for a month, then widen the scope. No faster than that.
+
+If you would like to check your Peppol configuration, your access rights and the real behaviour of these alerts on your database, our [Odoo support](/en/support/) team can review it with you. And if the subject is part of a wider project, take a look at our approach to [Odoo implementation](/en/odoo-erp/).
