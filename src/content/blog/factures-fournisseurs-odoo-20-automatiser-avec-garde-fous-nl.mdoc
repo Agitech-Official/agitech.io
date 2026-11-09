@@ -1,0 +1,99 @@
+---
+title: "Aankoopfacturen automatiseren in Odoo 20 met controle"
+lang: "nl"
+publishedAt: "2026-11-09"
+category: "Odoo"
+excerpt: "Odoo 20 boekt uw terugkerende aankoopfacturen zelf. Welke leveranciers eerst, en welke controles een bedrijfsleider zelf moet blijven uitvoeren."
+---
+
+Odoo 20 werd op 24 september 2026 voorgesteld op Odoo Experience in Brussel. Sindsdien tonen de demo's een factuur die zichzelf boekt. Dat klinkt aantrekkelijk. Maar niemand zegt wat een bedrijfsleider moet vastleggen voordat hij dit laat gebeuren.
+
+Hier volgt een stappenplan. Het vertrekt van de eenvoudigste leveranciers en stopt waar menselijk oordeel weer nodig is.
+
+## Wat Odoo doet, en wat niet nieuw is
+
+Het mechanisme is eenvoudig. Na drie opeenvolgende facturen die zonder wijziging bevestigd zijn, stelt Odoo automatische validatie voor.
+
+De volgende facturen worden vervolgens automatisch gedigitaliseerd en geboekt, met een waarschuwing als het bedrag identiek is aan dat van de vorige factuur.
+
+Een nuttige verduidelijking: deze instelling is niet ontstaan met Odoo 20. De documentatie van versie 18.0 biedt per leverancier al de opties Altijd, Vragen na 3 validaties zonder wijziging, of Nooit. Wat verandert met versie 20, is het vangnet errond. De detectie van dubbele facturen werkt op twee niveaus: rood voor een zeer waarschijnlijke dubbele factuur, geel voor een mogelijke dubbele factuur die u vóór het boeken moet nakijken.
+
+De afstemming tussen factuur en inkooporder meldt bovendien een prijs of hoeveelheid die afwijkt van wat verwacht werd.
+
+De boekhouder verdwijnt daarmee niet. Hij krijgt een andere rol: hij superviseert in plaats van in te boeken.
+
+## Stap 1: begin met terugkerende leveranciers van wie u facturen via Peppol ontvangt
+
+Sinds 1 januari 2026 moeten facturen tussen Belgische btw-plichtige ondernemingen gestructureerde elektronische facturen zijn, uitgewisseld via Peppol. Uw terugkerende leveranciers sturen u dus al gestructureerde gegevens, geen pdf's die u moet ontcijferen. Deze facturen komen aan als ontwerp van aankoopfactuur of in de app Documenten.
+
+Een gestructureerd XML-bestand maakt uitlezen via OCR overbodig. Volgens een gids van een externe partij leest Odoo UBL 2.1 rechtstreeks, waardoor OCR en IAP-credits worden omzeild. Dat is een duidelijk voordeel: minder leesfouten en minder verbruikte credits.
+
+Goede kandidaten hebben drie kenmerken gemeen:
+
+- de factuur komt elke maand of elk kwartaal binnen;
+- de structuur verandert niet (dezelfde lijnen, dezelfde rekening, dezelfde btw);
+- er moet geen inkooporder of goederenontvangst gecontroleerd worden.
+
+Denk aan telecom, energie, hosting en softwareabonnementen. Een integrator raadt aan om automatisch boeken voor te behouden aan voorspelbare leveranciers, en het nooit als algemene instelling te hanteren wanneer de lijnen variëren of een bestelling moet worden afgestemd. Wij delen die mening.
+
+## Stap 2: activeer leverancier per leverancier, nooit in bulk
+
+De instelling vindt u op de leveranciersfiche. Onder Boekhouding, Leveranciers, tabblad Boekhouding, biedt het veld voor automatisch boeken de drie opties aan.
+
+Drie technische voorwaarden om te kennen:
+
+- de automatische digitalisering moet geactiveerd zijn voor aankoopfacturen;
+- de leverancier moet al in de database bestaan;
+- elke factuur moet een factuurdatum bevatten.
+
+Een punt om te testen voordat u iets belooft: de documentatie koppelt de optie aan de digitalisering. Ik heb geen bron gevonden die het exacte gedrag bevestigt voor een Peppol-factuur die als XML wordt ontvangen. Doe de proef op een kopie van uw database, met een echte leverancier.
+
+## Waarborg 1: dubbele facturen en identiek bedrag
+
+Dit is een onderschatte valkuil. Een huur of een abonnement heeft per definitie elke maand hetzelfde bedrag. Odoo toont echter een waarschuwing voor een mogelijke dubbele factuur wanneer het bedrag identiek is aan dat van de vorige factuur.
+
+Dat heeft twee gevolgen:
+
+1. Bij leveranciers met een vast bedrag dreigt de waarschuwing elke maand terug te komen. Als het team ze uit gewoonte negeert, beschermt ze niets meer.
+2. Ik heb geen bron gezien die zegt of deze waarschuwing het boeken blokkeert of slechts een eenvoudige melding blijft. Controleer dit in uw versie.
+
+Behoud ook het vangnet aan de betaalzijde. Odoo 20 kondigt een blokkering van dubbele betalingen aan. En als u vanuit Odoo betaalt, onthoud dan dat facturen per stuk of per batch betaald kunnen worden, maar dat de beschikbaarheid ervan afhangt van uw bank en uw land.
+
+## Waarborg 2: wie valideert wat
+
+Dit is de kern van het interne controlekader. Schrijf het op één pagina neer, laat het ondertekenen en pas het toe.
+
+- **De bedrijfsleider of de financieel directeur (CFO) beslist** welke leveranciers overgaan op automatisch boeken. Niet de boekhouder alleen, en niet de assistent die het venster zag verschijnen.
+- **De boekhouder houdt de touwtjes in handen** bij elke nieuwe leverancier, elke leverancier met een inkooporder en elke factuur die uit het gewone patroon valt.
+- **De toegangsrechten** beperken wie deze instelling op een leveranciersfiche mag wijzigen. Dit moet u configureren, niet veronderstellen.
+- **Wie betaalt, activeert de automatisering niet.** Scheid de rollen, zeker als de betaling vanuit Odoo vertrekt.
+- **Elke wijziging van bankgegevens** van een geautomatiseerde leverancier gaat opnieuw langs een menselijke controle. Dat is mijn aanbeveling, geen standaardfunctie die ik heb kunnen bevestigen.
+
+Bepaal ook een drempelbedrag in euro waarboven een factuur wordt nagelezen, zelfs bij een geautomatiseerde leverancier. Het bedrag van die drempel hangt af van uw organisatie. Wat u niet kunt delegeren, is dat u er een heeft.
+
+## Waarborg 3: de AI-credits
+
+Volgens de release notes vereisen alle AI-functies van Odoo 20 voortaan credits die via IAP worden aangekocht. Volgens een partner wordt elk credit aangerekend aan 1 € en krijgt elke database 20 gratis credits. Odoo publiceert geen tarief per functie. Controleer deze cijfers in uw contract voordat u budgetteert.
+
+Voor facturen zijn twee punten belangrijk:
+
+- De digitalisering van pdf's zou één voorafbetaald credit per document verbruiken. Dezelfde bron preciseert dat de digitalisering een eigen saldo heeft, los van de credits van de AI-agenten. Controleer het saldo van elke dienst.
+- Een bron geeft aan dat de afstemmings- en dubbelecontroles van Odoo 20 op 7 oktober 2026 op regels berusten, niet op AI. Uw waarborgen zouden dus niet van uw creditsaldo mogen afhangen. Te bevestigen in uw database.
+
+Wijs een persoon aan die het verbruik opvolgt. Een andere partner raadt aan om van bij de start te bepalen wie het gebruik bewaakt. Een factuur die in ontwerp blijft door een gebrek aan credits, is een beter incident dan een verkeerd gelezen en geboekte factuur.
+
+## Maandelijkse review: tien minuten die al het andere rechtvaardigen
+
+Eén keer per maand bekijkt de CFO of de bedrijfsleider drie zaken:
+
+1. de lijst van automatisch geboekte facturen, leverancier per leverancier;
+2. de rode en gele waarschuwingen voor dubbele facturen, en wat ermee gedaan is;
+3. het creditsaldo en het verbruik ervan.
+
+Als een leverancier zijn gedrag wijzigt (extra lijnen, een bedrag dat afwijkt), zet hem dan terug op "Nooit" en lees zijn facturen enkele cycli lang met de hand na. De automatisering is even gemakkelijk ongedaan te maken als te activeren.
+
+## Waar begint u maandag?
+
+Neem vijf terugkerende leveranciers van wie u facturen via Peppol ontvangt. Schrijf de validatieregel neer. Activeer er twee, observeer een maand en breid dan uit. Niet sneller.
+
+Wilt u uw Peppol-configuratie, uw toegangsrechten en het echte gedrag van deze waarschuwingen in uw database laten controleren? Dan kan ons team van [Odoo-support](/nl/support/) dit samen met u onderzoeken. En past het onderwerp in een breder project, bekijk dan onze aanpak voor de [implementatie van Odoo](/nl/odoo-erp/).
