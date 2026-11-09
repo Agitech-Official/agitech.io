@@ -1,0 +1,143 @@
+---
+title: "Factures fournisseurs Odoo 20 : automatiser avec garde-fous"
+lang: "fr"
+publishedAt: "2026-11-09"
+category: "Odoo"
+excerpt: "Odoo 20 peut comptabiliser seul vos factures récurrentes. Quels fournisseurs confier en premier, et quels contrôles un dirigeant doit garder."
+---
+
+
+Odoo 20 a été présenté le 24 septembre 2026 à l'Odoo Experience de Bruxelles.
+ Depuis, les démos montrent une facture qui se comptabilise toute seule. C'est séduisant. Mais personne ne dit ce qu'un dirigeant doit verrouiller avant de laisser faire.
+
+Voici une marche à suivre. Elle part des fournisseurs les plus simples et s'arrête là où le jugement humain redevient nécessaire.
+
+## Ce qu'Odoo fait, et ce qui n'est pas nouveau
+
+Le mécanisme est simple. 
+Après trois factures consécutives confirmées sans modification, Odoo propose la validation automatique.
+ 
+Les factures suivantes sont alors numérisées et comptabilisées seules, avec une alerte si le montant est identique à la précédente.
+
+
+Une précision utile : ce réglage n'est pas né avec Odoo 20. 
+La documentation 18.0 propose déjà, par fournisseur, les options Toujours, Demander après 3 validations sans modification, ou Jamais.
+ Ce qui change avec la version 20, c'est le filet autour. 
+La détection de doublons a deux niveaux : rouge pour un doublon très probable, jaune pour un doublon potentiel à vérifier avant comptabilisation.
+ 
+Le rapprochement entre facture et bon de commande signale aussi un prix ou une quantité différents de ce qui était attendu.
+
+
+Le comptable ne disparaît pas pour autant. Il change de rôle : il supervise au lieu d'encoder.
+
+## Étape 1 : commencez par les fournisseurs récurrents reçus en Peppol
+
+
+Depuis le 1er janvier 2026, les factures entre entreprises belges assujetties à la TVA doivent être des factures électroniques structurées, échangées via Peppol.
+ Vos fournisseurs récurrents vous envoient donc déjà des données structurées, pas des PDF à deviner. 
+Ces factures arrivent soit en brouillon de facture fournisseur, soit dans l'application Documents.
+
+
+Un fichier XML structuré évite la lecture par OCR. 
+Selon un guide tiers, Odoo lit directement l'UBL 2.1, ce qui contourne l'OCR et les crédits IAP.
+ C'est un avantage net : moins d'erreurs de lecture, moins de crédits consommés.
+
+Les bons candidats ont trois points communs :
+
+- la facture arrive chaque mois ou chaque trimestre ;
+- la structure ne bouge pas (mêmes lignes, même compte, même TVA) ;
+- aucune commande d'achat ni réception de marchandise n'est à vérifier.
+
+Pensez télécoms, énergie, hébergement, abonnements logiciels. 
+Un intégrateur recommande de réserver l'auto-comptabilisation aux fournisseurs prévisibles, jamais en réglage global quand les lignes varient ou qu'une commande doit être rapprochée.
+ Nous sommes du même avis.
+
+## Étape 2 : activez fournisseur par fournisseur, jamais en bloc
+
+Le réglage se trouve sur la fiche du fournisseur. 
+Dans Comptabilité, Fournisseurs, onglet Comptabilité, le champ de comptabilisation automatique propose les trois options.
+
+
+Trois conditions techniques à connaître :
+
+- 
+la numérisation automatique doit être activée pour les factures fournisseurs ;
+
+- 
+le fournisseur doit déjà exister dans la base ;
+
+- 
+chaque facture doit porter une date de facture.
+
+
+Point à tester avant de promettre quoi que ce soit : la documentation lie l'option à la numérisation. Je n'ai pas trouvé de source qui confirme le comportement exact pour une facture Peppol reçue en XML. Faites l'essai sur une copie de votre base, avec un fournisseur réel.
+
+## Garde-fou 1 : doublons et montant identique
+
+Voilà un piège sous-estimé. Un loyer ou un abonnement a, par définition, le même montant chaque mois. Or 
+Odoo affiche un avertissement de doublon potentiel quand le montant est identique à la facture précédente.
+
+
+Deux conséquences :
+
+1. Pour vos fournisseurs à montant fixe, l'alerte risque de revenir tous les mois. Si l'équipe l'ignore par habitude, elle ne protège plus rien.
+2. Je n'ai pas vu de source qui dise si cet avertissement bloque la comptabilisation ou s'il reste une simple alerte. Vérifiez-le sur votre version.
+
+Gardez aussi le filet côté paiement. 
+Odoo 20 annonce un blocage des doubles paiements.
+ Et si vous payez depuis Odoo, rappelez-vous que 
+le paiement de factures se fait à l'unité ou par lot, mais que sa disponibilité dépend de votre banque et de votre pays.
+
+
+## Garde-fou 2 : qui valide quoi
+
+C'est le cœur du cadre de contrôle interne. Écrivez-le sur une page, signez-la, appliquez-la.
+
+- **Le dirigeant ou le DAF décide** quels fournisseurs passent en comptabilisation automatique. Pas le comptable seul, pas l'assistant qui a vu la fenêtre apparaître.
+- **Le comptable garde la main** sur tout nouveau fournisseur, tout fournisseur avec commande d'achat et toute facture qui sort de l'ordinaire.
+- **Les droits d'accès** limitent qui peut modifier ce réglage sur une fiche fournisseur. À configurer, pas à supposer.
+- **Celui qui paie n'est pas celui qui active l'automatisation.** Séparez les rôles, surtout si le paiement part d'Odoo.
+- **Tout changement de coordonnées bancaires** d'un fournisseur automatisé repasse par une vérification humaine. C'est ma recommandation, pas une fonction native que j'ai pu confirmer.
+
+Fixez aussi un seuil en euros au-delà duquel une facture est relue, même chez un fournisseur automatisé. Le montant du seuil dépend de votre structure. Ce que vous ne pouvez pas déléguer, c'est d'en avoir un.
+
+## Garde-fou 3 : les crédits IA
+
+
+Selon les notes de version, toutes les fonctions d'IA d'Odoo 20 exigent désormais des crédits achetés via IAP.
+ D'après un partenaire, 
+chaque crédit est facturé 1 € et chaque base reçoit 20 crédits gratuits.
+ 
+Odoo ne publie pas de tarif par fonction.
+ Vérifiez ces chiffres sur votre contrat avant de budgétiser.
+
+Pour les factures, deux points comptent :
+
+- 
+La numérisation de PDF consommerait un crédit prépayé par document.
+ Cette source précise que 
+la numérisation a son propre solde, distinct des crédits des agents IA.
+ Contrôlez le solde de chaque service.
+- 
+Une source indique qu'au 7 octobre 2026, les contrôles de rapprochement et de doublons d'Odoo 20 reposent sur des règles, pas sur de l'IA.
+ Vos garde-fous ne devraient donc pas dépendre de votre solde de crédits. À confirmer sur votre base.
+
+Désignez une personne qui suit la consommation. 
+Un autre partenaire recommande de décider dès le départ qui surveille l'usage.
+ Une facture qui reste en brouillon faute de crédits est un meilleur incident qu'une facture mal lue et comptabilisée.
+
+## Revue mensuelle : dix minutes qui justifient tout le reste
+
+Une fois par mois, le DAF ou le dirigeant regarde trois choses :
+
+1. la liste des factures comptabilisées automatiquement, fournisseur par fournisseur ;
+2. les alertes de doublon rouges et jaunes, et ce qu'on en a fait ;
+3. le solde de crédits et sa consommation.
+
+Si un fournisseur change de comportement (lignes en plus, montant qui dérive), repassez-le sur « Jamais » et relisez ses factures à la main pendant quelques cycles. L'automatisation se retire aussi facilement qu'elle s'active.
+
+## Par où commencer lundi
+
+Prenez cinq fournisseurs récurrents reçus par Peppol. Écrivez la règle de validation. Activez-en deux, observez un mois, puis élargissez. Pas plus vite.
+
+Si vous voulez vérifier votre configuration Peppol, vos droits d'accès et le comportement réel de ces alertes sur votre base, notre équipe de [support Odoo](/support/) peut l'examiner avec vous. Et si le sujet s'inscrit dans un chantier plus large, voyez notre approche d'[implémentation Odoo](/odoo-erp/).
