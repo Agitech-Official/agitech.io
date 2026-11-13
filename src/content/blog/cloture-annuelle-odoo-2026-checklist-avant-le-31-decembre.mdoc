@@ -1,0 +1,161 @@
+---
+title: "Clôture annuelle Odoo 2026 : checklist avant le 31 décembre"
+lang: "fr"
+publishedAt: "2026-11-13"
+category: "Odoo"
+excerpt: "Rapprochements, brouillons, comptes d'attente, stock, verrouillage : la checklist des 7 semaines avant le 31 décembre, puis Odoo 20 au T1 2027."
+---
+
+Il reste environ sept semaines avant le 31 décembre. Odoo 20 est sorti. 
+Odoo l'a présenté le 24 septembre 2026 à l'Odoo Experience de Bruxelles.
+ La tentation de migrer pendant la clôture existe.
+
+Notre position : clôturez d'abord, migrez ensuite. Voici la checklist, puis le calendrier.
+
+## Ce que la documentation ne vous dit pas
+
+La page « Year-end closing » d'Odoo 20 reste générique. 
+Elle demande de rapprocher toutes les transactions bancaires jusqu'à la fin de l'exercice.
+ Elle ne parle ni des échéances belges, ni de l'inventaire, ni de la décision de migrer.
+
+Le reste de cet article comble ces trois trous.
+
+## La checklist des 7 semaines
+
+### 1. Vider les brouillons
+
+Ouvrez les factures clients, les factures fournisseurs et les notes de frais. La checklist Odoo demande de 
+vérifier qu'il ne reste aucune facture client en brouillon
+ et de 
+confirmer que toutes les factures fournisseurs sont créées et validées
+.
+
+Un brouillon de décembre qui passe en janvier fausse votre résultat. Fixez une date butoir interne pour que vos équipes valident ou suppriment.
+
+### 2. Rapprocher la banque jusqu'au dernier jour
+
+Le solde Odoo doit égaler le solde du relevé. 
+Vérifiez que les comptes bancaires sont rapprochés jusqu'à la fin de l'exercice et que les soldes comptables correspondent aux relevés.
+
+
+Traitez aussi les paiements non lettrés avec leurs factures. Ce lettrage est optionnel, mais 
+il peut aider la clôture en faisant apparaître des erreurs dans le système
+.
+
+### 3. Solder les comptes d'attente
+
+Un compte d'attente non vide, c'est une écriture que personne n'a comprise. L'ancienne checklist Odoo le dit simplement : 
+fermer tous les comptes d'attente
+. Elle demande aussi de 
+comptabiliser les amortissements et les produits constatés d'avance
+.
+
+Pour chaque ligne, demandez-vous qui la justifie, avec quelle pièce.
+
+### 4. Valoriser l'inventaire, sans attendre le comptage
+
+Depuis Odoo 19, la valorisation se contrôle dans Comptabilité ‣ Révision ‣ Valorisation de l'inventaire. 
+La « variation de stock » est l'écart entre la valeur comptabilisée et la valorisation dans l'application Inventaire.
+ Une fois l'écart expliqué, 
+vous rééquilibrez les comptes transitoires et vérifiez au grand livre qu'ils sont à zéro
+.
+
+Un point de méthode : un résumé d'une conférence Odoo Experience 2025 indique que 
+la valorisation suit les dates des mouvements de stock, pas les dates comptables
+. Un mouvement oublié ou daté en janvier crée donc un écart.
+
+Planifiez le comptage physique tôt, puis comparez le résultat au grand livre. Si votre écart est inexpliqué, ne le passez pas en perte.
+
+### 5. Résultat, puis date de verrouillage
+
+La documentation 20.0 précise que 
+le résultat de l'année N apparaît comme une ligne dynamique « Result Brought Forward » dans la balance de l'année N+1
+. Pour la solder, 
+on crée une écriture manuelle sur un compte de type « Current Year Earnings »
+.
+
+En Belgique, c'est l'assemblée générale qui 
+décide de l'affectation du résultat
+. Demandez à votre comptable à quel moment passer cette écriture.
+
+Verrouillez en deux temps :
+
+- **Verrou souple d'abord.** 
+Une date « Lock Everything » empêche de créer ou de modifier des écritures datées avant elle pendant l'audit.
+ Une écriture saisie après coup 
+reçoit automatiquement la date du lendemain du verrou
+.
+- **Verrou dur ensuite.** 
+Le Hard Lock est irréversible.
+ Ne le posez qu'avec l'accord écrit de votre comptable.
+
+Pensez aussi au verrou TVA. 
+La documentation recommande de fixer manuellement la date de verrouillage de la déclaration avant de la valider.
+
+
+## Les échéances belges derrière la clôture
+
+Pour un exercice clos au 31 décembre, 
+l'assemblée générale doit se tenir au plus tard le 30 juin et le dépôt à la BNB intervient au plus tard le 30 juillet
+. La limite absolue est 
+sept mois après la clôture, soit le 31 juillet
+. Le délai de 30 jours court à partir de l'approbation.
+
+Le listing annuel des clients assujettis arrive plus tôt. 
+Pour 2026, il est dû le 31 mars 2027.
+ Il reprend 
+les clients belges assujettis facturés pour plus de 250 euros hors TVA
+. Vérifiez dès maintenant que vos clients ont un numéro de TVA correct dans Odoo.
+
+## Pourquoi pas Odoo 20 en pleine clôture
+
+Quatre raisons concrètes.
+
+**Le retour arrière n'existe pas.** 
+La documentation d'Odoo précise qu'une fois la migration de production terminée, on ne peut pas revenir à la version précédente.
+ Se tromper en janvier avec des écritures de clôture en cours coûte cher.
+
+**Les modules sur mesure fixent le calendrier.** 
+Une base avec des modules spécifiques ne peut pas être migrée tant que chacun n'existe pas pour la version cible.
+ Les applications tierces suivent plus tard : 
+elles ont rarement une branche 20 le jour du lancement
+.
+
+**Le travail réel dépasse sept semaines.** Un intégrateur annonce 
+4 à 8 semaines pour un saut court (18 ou 19 vers 20)
+, avec la plus grande part en tests. Ce chiffre est le sien, pas celui d'Odoo. Il montre quand même que vous ne boucliez rien avant le 31 décembre.
+
+**Vos équipes changent de gestes.** Odoo 20 apporte 
+la prédiction des lignes de facture, la détection de doublons
+ et 
+des actions par lot sur les transactions bancaires
+. C'est utile. Ce n'est pas le moment de l'apprendre pendant les rapprochements.
+
+Plusieurs intégrateurs conseillent d'attendre un cycle de correctifs. L'un d'eux le recommande pour 
+une base très personnalisée, sauf échéance de support ou gain financier clair
+. C'est un avis de prestataire, pas une règle d'Odoo.
+
+Une nuance : planifier n'est pas migrer. 
+Un test de migration est gratuit à demander et son rapport montre votre périmètre réel.
+ Vous pouvez donc le lancer sur une copie, sans toucher à la production. Une exception : si votre version Odoo n'est plus supportée, parlez-nous-en. Le calendrier ci-dessous change alors.
+
+## Un calendrier réaliste
+
+| Période | Chantier |
+|---|---|
+| 16–27 nov. | Brouillons vidés, comptes d'attente soldés, banque à jour |
+| 30 nov.–11 déc. | Comptage, valorisation du stock, amortissements et régularisations |
+| 14–23 déc. | Factures de fin d'année, coupure des périodes, gel de la configuration |
+| 24–31 déc. | Aucun changement de configuration, sauvegarde vérifiée |
+| Janvier | Dernières écritures, dernière TVA de l'année, balance validée, verrou souple |
+| Février | Accord du comptable, verrou dur, premier test de migration sur copie |
+| Mars | Listing clients extrait et déposé avant le 31 mars, puis bascule vers Odoo 20 si les tests passent |
+| Avril | Marge si le planning glisse |
+
+Ce calendrier est une recommandation d'Agitech, pas une règle d'Odoo. Pour la bascule, répétez la migration complète la veille. C'est ce que recommande 
+la documentation d'Odoo
+.
+
+Après la bascule, comparez la balance générale avant et après. Vos comptes 2026 doivent rester lisibles jusqu'à l'AGO et au dépôt à la BNB.
+
+Si vous voulez cadrer cette clôture ou chiffrer la migration d'après clôture, notre équipe [Support Odoo](/support/) peut vous aider sur la période de clôture. Pour la bascule vers Odoo 20, regardez notre approche de [migration de données](/migration/) ou [contactez-nous](/contact-us/).
