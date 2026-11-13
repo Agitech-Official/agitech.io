@@ -1,0 +1,99 @@
+---
+title: "Odoo-jaarafsluiting 2026: checklist vóór 31 december"
+lang: "nl"
+publishedAt: "2026-11-13"
+category: "Odoo"
+excerpt: "Bankafstemming, concepten, wachtrekeningen, voorraad, vergrendeling: de checklist voor de 7 weken tot 31 december, daarna Odoo 20 in Q1 2027."
+---
+
+Er resten nog ongeveer zeven weken tot 31 december. Odoo 20 is uit. Odoo stelde het op 24 september 2026 voor op Odoo Experience in Brussel. De verleiding om tijdens de jaarafsluiting te migreren is er dus.
+
+Ons standpunt: sluit eerst af, migreer daarna. Hieronder vindt u de checklist, gevolgd door de planning.
+
+## Wat de documentatie u niet vertelt
+
+De pagina "Year-end closing" van Odoo 20 blijft algemeen. Ze vraagt om alle banktransacties af te stemmen tot het einde van het boekjaar. Over de Belgische deadlines, de inventaris en de beslissing om te migreren zegt ze niets.
+
+De rest van dit artikel vult deze drie leemtes in.
+
+## De checklist voor 7 weken
+
+### 1. Concepten opruimen
+
+Overloop de klantenfacturen, de leveranciersfacturen en de onkostennota's. De Odoo-checklist vraagt om na te gaan dat er geen klantenfactuur meer in concept staat en te bevestigen dat alle leveranciersfacturen zijn aangemaakt en gevalideerd.
+
+Een conceptfactuur van december die pas in januari wordt geboekt, vertekent uw resultaat. Leg een interne uiterste datum vast, zodat uw teams de concepten valideren of verwijderen.
+
+### 2. De bank afstemmen tot de laatste dag
+
+Het Odoo-saldo moet gelijk zijn aan het saldo van het rekeninguittreksel. Controleer of de bankrekeningen zijn afgestemd tot het einde van het boekjaar en of de boekhoudkundige saldi overeenstemmen met de uittreksels.
+
+Verwerk ook de betalingen die nog niet aan hun facturen zijn afgepunt. Dit afpunten is optioneel, maar het kan de afsluiting vergemakkelijken doordat er fouten in het systeem zichtbaar worden.
+
+### 3. Wachtrekeningen aanzuiveren
+
+Een wachtrekening die niet leeg is, bevat een boeking die niemand heeft begrepen. De oude Odoo-checklist zegt het eenvoudig: alle wachtrekeningen afsluiten. Ze vraagt ook om de afschrijvingen en de over te dragen opbrengsten te boeken.
+
+Vraag u voor elke lijn af wie ze verantwoordt en met welk stuk.
+
+### 4. De voorraad waarderen, zonder op de telling te wachten
+
+Sinds Odoo 19 controleert u de waardering via Boekhouding ‣ Nazicht ‣ Voorraadwaardering. De "voorraadwijziging" is het verschil tussen de geboekte waarde en de waardering in de toepassing Voorraad. Zodra het verschil is verklaard, brengt u de overgangsrekeningen weer in evenwicht en controleert u in het grootboek of ze op nul staan.
+
+Een methodologische opmerking: een samenvatting van een conferentie op Odoo Experience 2025 vermeldt dat de waardering de data van de voorraadbewegingen volgt, niet de boekhoudkundige data. Een vergeten beweging, of een beweging met een datum in januari, zorgt dus voor een verschil.
+
+Plan de fysieke telling vroeg en vergelijk het resultaat daarna met het grootboek. Boek een onverklaard verschil niet zomaar af als verlies.
+
+### 5. Resultaat, daarna vergrendeldatum
+
+De documentatie van versie 20.0 verduidelijkt dat het resultaat van jaar N verschijnt als een dynamische lijn "Result Brought Forward" in de balans van jaar N+1. Om die lijn aan te zuiveren, maakt u een manuele boeking op een rekening van het type "Current Year Earnings".
+
+In België beslist de algemene vergadering over de bestemming van het resultaat. Vraag uw boekhouder wanneer u deze boeking moet doen.
+
+Vergrendel in twee stappen:
+
+- **Eerst de zachte vergrendeling.** Met een datum "Lock Everything" kunt u tijdens de audit geen boekingen meer aanmaken of wijzigen met een datum vóór die datum. Een boeking die achteraf wordt ingevoerd, krijgt automatisch de datum van de dag na de vergrendeling.
+- **Daarna de harde vergrendeling.** De Hard Lock is onomkeerbaar. Zet hem pas vast met het schriftelijke akkoord van uw boekhouder.
+
+Denk ook aan de BTW-vergrendeling. De documentatie raadt aan om de vergrendeldatum van de aangifte manueel in te stellen voordat u de aangifte valideert.
+
+## De Belgische deadlines achter de afsluiting
+
+Voor een boekjaar dat op 31 december wordt afgesloten, moet de algemene vergadering uiterlijk op 30 juni plaatsvinden en gebeurt de neerlegging bij de NBB uiterlijk op 30 juli. De absolute limiet is zeven maanden na de afsluiting, dus 31 juli. De termijn van 30 dagen loopt vanaf de goedkeuring.
+
+De jaarlijkse klantenlisting komt eerder. Voor 2026 is ze verschuldigd op 31 maart 2027. Ze bevat de Belgische BTW-plichtige klanten aan wie u voor meer dan 250 euro exclusief BTW hebt gefactureerd. Controleer nu al of uw klanten in Odoo een correct BTW-nummer hebben.
+
+## Waarom niet naar Odoo 20 tijdens de afsluiting
+
+Vier concrete redenen.
+
+**Een stap terug bestaat niet.** De documentatie van Odoo vermeldt dat u na afloop van de productiemigratie niet meer naar de vorige versie kunt terugkeren. Een fout in januari, met afsluitingsboekingen die nog lopen, kost veel.
+
+**Maatwerkmodules bepalen de planning.** Een database met specifieke modules kan niet worden gemigreerd zolang elke module niet bestaat voor de doelversie. Applicaties van derden volgen later: ze hebben zelden een branch 20 op de dag van de lancering.
+
+**Het echte werk duurt langer dan zeven weken.** Een integrator kondigt 4 tot 8 weken aan voor een korte sprong (18 of 19 naar 20), waarvan het grootste deel naar testen gaat. Dat cijfer is van de integrator, niet van Odoo. Het toont wel aan dat u niets vóór 31 december zou afronden.
+
+**Uw teams moeten andere handelingen aanleren.** Odoo 20 brengt voorspelling van factuurlijnen, detectie van dubbels en bulkacties op banktransacties. Dat is nuttig. Maar de afstemmingen zijn niet het moment om dit te leren.
+
+Verschillende integratoren raden aan om een cyclus van correcties af te wachten. Een van hen beveelt dat aan voor een sterk aangepaste database, behalve bij een supportdeadline of een duidelijk financieel voordeel. Dat is het advies van een dienstverlener, geen regel van Odoo.
+
+Een nuance: plannen is niet migreren. Een migratietest aanvragen is gratis en het rapport toont uw reële perimeter. U kunt hem dus op een kopie laten lopen, zonder aan de productie te raken. Een uitzondering: als uw Odoo-versie niet meer wordt ondersteund, neem dan contact met ons op. De planning hieronder verandert dan.
+
+## Een realistische planning
+
+| Periode | Werkzaamheden |
+|---|---|
+| 16–27 nov. | Concepten opgeruimd, wachtrekeningen aangezuiverd, bank up-to-date |
+| 30 nov.–11 dec. | Telling, voorraadwaardering, afschrijvingen en regularisaties |
+| 14–23 dec. | Eindejaarsfacturen, periodeafsluiting (cut-off), configuratie bevriezen |
+| 24–31 dec. | Geen enkele configuratiewijziging, back-up gecontroleerd |
+| Januari | Laatste boekingen, laatste BTW-aangifte van het jaar, balans gevalideerd, zachte vergrendeling |
+| Februari | Akkoord van de boekhouder, harde vergrendeling, eerste migratietest op een kopie |
+| Maart | Klantenlisting opgesteld en neergelegd vóór 31 maart, daarna overschakeling naar Odoo 20 als de tests slagen |
+| April | Marge als de planning verschuift |
+
+Deze planning is een aanbeveling van Agitech, geen regel van Odoo. Repeteer voor de overschakeling de volledige migratie de dag ervoor. Dat is wat de documentatie van Odoo aanbeveelt.
+
+Vergelijk na de overschakeling de algemene balans van voor en na. Uw rekeningen van 2026 moeten leesbaar blijven tot aan de gewone algemene vergadering en de neerlegging bij de NBB.
+
+Wilt u deze afsluiting omkaderen of de migratie na de afsluiting laten begroten? Ons [Odoo-supportteam](/nl/support/) kan u helpen tijdens de afsluitingsperiode. Voor de overschakeling naar Odoo 20 bekijkt u onze aanpak voor [datamigratie](/nl/migration/) of [neemt u contact met ons op](/nl/contact-us/).
