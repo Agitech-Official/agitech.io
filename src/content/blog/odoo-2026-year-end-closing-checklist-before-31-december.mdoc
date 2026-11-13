@@ -1,0 +1,99 @@
+---
+title: "Odoo 2026 year-end closing: checklist before 31 December"
+lang: "en"
+publishedAt: "2026-11-13"
+category: "Odoo"
+excerpt: "Reconciliations, drafts, suspense accounts, stock, lock dates: your 7-week checklist before 31 December, then Odoo 20 in Q1 2027."
+---
+
+There are about seven weeks left before 31 December. Odoo 20 is out. Odoo presented it on 24 September 2026 at Odoo Experience in Brussels. The temptation to migrate during the year-end close is real.
+
+Our position: close first, migrate afterwards. Here is the checklist, followed by the timetable.
+
+## What the documentation does not tell you
+
+The "Year-end closing" page in the Odoo 20 documentation remains generic. It asks you to reconcile all bank transactions up to the end of the financial year. It says nothing about Belgian deadlines, stock inventory or the decision to migrate.
+
+The rest of this article fills those three gaps.
+
+## The 7-week checklist
+
+### 1. Clear the drafts
+
+Open your customer invoices, vendor bills and expense reports. The Odoo checklist asks you to check that no customer invoices remain in draft and to confirm that all vendor bills have been created and validated.
+
+A December draft that slips into January distorts your result. Set an internal cut-off date by which your teams must either validate or delete their drafts.
+
+### 2. Reconcile the bank up to the last day
+
+The Odoo balance must equal the statement balance. Check that bank accounts are reconciled up to the end of the financial year and that the accounting balances match the statements.
+
+Also match unreconciled payments with their invoices. This matching is optional, but it can help the close by bringing errors in the system to light.
+
+### 3. Clear the suspense accounts
+
+A suspense account that is not empty means an entry that nobody has understood. The former Odoo checklist puts it simply: close all suspense accounts. It also asks you to post depreciation and deferred income.
+
+For each line, ask yourself who justifies it, and with which supporting document.
+
+### 4. Value the inventory without waiting for the count
+
+Since Odoo 19, valuation is checked under Accounting ‣ Review ‣ Inventory Valuation. The "stock variation" is the difference between the value posted in accounting and the valuation in the Inventory app. Once the difference is explained, you rebalance the interim accounts and check in the general ledger that they are at zero.
+
+A point of method: a summary of an Odoo Experience 2025 session states that valuation follows the dates of stock moves, not accounting dates. A forgotten move, or one dated in January, therefore creates a difference.
+
+Schedule the physical count early, then compare the result with the general ledger. If you have an unexplained difference, do not write it off as a loss.
+
+### 5. Result first, then lock date
+
+The 20.0 documentation specifies that the result for year N appears as a dynamic "Result Brought Forward" line in the year N+1 trial balance. To clear it, you create a manual entry on an account of the "Current Year Earnings" type.
+
+In Belgium, it is the general meeting that decides on the appropriation of the result. Ask your accountant when to post this entry.
+
+Lock in two stages:
+
+- **Soft lock first.** A "Lock Everything" date prevents the creation or modification of entries dated before it during the audit. An entry posted after the fact automatically receives the date of the day after the lock.
+- **Hard lock afterwards.** The Hard Lock is irreversible. Only apply it with your accountant's written agreement.
+
+Remember the VAT lock too. The documentation recommends manually setting the lock date for the return before validating it.
+
+## The Belgian deadlines behind the close
+
+For a financial year ending on 31 December, the general meeting must be held by 30 June at the latest, and the filing with the NBB (National Bank of Belgium) must be made by 30 July at the latest. The absolute limit is seven months after the year-end, i.e. 31 July. The 30-day period runs from the date of approval.
+
+The annual VAT customer listing comes earlier. For 2026, it is due on 31 March 2027. It covers Belgian VAT-liable customers invoiced for more than €250 excluding VAT. Check now that your customers have a correct VAT number in Odoo.
+
+## Why not Odoo 20 in the middle of the close
+
+Four practical reasons.
+
+**There is no going back.** Odoo's documentation states that once the production migration is complete, you cannot return to the previous version. Making a mistake in January with year-end entries still in progress is costly.
+
+**Custom modules set the timetable.** A database with custom modules cannot be migrated until each one exists for the target version. Third-party apps follow later: they rarely have a version 20 branch on launch day.
+
+**The real work exceeds seven weeks.** One integrator quotes 4 to 8 weeks for a short jump (18 or 19 to 20), with the largest share spent on testing. That figure is theirs, not Odoo's. It still shows that you will not wrap anything up before 31 December.
+
+**Your teams change their habits.** Odoo 20 brings invoice line prediction, duplicate detection and batch actions on bank transactions. That is useful. But it is not the moment to learn it in the middle of reconciliations.
+
+Several integrators advise waiting for a cycle of fixes. One of them recommends this for a heavily customised database, unless there is a support deadline or a clear financial gain. That is a provider's opinion, not an Odoo rule.
+
+One nuance: planning is not migrating. A migration test is free to request, and its report shows your real scope. You can therefore run it on a copy, without touching production. One exception: if your Odoo version is no longer supported, talk to us. The timetable below then changes.
+
+## A realistic timetable
+
+| Period | Workstream |
+|---|---|
+| 16–27 Nov. | Drafts cleared, suspense accounts cleared, bank up to date |
+| 30 Nov.–11 Dec. | Count, stock valuation, depreciation and accruals |
+| 14–23 Dec. | Year-end invoices, period cut-off, configuration freeze |
+| 24–31 Dec. | No configuration changes, backup verified |
+| January | Last entries, last VAT return of the year, trial balance validated, soft lock |
+| February | Accountant's agreement, hard lock, first migration test on a copy |
+| March | Customer listing extracted and filed before 31 March, then switch to Odoo 20 if the tests pass |
+| April | Buffer if the schedule slips |
+
+This timetable is an Agitech recommendation, not an Odoo rule. For the switchover, rehearse the full migration the day before. This is what Odoo's documentation recommends.
+
+After the switchover, compare the general trial balance before and after. Your 2026 accounts must remain readable until the AGM and the filing with the NBB.
+
+If you would like help framing this close or costing the post-close migration, our [Odoo Support](/en/support/) team can assist you during the closing period. For the switch to Odoo 20, take a look at our approach to [data migration](/en/migration/) or [contact us](/en/contact-us/).
