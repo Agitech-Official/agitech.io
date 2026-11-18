@@ -1,0 +1,87 @@
+---
+title: "Outbound Peppol: have your invoices actually arrived?"
+lang: "en"
+publishedAt: "2026-11-18"
+category: "Odoo"
+excerpt: "A Peppol invoice marked 'sent' isn't necessarily delivered. Track statuses in Odoo, clean up your customer records and get alerted to rejections."
+---
+
+In Odoo, the "Send" button has been clicked and the invoice has gone. As far as your team is concerned, the matter is closed. Three weeks later, the customer hasn't paid. They never received the invoice.
+
+We have already covered receiving supplier invoices and the fines involved. That leaves the outbound side, which is where problems slip by most easily.
+
+## A rejection makes no noise
+
+Since January 2026, the reports from the field have all looked alike. Belgian accountants have flagged invoices sent via Peppol that never reach their recipient. A practical guide from the firm Deg & Partners lists the lack of tracking of sent invoices among the six most common mistakes. The consequences are described bluntly: unnoticed rejections, mounting payment delays and duplicates sent for nothing.
+
+The real cost is not the technical error. It is the time it takes to get paid. A rejected invoice that nobody knows about triggers no reminder, because as far as your system is concerned it has been "sent".
+
+## The four most common causes of rejection
+
+### 1. A badly formed 0208 identifier
+
+The Peppol identifier of a Belgian company is 0208, a colon, then the CBE (Crossroads Bank for Enterprises) company number. Data entry errors are common. The "BE" prefix belongs to the VAT number, not to the Peppol identifier. Dots and spaces cause problems too. A number written as 0208:0456.789.123 instead of 0208:0456789123 is incorrect. The network also runs a validity check: a 0208 number in the wrong format or with the wrong check digits is refused.
+
+There is another pitfall: the same Belgian company can appear under two identifiers in the directory, one in 0208 and the other in 9925 (VAT number). For some large accounts, the identifier is even a 13-digit GLN, prefixed 0088. In that case, the VAT number is not enough. Ask your customer for their Peppol invoicing identifier.
+
+### 2. A valid VAT number, but a customer who is not on the network
+
+This is the costliest confusion. A valid VAT number does not prove that the company is registered on Peppol. Some have still not activated reception. An Odoo guide published in October 2026 mentions 89% of VAT-registered businesses signed up by mid-July. That means some are still not. And a VAT number entered incorrectly on the customer record produces the same failure, with a different message.
+
+### 3. The duplicate
+
+A slow click, a double-click, and the same invoice goes out twice. This happens more often than you might think. The network may then reject the second one. The opposite risk exists too: resending "just in case" an invoice that was simply pending. Before any resend, check the status.
+
+### 4. An incomplete file
+
+Sometimes the customer record is perfect and it is the content that blocks the invoice. Peppol requires at least a buyer reference or an order number. If your invoice template doesn't carry one, rejection is systematic for the customers concerned.
+
+## Reading statuses in Odoo
+
+The Peppol module exists from version 16 to version 20. Only versions 18, 19 and 20 are still under standard support. The principle is the same from one version to the next:
+
+- A posted invoice waiting to be sent is marked "Ready to send" in the Peppol Status field.
+- Once sent, it moves to "Processing".
+- The status changes to "Done" when the invoice is delivered to the recipient's access point.
+
+An invoice that stays in "Processing" has not been delivered. You also need to know the error statuses. A user report on Odoo 18 describes two: "Error" (blocked by Odoo or by the network) and "Skipped" (blocked by the recipient). The labels may have changed between versions. A fix published on GitHub, for example, removes the "skipped" state in certain cases. So check what your version displays.
+
+Two practical steps:
+
+- In the invoice list, add the Peppol Status column.
+- A scheduled task checks statuses regularly. The "Retrieve Peppol invoice status" button on the accounting dashboard triggers it on demand.
+
+The weak point is well known. The same user report notes that in Odoo 18, there is no warning when an error occurs. It recommends checking statuses the day after sending, grouped by Peppol status. We have not seen any source confirming a change on this point in later versions. Don't rely on it without testing it on your own database.
+
+## Cleaning up the customer record before sending
+
+The most cost-effective approach is not to send an invoice that is bound to be rejected. On the customer record, in the Accounting tab:
+
+- **Check the electronic invoicing block.** The format, the EAS code (the prefix, 0208 for example) and the endpoint must be filled in and consistent.
+- **Run the verification.** In developer mode, the Verify button shows "Valid" if the contact is found on the network. Odoo also lets you spot in advance which partners are already registered, from the contacts list view.
+- **Check again after every change.** One field report notes that a company number changed after validation then causes sending to fail. An old "Valid" status guarantees nothing.
+- **Validate the VAT number and the address.** One guide recommends checking the VAT number via VIES and entering a complete address, including the country.
+- **Set the sending method.** Set it to "via Peppol" in the Customer Invoices section of the Accounting tab.
+- **Handle customers outside the network separately.** If the customer cannot be found, don't force it. Contact them, ask for their exact identifier, and check with your accountant which fallback solution is acceptable.
+
+Do this clean-up once across all your active customers, then build it into the creation of every new customer.
+
+## Simple monitoring that saves weeks of delay
+
+Don't rely on the accounting team's memory. Here is what we set up for our customers:
+
+1. **A saved "Peppol at risk" view.** It groups invoices in error or stuck in "Processing" for more than one working day. This threshold is our rule of thumb, not a standard. Some access points have queues at peak times, such as month-end or the end of a VAT quarter. Adapt it accordingly.
+2. **A daily alert.** A scheduled action sends an email or creates an activity for the person responsible for invoicing as soon as an invoice enters this view.
+3. **A check on the status task.** If it stops running, statuses freeze. You would then think everything is fine.
+4. **A weekly review of customers with repeated failures.** A customer who rejects three invoices points to an identifier problem, not bad luck.
+
+An alert is only worth something if someone is named to deal with it. Decide who fixes the problem, who calls the customer, and within what timeframe.
+
+## Key takeaways
+
+- "Sent" in Odoo does not mean "delivered". Only the delivery status counts.
+- The 0208 format followed by ten digits resolves a large share of identifier rejections.
+- A valid VAT number does not prove that the customer can receive on Peppol.
+- Check statuses every day, and don't resend anything before you have looked.
+
+Setting up the view, the alert and the scheduled task check is a short job. It costs less than a single quarter of invoices lying dormant. If you would like us to look at your customer records and your statuses, our [Hosting & Monitoring](/en/hosting-monitoring/) team can keep an eye on these points with you. Our [Odoo support](/en/support/) can also help you fix what has already failed.
