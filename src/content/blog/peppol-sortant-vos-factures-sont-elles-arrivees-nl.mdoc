@@ -1,0 +1,87 @@
+---
+title: "Peppol-facturen verzonden: zijn ze ook aangekomen?"
+lang: "nl"
+publishedAt: "2026-11-18"
+category: "Odoo"
+excerpt: "Een ‘verzonden’ Peppol-factuur is niet altijd geleverd. Volg de statussen in Odoo, ruim uw klantenfiches op en word gewaarschuwd bij weigeringen."
+---
+
+In Odoo is op de knop 'Verzenden' geklikt en de factuur is vertrokken. Voor uw team is het dossier afgesloten. Drie weken later heeft de klant nog niet betaald. Hij heeft de factuur nooit ontvangen.
+
+We schreven al over de ontvangst van aankoopfacturen en over de boetes. Blijft de uitgaande kant over. Daar blijven problemen het gemakkelijkst onopgemerkt.
+
+## Een weigering maakt geen lawaai
+
+Sinds januari 2026 lijken de signalen uit de praktijk sterk op elkaar. Belgische accountants meldden Peppol-facturen die hun bestemmeling niet bereiken. Een praktijkgids van het kantoor Deg & Partners rekent het ontbreken van opvolging van verzonden facturen tot de zes meest voorkomende fouten. De gevolgen worden zonder omwegen beschreven: onopgemerkte weigeringen, betalingsachterstanden die zich opstapelen en dubbele facturen die voor niets verstuurd worden.
+
+De echte kost is niet de technische fout, maar de termijn waarop u uw geld ontvangt. Over een geweigerde factuur waarvan niemand iets weet, vertrekt er geen enkele herinnering, want voor uw systeem is ze 'verzonden'.
+
+## De vier meest voorkomende oorzaken van weigering
+
+### 1. Een verkeerd opgebouwde 0208-identificatie
+
+De Peppol-identificatie van een Belgische onderneming is 0208, een dubbele punt en dan het KBO-ondernemingsnummer. Invoerfouten komen vaak voor. Het voorvoegsel 'BE' hoort bij het btw-nummer, niet bij de Peppol-identificatie. Ook punten en spaties zorgen voor problemen. Een nummer dat als 0208:0456.789.123 is geschreven in plaats van 0208:0456789123, is onjuist. Het netwerk past bovendien een geldigheidscontrole toe: een 0208-nummer met een verkeerd formaat of verkeerde controlecijfers wordt geweigerd.
+
+Nog een valkuil: dezelfde Belgische onderneming kan onder twee identificaties in de directory staan, een in 0208 en een in 9925 (btw-nummer). Bij sommige grote klanten is de identificatie zelfs een GLN van 13 cijfers, met voorvoegsel 0088. In dat geval volstaat het btw-nummer niet. Vraag uw klant naar zijn Peppol-identificatie voor facturatie.
+
+### 2. Een geldig btw-nummer, maar een klant die niet op het netwerk staat
+
+Dit is de duurste verwarring. Een geldig btw-nummer bewijst niet dat de onderneming op Peppol is geregistreerd. Sommige hebben hun ontvangst nog altijd niet geactiveerd. Een Odoo-gids van oktober 2026 vermeldt 89 % van de btw-plichtigen die half juli geregistreerd waren. Er blijven er dus die dat niet zijn. En een verkeerd ingevoerd btw-nummer op de fiche leidt tot dezelfde mislukking, met een andere foutmelding.
+
+### 3. De dubbele factuur
+
+Een trage klik, een dubbelklik, en dezelfde factuur vertrekt twee keer. Dat gebeurt vaker dan u denkt. Het netwerk kan de tweede dan weigeren. Het omgekeerde risico bestaat ook: 'voor alle zekerheid' een factuur opnieuw verzenden die gewoon nog in behandeling was. Controleer altijd de status voordat u iets opnieuw verzendt.
+
+### 4. Een onvolledig bestand
+
+Soms is de klantenfiche perfect en blokkeert de inhoud. Peppol vereist minstens een referentie van de koper of een bestelnummer. Als uw factuursjabloon er geen bevat, wordt de factuur systematisch geweigerd voor de betrokken klanten.
+
+## De statussen in Odoo lezen
+
+De Peppol-module bestaat van versie 16 tot en met 20. Alleen versies 18, 19 en 20 vallen nog onder de standaardsupport. Het principe is in elke versie hetzelfde:
+
+- Een geboekte factuur die verzonden moet worden, krijgt in het veld Peppol-status de waarde 'Klaar om te verzenden'.
+- Na verzending gaat ze naar 'Processing'.
+- De status wordt 'Done' wanneer de factuur is geleverd aan het toegangspunt van de ontvanger.
+
+Een factuur die op 'Processing' blijft staan, is niet geleverd. U moet ook de foutstatussen kennen. Een praktijkervaring met Odoo 18 beschrijft er twee: 'Error' (geblokkeerd door Odoo of door het netwerk) en 'Skipped' (geblokkeerd door de ontvanger). De benamingen kunnen per versie verschillen. Een op GitHub gepubliceerde correctie verwijdert bijvoorbeeld in bepaalde gevallen de status 'skipped'. Controleer dus wat uw versie weergeeft.
+
+Twee praktische handelingen:
+
+- Voeg in de lijst met facturen de kolom Peppol-status toe.
+- Een geplande taak controleert regelmatig de statussen. De knop 'Peppol-factuurstatus ophalen' op het boekhouddashboard start die taak op aanvraag.
+
+Het zwakke punt is bekend. Dezelfde praktijkervaring merkt op dat er in Odoo 18 geen waarschuwing is bij een fout. Ze raadt aan de statussen de dag na verzending te controleren, gegroepeerd per Peppol-status. We hebben geen bron gezien die een wijziging op dat punt in latere versies bevestigt. Reken er dus niet op zonder het getest te hebben op uw eigen database.
+
+## De klantenfiche opruimen vóór verzending
+
+Het rendabelst is om geen factuur te verzenden die toch geweigerd zal worden. Op de klantenfiche, tabblad Boekhouding:
+
+- **Controleer het blok voor elektronische facturatie.** Het formaat, de EAS-code (het voorvoegsel, bijvoorbeeld 0208) en het eindpunt moeten ingevuld en consistent zijn.
+- **Start de verificatie.** In ontwikkelaarsmodus geeft de knop Verifiëren 'Geldig' weer als het contact op het netwerk wordt gevonden. Odoo laat u ook vooraf nagaan welke partners al geregistreerd zijn, vanuit de lijstweergave van de contacten.
+- **Controleer opnieuw na elke wijziging.** Een praktijkervaring wijst erop dat een ondernemingsnummer dat na de validatie wordt gewijzigd, de verzending later laat mislukken. Een oude status 'Geldig' garandeert niets.
+- **Valideer het btw-nummer en het adres.** Een gids raadt aan het btw-nummer te controleren via VIES en een volledig adres in te vullen, land inbegrepen.
+- **Leg de verzendmethode vast.** Stel ze in op 'via Peppol' in de sectie Klantfacturen van het tabblad Boekhouding.
+- **Behandel klanten buiten het netwerk apart.** Als de klant niet te vinden is, forceer dan niets. Neem contact met hem op, vraag zijn exacte identificatie en overleg met uw boekhouder welke alternatieve oplossing aanvaardbaar is.
+
+Doe deze opkuis één keer voor alle actieve klanten en integreer ze daarna in de aanmaak van elke nieuwe klant.
+
+## Eenvoudige monitoring die weken vertraging voorkomt
+
+Reken niet op het geheugen van de boekhouding. Dit is wat wij bij onze klanten opzetten:
+
+1. **Een opgeslagen weergave 'Peppol-risico'.** Ze groepeert de facturen met een fout of die langer dan één werkdag op 'Processing' blijven staan. Die drempel is onze eigen vuistregel, geen norm. Sommige toegangspunten hebben wachtrijen tijdens piekperiodes, aan het einde van de maand of het btw-kwartaal. Pas hem dus aan.
+2. **Een dagelijkse waarschuwing.** Een geplande actie verstuurt een e-mail of maakt een activiteit aan voor de verantwoordelijke voor de facturatie zodra een factuur in die weergave terechtkomt.
+3. **Een controle van de statustaak.** Als ze niet meer draait, blijven de statussen vastgeroest staan. U zou dan denken dat alles in orde is.
+4. **Een wekelijkse review van klanten met herhaalde mislukkingen.** Een klant die drie facturen weigert, wijst op een probleem met de identificatie, niet op pech.
+
+Een waarschuwing heeft alleen waarde als iemand is aangeduid om ze af te handelen. Leg vast wie corrigeert, wie de klant belt en binnen welke termijn.
+
+## Om te onthouden
+
+- 'Verzonden' in Odoo betekent niet 'geleverd'. Alleen de leveringsstatus telt.
+- Het formaat 0208 gevolgd door tien cijfers lost een groot deel van de weigeringen van identificaties op.
+- Een geldig btw-nummer bewijst niet dat de klant via Peppol ontvangt.
+- Controleer de statussen elke dag en verzend niets opnieuw zonder eerst te kijken.
+
+De weergave, de waarschuwing en de controle van de geplande taak opzetten is snel gedaan. Het kost minder dan één kwartaal aan facturen die blijven liggen. Wilt u dat wij uw klantenfiches en statussen bekijken? Ons team van [Hosting & Monitoring](/nl/hosting-monitoring/) kan die punten samen met u opvolgen. Onze [Odoo-support](/nl/support/) kan u ook helpen om te corrigeren wat al mislukt is.
