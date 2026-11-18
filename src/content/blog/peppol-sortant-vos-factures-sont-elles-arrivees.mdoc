@@ -1,0 +1,137 @@
+---
+title: "Peppol sortant : vos factures sont-elles arrivées ?"
+lang: "fr"
+publishedAt: "2026-11-18"
+category: "Odoo"
+excerpt: "Une facture Peppol « envoyée » n'est pas forcément livrée. Suivez les statuts dans Odoo, nettoyez vos fiches clients, soyez alerté des rejets."
+---
+
+Dans Odoo, le bouton « Envoyer » est cliqué, la facture est partie. Pour votre équipe, le dossier est clos. Trois semaines plus tard, le client n'a pas payé. Il n'a jamais reçu la facture.
+
+Nous avons déjà parlé de la réception des factures fournisseurs et des amendes. Reste le côté sortant. C'est là que les problèmes passent le plus facilement inaperçus.
+
+## Un rejet ne fait pas de bruit
+
+Depuis janvier 2026, les remontées de terrain se ressemblent. 
+Les experts-comptables belges ont signalé des factures envoyées via Peppol qui n'arrivent pas à leur destinataire.
+ Un guide pratique du cabinet Deg & Partners range 
+l'absence de suivi des factures envoyées parmi les six erreurs les plus fréquentes.
+ Les conséquences sont décrites sans détour : rejets inaperçus, retards de paiement qui s'accumulent, doublons envoyés pour rien.
+
+Le vrai coût n'est pas l'erreur technique. C'est le délai d'encaissement. Une facture rejetée dont personne ne sait rien ne déclenche aucune relance, car pour votre système elle est « envoyée ».
+
+## Les quatre causes de rejet que vous verrez le plus
+
+### 1. Un identifiant 0208 mal formé
+
+L'identifiant Peppol d'une entreprise belge, c'est 0208, deux points, puis le numéro d'entreprise BCE. Les erreurs de saisie sont classiques. 
+Le préfixe « BE » appartient au numéro de TVA, pas à l'identifiant Peppol.
+ Les points et les espaces posent aussi problème. 
+Un numéro écrit 0208:0456.789.123 au lieu de 0208:0456789123 est incorrect.
+ Le réseau applique aussi un contrôle de validité : 
+un numéro en 0208 au mauvais format ou avec de mauvais chiffres de contrôle est refusé.
+
+
+Autre piège : 
+une même entreprise belge peut apparaître sous deux identifiants dans l'annuaire, l'un en 0208, l'autre en 9925 (numéro de TVA).
+ Pour certains grands comptes, l'identifiant est même 
+un GLN à 13 chiffres, préfixé 0088.
+ Dans ce cas, la TVA ne suffit pas. Demandez l'identifiant Peppol de facturation à votre client.
+
+### 2. Un numéro de TVA valide, mais un client absent du réseau
+
+C'est la confusion la plus coûteuse. 
+Une TVA valide ne prouve pas que l'entreprise est inscrite sur Peppol. Certaines n'ont toujours pas activé leur réception.
+ Un guide Odoo publié en octobre 2026 parle de 
+89 % des assujettis inscrits à la mi-juillet.
+ Il en reste donc qui ne le sont pas. Et une TVA mal encodée dans la fiche produit le même échec, avec un message différent.
+
+### 3. Le doublon
+
+Un clic lent, un double-clic, et la même facture part deux fois. 
+Cela arrive plus souvent qu'on ne le croit.
+ Le réseau peut alors rejeter la seconde. Le risque inverse existe aussi : renvoyer « par précaution » une facture qui était simplement en attente. Avant tout renvoi, regardez le statut.
+
+### 4. Un fichier incomplet
+
+Parfois la fiche client est parfaite et c'est le contenu qui bloque. 
+Peppol exige au moins une référence acheteur ou un numéro de commande.
+ Si votre modèle de facture n'en porte pas, le rejet est systématique pour les clients concernés.
+
+## Lire les statuts dans Odoo
+
+Le module Peppol existe de la version 16 à la 20. 
+Seules les versions 18, 19 et 20 sont encore en support standard.
+ Le principe est le même d'une version à l'autre :
+
+- 
+Une facture comptabilisée à envoyer est marquée « Prêt à envoyer » dans le champ Statut Peppol.
+
+- 
+Une fois envoyée, elle passe en « Processing ».
+
+- 
+Le statut passe à « Done » quand la facture est livrée au point d'accès du destinataire.
+
+
+Une facture qui reste en « Processing » n'est pas livrée. Il faut aussi connaître les statuts d'erreur. Un retour d'expérience sur Odoo 18 en décrit deux : 
+« Error » (blocage par Odoo ou par le réseau) et « Skipped » (blocage par le destinataire).
+ Les libellés ont pu évoluer selon les versions. Un correctif publié sur GitHub retire par exemple l'état « skipped » dans certains cas. Vérifiez donc ce qu'affiche votre version.
+
+Deux gestes pratiques :
+
+- Dans la liste des factures, 
+ajoutez la colonne Statut Peppol.
+
+- 
+Une tâche planifiée vérifie les statuts régulièrement. Le bouton « Récupérer le statut des factures Peppol » du tableau de bord comptable la déclenche à la demande.
+
+
+Le point faible est connu. Le même retour d'expérience note que dans Odoo 18, 
+il n'y a pas d'avertissement en cas d'erreur. Il recommande de contrôler les statuts le lendemain de l'envoi, regroupés par statut Peppol.
+ Nous n'avons pas vu de source confirmant un changement sur ce point dans les versions suivantes. Ne comptez pas dessus sans l'avoir testé sur votre base.
+
+## Nettoyer la fiche client avant l'envoi
+
+Le plus rentable est de ne pas envoyer une facture vouée au rejet. Sur la fiche client, onglet Comptabilité :
+
+- **Contrôlez le bloc de facturation électronique.** Le format, le code EAS (le préfixe, 0208 par exemple) et le point de terminaison doivent être remplis et cohérents.
+- **Lancez la vérification.** 
+En mode développeur, le bouton Vérifier indique « Valide » si le contact est trouvé sur le réseau.
+ Odoo permet aussi de 
+repérer d'avance les partenaires déjà enregistrés depuis la vue liste des contacts.
+
+- **Repassez après chaque modification.** Un retour de terrain relève qu'
+un numéro d'entreprise modifié après la validation fait ensuite échouer l'envoi.
+ Un statut « Valide » ancien ne garantit rien.
+- **Validez la TVA et l'adresse.** Un guide recommande de 
+contrôler la TVA via VIES et de renseigner une adresse complète, pays compris.
+
+- **Fixez la méthode d'envoi.** 
+Réglez-la sur « via Peppol » dans la section Factures client de l'onglet Comptabilité.
+
+- **Traitez les clients hors réseau à part.** Si le client est introuvable, ne forcez pas. Contactez-le, demandez son identifiant exact, et vérifiez avec votre comptable quelle solution de repli est acceptable.
+
+Faites ce nettoyage une fois sur l'ensemble des clients actifs, puis intégrez-le à la création de chaque nouveau client.
+
+## Un monitoring simple qui évite des semaines de retard
+
+Ne comptez pas sur la mémoire de la comptabilité. Voici ce que nous mettons en place chez nos clients :
+
+1. **Une vue enregistrée « Peppol à risque ».** Elle regroupe les factures en erreur ou bloquées en « Processing » depuis plus d'un jour ouvré. Ce seuil est notre règle de terrain, pas une norme. 
+Certains points d'accès ont des files d'attente en période de pointe, fin de mois ou de trimestre TVA.
+ Adaptez-le.
+2. **Une alerte quotidienne.** Une action planifiée envoie un e-mail ou crée une activité pour la personne responsable de la facturation dès qu'une facture entre dans cette vue.
+3. **Un contrôle de la tâche de statut.** Si elle ne tourne plus, les statuts figent. Vous croiriez alors que tout va bien.
+4. **Une revue hebdomadaire des clients en échec répété.** Un même client qui rejette trois factures signale un problème d'identifiant, pas de malchance.
+
+Une alerte n'a de valeur que si quelqu'un est nommé pour la traiter. Fixez qui corrige, qui appelle le client, et sous quel délai.
+
+## À retenir
+
+- « Envoyée » dans Odoo ne signifie pas « livrée ». Seul le statut de livraison compte.
+- Le format 0208 suivi de dix chiffres règle une grande part des rejets d'identifiants.
+- Une TVA valide ne prouve pas que le client reçoit sur Peppol.
+- Contrôlez les statuts chaque jour, et ne renvoyez rien avant d'avoir regardé.
+
+Mettre en place la vue, l'alerte et le contrôle de la tâche planifiée est un travail court. Il coûte moins qu'un seul trimestre de factures qui dorment. Si vous voulez qu'on regarde vos fiches clients et vos statuts, notre équipe de [Hosting & Monitoring](/hosting-monitoring/) peut surveiller ces points avec vous. Notre [support Odoo](/support/) peut aussi vous aider à corriger ce qui est déjà en échec.
