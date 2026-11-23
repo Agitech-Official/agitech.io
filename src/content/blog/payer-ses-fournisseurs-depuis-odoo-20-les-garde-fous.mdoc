@@ -1,0 +1,121 @@
+---
+title: "Payer ses fournisseurs depuis Odoo 20 : les garde-fous"
+lang: "fr"
+publishedAt: "2026-11-23"
+category: "Odoo"
+excerpt: "Odoo 20 paie vos fournisseurs en une seule authentification. Qui prépare, qui valide, quel plafond : les garde-fous à fixer avant d'activer."
+---
+
+Jusqu'ici, payer des fournisseurs avec Odoo voulait dire exporter un fichier, se connecter au portail de la banque, le téléverser, puis signer. Avec Odoo 20, on clique sur « Payer » et on confirme chez la banque. C'est plus rapide. C'est aussi un contrôle en moins si vous ne le remplacez pas.
+
+## Ce qui est annoncé, et ce qui ne l'est pas
+
+
+Odoo 20 est sorti le 24 septembre 2026.
+ Ses notes de version précisent qu'on peut 
+payer des factures, une par une ou par lots, avec une seule signature, via une interface PISP (prestataire d'initiation de paiement).
+
+
+Mi-novembre, Odoo a annoncé l'extension de son partenariat avec Salt Edge. Les utilisateurs peuvent 
+payer une facture ou un lot de factures directement depuis la plateforme, via Pay by Bank et Bulk Payments.
+ Odoo est 
+le premier client de Salt Edge à lancer les paiements groupés, un service jusque-là limité à l'Italie et élargi à l'UE et au Royaume-Uni.
+
+
+Ce que ces annonces ne disent pas : comment se règlent les droits côté banque, s'il existe un plafond par lot, et ce que le signataire voit exactement sur son écran de confirmation. Je n'ai rien trouvé là-dessus dans la documentation consultée. À tester avant de promettre quoi que ce soit à votre comptable.
+
+## Fichier SEPA ou paiement initié : ce qui change côté contrôle
+
+Avec le fichier, Odoo génère un XML (
+au format PAIN.001.001.09 par défaut
+) que quelqu'un téléverse sur le portail bancaire. Ce passage est une pause naturelle. La personne qui téléverse regarde le total, la banque affiche ses alertes, et le signataire valide.
+
+Avec le paiement initié, Odoo l'a dit lui-même : l'objectif est 
+d'éliminer les fichiers à téléverser et les saisies manuelles.
+ Une seule authentification forte déclenche tout le lot. Si le lot est faux, il part faux.
+
+Le risque ne vient donc pas de la technique. Il vient de la disparition de l'étape où quelqu'un d'autre regardait le fichier.
+
+## Garde-fou 1 : séparer celui qui prépare et celui qui signe
+
+Règle simple : la personne qui encode les factures et crée le lot ne signe jamais chez la banque.
+
+- **Préparation** : comptabilité fournisseurs. Elle crée les paiements et assemble le lot.
+- **Contrôle** : une deuxième personne compare le lot à la liste des factures échues.
+- **Signature** : le dirigeant ou le responsable financier, avec ses propres identifiants bancaires.
+
+Dans une petite équipe, le dirigeant signe lui-même. Mais il ne doit pas être la personne qui prépare le lot. Si les deux rôles tombent sur la même tête, vous avez supprimé la séparation des tâches.
+
+Autre point : les accès Odoo ne remplacent pas les droits bancaires. Vérifiez avec votre banque qui peut autoriser un paiement initié par un tiers, et s'il faut une signature collective.
+
+## Garde-fou 2 : un plafond par lot, fixé par écrit
+
+Je n'ai pas vu de plafond natif décrit dans la documentation. Fixez donc le vôtre, en dehors d'Odoo si nécessaire :
+
+- un montant maximum par lot au-delà duquel un second signataire est requis ;
+- un montant maximum par fournisseur et par lot ;
+- une règle pour les paiements hors cycle : un seul fournisseur, une seule facture, une validation à part.
+
+Demandez aussi à votre banque si ses propres plafonds s'appliquent aux paiements initiés par un prestataire. La réponse peut varier d'une banque à l'autre. Ne la supposez pas.
+
+Côté doublons, Odoo 20 aide : 
+l'assistant de paiement détecte les paiements en attente et les déduit du montant dû.
+ C'est utile, mais ça ne vaut pas un plafond.
+
+## Garde-fou 3 : verrouiller les IBAN modifiés
+
+Le scénario classique de fraude : un faux courriel annonce qu'un fournisseur a changé de compte. Quelqu'un met à jour la fiche, le lot part.
+
+Odoo a déjà un mécanisme pour ça. 
+Les nouveaux comptes bancaires sont « non fiables » par défaut, ce qui bloque les virements sortants jusqu'à validation manuelle.
+ La documentation précise de ne l'activer que 
+quand on est certain que les informations sont correctes et ne viennent pas d'une attaque de phishing.
+ Par ailleurs, Odoo ne vérifie que 
+le format de l'IBAN
+, pas son titulaire.
+
+Ma recommandation :
+
+1. Une seule personne autorisée à marquer un compte comme fiable, et ce n'est pas celle qui encode les factures.
+2. Rappel du fournisseur sur un numéro déjà connu, jamais celui du courriel de changement.
+3. Trace écrite de la vérification (date, interlocuteur).
+4. Revue de la liste des IBAN modifiés depuis le dernier lot, avant la signature.
+
+La vérification du bénéficiaire est un second filet. 
+Depuis le 9 octobre 2025, elle s'applique à tous les virements SEPA
+ : la banque compare le nom saisi au titulaire de l'IBAN. Mais 
+vous pouvez confirmer le virement malgré l'alerte
+. Ce filet dépend donc d'une personne qui lit l'alerte. Et je ne sais pas encore si cette alerte remonte clairement dans le parcours initié depuis Odoo. Testez-le avec un fournisseur dont le nom est volontairement légèrement différent. Dans tous les cas, des fiches fournisseurs avec la raison sociale exacte évitent les fausses alertes.
+
+## Garde-fou 4 : vérifier que votre banque est vraiment prise en charge
+
+Odoo l'écrit : 
+la disponibilité dépend de la prise en charge de votre banque par le prestataire d'initiation.
+ Autre précision documentée : la voie Ponto, décrite dans la documentation Odoo 20, 
+exige SEPA Credit Transfer activé, la méthode ajoutée au journal bancaire et un compte fournisseur marqué comme fiable.
+
+
+Avant d'activer :
+
+- confirmez la banque et le type de compte (compte courant de l'entreprise) dans l'interface Odoo, pas dans une présentation commerciale ;
+- testez avec un petit paiement réel vers un compte que vous maîtrisez ;
+- notez quel prestataire est utilisé (Salt Edge ou autre) et qui peut révoquer l'accès côté banque.
+
+Les connexions bancaires belges n'ont pas toujours été simples. Un fil du forum Odoo décrit par exemple 
+des connexions impossibles avec BNP Paribas sur deux bases.
+ C'est un cas ancien, sur Odoo 18, mais il rappelle qu'il faut tester sa propre banque.
+
+## Le plan d'activation que je recommande
+
+1. Garder le fichier SEPA en parallèle pendant un cycle de paiement.
+2. Désigner préparateur, contrôleur et signataire, par écrit.
+3. Fixer le plafond par lot et la règle des paiements hors cycle.
+4. Faire la revue des IBAN modifiés avant chaque signature.
+5. Tester un lot de faible montant, puis comparer le résultat dans Odoo et sur l'extrait bancaire. Odoo 20 a d'ailleurs renommé les statuts : 
+« En cours » devient « Payé », et « Payé » devient « Rapproché ».
+ Formez l'équipe à ce changement avant le premier vrai lot.
+6. Ne couper le fichier SEPA qu'après ce cycle de test.
+
+Une seule authentification pour un lot entier est un vrai gain de temps. Elle n'est acceptable que si, avant elle, quelqu'un d'autre a contrôlé le lot.
+
+Si vous voulez cadrer ces rôles et tester votre banque avant l'activation, notre équipe peut vous accompagner via le [support Odoo](/support/) ou dans le cadre d'une [implémentation Odoo](/odoo-erp/). Vous pouvez aussi nous écrire directement via la page [contact](/contact-us/).
