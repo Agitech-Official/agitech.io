@@ -1,0 +1,89 @@
+---
+title: "Paying suppliers from Odoo 20: the safeguards to set first"
+lang: "en"
+publishedAt: "2026-11-23"
+category: "Odoo"
+excerpt: "Odoo 20 pays your suppliers with a single authentication. Who prepares, who approves, what limit: the safeguards to set before you switch it on."
+---
+
+Until now, paying suppliers with Odoo meant exporting a file, logging in to the bank's portal, uploading it, then signing. With Odoo 20, you click "Pay" and confirm with the bank. It is faster. It is also one control fewer if you don't replace it.
+
+## What has been announced, and what hasn't
+
+Odoo 20 was released on 24 September 2026. Its release notes state that you can pay bills, one by one or in batches, with a single signature, through a PISP (payment initiation service provider) interface.
+
+In mid-November, Odoo announced the extension of its partnership with Salt Edge. Users can pay a bill or a batch of bills directly from the platform, via Pay by Bank and Bulk Payments. Odoo is the first Salt Edge client to launch bulk payments, a service previously limited to Italy and now extended to the EU and the UK.
+
+What these announcements don't say: how permissions are managed on the bank's side, whether there is a limit per batch, and exactly what the signatory sees on the confirmation screen. I found nothing on these points in the documentation I consulted. Test them before promising anything to your accountant.
+
+## SEPA file or initiated payment: what changes for control
+
+With the file, Odoo generates an XML (in PAIN.001.001.09 format by default) that someone uploads to the bank portal. That step is a natural pause. The person uploading checks the total, the bank displays its alerts, and the signatory approves.
+
+With an initiated payment, Odoo has said it itself: the aim is to eliminate files to upload and manual entries. A single strong authentication triggers the whole batch. If the batch is wrong, it goes out wrong.
+
+The risk therefore doesn't come from the technology. It comes from the disappearance of the step where someone else looked at the file.
+
+## Safeguard 1: separate whoever prepares from whoever signs
+
+A simple rule: the person who enters the bills and creates the batch never signs at the bank.
+
+- **Preparation**: accounts payable. They create the payments and assemble the batch.
+- **Review**: a second person compares the batch with the list of overdue bills.
+- **Signature**: the managing director or the finance manager, using their own banking credentials.
+
+In a small team, the managing director signs personally. But they must not be the person who prepares the batch. If both roles fall to the same person, you have removed the segregation of duties.
+
+Another point: Odoo access rights do not replace banking permissions. Check with your bank who can authorise a payment initiated by a third party, and whether a joint signature is required.
+
+## Safeguard 2: a limit per batch, set in writing
+
+I haven't seen a native limit described in the documentation. So set your own, outside Odoo if necessary:
+
+- a maximum amount per batch above which a second signatory is required;
+- a maximum amount per supplier and per batch;
+- a rule for off-cycle payments: one supplier, one bill, a separate approval.
+
+Also ask your bank whether its own limits apply to payments initiated by a service provider. The answer may vary from one bank to another. Don't assume it.
+
+On duplicates, Odoo 20 helps: the payment wizard detects pending payments and deducts them from the amount due. That is useful, but it is no substitute for a limit.
+
+## Safeguard 3: lock down changed IBANs
+
+The classic fraud scenario: a fake email announces that a supplier has changed bank account. Someone updates the record, and the batch goes out.
+
+Odoo already has a mechanism for this. New bank accounts are "untrusted" by default, which blocks outgoing transfers until they are manually approved. The documentation specifies that you should only enable this when you are certain the information is correct and does not come from a phishing attack. Furthermore, Odoo only checks the format of the IBAN, not its holder.
+
+My recommendation:
+
+1. Only one person is authorised to mark an account as trusted, and it is not the person who enters the bills.
+2. Call the supplier back on a number you already know, never the one in the change-of-details email.
+3. Keep a written record of the verification (date, contact person).
+4. Review the list of IBANs changed since the last batch, before signing.
+
+Verification of payee is a second safety net. Since 9 October 2025, it has applied to all SEPA transfers: the bank compares the name entered with the IBAN holder. But you can confirm the transfer despite the alert. This net therefore depends on someone reading the alert. And I don't yet know whether this alert comes through clearly in the payment flow initiated from Odoo. Test it with a supplier whose name is deliberately slightly different. In any case, supplier records with the exact company name avoid false alerts.
+
+## Safeguard 4: check that your bank is genuinely supported
+
+Odoo states it: availability depends on your bank being supported by the initiation provider. Another documented point: the Ponto route, described in the Odoo 20 documentation, requires SEPA Credit Transfer to be enabled, the method to be added to the bank journal, and a supplier account marked as trusted.
+
+Before enabling:
+
+- confirm the bank and the account type (the company's current account) in the Odoo interface, not in a sales presentation;
+- test with a small real payment to an account you control;
+- note which provider is used (Salt Edge or another) and who can revoke access on the bank's side.
+
+Belgian bank connections have not always been straightforward. A thread on the Odoo forum, for example, describes failed connections with BNP Paribas on two databases. It is an old case, on Odoo 18, but it is a reminder to test your own bank.
+
+## The activation plan I recommend
+
+1. Keep the SEPA file running in parallel for one payment cycle.
+2. Appoint a preparer, a reviewer and a signatory, in writing.
+3. Set the limit per batch and the rule for off-cycle payments.
+4. Review changed IBANs before every signature.
+5. Test a low-value batch, then compare the result in Odoo and on the bank statement. Odoo 20 has, incidentally, renamed the statuses: "In progress" becomes "Paid", and "Paid" becomes "Reconciled". Train the team on this change before the first real batch.
+6. Only switch off the SEPA file after this test cycle.
+
+A single authentication for an entire batch is a real time saver. It is only acceptable if, beforehand, someone else has checked the batch.
+
+If you would like to define these roles and test your bank before activation, our team can help you through [Odoo support](/en/support/) or as part of an [Odoo implementation](/en/odoo-erp/). You can also write to us directly via the [contact](/en/contact-us/) page.
