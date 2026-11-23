@@ -1,0 +1,89 @@
+---
+title: "Leveranciers betalen vanuit Odoo 20: de nodige controles"
+lang: "nl"
+publishedAt: "2026-11-23"
+category: "Odoo"
+excerpt: "Odoo 20 betaalt uw leveranciers met één enkele authenticatie. Wie bereidt voor, wie keurt goed, welk plafond: de waarborgen om vooraf vast te leggen."
+---
+
+Tot nu toe betekende leveranciers betalen met Odoo: een bestand exporteren, inloggen op het bankportaal, het bestand uploaden en vervolgens ondertekenen. Met Odoo 20 klikt u op “Betalen” en bevestigt u bij de bank. Dat gaat sneller. Het betekent ook één controle minder, tenzij u die vervangt.
+
+## Wat is aangekondigd, en wat niet
+
+Odoo 20 is uitgebracht op 24 september 2026. Volgens de release notes kunt u facturen betalen, één per één of per batch, met één enkele handtekening, via een PISP-interface (betalingsinitiatiedienstverlener).
+
+Midden november kondigde Odoo de uitbreiding van zijn partnerschap met Salt Edge aan. Gebruikers kunnen een factuur of een batch facturen rechtstreeks vanuit het platform betalen, via Pay by Bank en Bulk Payments. Odoo is de eerste klant van Salt Edge die gegroepeerde betalingen lanceert, een dienst die tot dan toe beperkt was tot Italië en nu is uitgebreid naar de EU en het Verenigd Koninkrijk.
+
+Wat deze aankondigingen niet vermelden: hoe de rechten aan de kant van de bank worden geregeld, of er een plafond per batch bestaat en wat de ondertekenaar precies ziet op zijn bevestigingsscherm. Ik heb hierover niets gevonden in de geraadpleegde documentatie. Test dit uit voordat u iets belooft aan uw boekhouder.
+
+## SEPA-bestand of geïnitieerde betaling: wat verandert er voor de controle
+
+Bij het bestand genereert Odoo een XML-bestand (standaard in het formaat PAIN.001.001.09) dat iemand uploadt op het bankportaal. Dat is een natuurlijk rustmoment. De persoon die uploadt, kijkt naar het totaalbedrag, de bank toont haar waarschuwingen en de ondertekenaar keurt goed.
+
+Bij de geïnitieerde betaling is het doel volgens Odoo zelf om de te uploaden bestanden en de manuele invoer te elimineren. Eén enkele sterke authenticatie zet de volledige batch in gang. Als de batch fout is, vertrekt ze fout.
+
+Het risico komt dus niet van de technologie. Het komt doordat de stap verdwijnt waarin iemand anders het bestand bekeek.
+
+## Controle 1: voorbereiding en ondertekening scheiden
+
+Eenvoudige regel: de persoon die de facturen boekt en de batch aanmaakt, ondertekent nooit bij de bank.
+
+- **Voorbereiding**: leveranciersboekhouding. Zij maakt de betalingen aan en stelt de batch samen.
+- **Controle**: een tweede persoon vergelijkt de batch met de lijst van vervallen facturen.
+- **Ondertekening**: de zaakvoerder of de financieel verantwoordelijke, met zijn eigen bankgegevens.
+
+In een klein team ondertekent de zaakvoerder zelf. Hij mag dan echter niet degene zijn die de batch voorbereidt. Als beide rollen bij dezelfde persoon terechtkomen, hebt u de functiescheiding opgeheven.
+
+Nog een aandachtspunt: de toegangsrechten in Odoo vervangen de bankrechten niet. Vraag aan uw bank wie een door een derde geïnitieerde betaling mag autoriseren en of een collectieve handtekening vereist is.
+
+## Controle 2: een plafond per batch, schriftelijk vastgelegd
+
+Ik heb in de documentatie geen standaardplafond beschreven gezien. Leg dus uw eigen plafond vast, indien nodig buiten Odoo:
+
+- een maximumbedrag per batch waarboven een tweede ondertekenaar vereist is;
+- een maximumbedrag per leverancier en per batch;
+- een regel voor betalingen buiten de betaalronde: één leverancier, één factuur, een afzonderlijke goedkeuring.
+
+Vraag ook aan uw bank of haar eigen plafonds van toepassing zijn op betalingen die door een dienstverlener worden geïnitieerd. Het antwoord kan verschillen van bank tot bank. Ga er niet van uit.
+
+Wat dubbele betalingen betreft, helpt Odoo 20: de betaalassistent detecteert openstaande betalingen en trekt ze af van het verschuldigde bedrag. Dat is nuttig, maar het vervangt geen plafond.
+
+## Controle 3: gewijzigde IBAN-nummers vergrendelen
+
+Het klassieke fraudescenario: een valse e-mail meldt dat een leverancier van rekening is veranderd. Iemand past de fiche aan en de batch vertrekt.
+
+Odoo heeft hiervoor al een mechanisme. Nieuwe bankrekeningen zijn standaard “niet betrouwbaar”, waardoor uitgaande overschrijvingen geblokkeerd blijven tot ze manueel zijn goedgekeurd. De documentatie vermeldt dat u dit pas mag activeren wanneer u zeker bent dat de informatie correct is en niet afkomstig is van een phishingaanval. Bovendien controleert Odoo enkel het formaat van het IBAN, niet de houder ervan.
+
+Mijn aanbeveling:
+
+1. Slechts één persoon mag een rekening als betrouwbaar markeren, en dat is niet degene die de facturen boekt.
+2. Bel de leverancier terug op een reeds gekend nummer, nooit op het nummer uit de e-mail over de wijziging.
+3. Leg de verificatie schriftelijk vast (datum, gesprekspartner).
+4. Overloop vóór de ondertekening de lijst van IBAN-nummers die sinds de vorige batch zijn gewijzigd.
+
+De verificatie van de begunstigde is een tweede vangnet. Sinds 9 oktober 2025 geldt ze voor alle SEPA-overschrijvingen: de bank vergelijkt de ingevoerde naam met de houder van het IBAN. Maar u kunt de overschrijving bevestigen ondanks de waarschuwing. Dit vangnet hangt dus af van iemand die de waarschuwing leest. Bovendien weet ik nog niet of die waarschuwing duidelijk doorkomt in het traject dat vanuit Odoo wordt geïnitieerd. Test dit met een leverancier van wie de naam bewust lichtjes afwijkt. In elk geval voorkomen leveranciersfiches met de exacte maatschappelijke benaming valse waarschuwingen.
+
+## Controle 4: nagaan of uw bank echt wordt ondersteund
+
+Odoo schrijft het zelf: de beschikbaarheid hangt af van de ondersteuning van uw bank door de initiatiedienstverlener. Een andere gedocumenteerde vereiste: voor de Ponto-route, beschreven in de Odoo 20-documentatie, moet SEPA Credit Transfer geactiveerd zijn, moet de methode zijn toegevoegd aan het bankdagboek en moet een leveranciersrekening als betrouwbaar zijn gemarkeerd.
+
+Vóór de activering:
+
+- bevestig de bank en het type rekening (zakelijke zichtrekening) in de Odoo-interface, niet in een commerciële presentatie;
+- test met een kleine echte betaling naar een rekening waarover u zelf beschikt;
+- noteer welke dienstverlener wordt gebruikt (Salt Edge of een andere) en wie de toegang aan de kant van de bank kan intrekken.
+
+Belgische bankkoppelingen zijn niet altijd eenvoudig geweest. Een draad op het Odoo-forum beschrijft bijvoorbeeld onmogelijke koppelingen met BNP Paribas op twee databases. Het gaat om een ouder geval, op Odoo 18, maar het herinnert eraan dat u uw eigen bank moet testen.
+
+## Het activeringsplan dat ik aanbeveel
+
+1. Houd het SEPA-bestand gedurende één betaalronde parallel aan.
+2. Duid schriftelijk een voorbereider, een controleur en een ondertekenaar aan.
+3. Leg het plafond per batch en de regel voor betalingen buiten de betaalronde vast.
+4. Overloop vóór elke ondertekening de gewijzigde IBAN-nummers.
+5. Test een batch met een laag bedrag en vergelijk daarna het resultaat in Odoo en op het bankuittreksel. Odoo 20 heeft trouwens de statussen hernoemd: “In uitvoering” wordt “Betaald” en “Betaald” wordt “Afgestemd”. Leid het team op voor deze wijziging vóór de eerste echte batch.
+6. Stop het SEPA-bestand pas na deze testronde.
+
+Eén enkele authenticatie voor een volledige batch is een echte tijdwinst. Ze is pas aanvaardbaar als iemand anders de batch er voordien heeft gecontroleerd.
+
+Wilt u deze rollen afbakenen en uw bank testen vóór de activering? Dan kan ons team u begeleiden via de [Odoo-support](/nl/support/) of in het kader van een [Odoo-implementatie](/nl/odoo-erp/). U kunt ons ook rechtstreeks contacteren via de [contactpagina](/nl/contact-us/).
