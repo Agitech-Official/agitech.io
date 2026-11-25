@@ -1,0 +1,99 @@
+---
+title: "MCP in Odoo 20: welke rechten geeft u Claude of ChatGPT?"
+lang: "nl"
+publishedAt: "2026-11-25"
+category: "Softwareontwikkeling & AI"
+excerpt: "Odoo 20 koppelt Claude of ChatGPT via MCP. Eén aparte gebruiker, alleen-lezen, voor één use case: de startregel en de checklist vóór schrijfrechten."
+---
+
+Odoo 20 laat een externe AI rechtstreeks met uw database praten. Claude, ChatGPT of een andere assistent maakt verbinding, zoekt, leest en vat samen. De vraag van de bedrijfsleider is niet: "werkt het?". Het is: "wat laat ik die AI doen?"
+
+Onze startregel past in één zin: **een eigen Odoo-gebruiker voor de AI, alleen-lezen, voor één enkele use case.** De rest van dit artikel legt uit waarom, en wat u moet controleren voordat u schrijfrechten openstelt.
+
+## Wat de native MCP van Odoo 20 echt doet
+
+Odoo 20 werd voorgesteld op Odoo Experience op 24 september 2026 en bevat een MCP-server op het adres van uw database, gevolgd door /mcp.
+
+De assistent authentificeert zich met een API-sleutel die de MCP-scope bevat.
+
+De reikwijdte is beperkter dan men denkt:
+
+- De native server maakt deel uit van Odoo Enterprise en vereist een Enterprise-abonnement. Het Custom-plan is eveneens vereist: noch het Standard-plan, noch Community geeft toegang.
+- Er bestaat documentatie voor Odoo 20.0 en Online saas-19.4. De documentatie van versie 19.0 heeft geen MCP-pagina.
+- Een MCP-verbinding bereikt maar één Odoo-database.
+
+Wat de assistenten betreft, spreekt Odoo over Claude, ChatGPT of Gemini. In de code zijn ChatGPT, Claude, Claude Code en Grok vooraf goedgekeurd voor OAuth, en elke client die een API-sleutel kan versturen, kan ook verbinding maken. Test Gemini eerst, voordat u iets aan uw teams belooft.
+
+## Standaard alleen-lezen: wat dat betekent
+
+Standaard kan de AI de gegevens enkel raadplegen. Schrijfrechten moeten handmatig worden toegestaan. Concreet zijn vijf tools actief: Get Fields, Get Models, Retrieve initial context, Search en Read group.
+
+Create Records, Update Records, navigatie, website en media blijven verborgen zolang een beheerder niet bij elke serveractie "Available in MCP" aanvinkt.
+
+Dat is een goede instelling. Maar het is slechts één slot, en niet het sterkste.
+
+## Waarom de aparte gebruiker zwaarder weegt dan het aanvinkvakje
+
+Odoo voert de AI uit met de rechten van de persoon die de sleutel bezit. Een MCP-sleutel geeft de AI exact uw rechten, niet meer en niet minder.
+
+Een beheerder kan de zichtbare tools per groep beperken, maar er bestaat nog altijd geen manier om de AI minder te geven dan de persoon die de sleutel in handen heeft.
+
+Als u Claude koppelt met de sleutel van uw financieel directeur, ziet Claude wat uw financieel directeur ziet. Hetzelfde geldt als schrijfrechten ooit worden geactiveerd.
+
+Het tweede punt verrast: de vlag "alleen-lezen" van een tool is slechts een aanwijzing. Ze wordt als hint aan de client doorgegeven, dus u moet ze eerlijk houden. Bij een test op Odoo 20 vinkten testers de tool voor het aanmaken aan, de server meldde zich als alleen-lezen en toch werd er een contact aangemaakt. Dat is geen fout in de standaardversie van Odoo. Het is wat er gebeurt wanneer iemand aanpassingen doet zonder te controleren.
+
+Het echte slot is dus de gebruikersaccount. Maak een aparte gebruiker voor de AI aan, met strikt de noodzakelijke rechten, en koppel de assistent aan de sleutel van die gebruiker in plaats van aan de uwe. Een gebruiker zonder schrijfrechten kan niet schrijven, ongeacht welke tools beschikbaar zijn.
+
+Enkele eenvoudige instellingen:
+
+- **Eén use case.** Bijvoorbeeld: opvolging van openstaande offertes voor de verkopers, of het raadplegen van voorraden. Niet "heel Odoo".
+- **Eén sleutel per gebruik**, met een naam en een vervaldatum. Een gepubliceerd voorbeeld stelt de vervaldatum in op één maand. Odoo toont de sleutel slechts één keer.
+- **Een zichtbaarheidstest.** De tool Get Models geeft een lijst van alle modellen waartoe de huidige gebruiker toegang heeft. Voer hem uit met de AI-account en overloop de lijst samen met de verantwoordelijke van het betrokken vakgebied.
+
+## Voordat u schrijfrechten toestaat: de checklist
+
+Overloop deze punten één voor één. Blijft er ook maar één onduidelijk, blijf dan bij alleen-lezen.
+
+**1. Wie valideert?**
+
+Volgens een analyse van een derde partij voert MCP, zodra een schrijftool is geactiveerd, de oproep uit met de bevestiging al op "waar": er is geen menselijke validatie aan de kant van Odoo. Die validatie moet dus elders bestaan: in de AI-client of in uw werkproces. Duid één persoon aan, niet "het team". Bepaal ook wat de AI mag aanmaken: ontwerpen, geen definitieve documenten. Bij een test op Odoo 20 Enterprise kon de native server fiches aanmaken en wijzigen, maar geen bestellingen bevestigen, geen facturen valideren en niets verwijderen. Controleer of dat ook bij u het geval is.
+
+**2. Welke gevoelige gegevens?**
+
+Maak een lijst van wat de AI-account kan lezen: kostprijzen, marges, personeelsdossiers, lonen, contracten. Een verkoper die de boekhouding niet ziet in Odoo, ziet die ook niet via Claude. De regel werkt in beide richtingen: wat de account ziet, belandt in het gesprek met de AI-leverancier. Haal de rechten op loonadministratie en marges weg vóór de eerste vraag, niet erna.
+
+**3. Welke sporen?**
+
+Dit is het zwakke punt van de native oplossing. De documentatie van 20.0 beschrijft geen enkel logboek van MCP-oproepen. Odoo biedt slechts gedeeltelijke zichtbaarheid: bepaalde gevolgde velden publiceren hun wijzigingen in de chatter. De OCA onderhoudt een auditmodule die de bewerkingen per geactiveerd model registreert. Als u schrijfrechten openstelt, bepaal dan eerst waar u zult nalezen wie wat heeft gewijzigd.
+
+**4. Wie houdt het register bij?**
+
+Een aanbeveling is om een register van de sleutels bij te houden: eigenaar, vervaldatum, toegankelijke tools, met een maandelijkse controle om na te gaan dat er intussen niets werd aangevinkt. Dat is discipline, geen techniek.
+
+**5. Kunnen we snel afsluiten?**
+
+Weet hoe u de sleutel binnen een minuut kunt deactiveren, en wie daartoe het recht heeft. Een toegangspunt /mcp, zelfs in alleen-lezen, blijft een nieuw blootgesteld oppervlak met een database erachter.
+
+## Native MCP of module van derden: het verschil
+
+De native MCP van Odoo 20 is eenvoudig en vraagt geen installatie. U hoeft niets te installeren, de URL van de database volstaat. Hij dekt lezen en analyseren goed. De beperkingen: Enterprise Custom, enkel Odoo 20 en weinig governance.
+
+Modules van derden beantwoorden aan andere behoeften:
+
+- **Versies en edities.** Voor Community of Odoo 14 tot 19 bestaat de native oplossing niet: een module van derden is dan de enige optie.
+- **Governance.** Sommige voegen minimaalrechtenregels per assistent toe, een menselijke goedkeuring op schrijfacties en een volledig auditlogboek. Andere markeren de berichten die van de AI komen: elk chatterbericht dat door een MCP-tool is opgesteld, draagt een MCP-badge.
+- **Prijs.** Niet alle modules zijn betalend. Een module in de Odoo App Store vermeldt een lanceringsprijs van 99 dollar in plaats van 299. Reken ook op het onderhoud: een module van derden moet bij elke Odoo-versie worden bijgewerkt.
+
+Onze visie: begin op Odoo 20 Enterprise met de native oplossing in alleen-lezen. Stap over op een governancelaag wanneer u wilt schrijven met bevestiging en logboek. Ook met een module van derden blijven de rechten van de Odoo-gebruiker het laatste vangnet. De aparte account blijft dus de basis.
+
+Nog een budgettair punt: de in Odoo 20 geïntegreerde AI-functies verbruiken IAP-credits, terwijl MCP steunt op het abonnement van uw assistent. Dat zijn niet dezelfde kostenposten.
+
+## Waar begint u maandag?
+
+1. Kies een use case en de verantwoordelijke ervan in het vakgebied.
+2. Maak de AI-gebruiker aan, zonder schrijfrechten en zonder toegang tot loonadministratie of marges.
+3. Genereer een MCP-sleutel met vervaldatum, koppel de assistent en test met Get Models.
+4. Laat het enkele weken draaien. Noteer waarvoor de AI daadwerkelijk heeft gediend.
+5. Pas daarna bespreekt u schrijfrechten: één enkele tool, ontwerpen, een aangeduide valideerder.
+
+Wilt u die eerste use case afbakenen of de rechten van een bestaande database laten nakijken? Ons team verbindt Odoo met Claude of ChatGPT in het kader van zijn opdrachten voor [ontwikkeling tegen forfaitaire prijs met AI-ondersteuning](/nl/developpement-odoo-forfait/), en de [Odoo-support](/nl/support/) kan uw toegangsgroepen nakijken voordat er ook maar één schrijfactie wordt geopend.
