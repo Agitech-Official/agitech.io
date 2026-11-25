@@ -1,0 +1,99 @@
+---
+title: "Odoo 20 MCP: What Access Should Claude or ChatGPT Get?"
+lang: "en"
+publishedAt: "2026-11-25"
+category: "Software Development & AI"
+excerpt: "Odoo 20 connects Claude or ChatGPT via MCP. One dedicated read-only user, one use case: the starting rule and the checklist before allowing writes."
+---
+
+Odoo 20 lets an external AI talk directly to your database. Claude, ChatGPT or another assistant connects, searches, reads and summarises. The question for a business owner is not "does it work?". It is "what am I letting this AI do?".
+
+Our starting rule fits in one sentence: **a dedicated Odoo user for the AI, read-only, on a single use case.** The rest of this article explains why, and what to check before enabling write access.
+
+## What Odoo 20's native MCP actually does
+
+Odoo 20 was presented at Odoo Experience on 24 September 2026 and ships with an MCP server at your database's address followed by /mcp.
+
+The assistant authenticates with an API key that carries the MCP scope.
+
+The scope is narrower than people assume:
+
+- The native server is part of Odoo Enterprise and requires an Enterprise subscription. It also requires the Custom plan; neither the Standard plan nor Community gives access to it.
+- Documentation exists for Odoo 20.0 and Online saas-19.4. The 19.0 documentation has no MCP page.
+- An MCP connection reaches a single Odoo database.
+
+On the assistant side, Odoo mentions Claude, ChatGPT and Gemini. In the code, ChatGPT, Claude, Claude Code and Grok are pre-approved for OAuth, and any client able to send an API key can also connect. For Gemini, test before promising anything to your teams.
+
+## Read-only by default: what that means
+
+By default, the AI can only consult data. Write access has to be authorised manually. In practice, five tools are active: Get Fields, Get Models, Retrieve initial context, Search and Read group.
+
+Create Records, Update Records, navigation, website and media tools stay hidden until an administrator ticks "Available in MCP" on each server action.
+
+It is a sensible setting. But it is only one lock, and not the strongest one.
+
+## Why the dedicated user matters more than the checkbox
+
+Odoo runs the AI with the rights of the person who holds the key. An MCP key gives the AI exactly your rights, no more and no less.
+
+An administrator can limit the visible tools by group, but there is still no way to give the AI fewer rights than the person holding the key.
+
+If you connect Claude with your finance director's key, Claude sees what your finance director sees. The same applies if write access is ever enabled.
+
+The second point is surprising: a tool's "read-only" flag is only an indication. It is passed to the client as a hint, so it has to be kept honest. During a test on Odoo 20, testers ticked the create tool, the server announced it as read-only, and it still created a contact. This is not a bug in standard Odoo. It is what happens when someone customises without checking.
+
+So the real lock is the account. Create a user dedicated to the AI, with strictly the rights it needs, and connect the assistant to that user's key rather than yours. A user without write permission cannot write, whatever tools are exposed.
+
+A few simple settings:
+
+- **One use case.** For example: tracking open quotes for sales reps, or reading stock levels. Not "all of Odoo".
+- **One key per use**, named, with an expiry date. One published example sets expiry to one month. Odoo only displays the key once.
+- **A visibility test.** The Get Models tool lists every model the current user can access. Run it with the AI account and review the list with the manager of the business area concerned.
+
+## Before allowing writes: the checklist
+
+Go through these points one by one. If a single one remains unclear, stay read-only.
+
+**1. Who approves?**
+
+According to a third-party analysis, once a write tool is enabled, MCP makes the call with confirmation already set to "true": there is no human validation on the Odoo side. That validation must therefore exist elsewhere: in the AI client, or in your process. Name a person, not "the team". Also decide what the AI is allowed to produce: drafts, not final documents. In a test on Odoo 20 Enterprise, the native server created and modified records, but could not confirm orders, validate invoices or delete anything. Check that this is also the case on your system.
+
+**2. Which sensitive data?**
+
+List what the AI account can read: cost prices, margins, employee records, salaries, contracts. A sales rep who cannot see accounting in Odoo will not see it through Claude either. The rule works both ways: whatever the account can see goes into the conversation with the AI provider. Remove rights over payroll and margins before the first question, not after.
+
+**3. Which traces?**
+
+This is the native server's weak point. The 20.0 documentation describes no MCP call log. Odoo only keeps partial visibility: some tracked fields publish their changes in the chatter. The OCA maintains an audit module that records operations per enabled model. If you open up write access, first decide where you will read who changed what.
+
+**4. Who keeps the register?**
+
+One recommendation is to keep a register of keys: owner, expiry, accessible tools, with a monthly review to check that nothing has been ticked in the meantime. This is a matter of discipline, not technology.
+
+**5. Can you cut access quickly?**
+
+Know how to deactivate the key within a minute, and who is allowed to do it. An /mcp entry point, even a read-only one, is still a new exposed surface with a database behind it.
+
+## Native MCP or third-party module: the difference
+
+Odoo 20's native server is simple and requires nothing to be installed. The database URL is enough. It covers reading and analysis well. Its limits: Enterprise Custom, Odoo 20 only, little governance.
+
+Third-party modules address other needs:
+
+- **Versions and editions.** For Community or Odoo 14 to 19, the native server does not exist: a third-party module is the only option.
+- **Governance.** Some add least-privilege rules per assistant, human approval on writes and a full audit log. Others tag messages coming from the AI: every chatter message written by an MCP tool carries an MCP badge.
+- **Price.** Not all of them are paid. One App Store module shows a launch price of 99 dollars instead of 299. Also factor in maintenance: a third-party module has to be updated with every Odoo version.
+
+Our view: on Odoo 20 Enterprise, start with the native server in read-only mode. Move to a governance layer when you want to write with confirmation and a log. Even with a third-party module, the last safety net remains the Odoo user's rights. The dedicated account is therefore still the foundation.
+
+One last budget point: the AI features built into Odoo 20 consume IAP credits, whereas MCP relies on your assistant's subscription. These are not the same cost lines.
+
+## Where to start on Monday
+
+1. Choose a use case and its business owner.
+2. Create the AI user, with no write access and no access to payroll or margins.
+3. Generate a dated MCP key, connect the assistant, and test with Get Models.
+4. Let it run for a few weeks. Note what the AI has actually been used for.
+5. Only then, discuss write access: a single tool, drafts, a named approver.
+
+Would you like help scoping this first use case or checking the access rights of an existing database? Our team connects Odoo to Claude or ChatGPT as part of its [AI-assisted fixed-price development](/en/developpement-odoo-forfait/) projects, and [Odoo support](/en/support/) can review your access groups before any write access is opened.
