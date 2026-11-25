@@ -1,0 +1,156 @@
+---
+title: "MCP Odoo 20 : quels droits donner à Claude ou ChatGPT ?"
+lang: "fr"
+publishedAt: "2026-11-25"
+category: "Développement & IA"
+excerpt: "Odoo 20 branche Claude ou ChatGPT par MCP. Un utilisateur dédié, en lecture seule, sur un cas d'usage : la règle de départ et la checklist avant d'écrire."
+---
+
+Odoo 20 permet à une IA externe de parler directement à votre base. Claude, ChatGPT ou un autre assistant se connecte, cherche, lit, résume. La question du dirigeant n'est pas « est-ce que ça marche ? ». C'est « qu'est-ce que je laisse faire à cette IA ? ».
+
+Notre règle de départ tient en une phrase : **un utilisateur Odoo dédié à l'IA, en lecture seule, sur un seul cas d'usage.** Le reste de l'article explique pourquoi, et ce qu'il faut vérifier avant d'ouvrir l'écriture.
+
+## Ce que fait réellement le MCP natif d'Odoo 20
+
+
+Odoo 20 a été présenté à l'Odoo Experience le 24 septembre 2026 et embarque un serveur MCP à l'adresse de votre base suivie de /mcp.
+ 
+L'assistant s'authentifie avec une clé d'API qui porte le scope MCP.
+
+
+Le périmètre est plus étroit qu'on ne le croit :
+
+- 
+Le serveur natif fait partie d'Odoo Enterprise et demande un abonnement Enterprise.
+ 
+Il faut aussi le plan Custom ; ni le plan Standard ni Community n'y donnent accès.
+
+- 
+La documentation existe pour Odoo 20.0 et Online saas-19.4. La documentation 19.0 n'a pas de page MCP.
+
+- 
+Une connexion MCP atteint une seule base Odoo.
+
+
+Côté assistants, Odoo parle de Claude, ChatGPT ou Gemini. Dans le code, 
+ChatGPT, Claude, Claude Code et Grok sont approuvés d'office pour OAuth, tout client capable d'envoyer une clé d'API peut aussi se connecter.
+ Pour Gemini, testez avant de promettre quoi que ce soit à vos équipes.
+
+## Lecture seule par défaut : ce que ça veut dire
+
+
+Par défaut, l'IA peut seulement consulter les données. L'écriture doit être autorisée manuellement.
+ Concrètement, 
+cinq outils sont actifs : Get Fields, Get Models, Retrieve initial context, Search et Read group.
+ 
+Create Records, Update Records, navigation, site web et médias restent cachés tant qu'un administrateur ne coche pas « Available in MCP » sur chaque action serveur.
+
+
+C'est un bon réglage. Mais c'est un seul verrou. Et il n'est pas le plus solide.
+
+## Pourquoi l'utilisateur dédié compte plus que la case à cocher
+
+Odoo exécute l'IA avec les droits de la personne qui détient la clé. 
+Une clé MCP donne à l'IA exactement vos droits, ni plus ni moins.
+ 
+Un administrateur peut limiter les outils visibles par groupe, mais il n'existe toujours aucun moyen de donner à l'IA moins que la personne qui tient la clé.
+
+
+Si vous branchez Claude avec la clé de votre directeur financier, Claude voit ce que voit votre directeur financier. Même chose si un jour l'écriture est activée.
+
+Le second point surprend : le drapeau « lecture seule » d'un outil n'est qu'une indication. 
+Il est transmis au client comme un indice, il faut donc le garder honnête.
+ Lors d'un test sur Odoo 20, 
+des testeurs ont coché l'outil de création, le serveur l'annonçait en lecture seule, et il a quand même créé un contact.
+ Ce n'est pas un bug d'Odoo livré en standard. C'est ce qui arrive si quelqu'un personnalise sans vérifier.
+
+Donc le vrai verrou, c'est le compte. 
+Créez un utilisateur dédié à l'IA, avec les droits strictement nécessaires, et branchez l'assistant sur sa clé plutôt que sur la vôtre.
+ Un utilisateur sans droit d'écriture ne pourra pas écrire, quels que soient les outils exposés.
+
+Quelques réglages simples :
+
+- **Un cas d'usage.** Par exemple : suivi des devis ouverts pour les commerciaux, ou lecture des stocks. Pas « tout Odoo ».
+- **Une clé par usage**, nommée, avec une date d'expiration. 
+Un exemple publié règle l'expiration à un mois.
+ 
+Odoo n'affiche la clé qu'une fois.
+
+- **Un test de visibilité.** L'outil Get Models 
+liste tous les modèles auxquels l'utilisateur courant a accès.
+ Lancez-le avec le compte IA et relisez la liste avec le responsable du métier concerné.
+
+## Avant d'autoriser l'écriture : la checklist
+
+Passez ces points un par un. Si un seul reste flou, restez en lecture.
+
+**1. Qui valide ?**
+
+Selon une analyse tierce, une fois un outil d'écriture activé, MCP passe l'appel avec la confirmation déjà à « vrai » : aucune validation humaine côté Odoo.
+ Cette validation doit donc exister ailleurs : dans le client IA, ou dans votre processus. Nommez une personne, pas « l'équipe ». Décidez aussi ce que l'IA a le droit de produire : des brouillons, pas des documents définitifs. 
+Lors d'un test sur Odoo 20 Enterprise, le serveur natif créait et modifiait des fiches, mais ne pouvait ni confirmer des commandes, ni valider des factures, ni supprimer.
+ Vérifiez que c'est aussi le cas chez vous.
+
+**2. Quelles données sensibles ?**
+Listez ce que le compte IA peut lire : prix de revient, marges, fiches des salariés, salaires, contrats. 
+Un commercial qui ne voit pas la comptabilité dans Odoo ne la verra pas non plus via Claude.
+ La règle marche dans les deux sens : ce que le compte voit part dans la conversation avec le fournisseur d'IA. Retirez les droits sur la paie et sur les marges avant la première question, pas après.
+
+**3. Quelles traces ?**
+C'est le point faible du natif. 
+La documentation 20.0 ne décrit aucun journal d'appels MCP.
+ 
+Odoo garde seulement une visibilité partielle : certains champs suivis publient leurs changements dans le chatter.
+ 
+L'OCA maintient un module d'audit qui enregistre les opérations par modèle activé.
+ Si vous ouvrez l'écriture, décidez d'abord où vous lirez qui a changé quoi.
+
+**4. Qui tient le registre ?**
+
+Une recommandation consiste à tenir un registre des clés : propriétaire, expiration, outils accessibles, avec une revue mensuelle pour vérifier que rien n'a été coché entre-temps.
+ C'est de la discipline, pas de la technique.
+
+**5. Peut-on couper vite ?**
+Sachez désactiver la clé en une minute, et qui en a le droit. 
+Un point d'entrée /mcp, même en lecture seule, reste une nouvelle surface exposée avec une base de données derrière.
+
+
+## MCP natif ou module tiers : la différence
+
+Le natif d'Odoo 20 est simple et ne demande rien à installer. 
+Vous n'avez rien à installer, l'URL de la base suffit.
+ Il couvre bien la lecture et l'analyse. Ses limites : Enterprise Custom, Odoo 20 uniquement, peu de gouvernance.
+
+Les modules tiers répondent à d'autres besoins :
+
+- **Versions et éditions.** 
+Pour Community ou Odoo 14 à 19, le natif n'existe pas : un module tiers est la seule option.
+
+- **Gouvernance.** Certains ajoutent 
+des règles à moindre privilège par assistant, une approbation humaine sur les écritures et un journal d'audit complet.
+ D'autres marquent les messages venant de l'IA : 
+chaque message du chatter rédigé par un outil MCP porte un badge MCP.
+
+- **Prix.** Tous ne sont pas payants. Un module de l'App Store affiche 
+un prix de lancement à 99 dollars au lieu de 299.
+ Comptez aussi la maintenance : un module tiers se met à jour à chaque version d'Odoo.
+
+Notre lecture : sur Odoo 20 Enterprise, commencez avec le natif en lecture seule. Passez à une couche de gouvernance quand vous voulez écrire avec confirmation et journal. Même avec un module tiers, 
+le dernier filet de sécurité reste les droits de l'utilisateur Odoo.
+ Le compte dédié reste donc la base.
+
+Un dernier point de budget : 
+les fonctions d'IA intégrées à Odoo 20 consomment des crédits IAP
+, alors que 
+le MCP s'appuie sur l'abonnement de votre assistant.
+ Ce ne sont pas les mêmes lignes de coût.
+
+## Par où commencer lundi
+
+1. Choisissez un cas d'usage et son responsable métier.
+2. Créez l'utilisateur IA, sans droit d'écriture, sans accès paie ni marges.
+3. Générez une clé MCP datée, branchez l'assistant, testez avec Get Models.
+4. Laissez tourner quelques semaines. Relevez ce que l'IA a réellement servi.
+5. Ensuite seulement, discutez d'une écriture : un seul outil, des brouillons, un validateur nommé.
+
+Vous voulez cadrer ce premier cas d'usage ou vérifier les droits d'une base existante ? Notre équipe connecte Odoo à Claude ou ChatGPT dans le cadre de ses missions de [développement au forfait assisté par IA](/developpement-odoo-forfait/), et le [support Odoo](/support/) peut revoir vos groupes d'accès avant l'ouverture de la moindre écriture.
