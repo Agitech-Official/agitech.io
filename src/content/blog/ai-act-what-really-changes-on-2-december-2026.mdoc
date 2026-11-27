@@ -1,0 +1,143 @@
+---
+title: "AI Act: what really changes on 2 December 2026"
+lang: "en"
+publishedAt: "2026-11-27"
+category: "Software Development & AI"
+excerpt: "AI transparency: in force since 2 August 2026. 2 December only changes machine-readable marking and two bans. A checklist for your Odoo."
+---
+
+2 December is five days away. Several commentators present it as a general postponement of AI transparency. That is wrong.
+
+If your website has an AI chat, or if your teams have a model write texts for them, you are already affected. This article lists what to check in Odoo and on your website. It is not a substitute for legal advice.
+
+## What the timeline says, without shortcuts
+
+Regulation (EU) 2026/1744, the "Digital Omnibus" on AI, 
+was published in the Official Journal on 24 July 2026 and has been in force since 27 July 2026
+. It mainly postpones the high-risk rules: 
+December 2027 for Annex III systems, August 2028 for those in Annex I
+.
+
+Transparency has not moved. 
+The rules in Article 50 have applied since 2 August 2026.
+
+
+2 December is a narrow exception. 
+The extension covers only the machine-readable marking required by Article 50(2), and only for generative systems already on the market before 2 August 2026.
+ This marking is the responsibility of the providers of models and tools, not yours.
+
+Two new bans also take effect on that date: 
+AI designed to produce child sexual abuse material and non-consensual intimate images, such as "nudifier" tools
+. They target the providers of these tools first and foremost.
+
+In practical terms, 2 December gives you no extra time to disclose that a chat is an AI.
+
+## The Odoo and website checklist
+
+### 1. Live chat
+
+Since version 19, Odoo has offered 
+an AI agent connected to Live Chat, which can also generate leads
+. The Odoo 20 documentation describes 
+an agent that answers common questions, asks for clarification and decides when to hand over to a human
+.
+
+On paper, Article 50(1) weighs first on the provider: 
+it must design the system so that people know they are talking to an AI
+. But you are the one who names the agent, writes its greeting and decides what the visitor sees.
+
+What to check:
+- Open your website in a private browsing window. From the very first message, can the visitor tell they are talking to an AI?
+- Use the channel's welcome message. 
+It is configured in the Options tab of the Live Chat channel.
+ One clear sentence is enough.
+- Do not rely on it being obvious. 
+According to an analysis of the Commission's guidelines, the exception for "obvious" cases must be read restrictively, and support chatbots do not benefit from it.
+ 
+A smooth bot with a human tone does not pass this test.
+
+- Do not give the agent a human first name without an AI notice.
+
+If a team member reviews every reply before it is sent, the reading is different. 
+The visitor is then talking to a human using a tool, and Article 50(1) is unlikely to apply.
+ This source is an analysis, not an official text: decide with your legal adviser.
+
+### 2. Emails and automated agents
+
+In the sources I consulted, I found no general obligation to label every email written with AI assistance. Odoo allows AI to be used in email templates, and a team member who reviews and sends the message remains its author.
+
+The case to watch is different. With Odoo 20, 
+agents run in automated and scheduled actions, not only in a chat window
+. An agent that replies to a customer by email on its own behaves like a chatbot. My reading, as a precaution: flag it in the signature or the first message. This point is not settled by the sources I have seen.
+
+### 3. Automatic summaries
+
+A summary of a ticket, meeting or discussion thread read by your teams is not a published text. The guidelines specifically exclude 
+the chatbot summary available only to the individual user
+. No label is needed.
+
+This settles neither GDPR nor quality. A wrong summary is still wrong. Keep a human in the loop before any decision.
+
+### 4. Texts and images published on the website
+
+Odoo lets you 
+create or rewrite website pages with AI
+ and, according to its 20 documentation, 
+generate images with AI
+.
+
+Two separate rules apply:
+- **Text.** 
+A label is required when the text is published to inform the public on matters of public interest.
+ A product page or a blog article about your trade does not generally fall into this category. However, the guidelines cite 
+health, consumer safety or sustainability claims
+ as an area requiring vigilance.
+- **Images and videos.** 
+A deepfake requires a visible notice.
+ A realistic visual showing a fake event, a fake customer or a fake person is covered.
+
+The exception exists for texts. It requires 
+a genuine substantive review and a person who bears editorial responsibility
+. A simple spelling correction 
+is not enough
+.
+
+### 5. The evidence
+
+Record who reviews sensitive texts and who is accountable for them. 
+Also keep screenshots of your notices and update your privacy policy.
+ If a customer raises a question or you face an inspection, this file is what counts.
+
+## What 2 December changes for you
+
+For most companies using Odoo, very little. The work lies with the providers. 
+The Odoo 19 documentation names Gemini and OpenAI as providers for the AI module.
+ They, along with the publishers of generative tools, are the ones who must mark the content produced.
+
+Two caveats:
+- 
+Tools launched after 2 August had to be compliant from the start.
+ The extension benefits only older tools.
+- If you develop a generative tool yourself and offer it to third parties, you may become a provider. Ask the question beforehand, not afterwards.
+
+On 2 December, ask your AI providers what they have planned for marking. A written answer is worth more than a verbal promise.
+
+## What is not for right now
+
+High risk, for its part, really has been postponed. 
+Annex III systems, such as recruitment or staff evaluation, now fall under 2 December 2027.
+ If you use AI to sort applications, this task awaits you, but not this week.
+
+The Article 5 prohibitions, meanwhile, have applied 
+since 2 February 2025
+.
+
+## In practice, this week
+
+1. Test your chat as a visitor would.
+2. Add the AI notice to the welcome message.
+3. List your agents that write to customers without review.
+4. Identify the AI-generated texts and images published on your website.
+5. Write to your AI providers about marking.
+
+If your Odoo combines AI chat, automated actions and a connection to Claude or ChatGPT, a configuration review takes little time. Our team can carry it out as part of your [Odoo support](/en/support/), or ahead of an [AI-assisted fixed-price development](/en/developpement-odoo-forfait/) project. For a specific case, use the [contact page](/en/contact-us/).
