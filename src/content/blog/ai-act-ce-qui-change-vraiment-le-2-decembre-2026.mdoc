@@ -1,0 +1,143 @@
+---
+title: "AI Act : ce qui change vraiment le 2 décembre 2026"
+lang: "fr"
+publishedAt: "2026-11-27"
+category: "Développement & IA"
+excerpt: "Transparence IA : en vigueur depuis le 2 août 2026. Le 2 décembre ne change que le marquage machine et deux interdictions. Checklist pour votre Odoo."
+---
+
+Le 2 décembre tombe dans cinq jours. Plusieurs commentaires le présentent comme un report général de la transparence IA. C'est faux.
+
+Si votre site a un chat IA, si vos équipes font rédiger des textes par un modèle, vous êtes déjà concerné. Cet article liste ce qu'il faut vérifier dans Odoo et sur votre site. Il ne remplace pas un avis juridique.
+
+## Ce que dit le calendrier, sans raccourci
+
+Le règlement (UE) 2026/1744, le « Digital Omnibus » sur l'IA, 
+a été publié au Journal officiel le 24 juillet 2026 et est en vigueur depuis le 27 juillet 2026
+. Il repousse surtout le haut risque : 
+décembre 2027 pour les systèmes de l'annexe III, août 2028 pour ceux de l'annexe I
+.
+
+La transparence n'a pas bougé. 
+Les règles de l'article 50 s'appliquent depuis le 2 août 2026.
+
+
+Le 2 décembre est une exception étroite. 
+Le délai ne couvre que le marquage lisible par machine de l'article 50(2), et seulement pour les systèmes génératifs déjà sur le marché avant le 2 août 2026.
+ Ce marquage incombe aux fournisseurs de modèles et d'outils, pas à vous.
+
+À cette date s'ajoutent 
+deux nouvelles interdictions : les IA conçues pour produire des contenus pédopornographiques et des images intimes non consenties, type « nudifier »
+. Elles visent d'abord les fournisseurs de ce type d'outils.
+
+Concrètement, le 2 décembre ne vous donne aucun délai pour afficher qu'un chat est une IA.
+
+## La checklist Odoo et site web
+
+### 1. Le chat en direct
+
+Odoo propose depuis la version 19 
+un agent IA branché sur le Live Chat, capable aussi de générer des leads
+. La documentation Odoo 20 décrit 
+un agent qui répond aux questions courantes, demande des précisions et décide quand passer la main à un humain
+.
+
+Sur le papier, l'article 50(1) pèse d'abord sur le fournisseur : 
+il doit concevoir le système pour que les gens sachent qu'ils parlent à une IA
+. Mais c'est vous qui nommez l'agent, rédigez son accueil et décidez de ce que le visiteur voit.
+
+À contrôler :
+- Ouvrez votre site en navigation privée. Dès le premier message, le visiteur voit-il qu'il parle à une IA ?
+- Utilisez le message de bienvenue du canal. 
+Il se paramètre dans l'onglet Options du canal Live Chat.
+ Une phrase claire suffit.
+- Ne comptez pas sur l'évidence. 
+Selon une analyse des lignes directrices de la Commission, l'exception pour les cas « évidents » doit se lire restrictivement, et les chatbots d'assistance n'en bénéficient pas.
+ 
+Un bot fluide, au ton humain, ne passe pas ce test.
+
+- Ne donnez pas un prénom humain à l'agent sans mention IA.
+
+Si un collaborateur relit chaque réponse avant envoi, la lecture est différente. 
+Le visiteur parle alors à un humain qui utilise un outil, et l'article 50(1) est peu probablement applicable.
+ Cette source est une analyse, pas un texte officiel : tranchez avec votre conseil.
+
+### 2. Les mails et les agents automatiques
+
+Je n'ai trouvé dans les sources consultées aucune obligation générale d'étiqueter chaque mail rédigé avec une aide IA. Odoo permet d'utiliser l'IA dans les modèles d'e-mail, et un collaborateur qui relit et envoie reste l'auteur.
+
+Le cas à surveiller est différent. Avec Odoo 20, 
+les agents tournent dans des actions automatisées et planifiées, pas seulement dans une fenêtre de chat
+. Un agent qui répond seul à un client par mail se comporte comme un chatbot. Ma lecture, par prudence : signalez-le dans la signature ou le premier message. Ce point n'est pas tranché par les sources que j'ai vues.
+
+### 3. Les résumés automatiques
+
+Un résumé de ticket, de réunion ou de fil de discussion lu par vos équipes n'est pas un texte publié. Les lignes directrices écartent notamment 
+le résumé de chatbot disponible uniquement pour l'utilisateur individuel
+. Pas d'étiquette à prévoir.
+
+Cela ne règle ni le RGPD ni la qualité. Un résumé faux reste faux. Gardez un humain avant toute décision.
+
+### 4. Les textes et images publiés sur le site
+
+Odoo permet de 
+créer ou réécrire des pages du site avec l'IA
+ et, selon sa documentation 20, de 
+générer des images avec l'IA
+.
+
+Deux règles distinctes :
+- **Texte.** 
+L'étiquette est exigée quand le texte est publié pour informer le public sur des sujets d'intérêt public.
+ Une fiche produit ou un article de blog sur votre métier n'entre en général pas là. Les lignes directrices citent toutefois les 
+allégations de santé, de sécurité des consommateurs ou de durabilité
+ comme zone de vigilance.
+- **Images et vidéos.** 
+Un deepfake exige une mention visible.
+ Un visuel réaliste qui montre un faux événement, un faux client ou une fausse personne est concerné.
+
+L'exception existe pour les textes. Elle exige 
+une vraie relecture de fond et une personne qui porte la responsabilité éditoriale
+. Une simple correction orthographique 
+ne suffit pas
+.
+
+### 5. La preuve
+
+Notez qui relit les textes sensibles et qui en répond. 
+Gardez aussi des captures d'écran de vos mentions et mettez à jour votre politique de confidentialité.
+ En cas de question d'un client ou d'un contrôle, c'est ce dossier qui compte.
+
+## Ce que le 2 décembre change pour vous
+
+Pour la plupart des entreprises utilisatrices d'Odoo, peu de choses. Le travail est chez les fournisseurs. 
+La documentation Odoo 19 cite Gemini et OpenAI comme fournisseurs du module IA.
+ Ce sont eux, et les éditeurs d'outils génératifs, qui doivent marquer les contenus produits.
+
+Deux nuances :
+- 
+Les outils lancés après le 2 août devaient déjà être conformes dès le départ.
+ Le délai ne profite qu'aux anciens.
+- Si vous développez vous-même un outil génératif et le proposez à des tiers, vous pouvez devenir fournisseur. Posez la question avant, pas après.
+
+À la date du 2 décembre, demandez à vos fournisseurs IA ce qu'ils ont prévu pour le marquage. Une réponse écrite vaut mieux qu'une promesse orale.
+
+## Ce qui n'est pas pour tout de suite
+
+Le haut risque, lui, est bien repoussé. 
+Les systèmes d'annexe III, comme le recrutement ou l'évaluation du personnel, relèvent désormais du 2 décembre 2027.
+ Si vous utilisez l'IA pour trier des candidatures, ce chantier vous attend, mais plus cette semaine.
+
+Les interdictions de l'article 5 courent, elles, 
+depuis le 2 février 2025
+.
+
+## En pratique, cette semaine
+
+1. Testez votre chat comme un visiteur.
+2. Ajoutez la mention IA dans le message de bienvenue.
+3. Listez vos agents qui écrivent à des clients sans relecture.
+4. Repérez les textes et images IA publiés sur le site.
+5. Écrivez à vos fournisseurs IA sur le marquage.
+
+Si votre Odoo mélange chat IA, actions automatisées et connexion à Claude ou ChatGPT, une revue de configuration prend peu de temps. Notre équipe peut la faire dans le cadre de votre [support Odoo](/support/), ou en amont d'un projet de [développement au forfait assisté par IA](/developpement-odoo-forfait/). Pour un cas précis, passez par la [page de contact](/contact-us/).
